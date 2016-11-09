@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */; };
-		B7CC8D161DD2D625005FCBEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D151DD2D625005FCBEF /* ViewController.swift */; };
 		B7CC8D191DD2D625005FCBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D171DD2D625005FCBEF /* Main.storyboard */; };
 		B7CC8D1B1DD2D625005FCBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */; };
 		B7CC8D1E1DD2D625005FCBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D1C1DD2D625005FCBEF /* LaunchScreen.storyboard */; };
+		B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B7CC8D151DD2D625005FCBEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B7CC8D181DD2D625005FCBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7CC8D1D1DD2D625005FCBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7CC8D1F1DD2D625005FCBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.release.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.release.xcconfig"; sourceTree = "<group>"; };
 		FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,14 +70,22 @@
 		B7CC8D121DD2D625005FCBEF /* Joomped */ = {
 			isa = PBXGroup;
 			children = (
+				B7CC8D261DD2DB37005FCBEF /* View Controllers */,
 				B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */,
-				B7CC8D151DD2D625005FCBEF /* ViewController.swift */,
 				B7CC8D171DD2D625005FCBEF /* Main.storyboard */,
 				B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */,
 				B7CC8D1C1DD2D625005FCBEF /* LaunchScreen.storyboard */,
 				B7CC8D1F1DD2D625005FCBEF /* Info.plist */,
 			);
 			path = Joomped;
+			sourceTree = "<group>";
+		};
+		B7CC8D261DD2DB37005FCBEF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		FE0C3538427662739965C3D8 /* Frameworks */ = {
@@ -211,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7CC8D161DD2D625005FCBEF /* ViewController.swift in Sources */,
+				B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
