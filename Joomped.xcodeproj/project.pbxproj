@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */; };
 		B7CC8D161DD2D625005FCBEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D151DD2D625005FCBEF /* ViewController.swift */; };
 		B7CC8D191DD2D625005FCBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D171DD2D625005FCBEF /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7CC8D151DD2D625005FCBEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7CC8D1D1DD2D625005FCBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7CC8D1F1DD2D625005FCBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.release.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.release.xcconfig"; sourceTree = "<group>"; };
+		FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C37E3E184D6A90C16EADC86 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */,
+				FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B7CC8D071DD2D625005FCBEF = {
 			isa = PBXGroup;
 			children = (
 				B7CC8D121DD2D625005FCBEF /* Joomped */,
 				B7CC8D111DD2D625005FCBEF /* Products */,
+				2C37E3E184D6A90C16EADC86 /* Pods */,
+				FE0C3538427662739965C3D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = Joomped;
 			sourceTree = "<group>";
 		};
+		FE0C3538427662739965C3D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59467971EF4A07165814593E /* Pods_Joomped.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7CC8D221DD2D625005FCBEF /* Build configuration list for PBXNativeTarget "Joomped" */;
 			buildPhases = (
+				B1B40C9CB065134463D3C6F4 /* [CP] Check Pods Manifest.lock */,
 				B7CC8D0C1DD2D625005FCBEF /* Sources */,
 				B7CC8D0D1DD2D625005FCBEF /* Frameworks */,
 				B7CC8D0E1DD2D625005FCBEF /* Resources */,
+				771CC702689BA6AA0549E42B /* [CP] Embed Pods Frameworks */,
+				2FC545172F23DA6E9C7D4CB5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2FC545172F23DA6E9C7D4CB5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Joomped/Pods-Joomped-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		771CC702689BA6AA0549E42B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Joomped/Pods-Joomped-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1B40C9CB065134463D3C6F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B7CC8D0C1DD2D625005FCBEF /* Sources */ = {
@@ -256,6 +331,7 @@
 		};
 		B7CC8D231DD2D625005FCBEF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Joomped/Info.plist;
@@ -268,6 +344,7 @@
 		};
 		B7CC8D241DD2D625005FCBEF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Joomped/Info.plist;
@@ -297,6 +374,7 @@
 				B7CC8D241DD2D625005FCBEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
