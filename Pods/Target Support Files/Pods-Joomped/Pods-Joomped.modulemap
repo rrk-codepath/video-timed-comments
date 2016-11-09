@@ -1,0 +1,6 @@
+framework module Pods_Joomped {
+  umbrella header "Pods-Joomped-umbrella.h"
+
+  export *
+  module * { export * }
+}
