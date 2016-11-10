@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var playerView: YTPlayerView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         let playerVars = ["playsinline": 1]
         playerView.load(withVideoId: "M7lc1UVf-VE", playerVars: playerVars)
