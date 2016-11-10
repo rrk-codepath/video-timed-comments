@@ -70,9 +70,6 @@ class LoginViewController: UIViewController {
                 print("signed up")
             }
         }
-        
-        let jooomped = Joomped()
-        print("created at=\(jooomped.createdAt)")
     }
 
     /*

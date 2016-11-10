@@ -6,9 +6,9 @@ final class Annotation: PFObject, PFSubclassing {
         return "Annotation"
     }
     
-    var timestamp: TimeInterval {
+    var timestamp: Float {
         get {
-            return super["timestamp"] as! TimeInterval
+            return super["timestamp"] as! Float
         }
         set {
             super["timestamp"] = newValue
