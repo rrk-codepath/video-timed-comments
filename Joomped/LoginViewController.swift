@@ -27,21 +27,21 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func didTapLogin(_ sender: Any) {
-        let user = try? PFUser.logIn(withUsername: usernameTextField.text!, password: passwordTextField.text!)
-        if let user = user {
-            print("logged in as: \(user.username)")
-            self.performSegue(withIdentifier: "HomeSegue", sender: self)
-        } else {
-            print("could not login: \(user)")
-            let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                // dismiss by default
+        PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
+                if let user = user {
+                    print("logged in as: \(user.username!)")
+                    self.performSegue(withIdentifier: "HomeSegue", sender: self)
+                } else {
+                    let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                        // dismiss by default
+                    }
+                    alertController.addAction(OKAction)
+                    self.present(alertController, animated: true, completion: {
+                        // empty
+                    })
+                }
             }
-            alertController.addAction(OKAction)
-            present(alertController, animated: true, completion: {
-                // empty
-            })
-        }
     }
 
     @IBAction func didTapSignup(_ sender: Any) {
