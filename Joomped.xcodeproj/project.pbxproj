@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
+		79C5C69C1DD40CFA00040B17 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* HomeViewController.swift */; };
 		B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */; };
 		B7CC8D191DD2D625005FCBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D171DD2D625005FCBEF /* Main.storyboard */; };
 		B7CC8D1B1DD2D625005FCBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C5C69B1DD40CFA00040B17 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7CC8D181DD2D625005FCBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		79C5C6981DD40BE500040B17 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B7CC8D1F1DD2D625005FCBEF /* Info.plist */,
+				B7CC8D1C1DD2D625005FCBEF /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		B7CC8D071DD2D625005FCBEF = {
 			isa = PBXGroup;
 			children = (
@@ -74,8 +85,7 @@
 				B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */,
 				B7CC8D171DD2D625005FCBEF /* Main.storyboard */,
 				B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */,
-				B7CC8D1C1DD2D625005FCBEF /* LaunchScreen.storyboard */,
-				B7CC8D1F1DD2D625005FCBEF /* Info.plist */,
+				79C5C6981DD40BE500040B17 /* Supporting Files */,
 			);
 			path = Joomped;
 			sourceTree = "<group>";
@@ -84,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */,
+				79C5C69B1DD40CFA00040B17 /* HomeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -131,6 +142,7 @@
 				TargetAttributes = {
 					B7CC8D0F1DD2D625005FCBEF = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -221,6 +233,7 @@
 			files = (
 				B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
+				79C5C69C1DD40CFA00040B17 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,10 +355,13 @@
 			baseConfigurationReference = FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Joomped/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joomed.Joomped;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Joomped/Joomped-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -355,10 +371,12 @@
 			baseConfigurationReference = FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Joomped/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joomed.Joomped;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Joomped/Joomped-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
