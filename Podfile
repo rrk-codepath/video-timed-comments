@@ -8,4 +8,5 @@ target 'Joomped' do
   # Pods for Joomped
   pod 'Parse'
   pod 'youtube-ios-player-helper'
+  pod 'AFNetworking', '~> 3.0'
 end

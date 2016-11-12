@@ -1,6 +1,4 @@
-#ifdef __OBJC__
 #import <UIKit/UIKit.h>
-#endif
 
 #import "Parse.h"
 #import "ParseClientConfiguration.h"

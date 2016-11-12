@@ -14,6 +14,8 @@ class Video: PFObject, PFSubclassing {
     static let youtubeIdKey = "youtubeId"
     static let lengthKey = "length"
     static let titleKey = "title"
+    static let authorKey = "author"
+    static let thumbnailKey = "thumbnail"
     
     public static func parseClassName() -> String {
         return "Video"
@@ -46,4 +48,21 @@ class Video: PFObject, PFSubclassing {
         }
     }
     
+    var author: String? {
+        get {
+            return super[Video.authorKey] as? String
+        }
+        set {
+            super[Video.authorKey] = newValue
+        }
+    }
+    
+    var thumbnail: String? {
+        get {
+            return super[Video.thumbnailKey] as? String
+        }
+        set {
+            super[Video.thumbnailKey] = newValue
+        }
+    }
 }

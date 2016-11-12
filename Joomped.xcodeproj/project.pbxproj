@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		562F27BB1DD6B6100012E196 /* JoompedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F27BA1DD6B6100012E196 /* JoompedTableViewCell.swift */; };
 		5630B09E1DD41216008E78D6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B09D1DD41216008E78D6 /* Video.swift */; };
 		5630B0A01DD412A8008E78D6 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B09F1DD412A8008E78D6 /* Annotation.swift */; };
 		5630B0A21DD41327008E78D6 /* Joomped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B0A11DD41327008E78D6 /* Joomped.swift */; };
 		5630B0A81DD41974008E78D6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B0A71DD41974008E78D6 /* User.swift */; };
+		563708DC1DD6A473007CF706 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708D81DD6A473007CF706 /* Youtube.swift */; };
+		563708DD1DD6A473007CF706 /* YoutubeSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708D91DD6A473007CF706 /* YoutubeSnippet.swift */; };
+		563708DE1DD6A473007CF706 /* YoutubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */; };
+		563708DF1DD6A473007CF706 /* YoutubeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708DB1DD6A473007CF706 /* YoutubeVideo.swift */; };
+		563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708E01DD6A4C7007CF706 /* Float+Beautify.swift */; };
+		563708E31DD6A8F0007CF706 /* JoompedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */; };
 		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */; };
 		B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75866541DD69A3E00BB101D /* AnnotationCell.swift */; };
@@ -24,10 +31,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		562F27BA1DD6B6100012E196 /* JoompedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoompedTableViewCell.swift; sourceTree = "<group>"; };
 		5630B09D1DD41216008E78D6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		5630B09F1DD412A8008E78D6 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		5630B0A11DD41327008E78D6 /* Joomped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joomped.swift; sourceTree = "<group>"; };
 		5630B0A71DD41974008E78D6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		563708D81DD6A473007CF706 /* Youtube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
+		563708D91DD6A473007CF706 /* YoutubeSnippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeSnippet.swift; sourceTree = "<group>"; };
+		563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeThumbnail.swift; sourceTree = "<group>"; };
+		563708DB1DD6A473007CF706 /* YoutubeVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeVideo.swift; sourceTree = "<group>"; };
+		563708E01DD6A4C7007CF706 /* Float+Beautify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Beautify.swift"; sourceTree = "<group>"; };
+		563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JoompedTableViewCell.xib; sourceTree = "<group>"; };
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewController.swift; sourceTree = "<group>"; };
 		B75866541DD69A3E00BB101D /* AnnotationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCell.swift; sourceTree = "<group>"; };
@@ -77,6 +91,26 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		563708D71DD6A45F007CF706 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				563708D81DD6A473007CF706 /* Youtube.swift */,
+				563708D91DD6A473007CF706 /* YoutubeSnippet.swift */,
+				563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */,
+				563708DB1DD6A473007CF706 /* YoutubeVideo.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		563708E41DD6A8FA007CF706 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				562F27BA1DD6B6100012E196 /* JoompedTableViewCell.swift */,
+				563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		79C5C6981DD40BE500040B17 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,10 +151,12 @@
 			isa = PBXGroup;
 			children = (
 				B75866531DD69A0A00BB101D /* Views */,
+				563708D71DD6A45F007CF706 /* Service */,
 				B7E73F4A1DD43457009F7F48 /* Joomped.entitlements */,
 				5630B09C1DD41206008E78D6 /* Models */,
 				B7CC8D261DD2DB37005FCBEF /* View Controllers */,
 				B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */,
+				563708E41DD6A8FA007CF706 /* Views */,
 				B7CC8D171DD2D625005FCBEF /* Main.storyboard */,
 				B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */,
 				79C5C6981DD40BE500040B17 /* Supporting Files */,
@@ -134,6 +170,7 @@
 				B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */,
 				79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */,
 				B7E73F481DD42C41009F7F48 /* HomeViewController.swift */,
+				563708E01DD6A4C7007CF706 /* Float+Beautify.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -218,6 +255,7 @@
 				B7CC8D1E1DD2D625005FCBEF /* LaunchScreen.storyboard in Resources */,
 				B7CC8D1B1DD2D625005FCBEF /* Assets.xcassets in Resources */,
 				B75866571DD69A3E00BB101D /* AnnotationCell.xib in Resources */,
+				563708E31DD6A8F0007CF706 /* JoompedTableViewCell.xib in Resources */,
 				B7CC8D191DD2D625005FCBEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,15 +315,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				563708DE1DD6A473007CF706 /* YoutubeThumbnail.swift in Sources */,
+				563708DC1DD6A473007CF706 /* Youtube.swift in Sources */,
+				563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */,
 				B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */,
 				5630B0A01DD412A8008E78D6 /* Annotation.swift in Sources */,
 				5630B0A21DD41327008E78D6 /* Joomped.swift in Sources */,
+				563708DF1DD6A473007CF706 /* YoutubeVideo.swift in Sources */,
 				B7E73F491DD42C41009F7F48 /* HomeViewController.swift in Sources */,
 				5630B0A81DD41974008E78D6 /* User.swift in Sources */,
 				B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */,
 				5630B09E1DD41216008E78D6 /* Video.swift in Sources */,
+				562F27BB1DD6B6100012E196 /* JoompedTableViewCell.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
 				79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */,
+				563708DD1DD6A473007CF706 /* YoutubeSnippet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

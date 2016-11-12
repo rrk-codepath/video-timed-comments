@@ -47,4 +47,8 @@ final class Annotation: PFObject, PFSubclassing {
         self.text = text
         self.timestamp = timestamp
     }
+    
+    override init() {
+        super.init()
+    }
 }
