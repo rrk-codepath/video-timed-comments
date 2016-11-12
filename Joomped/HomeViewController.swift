@@ -22,6 +22,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let service = Youtube()
+        service.search(term: "gerbil", success: { (videos: [YoutubeVideo]) -> Void in
+            print("hi")
+        }, failure: nil)
+        
         let playerVars = ["playsinline": 1]
         playerView.load(withVideoId: videoId, playerVars: playerVars)
     }
