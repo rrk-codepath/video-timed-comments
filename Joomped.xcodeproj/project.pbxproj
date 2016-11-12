@@ -15,6 +15,7 @@
 		563708DD1DD6A473007CF706 /* YoutubeSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708D91DD6A473007CF706 /* YoutubeSnippet.swift */; };
 		563708DE1DD6A473007CF706 /* YoutubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */; };
 		563708DF1DD6A473007CF706 /* YoutubeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708DB1DD6A473007CF706 /* YoutubeVideo.swift */; };
+		563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708E01DD6A4C7007CF706 /* Float+Beautify.swift */; };
 		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */; };
 		B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 		563708D91DD6A473007CF706 /* YoutubeSnippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeSnippet.swift; sourceTree = "<group>"; };
 		563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeThumbnail.swift; sourceTree = "<group>"; };
 		563708DB1DD6A473007CF706 /* YoutubeVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeVideo.swift; sourceTree = "<group>"; };
+		563708E01DD6A4C7007CF706 /* Float+Beautify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Beautify.swift"; sourceTree = "<group>"; };
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewController.swift; sourceTree = "<group>"; };
 		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 				B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */,
 				79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */,
 				B7E73F481DD42C41009F7F48 /* HomeViewController.swift */,
+				563708E01DD6A4C7007CF706 /* Float+Beautify.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			files = (
 				563708DE1DD6A473007CF706 /* YoutubeThumbnail.swift in Sources */,
 				563708DC1DD6A473007CF706 /* Youtube.swift in Sources */,
+				563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */,
 				B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */,
 				5630B0A01DD412A8008E78D6 /* Annotation.swift in Sources */,
 				5630B0A21DD41327008E78D6 /* Joomped.swift in Sources */,
