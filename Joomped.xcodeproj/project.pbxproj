@@ -13,6 +13,8 @@
 		5630B0A81DD41974008E78D6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B0A71DD41974008E78D6 /* User.swift */; };
 		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */; };
+		B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75866541DD69A3E00BB101D /* AnnotationCell.swift */; };
+		B75866571DD69A3E00BB101D /* AnnotationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75866551DD69A3E00BB101D /* AnnotationCell.xib */; };
 		B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */; };
 		B7CC8D191DD2D625005FCBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D171DD2D625005FCBEF /* Main.storyboard */; };
 		B7CC8D1B1DD2D625005FCBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 		5630B0A71DD41974008E78D6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewController.swift; sourceTree = "<group>"; };
+		B75866541DD69A3E00BB101D /* AnnotationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCell.swift; sourceTree = "<group>"; };
+		B75866551DD69A3E00BB101D /* AnnotationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotationCell.xib; sourceTree = "<group>"; };
 		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7CC8D181DD2D625005FCBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +86,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B75866531DD69A0A00BB101D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B75866541DD69A3E00BB101D /* AnnotationCell.swift */,
+				B75866551DD69A3E00BB101D /* AnnotationCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		B7CC8D071DD2D625005FCBEF = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +116,7 @@
 		B7CC8D121DD2D625005FCBEF /* Joomped */ = {
 			isa = PBXGroup;
 			children = (
+				B75866531DD69A0A00BB101D /* Views */,
 				B7E73F4A1DD43457009F7F48 /* Joomped.entitlements */,
 				5630B09C1DD41206008E78D6 /* Models */,
 				B7CC8D261DD2DB37005FCBEF /* View Controllers */,
@@ -203,6 +217,7 @@
 			files = (
 				B7CC8D1E1DD2D625005FCBEF /* LaunchScreen.storyboard in Resources */,
 				B7CC8D1B1DD2D625005FCBEF /* Assets.xcassets in Resources */,
+				B75866571DD69A3E00BB101D /* AnnotationCell.xib in Resources */,
 				B7CC8D191DD2D625005FCBEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +282,7 @@
 				5630B0A21DD41327008E78D6 /* Joomped.swift in Sources */,
 				B7E73F491DD42C41009F7F48 /* HomeViewController.swift in Sources */,
 				5630B0A81DD41974008E78D6 /* User.swift in Sources */,
+				B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */,
 				5630B09E1DD41216008E78D6 /* Video.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
 				79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */,

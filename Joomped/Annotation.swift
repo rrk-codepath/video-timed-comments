@@ -41,4 +41,10 @@ final class Annotation: PFObject, PFSubclassing {
             super["joomped"] = newValue
         }
     }
+    
+    init(text: String, timestamp: Float) {
+        super.init()
+        self.text = text
+        self.timestamp = timestamp
+    }
 }

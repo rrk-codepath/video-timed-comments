@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnnotationCell" customModule="Joomped" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="108" id="KGk-i7-Jjw" customClass="AnnotationCell" customModule="Joomped" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OZ3-Kg-lFm">
+                        <rect key="frame" x="8" y="39" width="266" height="30"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2d-6J-4kZ">
+                        <rect key="frame" x="8" y="8" width="86" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYk-u9-Qn8">
+                        <rect key="frame" x="282" y="39" width="30" height="30"/>
+                        <state key="normal" title="Add"/>
+                        <connections>
+                            <action selector="didTapAddButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0qj-bs-f8C"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" red="0.45189379290955567" green="1" blue="0.6276670509941924" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="ZYk-u9-Qn8" firstAttribute="centerY" secondItem="OZ3-Kg-lFm" secondAttribute="centerY" id="5Od-Zt-sou"/>
+                    <constraint firstItem="OZ3-Kg-lFm" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="9zv-Qj-DCG"/>
+                    <constraint firstItem="M2d-6J-4kZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Adv-aA-nCI"/>
+                    <constraint firstItem="OZ3-Kg-lFm" firstAttribute="leading" secondItem="M2d-6J-4kZ" secondAttribute="leading" id="CYA-J9-y8f"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OZ3-Kg-lFm" secondAttribute="bottom" constant="30" id="HQH-yH-Vbp"/>
+                    <constraint firstItem="M2d-6J-4kZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Ka6-OI-mlp"/>
+                    <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="OZ3-Kg-lFm" secondAttribute="trailing" constant="8" id="P3V-G2-0aH"/>
+                    <constraint firstAttribute="trailing" secondItem="ZYk-u9-Qn8" secondAttribute="trailing" constant="8" id="WuI-UN-wJK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addButton" destination="ZYk-u9-Qn8" id="JOT-qS-NTM"/>
+                <outlet property="annotationTextField" destination="OZ3-Kg-lFm" id="xBb-a0-QKl"/>
+                <outlet property="timestampLabel" destination="M2d-6J-4kZ" id="Uea-dH-ayC"/>
+            </connections>
+            <point key="canvasLocation" x="89" y="86"/>
+        </tableViewCell>
+    </objects>
+</document>
