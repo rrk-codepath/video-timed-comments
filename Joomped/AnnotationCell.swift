@@ -17,6 +17,8 @@ class AnnotationCell: UITableViewCell {
     @IBOutlet weak var annotationTextField: UITextField!
     @IBOutlet weak var timestampLabel: UILabel!
     
+    var timestamp: Float?
+    
     var isEditMode: Bool = false {
         didSet {
             if isEditMode {
@@ -34,7 +36,8 @@ class AnnotationCell: UITableViewCell {
             if let annotation = annotation {
                 annotationTextField.text = annotation.text
                 // TODO: better formatting
-                timestampLabel.text = String(annotation.timestamp)
+                timestamp = annotation.timestamp
+                timestampLabel.text = annotation.timestamp.joompedBeautify()
                 annotationTextField.isUserInteractionEnabled = true
                 annotationTextField.becomeFirstResponder()
             }
@@ -61,7 +64,7 @@ class AnnotationCell: UITableViewCell {
             return
         }
         annotation?.text = annotationTextField.text!
-        annotation?.timestamp = Float(timestampLabel.text!)!
+        annotation?.timestamp = timestamp!
         
 //        if let annotationTime = annotationTime {
 //            annotation.timestamp = annotationTime
