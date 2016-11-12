@@ -18,10 +18,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Following code won't work until we re-add joomped table view to storyboard
         
-        /*joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
+        joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.dataSource = self
         joompedTableView.rowHeight = UITableViewAutomaticDimension
-        joompedTableView.estimatedRowHeight = 50*/
+        joompedTableView.estimatedRowHeight = 50
         fetchJoomped()
     }
     
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             self.joomped = objects as? [Joomped] ?? []
             // Uncomment this when joomped table view is in storyboard
-            // self.joompedTableView.reloadData()
+            self.joompedTableView.reloadData()
         }
     }
 
