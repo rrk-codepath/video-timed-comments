@@ -1,12 +1,13 @@
 import UIKit
+import AFNetworking
 
 class JoompedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var joompedTitleLabel: UILabel!
     @IBOutlet weak var videoAuthorLabel: UILabel!
     @IBOutlet weak var videoImageView: UIImageView!
-    
     @IBOutlet weak var joompedAuthorLabel: UILabel!
+    
     var joomped: Joomped? {
         didSet {
             guard let joomped = joomped else {
