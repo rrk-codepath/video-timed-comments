@@ -16,10 +16,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
+        // Following code won't work until we re-add joomped table view to storyboard
+        
+        /*joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.dataSource = self
         joompedTableView.rowHeight = UITableViewAutomaticDimension
-        joompedTableView.estimatedRowHeight = 50
+        joompedTableView.estimatedRowHeight = 50*/
         fetchJoomped()
     }
     
@@ -35,7 +37,8 @@ class HomeViewController: UIViewController {
         query.includeKeys(["video", "user"])
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             self.joomped = objects as? [Joomped] ?? []
-            self.joompedTableView.reloadData()
+            // Uncomment this when joomped table view is in storyboard
+            // self.joompedTableView.reloadData()
         }
     }
 
