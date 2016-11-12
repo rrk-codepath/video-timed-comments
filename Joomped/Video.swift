@@ -48,22 +48,21 @@ class Video: PFObject, PFSubclassing {
         }
     }
     
-    var author: String {
+    var author: String? {
         get {
-            return super[Video.authorKey] as! String
+            return super[Video.authorKey] as? String
         }
         set {
             super[Video.authorKey] = newValue
         }
     }
     
-    var thumbnail: String {
+    var thumbnail: String? {
         get {
-            return super[Video.thumbnailKey] as! String
+            return super[Video.thumbnailKey] as? String
         }
         set {
             super[Video.thumbnailKey] = newValue
-        }
         }
     }
 }

@@ -1,12 +1,12 @@
 import UIKit
 
-class JoomepdTableViewCell: UITableViewCell {
+class JoompedTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var joompedAuthorLabel: UILabel!
+    @IBOutlet weak var joompedTitleLabel: UILabel!
     @IBOutlet weak var videoAuthorLabel: UILabel!
-    @IBOutlet weak var joompedTitle: UILabel!
     @IBOutlet weak var videoImageView: UIImageView!
     
+    @IBOutlet weak var joompedAuthorLabel: UILabel!
     var joomped: Joomped? {
         didSet {
             guard let joomped = joomped else {
@@ -15,9 +15,9 @@ class JoomepdTableViewCell: UITableViewCell {
             }
             
             joompedAuthorLabel.text = joomped.user.username
-            joompedTitle.text = joomped.video.title
+            joompedTitleLabel.text = joomped.video.title
             videoAuthorLabel.text = joomped.video.author
-            if let thumbnailUrl = URL(string: joomped.video.thumbnail) {
+            if let thumbnail = joomped.video.thumbnail, let thumbnailUrl = URL(string: thumbnail) {
                 videoImageView.setImageWith(thumbnailUrl)
             }
         }
