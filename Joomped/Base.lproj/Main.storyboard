@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hwG-jh-ulb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -71,17 +71,56 @@
                     <connections>
                         <outlet property="passwordTextField" destination="oOR-bv-D15" id="4Jx-RR-CR9"/>
                         <outlet property="usernameTextField" destination="Jd5-dI-806" id="USS-XZ-hVQ"/>
-                        <segue destination="hwG-jh-ulb" kind="show" identifier="HomeSegue" id="9Y3-JH-rbk"/>
+                        <segue destination="5d4-ar-yu1" kind="show" identifier="HomeSegue" id="OWA-gs-cIn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+            <point key="canvasLocation" x="-633" y="36"/>
         </scene>
         <!--Home View Controller-->
+        <scene sceneID="Q6E-7W-Cpr">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" id="FpH-lp-WTC" customClass="HomeViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="44J-Xw-MR9"/>
+                        <viewControllerLayoutGuide type="bottom" id="FvQ-FB-2cp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="idT-B9-L1p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="List joomped objects here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rF-Li-uKp">
+                                <rect key="frame" x="88" y="323" width="198" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NMx-xn-h31">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="IYD-ea-XGa">
+                            <connections>
+                                <action selector="onLogout:" destination="FpH-lp-WTC" id="zoD-Qx-BAn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="Flf-9r-hUn">
+                            <connections>
+                                <segue destination="z9f-sm-9S5" kind="show" id="QXC-jl-FBO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5M9-xR-8W2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="962" y="36"/>
+        </scene>
+        <!--Creation-->
         <scene sceneID="HL9-fK-D9C">
             <objects>
-                <viewController id="z9f-sm-9S5" customClass="HomeViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="z9f-sm-9S5" customClass="CreationViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VHp-Kn-qJz"/>
                         <viewControllerLayoutGuide type="bottom" id="Hgd-Lr-0de"/>
@@ -132,7 +171,7 @@
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="top" secondItem="VHp-Kn-qJz" secondAttribute="bottom" id="yGQ-Gr-ylj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="eil-nm-zY9">
+                    <navigationItem key="navigationItem" title="Creation" id="eil-nm-zY9">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="c21-Gv-78d">
                             <connections>
                                 <action selector="didTapSave:" destination="z9f-sm-9S5" id="Uyt-Yp-n4z"/>
@@ -147,25 +186,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1916" y="36.431784107946029"/>
+            <point key="canvasLocation" x="1906" y="36"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="VIR-r7-UuZ">
+        <scene sceneID="00k-qF-SZo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hwG-jh-ulb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F6t-zI-rTM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="z9f-sm-9S5" kind="relationship" relationship="rootViewController" id="hPn-UZ-P1o"/>
+                        <segue destination="FpH-lp-WTC" kind="relationship" relationship="rootViewController" id="9wy-6B-93j"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8ul-pi-Yop" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Be6-tK-a2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.79999999999995" y="36.431784107946029"/>
+            <point key="canvasLocation" x="124" y="36"/>
         </scene>
     </scenes>
 </document>
