@@ -1,43 +1,84 @@
-//
-//  SearchYouTubeViewController.swift
-//  Joomped
-//
-//  Created by R-J Lim on 11/11/16.
-//  Copyright © 2016 Joomped. All rights reserved.
-//
-
 import UIKit
 
-class SearchYoutubeViewController: UIViewController {
+final class SearchYoutubeViewController: UIViewController {
 
     @IBOutlet weak var youtubeTableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     fileprivate var videos: [YoutubeVideo] = []
+    fileprivate var selectedVideo: YoutubeVideo?
 
     private let youtube = Youtube()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Should replace this with recently watched or something
+        youtubeTableView.register(UINib(nibName: "YoutubeVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "YoutubeVideo")
+        youtubeTableView.dataSource = self
+        youtubeTableView.delegate = self
+        youtubeTableView.estimatedRowHeight = 50
+        youtubeTableView.rowHeight = UITableViewAutomaticDimension
+        
+        searchBar.delegate = self
+        searchBar.text = "Pokemon Lectures"
+        
+        search()
+    }
+    
+    fileprivate func search() {
+        guard let term = searchBar.text, !term.isEmpty else {
+            return
+        }
+        
         youtube.search(
-            term: "philosophy lectures",
+            term: term,
             success: { (videos: [YoutubeVideo]) -> Void in
                 self.videos = videos
                 self.youtubeTableView.reloadData()
-            },
+        },
             failure: nil
         )
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let creationViewController = segue.destination as? CreationViewController else {
+            return
+        }
+        
+        creationViewController.video = selectedVideo
     }
 }
 
 extension SearchYoutubeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "YoutubeVideo") as! YoutubeVideoTableViewCell
+        cell.youtubeVideo = videos[indexPath.row]
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videos.count
+    }
+}
+
+extension SearchYoutubeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedVideo = videos[indexPath.row]
+        performSegue(withIdentifier: "Creation", sender: self)
+    }
+}
+
+extension SearchYoutubeViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        search()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        search()
+        searchBar.resignFirstResponder()
     }
 }

@@ -15,7 +15,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     
-    let videoId = "M7lc1UVf-VE"
+    var video: YoutubeVideo!
     var annotations = [Annotation]()
     var annotationTime: Float?
     
@@ -23,7 +23,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let playerVars = ["playsinline": 1]
-        playerView.load(withVideoId: videoId, playerVars: playerVars)
+        playerView.load(withVideoId: video.id, playerVars: playerVars)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -96,7 +96,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         let video = Video()
-        video.youtubeId = videoId
+        video.youtubeId = self.video.id
         video.length = playerView.duration()
         video.title = "Title of sample video"
         

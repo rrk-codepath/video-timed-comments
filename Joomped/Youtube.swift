@@ -5,7 +5,6 @@ final class Youtube {
     
     private static let baseUrl = "https://www.googleapis.com/youtube/v3"
     private static let key = "AIzaSyANijfbKhKbuIqqt7cJy6zbwE4ewsHIdQg"
-    private static let requestSerializer = AFHTTPRequestSerializer()
     private static let sessionManager = AFHTTPSessionManager(sessionConfiguration: URLSessionConfiguration.default)
     
     func search(term: String, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
@@ -115,6 +114,45 @@ extension YoutubeThumbnail {
         self.init(url: url, width: width, height: height)
     }
 }
+
+/*extension YoutubeVideoDetails {
+    
+    convenience init(dictionary d: Dictionary<String, AnyObject>) {
+        var duration: TimeInterval = 0
+        if let durationString = d["duration"] as? String {
+            var seconds = 0
+            var totalSeconds = 0
+            var totalTime = ""
+            for c in durationString.characters.reversed() {
+                if let time = Int(String(c)) {
+                    totalTime = "\(time)\(totalTime)"
+                } else if let totalTimeAmount = Int(totalTime) {
+                    totalSeconds += totalTimeAmount * seconds
+                    totalTime = ""
+                }
+                switch c {
+                    case "S":
+                    seconds = 1
+                    break
+                    case "M":
+                    seconds = 60
+                    break
+                case "H":
+                    seconds = 3600
+                    break
+                default:
+                    seconds = 0
+                }
+            }
+            
+            duration = TimeInterval(totalSeconds)
+        }
+        
+        let dimension = d["dimension"] as? String ?? ""
+        let definition = d["definition"] as? String ?? ""
+        self.init(duration: duration, definition: definition, dimension: dimension)
+    }
+}*/
 
 enum YoutubeError: Error {
     case failed

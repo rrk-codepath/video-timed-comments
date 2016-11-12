@@ -20,6 +20,9 @@
 		563708E31DD6A8F0007CF706 /* JoompedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */; };
 		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		5684F1CC1DD6DD37004EAF1C /* SearchYoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684F1CB1DD6DD37004EAF1C /* SearchYoutubeViewController.swift */; };
+		5684F1D41DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5684F1D31DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib */; };
+		5684F1D61DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684F1D51DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift */; };
+		5684F1D81DD719EB004EAF1C /* YoutubeVideoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684F1D71DD719EB004EAF1C /* YoutubeVideoDetails.swift */; };
 		79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */; };
 		B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75866541DD69A3E00BB101D /* AnnotationCell.swift */; };
 		B75866571DD69A3E00BB101D /* AnnotationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75866551DD69A3E00BB101D /* AnnotationCell.xib */; };
@@ -44,6 +47,9 @@
 		563708E01DD6A4C7007CF706 /* Float+Beautify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Beautify.swift"; sourceTree = "<group>"; };
 		563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JoompedTableViewCell.xib; sourceTree = "<group>"; };
 		5684F1CB1DD6DD37004EAF1C /* SearchYoutubeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchYoutubeViewController.swift; sourceTree = "<group>"; };
+		5684F1D31DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YoutubeVideoTableViewCell.xib; sourceTree = "<group>"; };
+		5684F1D51DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeVideoTableViewCell.swift; sourceTree = "<group>"; };
+		5684F1D71DD719EB004EAF1C /* YoutubeVideoDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeVideoDetails.swift; sourceTree = "<group>"; };
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewController.swift; sourceTree = "<group>"; };
 		B75866541DD69A3E00BB101D /* AnnotationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCell.swift; sourceTree = "<group>"; };
@@ -100,6 +106,7 @@
 				563708D91DD6A473007CF706 /* YoutubeSnippet.swift */,
 				563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */,
 				563708DB1DD6A473007CF706 /* YoutubeVideo.swift */,
+				5684F1D71DD719EB004EAF1C /* YoutubeVideoDetails.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -120,6 +127,8 @@
 				563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */,
 				B75866541DD69A3E00BB101D /* AnnotationCell.swift */,
 				B75866551DD69A3E00BB101D /* AnnotationCell.xib */,
+				5684F1D31DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib */,
+				5684F1D51DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -248,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7CC8D1E1DD2D625005FCBEF /* LaunchScreen.storyboard in Resources */,
+				5684F1D41DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib in Resources */,
 				B7CC8D1B1DD2D625005FCBEF /* Assets.xcassets in Resources */,
 				B75866571DD69A3E00BB101D /* AnnotationCell.xib in Resources */,
 				563708E31DD6A8F0007CF706 /* JoompedTableViewCell.xib in Resources */,
@@ -324,8 +334,10 @@
 				5630B09E1DD41216008E78D6 /* Video.swift in Sources */,
 				562F27BB1DD6B6100012E196 /* JoompedTableViewCell.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
+				5684F1D81DD719EB004EAF1C /* YoutubeVideoDetails.swift in Sources */,
 				79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */,
 				563708DD1DD6A473007CF706 /* YoutubeSnippet.swift in Sources */,
+				5684F1D61DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

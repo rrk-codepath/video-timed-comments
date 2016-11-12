@@ -136,7 +136,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qax-6P-ePT">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2c-YF-Agd">
@@ -150,16 +150,18 @@
                             <constraint firstAttribute="trailing" secondItem="qax-6P-ePT" secondAttribute="trailing" id="5yB-kH-kgF"/>
                             <constraint firstItem="qax-6P-ePT" firstAttribute="leading" secondItem="NLY-hz-06R" secondAttribute="leading" id="X9h-Jm-ldM"/>
                             <constraint firstItem="Ccg-a3-NhO" firstAttribute="top" secondItem="qax-6P-ePT" secondAttribute="bottom" id="cTh-CG-eJa"/>
-                            <constraint firstItem="qax-6P-ePT" firstAttribute="top" secondItem="NLY-hz-06R" secondAttribute="top" id="pgU-zW-N0I"/>
+                            <constraint firstItem="qax-6P-ePT" firstAttribute="top" secondItem="NLY-hz-06R" secondAttribute="top" constant="44" id="pgU-zW-N0I"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="X2c-YF-Agd" id="QqZ-g8-yyl"/>
                         <outlet property="youtubeTableView" destination="qax-6P-ePT" id="rPG-my-r5P"/>
+                        <segue destination="z9f-sm-9S5" kind="show" identifier="Creation" id="jhG-xq-cgv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fxv-kD-Kg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1108" y="763"/>
+            <point key="canvasLocation" x="961" y="800"/>
         </scene>
         <!--Creation-->
         <scene sceneID="HL9-fK-D9C">
@@ -217,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1904.8" y="35.532233883058474"/>
+            <point key="canvasLocation" x="1905" y="799"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="00k-qF-SZo">
