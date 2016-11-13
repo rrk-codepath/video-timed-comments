@@ -10,26 +10,35 @@ import UIKit
 import Parse
 import youtube_ios_player_helper
 
-class CreationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AnnotationCellDelegate {
+class CreationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AnnotationCellDelegate, YTPlayerViewDelegate {
 
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     
-    var video: YoutubeVideo!
+    var youtubeVideo: YoutubeVideo!
     var annotations = [Annotation]()
     var annotationTime: Float?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let playerVars = ["playsinline": 1]
-        playerView.load(withVideoId: video.id, playerVars: playerVars)
-        
+        let playerVars = [
+            "playsinline": 1,
+//            "autoplay": 1
+            
+        ]
+        playerView.delegate = self
+        playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
+        tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
+    }
+    
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.playVideo()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,6 +63,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.isEditMode = false
         } else {
             cell.annotation = nil
+            cell.timestampLabel.isHidden = true
         }
         return cell
     }
@@ -76,7 +86,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
     func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation) {
         // TODO: insert in sorted order
         annotations.append(newAnnotation)
-        print("number of annotations now: \(annotations.count)")
+        print("Number of annotations: \(annotations.count)")
         tableView.reloadData()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
@@ -96,9 +106,9 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         let video = Video()
-        video.youtubeId = self.video.id
+        video.youtubeId = youtubeVideo.id
         video.length = playerView.duration()
-        video.title = "Title of sample video"
+        video.title = youtubeVideo.snippet.title
         
         joomped.annotations = annotations
         joomped.user = user
@@ -111,32 +121,6 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
             print("saved successfully: \(joomped.objectId)")
         }
     }
-    
-    
-//    @IBAction func touchDownTextField(_ sender: Any) {
-//        // TODO: add formatting for time into hours, minutes, seconds in video
-//        annotationTime = playerView.currentTime()
-//        if let annotationTime = annotationTime {
-//            timestampLabel.text = String(annotationTime)
-//        }
-//    }
-    
-//    @IBAction func didTapAnnotationSave(_ sender: Any) {
-//        print("did tap annotation save")
-//        let annotation = Annotation()
-//        guard let annotationText = annotationTextField.text, !annotationText.isEmpty else {
-//            return
-//        }
-//        annotation.text = annotationText
-//        if let annotationTime = annotationTime {
-//            annotation.timestamp = annotationTime
-//        }
-//        // TODO: insert in sorted order
-//        annotations.append(annotation)
-//        print("number of annotations now: \(annotations.count)")
-//        // reset state
-//        annotationTextField.text = ""
-//    }
 
     /*
     // MARK: - Navigation

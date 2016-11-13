@@ -12,22 +12,18 @@ import UIKit
     @objc func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation)
 }
 
-
 class AnnotationCell: UITableViewCell {
     @IBOutlet weak var annotationTextField: UITextField!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
+    weak var delegate: AnnotationCellDelegate?
     
-    var timestamp: Float?
+    var timestampFloat: Float?
     
     var isEditMode: Bool = false {
         didSet {
-            if isEditMode {
-                annotationTextField.isUserInteractionEnabled = true
-                addButton.isHidden = false
-            } else {
-                annotationTextField.isUserInteractionEnabled = false
-                addButton.isHidden = true
-            }
+            annotationTextField.isUserInteractionEnabled = isEditMode
+            addButton.isHidden = !isEditMode
         }
     }
     
@@ -35,18 +31,14 @@ class AnnotationCell: UITableViewCell {
         didSet {
             if let annotation = annotation {
                 annotationTextField.text = annotation.text
-                // TODO: better formatting
-                timestamp = annotation.timestamp
+                timestampFloat = annotation.timestamp
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
+                timestampLabel.isHidden = false
                 annotationTextField.isUserInteractionEnabled = true
                 annotationTextField.becomeFirstResponder()
             }
         }
     }
-    
-    weak var delegate: AnnotationCellDelegate?
-    
-    @IBOutlet weak var addButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,11 +56,7 @@ class AnnotationCell: UITableViewCell {
             return
         }
         annotation?.text = annotationTextField.text!
-        annotation?.timestamp = timestamp!
-        
-//        if let annotationTime = annotationTime {
-//            annotation.timestamp = annotationTime
-//        }
+        annotation?.timestamp = timestampFloat!
         delegate?.annotationCell(annotationCell: self, addedAnnotation: annotation!)
     }
 }

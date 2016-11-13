@@ -45,7 +45,7 @@ final class SearchYoutubeViewController: UIViewController {
             return
         }
         
-        creationViewController.video = selectedVideo
+        creationViewController.youtubeVideo = selectedVideo
     }
 }
 
