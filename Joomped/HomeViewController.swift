@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 import Parse
 
 class HomeViewController: UIViewController {
@@ -43,6 +44,7 @@ class HomeViewController: UIViewController {
 
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOutInBackground { (error: Error?) in
+            GIDSignIn.sharedInstance().signOut()
             let appdelegate = UIApplication.shared.delegate as! AppDelegate
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             appdelegate.window!.rootViewController = mainStoryboard.instantiateInitialViewController()

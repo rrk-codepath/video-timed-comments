@@ -99,6 +99,8 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         video.youtubeId = self.video.id
         video.length = playerView.duration()
         video.title = "Title of sample video"
+        video.author = self.video.snippet.channelTitle
+        video.thumbnail = self.video.snippet.thumbnail.url
         
         joomped.annotations = annotations
         joomped.user = user

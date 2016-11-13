@@ -97,8 +97,6 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        PFUser.logOutInBackground()
-        Youtube.authToken = nil
     }
 }
 

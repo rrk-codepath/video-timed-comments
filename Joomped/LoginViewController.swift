@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     
     private let signInDelegate = ParseGoogleSignInDelegate()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -1,13 +1,21 @@
 import Foundation
 import AFNetworking
+import GoogleSignIn
 
 final class Youtube {
     
     private static let baseUrl = "https://www.googleapis.com/youtube/v3"
     private static let key = "AIzaSyANijfbKhKbuIqqt7cJy6zbwE4ewsHIdQg"
-    private static let sessionManager = AFHTTPSessionManager(sessionConfiguration: URLSessionConfiguration.default)
     
-    static var authToken: String?
+    private var authToken: String?
+    
+    init(authToken: String) {
+        self.authToken = authToken
+    }
+    
+    init() {
+        authToken = GIDSignIn.sharedInstance().currentUser?.authentication?.accessToken
+    }
     
     func search(term: String, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
         request(
@@ -33,14 +41,29 @@ final class Youtube {
         )
     }
     
+    private func userRequest(path: String, parameters: Dictionary<String, AnyObject>, success: @escaping ((Dictionary<String, AnyObject>) -> Void), failure: ((Error) -> Void)?) {
+        guard authToken != nil else {
+            failure?(YoutubeError.unauthorized)
+            return
+        }
+        
+        request(path: path, parameters: parameters, success: success, failure: failure)
+    }
+    
     private func request(path: String, parameters: Dictionary<String, AnyObject>, success: @escaping ((Dictionary<String, AnyObject>) -> Void), failure: ((Error) -> Void)?) {
         var parametersWithKey: Dictionary<String, AnyObject> = [:]
         parametersWithKey["key"] = Youtube.key as AnyObject
         for (key, value) in parameters {
             parametersWithKey[key] = value
         }
+
+        let sessionManager = AFHTTPSessionManager(sessionConfiguration: URLSessionConfiguration.default)
+        sessionManager.requestSerializer = AFHTTPRequestSerializer()
+        if let authToken = authToken {
+            sessionManager.requestSerializer.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        }
         
-        let taskOrNil = Youtube.sessionManager.get(
+        let taskOrNil = sessionManager.get(
             "\(Youtube.baseUrl)/\(path)",
             parameters: parametersWithKey,
             progress: nil,
@@ -158,4 +181,5 @@ extension YoutubeThumbnail {
 
 enum YoutubeError: Error {
     case failed
+    case unauthorized
 }
