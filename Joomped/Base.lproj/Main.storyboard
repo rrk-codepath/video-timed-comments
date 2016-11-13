@@ -65,10 +65,16 @@
                                     <action selector="didTapSignup:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gGx-FE-P7K"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQu-rd-FKt" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="379" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="googleSignInButton" destination="SQu-rd-FKt" id="nez-ez-gaF"/>
                         <outlet property="passwordTextField" destination="oOR-bv-D15" id="4Jx-RR-CR9"/>
                         <outlet property="usernameTextField" destination="Jd5-dI-806" id="USS-XZ-hVQ"/>
                         <segue destination="5d4-ar-yu1" kind="show" identifier="HomeSegue" id="OWA-gs-cIn"/>
@@ -226,7 +232,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

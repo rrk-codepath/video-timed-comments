@@ -9,4 +9,5 @@ target 'Joomped' do
   pod 'Parse'
   pod 'youtube-ios-player-helper'
   pod 'AFNetworking', '~> 3.0'
+  pod 'Google/SignIn'
 end

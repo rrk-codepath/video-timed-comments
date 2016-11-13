@@ -7,6 +7,8 @@ final class Youtube {
     private static let key = "AIzaSyANijfbKhKbuIqqt7cJy6zbwE4ewsHIdQg"
     private static let sessionManager = AFHTTPSessionManager(sessionConfiguration: URLSessionConfiguration.default)
     
+    static var authToken: String?
+    
     func search(term: String, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
         request(
             path: "search",
