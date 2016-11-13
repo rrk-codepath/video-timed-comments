@@ -8,19 +8,23 @@
 
 import UIKit
 import Parse
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    
+    private let signInDelegate = ParseGoogleSignInDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        signInDelegate.delegate = self
+        
+        GIDSignIn.sharedInstance().delegate = signInDelegate
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     @IBAction func didTapLogin(_ sender: Any) {
@@ -29,16 +33,20 @@ class LoginViewController: UIViewController {
                     print("logged in as: \(user.username!)")
                     self.performSegue(withIdentifier: "HomeSegue", sender: self)
                 } else {
-                    let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                        // dismiss by default
-                    }
-                    alertController.addAction(OKAction)
-                    self.present(alertController, animated: true, completion: {
-                        // empty
-                    })
+                    self.onLoginFailure()
                 }
             }
+    }
+    
+    fileprivate func onLoginFailure() {
+        let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // dismiss by default
+        }
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: {
+            // empty
+        })
     }
 
     @IBAction func didTapSignup(_ sender: Any) {
@@ -68,15 +76,21 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension LoginViewController: GIDSignInUIDelegate {
+}
+
+
+extension LoginViewController: ParseLoginDelegate {
+    
+    func login(didSucceedFor user: PFUser) {
+        performSegue(withIdentifier: "HomeSegue", sender: self)
+    }
+    
+    func login(didFailWith error: Error?) {
+        print("\(error?.localizedDescription)")
+        onLoginFailure()
+    }
+}
+

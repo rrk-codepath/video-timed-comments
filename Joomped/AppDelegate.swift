@@ -8,6 +8,8 @@
 
 import UIKit
 import Parse
+import Google
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,8 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Parse.setApplicationId("6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8",
                                clientKey: "x4S9CP9dhOj6pXCRNb4yWzWHIiPF195MXc03TbIb")
+        
+        // Initialize sign-in
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        GIDSignIn.sharedInstance().scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if PFUser.current() != nil {
+            GIDSignIn.sharedInstance().signInSilently()
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
             // TODO: animation does not work
             UIView.transition(with: self.window!, duration: 0.5, options: UIViewAnimationOptions.transitionFlipFromLeft, animations: {
@@ -28,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }, completion: nil)
             
         }
+        
         return true
     }
 
@@ -53,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+            sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
 }
-

@@ -115,7 +115,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         video.title = youtubeVideo.snippet.title
         video.author = youtubeVideo.snippet.channelTitle
         video.thumbnail = youtubeVideo.snippet.thumbnail.url
-        
+    
         joomped.annotations = annotations
         joomped.user = user
         joomped.video = video
@@ -125,6 +125,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
                 return
             }
             print("saved successfully: \(joomped.objectId)")
+            self.playerView.stopVideo()
             self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
