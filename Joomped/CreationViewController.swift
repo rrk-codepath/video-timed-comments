@@ -12,6 +12,8 @@ import youtube_ios_player_helper
 
 class CreationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AnnotationCellDelegate, YTPlayerViewDelegate {
 
+    @IBOutlet weak var videoTitle: UILabel!
+    @IBOutlet weak var videoUploader: UILabel!
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,10 +25,12 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let playerVars = [
-            "playsinline": 1,
-//            "autoplay": 1
-            
+            "playsinline": 1
         ]
+        
+        videoTitle.text = youtubeVideo.snippet.title
+        videoUploader.text = youtubeVideo.snippet.channelTitle
+        
         playerView.delegate = self
         playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
         tableView.dataSource = self
@@ -109,6 +113,8 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         video.youtubeId = youtubeVideo.id
         video.length = playerView.duration()
         video.title = youtubeVideo.snippet.title
+        video.author = youtubeVideo.snippet.channelTitle
+        video.thumbnail = youtubeVideo.snippet.thumbnail.url
         
         joomped.annotations = annotations
         joomped.user = user
@@ -119,6 +125,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
                 return
             }
             print("saved successfully: \(joomped.objectId)")
+            self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
 

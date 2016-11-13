@@ -72,10 +72,26 @@ extension YoutubeVideo {
         if let snippetDictionary = d["snippet"] as? Dictionary<String, AnyObject> {
             snippet = YoutubeSnippet(dictionary: snippetDictionary)
         }
+        var statistics = YoutubeStatistics.empty
+        if let statisticsDictionary = d["statistics"] as? Dictionary<String, AnyObject> {
+            statistics = YoutubeStatistics(dictionary: statisticsDictionary)
+        }
         
-        self.init(id: videoId, snippet: snippet)
+        self.init(id: videoId, snippet: snippet, statistics: statistics)
     }
 }
+
+extension YoutubeStatistics {
+    convenience init(dictionary d: Dictionary<String, AnyObject>) {
+        let viewCount = d["viewCount"] as! Int
+        let likeCount = d["likeCount"] as! Int
+        let dislikeCount = d["dislikeCount"] as! Int
+        let favoriteCount = d["favoriteCount"] as! Int
+        let commentCount = d["commentCount"] as! Int
+        self.init(viewCount: viewCount, likeCount: likeCount, dislikeCount: dislikeCount, favoriteCount: favoriteCount, commentCount: commentCount)
+    }
+}
+
 extension YoutubeSnippet {
     static let iso8601: DateFormatter = {
         let formatter = DateFormatter()

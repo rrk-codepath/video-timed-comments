@@ -36,7 +36,9 @@ final class SearchYoutubeViewController: UIViewController {
                 self.videos = videos
                 self.youtubeTableView.reloadData()
         },
-            failure: nil
+            failure: { (error: Error) -> Void in
+                print("error: \(error.localizedDescription)")
+            }
         )
     }
     
