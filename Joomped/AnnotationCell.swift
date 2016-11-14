@@ -9,7 +9,8 @@
 import UIKit
 
 @objc protocol AnnotationCellDelegate: class {
-    @objc func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation)
+    @objc optional func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation)
+    @objc optional func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float)
 }
 
 class AnnotationCell: UITableViewCell {
@@ -43,6 +44,8 @@ class AnnotationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let timestampTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapTimestamp(_:)))
+        timestampLabel.addGestureRecognizer(timestampTapRecognizer)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,12 +54,16 @@ class AnnotationCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func didTapTimestamp(_ sender: Any) {
+        delegate?.annotationCell?(annotationCell: self, tappedTimestamp: timestampFloat!)
+    }
+    
     @IBAction func didTapAddButton(_ sender: Any) {
         guard let annotationText = annotationTextField.text, !annotationText.isEmpty else {
             return
         }
         annotation?.text = annotationTextField.text!
         annotation?.timestamp = timestampFloat!
-        delegate?.annotationCell(annotationCell: self, addedAnnotation: annotation!)
+        delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation!)
     }
 }

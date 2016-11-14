@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import youtube_ios_player_helper
 
-class CreationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AnnotationCellDelegate, YTPlayerViewDelegate {
+class CreationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoUploader: UILabel!
@@ -39,10 +39,6 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.estimatedRowHeight = 150
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
-    }
-    
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        playerView.playVideo()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,20 +83,6 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation) {
-        // TODO: insert in sorted order
-        annotations.append(newAnnotation)
-        print("Number of annotations: \(annotations.count)")
-        tableView.reloadData()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-            let numberOfSections = self.tableView.numberOfSections
-            let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections - 1)
-            let indexPath = IndexPath(item: numberOfRows - 1, section: numberOfSections - 1)
-            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
-        }
-    }
-    
     @IBAction func didTapSave(_ sender: Any) {
         print("did tap joomped save")
         guard let user = PFUser.current() as? User else {
@@ -129,15 +111,32 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
             self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension CreationViewController: AnnotationCellDelegate {
+    
+    func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation) {
+        // TODO: insert in sorted order
+        annotations.append(newAnnotation)
+        print("Number of annotations: \(annotations.count)")
+        tableView.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+            let numberOfSections = self.tableView.numberOfSections
+            let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections - 1)
+            let indexPath = IndexPath(item: numberOfRows - 1, section: numberOfSections - 1)
+            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        }
     }
-    */
+    
+    func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float) {
+        self.playerView.seek(toSeconds: timestamp, allowSeekAhead: true)
+    }
+}
 
+extension CreationViewController: YTPlayerViewDelegate {
+    
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.playVideo()
+    }
 }

@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var joompedTableView: UITableView!
     fileprivate var joomped: [Joomped] = []
+    var selectedJoompedCell: JoompedTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class HomeViewController: UIViewController {
         
         joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.dataSource = self
+        joompedTableView.delegate = self
         joompedTableView.rowHeight = UITableViewAutomaticDimension
         joompedTableView.estimatedRowHeight = 50
         fetchJoomped()
@@ -28,6 +30,7 @@ class HomeViewController: UIViewController {
     
     private func fetchJoomped() {
         let query = PFQuery(className:"Joomped")
+        query.includeKey("annotations.Annotation")
         
         // Retrieve the most recent ones
         query.order(byDescending: "createdAt")
@@ -50,6 +53,12 @@ class HomeViewController: UIViewController {
             appdelegate.window!.rootViewController = mainStoryboard.instantiateInitialViewController()
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ConsumptionSegue" {
+            let cvc = segue.destination as! ConsumptionViewController
+            cvc.joomped = selectedJoompedCell?.joomped
+        }
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -62,5 +71,12 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Joomped") as! JoompedTableViewCell
         cell.joomped = joomped[indexPath.row]
         return cell
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedJoompedCell = tableView.cellForRow(at: indexPath) as? JoompedTableViewCell
+        performSegue(withIdentifier: "ConsumptionSegue", sender: self)
     }
 }
