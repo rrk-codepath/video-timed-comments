@@ -16,6 +16,7 @@ class ConsumptionViewController: UIViewController {
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var joompedUploader: UILabel!
+    @IBOutlet weak var liveAnnotationLabel: UILabel!
     
     var joomped: Joomped!
     
@@ -27,6 +28,8 @@ class ConsumptionViewController: UIViewController {
             joomped.annotations = newValue
         }
     }
+    
+    fileprivate var annotationDict = [Float: Annotation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +39,14 @@ class ConsumptionViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
         
+        annotations.forEach { (annotation) in
+            annotationDict[floorf(annotation.timestamp)] = annotation
+        }
+        
         videoTitle.text = joomped.video.title
         videoUploader.text = joomped.video.author
         joompedUploader.text = joomped.user.username
+        liveAnnotationLabel.text = ""
         let playerVars = [
             "playsinline": 1
         ]
@@ -73,6 +81,13 @@ extension ConsumptionViewController: AnnotationCellDelegate {
 extension ConsumptionViewController: YTPlayerViewDelegate {
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.playVideo()
+    }
+    
+    //Called roughly every half second
+    func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
+        if let annotation = annotationDict[floor(playTime)] {
+            liveAnnotationLabel.text = annotation.text
+        }
     }
 }
 

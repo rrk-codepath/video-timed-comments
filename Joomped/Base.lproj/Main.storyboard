@@ -183,6 +183,13 @@
                                     <constraint firstAttribute="height" constant="211" id="ATK-Fd-Hcs"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6s-nA-2Ul">
+                                <rect key="frame" x="8" y="250" width="359" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -207,6 +214,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="joompedUploader" destination="WL8-eq-q7L" id="rCr-CU-tzH"/>
+                        <outlet property="liveAnnotationLabel" destination="S6s-nA-2Ul" id="QN8-Ux-4o5"/>
                         <outlet property="playerView" destination="Gyb-wM-Tt2" id="6PO-WV-x35"/>
                         <outlet property="tableView" destination="0D8-oa-gbh" id="U9q-Og-RQp"/>
                         <outlet property="videoTitle" destination="tgF-nO-UWJ" id="bem-bd-NgL"/>
@@ -305,6 +313,13 @@
                                     <constraint firstAttribute="width" secondItem="xrz-eA-WJ7" secondAttribute="height" multiplier="16:9" id="lqq-D9-AnA"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-zE-iMH">
+                                <rect key="frame" x="8" y="250" width="359" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -329,6 +344,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="liveAnnotationLabel" destination="3Ub-zE-iMH" id="NgE-kX-GMs"/>
                         <outlet property="playerView" destination="xrz-eA-WJ7" id="MyV-aN-Gr4"/>
                         <outlet property="tableView" destination="zhd-B2-6ZF" id="DPp-dL-Mrp"/>
                         <outlet property="videoTitle" destination="gb9-og-qg5" id="pyg-tY-ixc"/>
@@ -345,7 +361,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -360,6 +376,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9wy-6B-93j"/>
+        <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>
 </document>

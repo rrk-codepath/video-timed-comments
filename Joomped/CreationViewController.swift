@@ -16,10 +16,12 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var videoUploader: UILabel!
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var liveAnnotationLabel: UILabel!
     
     var youtubeVideo: YoutubeVideo!
     var annotations = [Annotation]()
     var annotationTime: Float?
+    var annotationsDict = [Float:Annotation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.estimatedRowHeight = 150
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
+        liveAnnotationLabel.text = ""
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,6 +122,9 @@ extension CreationViewController: AnnotationCellDelegate {
         // TODO: insert in sorted order
         annotations.append(newAnnotation)
         print("Number of annotations: \(annotations.count)")
+        annotations.forEach { (annotation) in
+            annotationsDict[floorf(annotation.timestamp)] = annotation
+        }
         tableView.reloadData()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
@@ -138,5 +144,12 @@ extension CreationViewController: YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.playVideo()
+    }
+    
+    //Called roughly every half second
+    func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
+        if let annotation = annotationsDict[floor(playTime)] {
+            liveAnnotationLabel.text = annotation.text
+        }
     }
 }
