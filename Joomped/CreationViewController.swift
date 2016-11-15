@@ -119,8 +119,16 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
 extension CreationViewController: AnnotationCellDelegate {
     
     func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation) {
-        // TODO: insert in sorted order
-        annotations.append(newAnnotation)
+        if annotations.count == 0 || newAnnotation.timestamp > annotations.last!.timestamp {
+            // insert at end if no annotations, or the new annotation has the largest timestamp
+            annotations.append(newAnnotation)
+        } else {
+            for (index, annotation) in annotations.enumerated() {
+                if newAnnotation.timestamp < annotation.timestamp {
+                    annotations.insert(newAnnotation, at: index)
+                }
+            }
+        }
         print("Number of annotations: \(annotations.count)")
         annotations.forEach { (annotation) in
             annotationsDict[floorf(annotation.timestamp)] = annotation
