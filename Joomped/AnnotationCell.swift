@@ -41,6 +41,10 @@ class AnnotationCell: UITableViewCell {
         }
     }
     
+    @IBAction func editingDidChange(_ sender: Any) {
+        addButton.isEnabled = annotationTextField.text!.characters.count > 0
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -60,8 +64,11 @@ class AnnotationCell: UITableViewCell {
     
     @IBAction func didTapAddButton(_ sender: Any) {
         guard let annotationText = annotationTextField.text, !annotationText.isEmpty else {
+            annotationTextField.layer.borderColor = UIColor.red.cgColor
+            annotationTextField.layer.borderWidth = 1.0
             return
         }
+        annotationTextField.layer.borderWidth = 0
         annotation?.text = annotationTextField.text!
         annotation?.timestamp = timestampFloat!
         delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation!)
