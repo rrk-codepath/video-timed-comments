@@ -19,6 +19,7 @@ class ConsumptionViewController: UIViewController {
     @IBOutlet weak var liveAnnotationLabel: UILabel!
     
     var joomped: Joomped!
+    var timer: Timer = Timer()
     
     fileprivate var annotations: [Annotation] {
         get {
@@ -41,6 +42,7 @@ class ConsumptionViewController: UIViewController {
         
         annotations.forEach { (annotation) in
             annotationDict[floorf(annotation.timestamp)] = annotation
+            annotationDict[ceilf(annotation.timestamp)] = annotation
         }
         
         videoTitle.text = joomped.video.title
@@ -84,9 +86,17 @@ extension ConsumptionViewController: YTPlayerViewDelegate {
     }
     
     //Called roughly every half second
+    //TODO: Can't create annotations within 2 seconds apart..., but also don't want to keep firing same annotation timer due to floor/ceil.
+    //Need floor/ceil as not every annotation shows up when tapped
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
-        if let annotation = annotationDict[floor(playTime)] {
-            liveAnnotationLabel.text = annotation.text
+        if !timer.isValid {
+            if let annotation = annotationDict[floor(playTime)] {
+                liveAnnotationLabel.text = annotation.text
+                timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
+                    self.liveAnnotationLabel.text = ""
+                })
+            }
+            
         }
     }
 }

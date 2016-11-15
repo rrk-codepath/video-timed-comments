@@ -22,6 +22,7 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
     var annotations = [Annotation]()
     var annotationTime: Float?
     var annotationsDict = [Float:Annotation]()
+    var timer: Timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +133,7 @@ extension CreationViewController: AnnotationCellDelegate {
         print("Number of annotations: \(annotations.count)")
         annotations.forEach { (annotation) in
             annotationsDict[floorf(annotation.timestamp)] = annotation
+            annotationsDict[ceilf(annotation.timestamp)] = annotation
         }
         tableView.reloadData()
         
@@ -155,9 +157,16 @@ extension CreationViewController: YTPlayerViewDelegate {
     }
     
     //Called roughly every half second
+    //TODO: Can't create annotations within 2 seconds apart..., but also don't want to keep firing same annotation timer due to floor/ceil
+    //Need floor/ceil as not every annotation shows up when tapped
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
-        if let annotation = annotationsDict[floor(playTime)] {
-            liveAnnotationLabel.text = annotation.text
+        if !timer.isValid {
+            if let annotation = annotationsDict[floor(playTime)] {
+                liveAnnotationLabel.text = annotation.text
+                timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
+                    self.liveAnnotationLabel.text = ""
+                })
+            }
         }
     }
 }
