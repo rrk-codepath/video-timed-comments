@@ -29,6 +29,7 @@
 		795C84BE1DD9B1C000DDBD5F /* ConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C84BD1DD9B1C000DDBD5F /* ConsumptionViewController.swift */; };
 		79C5C69C1DD40CFA00040B17 /* CreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */; };
 		B70C2CBB1DD7EBAF000BEDCE /* YoutubeStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70C2CBA1DD7EBAF000BEDCE /* YoutubeStatistics.swift */; };
+		B72C6C2E1DDC51390049C3C5 /* Date+Relative.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72C6C2D1DDC51390049C3C5 /* Date+Relative.swift */; };
 		B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75866541DD69A3E00BB101D /* AnnotationCell.swift */; };
 		B75866571DD69A3E00BB101D /* AnnotationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B75866551DD69A3E00BB101D /* AnnotationCell.xib */; };
 		B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */; };
@@ -63,6 +64,7 @@
 		795C84BD1DD9B1C000DDBD5F /* ConsumptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionViewController.swift; sourceTree = "<group>"; };
 		79C5C69B1DD40CFA00040B17 /* CreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationViewController.swift; sourceTree = "<group>"; };
 		B70C2CBA1DD7EBAF000BEDCE /* YoutubeStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeStatistics.swift; sourceTree = "<group>"; };
+		B72C6C2D1DDC51390049C3C5 /* Date+Relative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Relative.swift"; sourceTree = "<group>"; };
 		B75866541DD69A3E00BB101D /* AnnotationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCell.swift; sourceTree = "<group>"; };
 		B75866551DD69A3E00BB101D /* AnnotationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotationCell.xib; sourceTree = "<group>"; };
 		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				563708E01DD6A4C7007CF706 /* Float+Beautify.swift */,
+				B72C6C2D1DDC51390049C3C5 /* Date+Relative.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				5684F1CC1DD6DD37004EAF1C /* SearchYoutubeViewController.swift in Sources */,
 				5630B09E1DD41216008E78D6 /* Video.swift in Sources */,
 				56952DBF1DD7DE4B00C372B0 /* ParseGoogleSignInDelegate.swift in Sources */,
+				B72C6C2E1DDC51390049C3C5 /* Date+Relative.swift in Sources */,
 				562F27BB1DD6B6100012E196 /* JoompedTableViewCell.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
 				5684F1D81DD719EB004EAF1C /* YoutubeVideoDetails.swift in Sources */,
