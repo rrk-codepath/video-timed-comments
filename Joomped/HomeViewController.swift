@@ -25,10 +25,15 @@ class HomeViewController: UIViewController {
         joompedTableView.delegate = self
         joompedTableView.rowHeight = UITableViewAutomaticDimension
         joompedTableView.estimatedRowHeight = 50
-        fetchJoomped()
+        fetchJoomped(refreshControl: nil)
+        
+        // Pull to refresh
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchJoomped(refreshControl:)), for: UIControlEvents.valueChanged)
+        joompedTableView.insertSubview(refreshControl, at: 0)
     }
     
-    private func fetchJoomped() {
+    @objc private func fetchJoomped(refreshControl: UIRefreshControl?) {
         let query = PFQuery(className:"Joomped")
         query.includeKey("annotations.Annotation")
         
@@ -42,6 +47,9 @@ class HomeViewController: UIViewController {
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             self.joomped = objects as? [Joomped] ?? []
             self.joompedTableView.reloadData()
+            if let refreshControl = refreshControl {
+                refreshControl.endRefreshing()
+            }
         }
     }
 
