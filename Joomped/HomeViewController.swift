@@ -84,6 +84,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        joompedTableView.deselectRow(at: indexPath, animated: true)
         selectedJoompedCell = tableView.cellForRow(at: indexPath) as? JoompedTableViewCell
         performSegue(withIdentifier: "ConsumptionSegue", sender: self)
     }
