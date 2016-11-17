@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -125,105 +124,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="joompedTableView" destination="HS6-Lc-nyY" id="SG7-l4-ijy"/>
-                        <segue destination="303-Y2-nNv" kind="show" identifier="ConsumptionSegue" id="dWb-iz-1KG"/>
+                        <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="8hp-Pb-k3P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5M9-xR-8W2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="960.79999999999995" y="35.532233883058474"/>
-        </scene>
-        <!--Consumption-->
-        <scene sceneID="rvq-uX-gwJ">
-            <objects>
-                <viewController storyboardIdentifier="ConsumptionViewController" id="303-Y2-nNv" customClass="JoompedViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FFs-w3-8mC"/>
-                        <viewControllerLayoutGuide type="bottom" id="sM1-hL-1Ru"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wpy-Hk-Vnt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0D8-oa-gbh">
-                                <rect key="frame" x="16" y="347" width="343" height="320"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnotationCell" id="nr4-p4-xSz" customClass="AnnotationCell" customModule="Joomped" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nr4-p4-xSz" id="hRu-jw-yBM">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgF-nO-UWJ">
-                                <rect key="frame" x="16" y="275" width="113" height="27"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youtube uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIf-R2-dBE">
-                                <rect key="frame" x="16" y="310" width="115" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Joomped uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL8-eq-q7L">
-                                <rect key="frame" x="237" y="275" width="122" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.68272860739999996" green="0.54089765099999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gyb-wM-Tt2" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="211"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="211" id="ATK-Fd-Hcs"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6s-nA-2Ul">
-                                <rect key="frame" x="8" y="250" width="359" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="WL8-eq-q7L" firstAttribute="top" secondItem="Gyb-wM-Tt2" secondAttribute="bottom" id="3iW-Hb-hT4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WL8-eq-q7L" secondAttribute="trailing" id="5yA-va-4db"/>
-                            <constraint firstItem="WL8-eq-q7L" firstAttribute="centerY" secondItem="tgF-nO-UWJ" secondAttribute="centerY" id="E4K-5I-VPl"/>
-                            <constraint firstItem="WL8-eq-q7L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tgF-nO-UWJ" secondAttribute="trailing" constant="8" id="HiY-iT-zWf"/>
-                            <constraint firstAttribute="trailing" secondItem="Gyb-wM-Tt2" secondAttribute="trailing" id="IRg-3y-FFj"/>
-                            <constraint firstItem="GIf-R2-dBE" firstAttribute="leading" secondItem="tgF-nO-UWJ" secondAttribute="leading" id="YBC-RP-KTA"/>
-                            <constraint firstItem="Gyb-wM-Tt2" firstAttribute="top" secondItem="FFs-w3-8mC" secondAttribute="bottom" id="cZk-J7-iuG"/>
-                            <constraint firstItem="0D8-oa-gbh" firstAttribute="leading" secondItem="wpy-Hk-Vnt" secondAttribute="leadingMargin" id="dfI-iX-15i"/>
-                            <constraint firstItem="0D8-oa-gbh" firstAttribute="top" secondItem="GIf-R2-dBE" secondAttribute="bottom" constant="20" id="e59-E5-a78"/>
-                            <constraint firstItem="sM1-hL-1Ru" firstAttribute="top" secondItem="0D8-oa-gbh" secondAttribute="bottom" id="fjK-yo-RCQ"/>
-                            <constraint firstItem="Gyb-wM-Tt2" firstAttribute="leading" secondItem="wpy-Hk-Vnt" secondAttribute="leading" id="itb-Pt-dbc"/>
-                            <constraint firstItem="GIf-R2-dBE" firstAttribute="top" secondItem="tgF-nO-UWJ" secondAttribute="bottom" constant="8" id="koZ-7f-XEi"/>
-                            <constraint firstItem="tgF-nO-UWJ" firstAttribute="top" secondItem="Gyb-wM-Tt2" secondAttribute="bottom" id="nE3-FR-2ua"/>
-                            <constraint firstItem="tgF-nO-UWJ" firstAttribute="leading" secondItem="wpy-Hk-Vnt" secondAttribute="leadingMargin" id="tAS-kL-PW7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0D8-oa-gbh" secondAttribute="trailing" id="yYe-sa-qjU"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Consumption" id="4rC-m0-1mv"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="joompedUploaderLabel" destination="WL8-eq-q7L" id="0ri-F4-C5O"/>
-                        <outlet property="liveAnnotationLabel" destination="S6s-nA-2Ul" id="tkx-lK-4Li"/>
-                        <outlet property="playerView" destination="Gyb-wM-Tt2" id="6PO-WV-x35"/>
-                        <outlet property="tableView" destination="0D8-oa-gbh" id="U9q-Og-RQp"/>
-                        <outlet property="videoTitleLabel" destination="tgF-nO-UWJ" id="3Hr-n8-n2c"/>
-                        <outlet property="videoUploaderLabel" destination="GIf-R2-dBE" id="kdn-pS-tP3"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7TT-m8-Cu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1879.2" y="34.632683658170919"/>
         </scene>
         <!--Search The YouTubes-->
         <scene sceneID="YrW-z3-mzY">
@@ -258,16 +164,17 @@
                     <connections>
                         <outlet property="searchBar" destination="X2c-YF-Agd" id="QqZ-g8-yyl"/>
                         <outlet property="youtubeTableView" destination="qax-6P-ePT" id="rPG-my-r5P"/>
-                        <segue destination="z9f-sm-9S5" kind="show" identifier="Creation" id="jhG-xq-cgv"/>
+                        <segue destination="z9f-sm-9S5" kind="show" identifier="CreationSegue" id="jhG-xq-cgv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fxv-kD-Kg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="800"/>
         </scene>
-        <!--Creation-->
+        <!--Joomped View Controller-->
         <scene sceneID="HL9-fK-D9C">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="z9f-sm-9S5" customClass="JoompedViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VHp-Kn-qJz"/>
@@ -300,7 +207,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSu-gK-gNr" id="yNc-LW-NPe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -320,6 +227,12 @@
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Joomped uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpO-D5-5Ok">
+                                <rect key="frame" x="245" y="270" width="122" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.68272860739999996" green="0.54089765099999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -330,13 +243,15 @@
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" id="Pin-K8-Nnc"/>
                             <constraint firstItem="zhd-B2-6ZF" firstAttribute="top" secondItem="R0Z-sg-Sjv" secondAttribute="bottom" constant="10" id="RBS-Vf-cIX"/>
                             <constraint firstItem="gb9-og-qg5" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" constant="8" id="WUe-Aa-Ksv"/>
+                            <constraint firstItem="lpO-D5-5Ok" firstAttribute="centerY" secondItem="R0Z-sg-Sjv" secondAttribute="centerY" id="Wni-Gx-0Nt"/>
+                            <constraint firstAttribute="trailing" secondItem="lpO-D5-5Ok" secondAttribute="trailing" constant="8" id="cAf-A6-3Js"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gb9-og-qg5" secondAttribute="trailing" constant="8" id="lbI-oB-xpx"/>
                             <constraint firstAttribute="trailing" secondItem="zhd-B2-6ZF" secondAttribute="trailing" id="m4S-0S-3gB"/>
                             <constraint firstItem="zhd-B2-6ZF" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" id="phb-6a-Do2"/>
                             <constraint firstAttribute="trailing" secondItem="xrz-eA-WJ7" secondAttribute="trailing" id="qqR-SZ-uM9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Creation" id="eil-nm-zY9">
+                    <navigationItem key="navigationItem" id="eil-nm-zY9">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="c21-Gv-78d">
                             <connections>
                                 <action selector="didTapSave:" destination="z9f-sm-9S5" id="Uyt-Yp-n4z"/>
@@ -344,6 +259,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="joompedUploaderLabel" destination="lpO-D5-5Ok" id="lMJ-7d-IL1"/>
                         <outlet property="liveAnnotationLabel" destination="3Ub-zE-iMH" id="NgE-kX-GMs"/>
                         <outlet property="playerView" destination="xrz-eA-WJ7" id="MyV-aN-Gr4"/>
                         <outlet property="tableView" destination="zhd-B2-6ZF" id="DPp-dL-Mrp"/>
@@ -352,9 +268,8 @@
                         <segue destination="FpH-lp-WTC" kind="show" identifier="saveHomeSegue" id="Hhx-Qr-R1r"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1904.8" y="798.35082458770626"/>
+            <point key="canvasLocation" x="1933" y="386"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="00k-qF-SZo">
@@ -377,5 +292,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Hhx-Qr-R1r"/>
+        <segue reference="jhG-xq-cgv"/>
     </inferredMetricsTieBreakers>
 </document>

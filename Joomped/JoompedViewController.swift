@@ -17,27 +17,19 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var liveAnnotationLabel: UILabel!
-    @IBOutlet weak var joompedUploaderLabel: UILabel!
+    @IBOutlet weak var joompedUploaderLabel: UILabel?
     
     var joomped: Joomped?
     var youtubeVideo: YoutubeVideo?
-    fileprivate var _annotations = [Annotation]()
-    fileprivate var annotations: [Annotation] {
-        get {
-            return joomped?.annotations ?? _annotations
-        }
-        set {
-            if let joomped = joomped {
-                joomped.annotations = newValue
-            } else {
-                _annotations = newValue
-            }
-        }
-    }
+    fileprivate var annotations: [Annotation]!
     fileprivate var annotationTime: Float?
     fileprivate var annotationsDict = [Float:Annotation]()
     fileprivate var timer: Timer = Timer()
-    var isEditMode = false
+    var isEditMode = false {
+        didSet {
+            updateNavigationBar()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,43 +37,49 @@ class JoompedViewController: UIViewController {
     }
     
     func configureView() {
-        // Do any additional setup after loading the view.
+        playerView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         let playerVars = [
             "playsinline": 1
         ]
-        playerView.delegate = self
         if let joomped = joomped {
+            annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
-            joompedUploaderLabel.text = joomped.user.username
+            joompedUploaderLabel?.text = joomped.user.username
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
         } else if let youtubeVideo = youtubeVideo {
+            annotations = [Annotation]()
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
             playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
+            joompedUploaderLabel?.isHidden = true
         }
         annotations.forEach { (annotation) in
             self.annotationsDict[floorf(annotation.timestamp)] = annotation
             self.annotationsDict[ceilf(annotation.timestamp)] = annotation
         }
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
         liveAnnotationLabel.text = ""
-        
+        updateNavigationBar()
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didTapSave(_ sender: Any) {
-        print("did tap joomped save")
+     @IBAction func didTapSave(_ sender: Any) {
+        if !isEditMode {
+            isEditMode = true
+            tableView.reloadData()
+            return
+        }
         guard let user = PFUser.current() as? User else {
             return
         }
@@ -95,7 +93,6 @@ class JoompedViewController: UIViewController {
             video.title = youtubeVideo.snippet.title
             video.author = youtubeVideo.snippet.channelTitle
             video.thumbnail = youtubeVideo.snippet.thumbnail.url
-            
         }
     
         newJoomped.annotations = annotations
@@ -111,7 +108,32 @@ class JoompedViewController: UIViewController {
             self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
+    
+    func updateNavigationBar() {
+        guard let user = PFUser.current() else {
+            return
+        }
+        if isEditMode && (youtubeVideo != nil && joomped == nil || joomped?.user.objectId == user.objectId){
+            navigationItem.title = "Creation"
+            navigationItem.rightBarButtonItem?.title = "Save"
+        } else if (joomped?.user.objectId == user.objectId) {
+            navigationItem.title = "Consumption"
+            navigationItem.rightBarButtonItem?.title = "Edit"
+        } else {
+            navigationItem.title = "Consumption"
+            hideRightBarButtonItem()
+        }
+    }
+    
+    func hideRightBarButtonItem() {
+        navigationItem.rightBarButtonItem?.rrk_hidden()
+    }
+    func showRightBarButtonItem() {
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.rrk_primaryColor()
+        navigationItem.rightBarButtonItem?.isEnabled = true
+    }
 }
+
 
 extension JoompedViewController: UITableViewDataSource {
     

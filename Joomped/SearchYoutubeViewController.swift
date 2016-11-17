@@ -71,7 +71,7 @@ extension SearchYoutubeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedVideo = videos[indexPath.row]
-        performSegue(withIdentifier: "Creation", sender: self)
+        performSegue(withIdentifier: "CreationSegue", sender: self)
     }
 }
 
