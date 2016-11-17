@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIBarButtonItem {
-    func rrk_hidden() {
+    func rrk_hide() {
         self.tintColor = UIColor.clear
         self.isEnabled = false
     }

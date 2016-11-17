@@ -127,11 +127,7 @@ class JoompedViewController: UIViewController {
     }
     
     func hideRightBarButtonItem() {
-        navigationItem.rightBarButtonItem?.rrk_hidden()
-    }
-    func showRightBarButtonItem() {
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.rrk_primaryColor()
-        navigationItem.rightBarButtonItem?.isEnabled = true
+        navigationItem.rightBarButtonItem?.rrk_hide()
     }
 }
 
