@@ -63,8 +63,8 @@ class HomeViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ConsumptionSegue" {
-            let cvc = segue.destination as! ConsumptionViewController
-            cvc.joomped = selectedJoompedCell?.joomped
+            let jvc = segue.destination as! JoompedViewController
+            jvc.joomped = selectedJoompedCell?.joomped
         }
     }
 }

@@ -44,11 +44,12 @@ final class SearchYoutubeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let creationViewController = segue.destination as? CreationViewController else {
+        guard let joompedViewController = segue.destination as? JoompedViewController else {
             return
         }
         
-        creationViewController.youtubeVideo = selectedVideo
+        joompedViewController.youtubeVideo = selectedVideo
+        joompedViewController.isEditMode = true
     }
 }
 

@@ -10,32 +10,60 @@ import UIKit
 import Parse
 import youtube_ios_player_helper
 
-class CreationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class JoompedViewController: UIViewController {
 
-    @IBOutlet weak var videoTitle: UILabel!
-    @IBOutlet weak var videoUploader: UILabel!
+    @IBOutlet weak var videoTitleLabel: UILabel!
+    @IBOutlet weak var videoUploaderLabel: UILabel!
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var liveAnnotationLabel: UILabel!
+    @IBOutlet weak var joompedUploaderLabel: UILabel!
     
-    var youtubeVideo: YoutubeVideo!
-    var annotations = [Annotation]()
-    var annotationTime: Float?
-    var annotationsDict = [Float:Annotation]()
-    var timer: Timer = Timer()
+    var joomped: Joomped?
+    var youtubeVideo: YoutubeVideo?
+    fileprivate var _annotations = [Annotation]()
+    fileprivate var annotations: [Annotation] {
+        get {
+            return joomped?.annotations ?? _annotations
+        }
+        set {
+            if let joomped = joomped {
+                joomped.annotations = newValue
+            } else {
+                _annotations = newValue
+            }
+        }
+    }
+    fileprivate var annotationTime: Float?
+    fileprivate var annotationsDict = [Float:Annotation]()
+    fileprivate var timer: Timer = Timer()
+    var isEditMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+    }
+    
+    func configureView() {
         // Do any additional setup after loading the view.
         let playerVars = [
             "playsinline": 1
         ]
-        
-        videoTitle.text = youtubeVideo.snippet.title
-        videoUploader.text = youtubeVideo.snippet.channelTitle
-        
         playerView.delegate = self
-        playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
+        if let joomped = joomped {
+            videoTitleLabel.text = joomped.video.title
+            videoUploaderLabel.text = joomped.video.author
+            joompedUploaderLabel.text = joomped.user.username
+            playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
+        } else if let youtubeVideo = youtubeVideo {
+            videoTitleLabel.text = youtubeVideo.snippet.title
+            videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
+            playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
+        }
+        annotations.forEach { (annotation) in
+            self.annotationsDict[floorf(annotation.timestamp)] = annotation
+            self.annotationsDict[ceilf(annotation.timestamp)] = annotation
+        }
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -43,45 +71,10 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
         liveAnnotationLabel.text = ""
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return annotations.count
-        } else if (section == 1) {
-            return 1
-        }
-        return 0
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AnnotationCell") as! AnnotationCell
-        cell.delegate = self
-        if indexPath.section == 0 {
-            let annotation = annotations[indexPath.row]
-            cell.annotation = annotation
-            cell.isEditMode = false
-        } else {
-            cell.annotation = nil
-            cell.timestampLabel.isHidden = true
-        }
-        return cell
+        
     }
     
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 1 {
-            let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
-            let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
-            cell.annotation = annotation
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -92,32 +85,82 @@ class CreationViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let user = PFUser.current() as? User else {
             return
         }
-        let joomped = Joomped()
+        let newJoomped = joomped ?? Joomped()
         
+        let video = joomped?.video ?? Video()
         
-        let video = Video()
-        video.youtubeId = youtubeVideo.id
-        video.length = playerView.duration()
-        video.title = youtubeVideo.snippet.title
-        video.author = youtubeVideo.snippet.channelTitle
-        video.thumbnail = youtubeVideo.snippet.thumbnail.url
+        if let youtubeVideo = youtubeVideo {
+            video.youtubeId = youtubeVideo.id
+            video.length = playerView.duration()
+            video.title = youtubeVideo.snippet.title
+            video.author = youtubeVideo.snippet.channelTitle
+            video.thumbnail = youtubeVideo.snippet.thumbnail.url
+            
+        }
     
-        joomped.annotations = annotations
-        joomped.user = user
-        joomped.video = video
-        joomped.saveInBackground { (success: Bool, error: Error?) in
+        newJoomped.annotations = annotations
+        newJoomped.user = user
+        newJoomped.video = video
+        newJoomped.saveInBackground { (success: Bool, error: Error?) in
             if let error = error {
                 print("error saving \(error.localizedDescription)")
                 return
             }
-            print("saved successfully: \(joomped.objectId)")
+            print("saved successfully: \(newJoomped.objectId)")
             self.playerView.stopVideo()
             self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
 }
 
-extension CreationViewController: AnnotationCellDelegate {
+extension JoompedViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return annotations.count
+        } else if (section == 1) {
+            return 1
+        }
+        return 0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if isEditMode {
+            return 2
+        } else {
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AnnotationCell") as! AnnotationCell
+        cell.delegate = self
+        
+        if indexPath.section == 0 {
+            let annotation = annotations[indexPath.row]
+            cell.annotation = annotation
+            cell.isEditMode = false
+        } else if indexPath.section == 1 && isEditMode {
+            cell.annotation = nil
+            cell.timestampLabel.isHidden = true
+        }
+        return cell
+    }
+}
+
+extension JoompedViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 1 {
+            let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
+            let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
+            cell.annotation = annotation
+        }
+    }
+    
+}
+
+extension JoompedViewController: AnnotationCellDelegate {
     
     func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation) {
         if annotations.count == 0 || newAnnotation.timestamp > annotations.last!.timestamp {
@@ -135,7 +178,7 @@ extension CreationViewController: AnnotationCellDelegate {
             annotationsDict[floorf(annotation.timestamp)] = annotation
             annotationsDict[ceilf(annotation.timestamp)] = annotation
         }
-        tableView.reloadData()
+        tableView?.reloadData()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             let numberOfSections = self.tableView.numberOfSections
@@ -146,11 +189,11 @@ extension CreationViewController: AnnotationCellDelegate {
     }
     
     func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float) {
-        self.playerView.seek(toSeconds: timestamp, allowSeekAhead: true)
+        self.playerView?.seek(toSeconds: timestamp, allowSeekAhead: true)
     }
 }
 
-extension CreationViewController: YTPlayerViewDelegate {
+extension JoompedViewController: YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.playVideo()
@@ -162,9 +205,9 @@ extension CreationViewController: YTPlayerViewDelegate {
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
         if !timer.isValid {
             if let annotation = annotationsDict[floor(playTime)] {
-                liveAnnotationLabel.text = annotation.text
+                liveAnnotationLabel?.text = annotation.text
                 timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
-                    self.liveAnnotationLabel.text = ""
+                    self.liveAnnotationLabel?.text = ""
                 })
             }
         }
