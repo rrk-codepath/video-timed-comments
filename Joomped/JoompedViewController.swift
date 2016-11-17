@@ -129,6 +129,10 @@ class JoompedViewController: UIViewController {
     func hideRightBarButtonItem() {
         navigationItem.rightBarButtonItem?.rrk_hide()
     }
+
+    func setAnnotationLabel() {
+        self.liveAnnotationLabel?.text = ""
+    }
 }
 
 
@@ -226,9 +230,7 @@ extension JoompedViewController: YTPlayerViewDelegate {
         if !timer.isValid {
             if let annotation = annotationsDict[floor(playTime)] {
                 liveAnnotationLabel?.text = annotation.text
-                timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
-                    self.liveAnnotationLabel?.text = ""
-                })
+                timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(setAnnotationLabel), userInfo: nil, repeats: false)
             }
         }
     }
