@@ -254,7 +254,7 @@
                     <navigationItem key="navigationItem" id="eil-nm-zY9">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="c21-Gv-78d">
                             <connections>
-                                <action selector="didTapSave:" destination="z9f-sm-9S5" id="Uyt-Yp-n4z"/>
+                                <action selector="didTapEditSave:" destination="z9f-sm-9S5" id="fk0-rI-IN0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -276,7 +276,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

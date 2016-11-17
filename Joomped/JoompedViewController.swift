@@ -21,7 +21,7 @@ class JoompedViewController: UIViewController {
     
     var joomped: Joomped?
     var youtubeVideo: YoutubeVideo?
-    fileprivate var annotations: [Annotation]!
+    fileprivate var annotations = [Annotation]()
     fileprivate var annotationTime: Float?
     fileprivate var annotationsDict = [Float:Annotation]()
     fileprivate var timer: Timer = Timer()
@@ -51,7 +51,6 @@ class JoompedViewController: UIViewController {
             joompedUploaderLabel?.text = joomped.user.username
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
         } else if let youtubeVideo = youtubeVideo {
-            annotations = [Annotation]()
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
             playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
@@ -73,8 +72,7 @@ class JoompedViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-     @IBAction func didTapSave(_ sender: Any) {
+    @IBAction func didTapEditSave(_ sender: UIBarButtonItem) {
         if !isEditMode {
             isEditMode = true
             tableView.reloadData()
@@ -116,6 +114,9 @@ class JoompedViewController: UIViewController {
         if isEditMode && (youtubeVideo != nil && joomped == nil || joomped?.user.objectId == user.objectId){
             navigationItem.title = "Creation"
             navigationItem.rightBarButtonItem?.title = "Save"
+            if annotations.count == 0 {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            }
         } else if (joomped?.user.objectId == user.objectId) {
             navigationItem.title = "Consumption"
             navigationItem.rightBarButtonItem?.title = "Edit"
@@ -188,6 +189,7 @@ extension JoompedViewController: AnnotationCellDelegate {
         if annotations.count == 0 || newAnnotation.timestamp > annotations.last!.timestamp {
             // insert at end if no annotations, or the new annotation has the largest timestamp
             annotations.append(newAnnotation)
+            navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
             for (index, annotation) in annotations.enumerated() {
                 if newAnnotation.timestamp < annotation.timestamp {
