@@ -19,6 +19,8 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var liveAnnotationLabel: UILabel!
     @IBOutlet weak var joompedUploaderLabel: UILabel?
     
+    var currentAnnotation: Annotation?
+    var currentAnnotationCell: AnnotationCell?
     var joomped: Joomped?
     var youtubeVideo: YoutubeVideo?
     fileprivate var annotations = [Annotation]()
@@ -72,6 +74,15 @@ class JoompedViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func unhighlightVisbileCells() {
+        tableView.visibleCells.forEach({ (cell) in
+            if cell != currentAnnotationCell {
+                cell.backgroundColor = UIColor.white
+            }
+        })
+    }
+    
     @IBAction func didTapEditSave(_ sender: UIBarButtonItem) {
         if !isEditMode {
             isEditMode = true
@@ -160,6 +171,13 @@ extension JoompedViewController: UITableViewDataSource {
         cell.delegate = self
         
         if indexPath.section == 0 {
+            if let currentAnnotation = currentAnnotation {
+                if cell.annotation != currentAnnotation {
+                    cell.backgroundColor = UIColor.white
+                } else {
+                    cell.backgroundColor = UIColor.rrk_primaryColor
+                }
+            }
             let annotation = annotations[indexPath.row]
             cell.annotation = annotation
             cell.isEditMode = isEditMode
@@ -178,7 +196,19 @@ extension JoompedViewController: UITableViewDelegate {
             let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
             let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
             cell.annotation = annotation
+        } else if indexPath.section == 0 {
+            let annotationCell = tableView.cellForRow(at: indexPath) as! AnnotationCell
+            currentAnnotationCell = annotationCell
+            UIView.animate(withDuration: 1, animations: {
+                annotationCell.backgroundColor = UIColor.rrk_primaryColor
+            })
+            tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+            if let timestamp = annotationCell.annotation?.timestamp {
+                self.playerView?.seek(toSeconds: timestamp, allowSeekAhead: true)
+            }
+            unhighlightVisbileCells()
         }
+        
     }
     
 }
@@ -211,10 +241,6 @@ extension JoompedViewController: AnnotationCellDelegate {
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
     }
-    
-    func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float) {
-        self.playerView?.seek(toSeconds: timestamp, allowSeekAhead: true)
-    }
 }
 
 extension JoompedViewController: YTPlayerViewDelegate {
@@ -230,6 +256,18 @@ extension JoompedViewController: YTPlayerViewDelegate {
         if !timer.isValid {
             if let annotation = annotationsDict[floor(playTime)] {
                 liveAnnotationLabel?.text = annotation.text
+                currentAnnotation = annotation
+                if let index = annotations.index(of: annotation) {
+                    let indexPath = IndexPath(row: index, section: 0)
+                    tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+                    let currentAnnotationCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
+                    UIView.animate(withDuration: 1, animations: {
+                        currentAnnotationCell?.backgroundColor = UIColor.rrk_primaryColor
+                    })
+                    self.currentAnnotationCell = currentAnnotationCell
+                    unhighlightVisbileCells()
+                }
+                
                 timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(setAnnotationLabel), userInfo: nil, repeats: false)
             }
         }

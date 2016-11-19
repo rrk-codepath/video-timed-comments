@@ -51,18 +51,12 @@ class AnnotationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let timestampTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapTimestamp(_:)))
-        timestampLabel.addGestureRecognizer(timestampTapRecognizer)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    func didTapTimestamp(_ sender: Any) {
-        delegate?.annotationCell?(annotationCell: self, tappedTimestamp: timestampFloat!)
     }
 
     @IBAction func didTapSaveButton(_ sender: Any) {
