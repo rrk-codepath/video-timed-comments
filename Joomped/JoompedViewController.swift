@@ -162,7 +162,7 @@ extension JoompedViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let annotation = annotations[indexPath.row]
             cell.annotation = annotation
-            cell.isEditMode = false
+            cell.isEditMode = isEditMode
         } else if indexPath.section == 1 && isEditMode {
             cell.annotation = nil
             cell.timestampLabel.isHidden = true

@@ -16,15 +16,17 @@ import UIKit
 class AnnotationCell: UITableViewCell {
     @IBOutlet weak var annotationTextField: UITextField!
     @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var annotationLabel: UILabel!
     weak var delegate: AnnotationCellDelegate?
     
     var timestampFloat: Float?
     
     var isEditMode: Bool = false {
         didSet {
-            annotationTextField.isUserInteractionEnabled = isEditMode
-            addButton.isHidden = !isEditMode
+            annotationLabel.isHidden = isEditMode
+            annotationTextField.isHidden = !isEditMode
+            saveButton.isHidden = !isEditMode
         }
     }
     
@@ -32,6 +34,7 @@ class AnnotationCell: UITableViewCell {
         didSet {
             if let annotation = annotation {
                 annotationTextField.text = annotation.text
+                annotationLabel.text = annotation.text
                 timestampFloat = annotation.timestamp
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
@@ -42,7 +45,7 @@ class AnnotationCell: UITableViewCell {
     }
     
     @IBAction func editingDidChange(_ sender: Any) {
-        addButton.isEnabled = annotationTextField.text!.characters.count > 0
+        saveButton.isEnabled = annotationTextField.text!.characters.count > 0
     }
     
     override func awakeFromNib() {
@@ -61,8 +64,8 @@ class AnnotationCell: UITableViewCell {
     func didTapTimestamp(_ sender: Any) {
         delegate?.annotationCell?(annotationCell: self, tappedTimestamp: timestampFloat!)
     }
-    
-    @IBAction func didTapAddButton(_ sender: Any) {
+
+    @IBAction func didTapSaveButton(_ sender: Any) {
         guard let annotationText = annotationTextField.text, !annotationText.isEmpty else {
             annotationTextField.layer.borderColor = UIColor.red.cgColor
             annotationTextField.layer.borderWidth = 1.0
