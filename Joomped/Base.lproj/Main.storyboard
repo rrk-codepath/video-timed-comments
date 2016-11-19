@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -172,14 +172,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youtube uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-sg-Sjv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Youtube uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-sg-Sjv">
                                 <rect key="frame" x="8" y="270" width="115" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="114" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zhd-B2-6ZF">
-                                <rect key="frame" x="0.0" y="297" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="320" width="375" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="EQt-HD-aY0"/>
@@ -209,10 +209,22 @@
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Joomped uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpO-D5-5Ok">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Joomped uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpO-D5-5Ok">
                                 <rect key="frame" x="245" y="270" width="122" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.68272860739999996" green="0.54089765099999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ea-GQ-lvb">
+                                <rect key="frame" x="8" y="295" width="80" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number annotations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drY-fX-e3T">
+                                <rect key="frame" x="235" y="295" width="132" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -221,16 +233,22 @@
                             <constraint firstItem="R0Z-sg-Sjv" firstAttribute="leading" secondItem="gb9-og-qg5" secondAttribute="leading" id="0Kl-Ht-zR4"/>
                             <constraint firstItem="R0Z-sg-Sjv" firstAttribute="top" secondItem="gb9-og-qg5" secondAttribute="bottom" constant="4" id="3GF-oQ-7fN"/>
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="top" secondItem="VHp-Kn-qJz" secondAttribute="bottom" id="7vv-ez-dE3"/>
+                            <constraint firstItem="2ea-GQ-lvb" firstAttribute="leading" secondItem="R0Z-sg-Sjv" secondAttribute="leading" id="B6h-Es-SdE"/>
                             <constraint firstItem="gb9-og-qg5" firstAttribute="top" secondItem="xrz-eA-WJ7" secondAttribute="bottom" constant="8" id="KjO-Pr-NLB"/>
+                            <constraint firstItem="2ea-GQ-lvb" firstAttribute="top" secondItem="R0Z-sg-Sjv" secondAttribute="bottom" constant="8" id="LLV-jx-aId"/>
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" id="Pin-K8-Nnc"/>
-                            <constraint firstItem="zhd-B2-6ZF" firstAttribute="top" secondItem="R0Z-sg-Sjv" secondAttribute="bottom" constant="10" id="RBS-Vf-cIX"/>
+                            <constraint firstItem="drY-fX-e3T" firstAttribute="centerY" secondItem="2ea-GQ-lvb" secondAttribute="centerY" id="Tjg-wA-QW7"/>
                             <constraint firstItem="gb9-og-qg5" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" constant="8" id="WUe-Aa-Ksv"/>
                             <constraint firstItem="lpO-D5-5Ok" firstAttribute="centerY" secondItem="R0Z-sg-Sjv" secondAttribute="centerY" id="Wni-Gx-0Nt"/>
+                            <constraint firstAttribute="trailing" secondItem="drY-fX-e3T" secondAttribute="trailing" constant="8" id="YZg-zv-fa0"/>
                             <constraint firstAttribute="trailing" secondItem="lpO-D5-5Ok" secondAttribute="trailing" constant="8" id="cAf-A6-3Js"/>
+                            <constraint firstItem="lpO-D5-5Ok" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R0Z-sg-Sjv" secondAttribute="trailing" constant="8" id="edG-OY-xz7"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gb9-og-qg5" secondAttribute="trailing" constant="8" id="lbI-oB-xpx"/>
                             <constraint firstAttribute="trailing" secondItem="zhd-B2-6ZF" secondAttribute="trailing" id="m4S-0S-3gB"/>
+                            <constraint firstItem="zhd-B2-6ZF" firstAttribute="top" secondItem="2ea-GQ-lvb" secondAttribute="bottom" constant="8" id="nYf-fb-Ic0"/>
                             <constraint firstItem="zhd-B2-6ZF" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" id="phb-6a-Do2"/>
                             <constraint firstAttribute="trailing" secondItem="xrz-eA-WJ7" secondAttribute="trailing" id="qqR-SZ-uM9"/>
+                            <constraint firstItem="drY-fX-e3T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2ea-GQ-lvb" secondAttribute="trailing" constant="8" id="x4w-Q1-SW6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eil-nm-zY9">
@@ -243,7 +261,9 @@
                     <connections>
                         <outlet property="joompedUploaderLabel" destination="lpO-D5-5Ok" id="lMJ-7d-IL1"/>
                         <outlet property="liveAnnotationLabel" destination="3Ub-zE-iMH" id="NgE-kX-GMs"/>
+                        <outlet property="numberAnnotationsLabel" destination="drY-fX-e3T" id="AwD-2i-E9X"/>
                         <outlet property="playerView" destination="xrz-eA-WJ7" id="MyV-aN-Gr4"/>
+                        <outlet property="publishLabel" destination="2ea-GQ-lvb" id="dNr-EY-T6Z"/>
                         <outlet property="tableView" destination="zhd-B2-6ZF" id="DPp-dL-Mrp"/>
                         <outlet property="videoTitleLabel" destination="gb9-og-qg5" id="U9X-P5-5i3"/>
                         <outlet property="videoUploaderLabel" destination="R0Z-sg-Sjv" id="T72-bZ-oRi"/>

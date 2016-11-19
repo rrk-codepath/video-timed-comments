@@ -45,6 +45,15 @@ extension Date {
         return ""
     }
     
+    public var timeFormatted: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy, h:mma"
+        dateFormatter.timeZone = TimeZone.current
+        let timeStamp = dateFormatter.string(from: self)
+        
+        return timeStamp
+    }
+    
     public var timeAgoRelative: String {
         let calendar = NSCalendar.current
         let components = calendar.dateComponents([.second, .minute, .hour, .day, .month, .year], from: self as Date, to: Date())

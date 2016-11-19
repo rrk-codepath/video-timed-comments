@@ -18,6 +18,8 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var liveAnnotationLabel: UILabel!
     @IBOutlet weak var joompedUploaderLabel: UILabel?
+    @IBOutlet weak var publishLabel: UILabel!
+    @IBOutlet weak var numberAnnotationsLabel: UILabel!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -51,6 +53,14 @@ class JoompedViewController: UIViewController {
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
             joompedUploaderLabel?.text = joomped.user.username
+            var countString = "\(joomped.annotations.count) annotations"
+            if joomped.annotations.count == 1 {
+                countString = countString.substring(to: countString.index(before: countString.endIndex))
+            }
+            numberAnnotationsLabel.text = countString
+            numberAnnotationsLabel.isHidden = false
+            publishLabel.text = joomped.updatedAt?.timeFormatted
+            publishLabel.isHidden = false
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
         } else if let youtubeVideo = youtubeVideo {
             videoTitleLabel.text = youtubeVideo.snippet.title
