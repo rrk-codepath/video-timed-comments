@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -97,17 +97,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3cv-Od-WDP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="5Op-XE-7lW"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Joomped"/>
+                                    <segment title="YouTube"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onSearchModeChanged:" destination="FpH-lp-WTC" eventType="valueChanged" id="BCo-0i-ub2"/>
+                                </connections>
+                            </segmentedControl>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aXa-DQ-gpX"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-Lc-nyY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="93" width="375" height="574"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3cv-Od-WDP" firstAttribute="top" secondItem="dUA-ZW-RZL" secondAttribute="bottom" id="3fw-1b-6Jh"/>
                             <constraint firstAttribute="trailing" secondItem="HS6-Lc-nyY" secondAttribute="trailing" id="98F-gh-Pnp"/>
                             <constraint firstItem="kWn-fz-7eL" firstAttribute="top" secondItem="HS6-Lc-nyY" secondAttribute="bottom" id="GsZ-ew-aA6"/>
-                            <constraint firstItem="HS6-Lc-nyY" firstAttribute="top" secondItem="Upd-ew-dAB" secondAttribute="top" id="baf-ee-w4n"/>
+                            <constraint firstItem="HS6-Lc-nyY" firstAttribute="top" secondItem="3cv-Od-WDP" secondAttribute="bottom" id="InH-hP-6lR"/>
+                            <constraint firstItem="dUA-ZW-RZL" firstAttribute="top" secondItem="eqe-4a-cdL" secondAttribute="bottom" id="MDK-Wa-N0q"/>
+                            <constraint firstItem="3cv-Od-WDP" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" id="geE-cT-EbB"/>
                             <constraint firstItem="HS6-Lc-nyY" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" id="hAr-vr-9h3"/>
+                            <constraint firstAttribute="trailing" secondItem="dUA-ZW-RZL" secondAttribute="trailing" id="lbx-3U-kpD"/>
+                            <constraint firstAttribute="trailing" secondItem="3cv-Od-WDP" secondAttribute="trailing" id="oCp-4i-vwC"/>
+                            <constraint firstItem="dUA-ZW-RZL" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" id="zbx-i1-XCA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NMx-xn-h31">
@@ -116,60 +142,17 @@
                                 <action selector="onLogout:" destination="FpH-lp-WTC" id="zoD-Qx-BAn"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Search" id="Flf-9r-hUn">
-                            <connections>
-                                <segue destination="CUo-hu-bZE" kind="show" id="EWn-le-qhl"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="joompedTableView" destination="HS6-Lc-nyY" id="SG7-l4-ijy"/>
+                        <outlet property="searchBar" destination="dUA-ZW-RZL" id="xle-O5-584"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="8hp-Pb-k3P"/>
+                        <segue destination="z9f-sm-9S5" kind="show" identifier="CreationSegue" id="vm2-8s-e9R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5M9-xR-8W2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960.79999999999995" y="35.532233883058474"/>
-        </scene>
-        <!--Search The YouTubes-->
-        <scene sceneID="YrW-z3-mzY">
-            <objects>
-                <viewController title="Search The YouTubes" id="CUo-hu-bZE" customClass="SearchYoutubeViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Nu6-Q5-Q5o"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ccg-a3-NhO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NLY-hz-06R">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qax-6P-ePT">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2c-YF-Agd">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="qax-6P-ePT" secondAttribute="trailing" id="5yB-kH-kgF"/>
-                            <constraint firstItem="qax-6P-ePT" firstAttribute="leading" secondItem="NLY-hz-06R" secondAttribute="leading" id="X9h-Jm-ldM"/>
-                            <constraint firstItem="Ccg-a3-NhO" firstAttribute="top" secondItem="qax-6P-ePT" secondAttribute="bottom" id="cTh-CG-eJa"/>
-                            <constraint firstItem="qax-6P-ePT" firstAttribute="top" secondItem="NLY-hz-06R" secondAttribute="top" constant="44" id="pgU-zW-N0I"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="searchBar" destination="X2c-YF-Agd" id="QqZ-g8-yyl"/>
-                        <outlet property="youtubeTableView" destination="qax-6P-ePT" id="rPG-my-r5P"/>
-                        <segue destination="z9f-sm-9S5" kind="show" identifier="CreationSegue" id="jhG-xq-cgv"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fxv-kD-Kg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="961" y="800"/>
+            <point key="canvasLocation" x="997.60000000000002" y="-92.203898050974516"/>
         </scene>
         <!--Joomped View Controller-->
         <scene sceneID="HL9-fK-D9C">
@@ -292,6 +275,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Hhx-Qr-R1r"/>
-        <segue reference="jhG-xq-cgv"/>
+        <segue reference="vm2-8s-e9R"/>
     </inferredMetricsTieBreakers>
 </document>

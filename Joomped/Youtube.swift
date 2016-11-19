@@ -7,23 +7,20 @@ final class Youtube {
     private static let baseUrl = "https://www.googleapis.com/youtube/v3"
     private static let key = "AIzaSyANijfbKhKbuIqqt7cJy6zbwE4ewsHIdQg"
     
-    private var authToken: String?
-    
-    init(authToken: String) {
-        self.authToken = authToken
+    private var authToken: String? {
+        return GIDSignIn.sharedInstance().currentUser?.authentication?.accessToken
     }
     
-    init() {
-        authToken = GIDSignIn.sharedInstance().currentUser?.authentication?.accessToken
+    var authenticated: Bool {
+        return authToken != nil
     }
     
-    func search(term: String, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
-        request(
-            path: "search",
+    func liked(success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
+        userRequest(
+            path: "videos",
             parameters: [
-                "type": "video" as AnyObject,
                 "part": "id,snippet" as AnyObject,
-                "q": term as AnyObject
+                "myRating": "like" as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
                 guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
@@ -40,6 +37,57 @@ final class Youtube {
             failure: failure
         )
     }
+    
+    func popular(success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
+        request(
+            path: "videos",
+            parameters: [
+                "part": "id,snippet" as AnyObject,
+                "chart": "mostPopular" as AnyObject,
+                "regionCode": "US" as AnyObject,
+                "videoCategoryId": 28 as AnyObject
+            ],
+            success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
+                guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
+                    failure?(YoutubeError.failed)
+                    return
+                }
+                
+                let videos = items.map({ (d: Dictionary<String, AnyObject>) -> YoutubeVideo in
+                    return YoutubeVideo(dictionary: d)
+                })
+                
+                success(videos)
+        },
+            failure: failure
+        )
+    }
+    
+    func search(term: String, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
+        request(
+            path: "search",
+            parameters: [
+                "type": "video" as AnyObject,
+                "part": "id,snippet" as AnyObject,
+                "videoSyndicated": "true" as AnyObject,
+                "q": term as AnyObject
+            ],
+            success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
+                guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
+                    failure?(YoutubeError.failed)
+                    return
+                }
+                
+                let videos = items.map({ (d: Dictionary<String, AnyObject>) -> YoutubeVideo in
+                    return YoutubeVideo(dictionary: d)
+                })
+                
+                success(videos)
+        },
+            failure: failure
+        )
+    }
+
     
     private func userRequest(path: String, parameters: Dictionary<String, AnyObject>, success: @escaping ((Dictionary<String, AnyObject>) -> Void), failure: ((Error) -> Void)?) {
         guard authToken != nil else {
