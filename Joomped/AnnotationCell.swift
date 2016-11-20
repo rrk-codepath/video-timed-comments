@@ -39,7 +39,6 @@ class AnnotationCell: UITableViewCell {
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
                 annotationTextField.isUserInteractionEnabled = true
-                annotationTextField.becomeFirstResponder()
             }
         }
     }

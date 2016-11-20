@@ -97,6 +97,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aXa-DQ-gpX"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-Lc-nyY">
+                                <rect key="frame" x="0.0" y="93" width="375" height="574"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3cv-Od-WDP">
                                 <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                                 <constraints>
@@ -110,17 +121,6 @@
                                     <action selector="onSearchModeChanged:" destination="FpH-lp-WTC" eventType="valueChanged" id="BCo-0i-ub2"/>
                                 </connections>
                             </segmentedControl>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="aXa-DQ-gpX"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-Lc-nyY">
-                                <rect key="frame" x="0.0" y="93" width="375" height="574"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -179,11 +179,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="114" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zhd-B2-6ZF">
-                                <rect key="frame" x="0.0" y="320" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="320" width="375" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="EQt-HD-aY0"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnotationCell" rowHeight="114" id="qSu-gK-gNr" customClass="AnnotationCell" customModule="Joomped" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="114"/>
@@ -233,6 +230,7 @@
                             <constraint firstItem="R0Z-sg-Sjv" firstAttribute="leading" secondItem="gb9-og-qg5" secondAttribute="leading" id="0Kl-Ht-zR4"/>
                             <constraint firstItem="R0Z-sg-Sjv" firstAttribute="top" secondItem="gb9-og-qg5" secondAttribute="bottom" constant="4" id="3GF-oQ-7fN"/>
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="top" secondItem="VHp-Kn-qJz" secondAttribute="bottom" id="7vv-ez-dE3"/>
+                            <constraint firstItem="Hgd-Lr-0de" firstAttribute="top" secondItem="zhd-B2-6ZF" secondAttribute="bottom" id="8bJ-bZ-5XD"/>
                             <constraint firstItem="2ea-GQ-lvb" firstAttribute="leading" secondItem="R0Z-sg-Sjv" secondAttribute="leading" id="B6h-Es-SdE"/>
                             <constraint firstItem="gb9-og-qg5" firstAttribute="top" secondItem="xrz-eA-WJ7" secondAttribute="bottom" constant="8" id="KjO-Pr-NLB"/>
                             <constraint firstItem="2ea-GQ-lvb" firstAttribute="top" secondItem="R0Z-sg-Sjv" secondAttribute="bottom" constant="8" id="LLV-jx-aId"/>
@@ -272,14 +270,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1933" y="386"/>
+            <point key="canvasLocation" x="1932" y="385.45727136431788"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="00k-qF-SZo">
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -294,7 +292,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Hhx-Qr-R1r"/>
-        <segue reference="vm2-8s-e9R"/>
+        <segue reference="8hp-Pb-k3P"/>
+        <segue reference="9wy-6B-93j"/>
     </inferredMetricsTieBreakers>
 </document>
