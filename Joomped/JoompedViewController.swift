@@ -20,6 +20,8 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var joompedUploaderLabel: UILabel?
     @IBOutlet weak var publishLabel: UILabel!
     @IBOutlet weak var numberAnnotationsLabel: UILabel!
+    @IBOutlet weak var seekBarView: UIView!
+    @IBOutlet weak var seekBar: UIView!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -179,6 +181,14 @@ class JoompedViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func onPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
+        let location = recognizer.location(in: self.seekBar)
+        let percentageOfVideo = location.x / self.seekBar.bounds.width
+        playerView.seek(toSeconds: Float(playerView.duration()) * Float(percentageOfVideo) , allowSeekAhead: true)
+    }
+    
+    
 }
 
 
