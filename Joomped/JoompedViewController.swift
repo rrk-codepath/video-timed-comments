@@ -48,6 +48,9 @@ class JoompedViewController: UIViewController {
         let playerVars = [
             "playsinline": 1
         ]
+        self.automaticallyAdjustsScrollViewInsets = false
+
+        // TODO(rahul): adjust height of header view
         if let joomped = joomped {
             annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
