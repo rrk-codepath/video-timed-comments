@@ -31,6 +31,10 @@ class JoompedViewController: UIViewController {
     fileprivate var annotationTime: Float?
     fileprivate var annotationsDict = [Float:Annotation]()
     fileprivate var timer: Timer = Timer()
+    fileprivate var isSeekBarAnnotated = false
+    fileprivate var duration: Float?
+    fileprivate var seekBarLine: UIView?
+    
     var isEditMode = false {
         didSet {
             updateNavigationBar()
@@ -54,6 +58,7 @@ class JoompedViewController: UIViewController {
 
         // TODO(rahul): adjust height of header view
         if let joomped = joomped {
+            duration = Float(joomped.video.length)
             annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
@@ -76,7 +81,9 @@ class JoompedViewController: UIViewController {
         annotations.forEach { (annotation) in
             self.annotationsDict[floorf(annotation.timestamp)] = annotation
             self.annotationsDict[ceilf(annotation.timestamp)] = annotation
+            updateAnnotationInSeekBar()
         }
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
         tableView.tableFooterView = UIView()
@@ -92,7 +99,7 @@ class JoompedViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func unhighlightVisbileCells() {
         tableView.visibleCells.forEach({ (cell) in
             if cell != currentAnnotationCell {
@@ -185,13 +192,38 @@ class JoompedViewController: UIViewController {
         }
     }
     
-    @IBAction func onPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
-        let location = recognizer.location(in: self.seekBar)
-        let percentageOfVideo = location.x / self.seekBar.bounds.width
-        playerView.seek(toSeconds: Float(playerView.duration()) * Float(percentageOfVideo) , allowSeekAhead: true)
+    func updateAnnotationInSeekBar() {
+        annotations.forEach { (annotation) in
+            let percentage = annotation.timestamp / (duration ?? Float(playerView.duration()))
+            let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: 0, width: 5, height: Double(seekBar.bounds.height)))
+            lineView.backgroundColor = UIColor.yellow
+            seekBar.addSubview(lineView)
+        }
+        isSeekBarAnnotated = true
     }
     
+    func updateSeekBarLine(percentage: Float? = nil) {
+        seekBarLine?.removeFromSuperview()
+        let percentageOfVideo = percentage ?? playerView.currentTime() / (duration ?? Float(playerView.duration()))
+        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo), y: -10, width: 1, height: Double(seekBar.bounds.height + 20)))
+        seekBarLine?.backgroundColor = UIColor.red
+        seekBar.addSubview(seekBarLine!)
+    }
     
+    @IBAction func didPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
+        let location = recognizer.location(in: self.seekBar)
+        let percentageOfVideo = Float(location.x / self.seekBar.bounds.width)
+        updateSeekBarLine(percentage: percentageOfVideo)
+        playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
+        
+    }
+    
+    @IBAction func didTapSeekBar(_ recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: self.seekBar)
+        let percentageOfVideo = Float(location.x / self.seekBar.bounds.width)
+        updateSeekBarLine(percentage: Float(percentageOfVideo))
+        playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
+    }
 }
 
 
@@ -254,6 +286,8 @@ extension JoompedViewController: UITableViewDelegate {
             tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
             if let timestamp = annotationCell.annotation?.timestamp {
                 self.playerView?.seek(toSeconds: timestamp, allowSeekAhead: true)
+                let percentage = timestamp / (duration ?? Float(playerView.duration()))
+                updateSeekBarLine(percentage: percentage)
             }
             unhighlightVisbileCells()
         }
@@ -282,6 +316,7 @@ extension JoompedViewController: AnnotationCellDelegate {
             annotationsDict[ceilf(annotation.timestamp)] = annotation
         }
         tableView?.reloadData()
+        updateAnnotationInSeekBar()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             let numberOfSections = self.tableView.numberOfSections
@@ -296,12 +331,16 @@ extension JoompedViewController: YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.playVideo()
+        if !isSeekBarAnnotated {
+            updateAnnotationInSeekBar()
+        }
     }
     
     //Called roughly every half second
     //TODO: Can't create annotations within 2 seconds apart..., but also don't want to keep firing same annotation timer due to floor/ceil
     //Need floor/ceil as not every annotation shows up when tapped
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
+        updateSeekBarLine()
         if !timer.isValid {
             if let annotation = annotationsDict[floor(playTime)] {
                 liveAnnotationLabel?.text = annotation.text

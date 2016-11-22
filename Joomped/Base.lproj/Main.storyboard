@@ -174,7 +174,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Youtube uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-sg-Sjv">
-                                            <rect key="frame" x="8" y="43" width="114.5" height="17"/>
+                                            <rect key="frame" x="8" y="43" width="115" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -192,7 +192,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gb9-og-qg5">
-                                            <rect key="frame" x="8" y="8" width="112.5" height="27"/>
+                                            <rect key="frame" x="8" y="8" width="113" height="27"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -240,7 +240,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-zE-iMH">
-                                <rect key="frame" x="146" y="210" width="83.5" height="21"/>
+                                <rect key="frame" x="146" y="210" width="84" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -255,6 +255,7 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="mqU-nX-v5f" appends="YES" id="slF-AD-4K7"/>
+                                            <outletCollection property="gestureRecognizers" destination="O8h-Iv-0AL" appends="YES" id="lG3-qL-JTo"/>
                                         </connections>
                                     </view>
                                 </subviews>
@@ -304,9 +305,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="mqU-nX-v5f">
                     <connections>
-                        <action selector="onPanSeekBar:" destination="z9f-sm-9S5" id="kVK-ZA-yHc"/>
+                        <action selector="didPanSeekBar:" destination="z9f-sm-9S5" id="BXf-cn-FFH"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="O8h-Iv-0AL">
+                    <connections>
+                        <action selector="didTapSeekBar:" destination="z9f-sm-9S5" id="9Ub-KL-H4Y"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1932" y="385.45727136431788"/>
         </scene>
