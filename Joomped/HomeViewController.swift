@@ -14,6 +14,9 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchModeSegmentedControl: UISegmentedControl!
+    @IBOutlet var viewTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var tableViewActivityIndicator: UIActivityIndicatorView!
     
     var selectedJoomped: Joomped?
     var selectedYoutubeVideo: YoutubeVideo?
@@ -23,7 +26,9 @@ class HomeViewController: UIViewController {
     fileprivate var searchMode = SearchMode.joomped
     
     private let youtube = Youtube()
-    
+    private var youtubeSearchText: String?
+    private var joompedSearchText: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Following code won't work until we re-add joomped table view to storyboard
@@ -35,8 +40,16 @@ class HomeViewController: UIViewController {
         joompedTableView.delegate = self
         joompedTableView.rowHeight = UITableViewAutomaticDimension
         joompedTableView.estimatedRowHeight = 50
+        joompedTableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
+        joompedTableView.isHidden = true
+        tableViewActivityIndicator.startAnimating()
+        
+        navigationItem.titleView = searchBar
         
         searchBar.delegate = self
+        
+        searchModeSegmentedControl.layer.cornerRadius = 4.0
+        searchModeSegmentedControl.clipsToBounds = true
         
         fetchJoomped(refreshControl: nil)
         
@@ -48,6 +61,16 @@ class HomeViewController: UIViewController {
     
     @IBAction func onSearchModeChanged(_ sender: UISegmentedControl) {
         searchMode = SearchMode(rawValue: sender.selectedSegmentIndex)!
+        searchBar.placeholder = searchMode.text
+        switch searchMode {
+        case .joomped:
+            searchBar.text = joompedSearchText
+            break
+        case .youtube:
+            searchBar.text = youtubeSearchText
+            break
+        }
+        
         search()
     }
     
@@ -64,11 +87,17 @@ class HomeViewController: UIViewController {
         query.includeKeys(["video", "user"])
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             self.joomped = objects as? [Joomped] ?? []
-            self.joompedTableView.reloadData()
+            self.reloadTable()
             if let refreshControl = refreshControl {
                 refreshControl.endRefreshing()
             }
         }
+    }
+    
+    private func reloadTable() {
+        self.joompedTableView.isHidden = false
+        self.tableViewActivityIndicator.stopAnimating()
+        self.joompedTableView.reloadData()
     }
     
     fileprivate func search() {
@@ -77,13 +106,23 @@ class HomeViewController: UIViewController {
         }
         
         joompedTableView.reloadData()
+        if joompedTableView.visibleCells.count == 0 {
+            joompedTableView.isHidden = true
+            tableViewActivityIndicator.startAnimating()
+        }
         
         switch searchMode {
         case SearchMode.joomped:
-            searchJoomped(term: term)
+            if joompedSearchText != term {
+                searchJoomped(term: term)
+                joompedSearchText = searchBar.text
+            }
             break
         case SearchMode.youtube:
-            searchYoutube(term: term)
+            if youtubeSearchText != term {
+                searchYoutube(term: term)
+                youtubeSearchText = searchBar.text
+            }
             break
         }
     }
@@ -105,7 +144,7 @@ class HomeViewController: UIViewController {
         query.includeKeys(["video", "user", "annotations.Annotation"])
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             self.joomped = objects as? [Joomped] ?? []
-            self.joompedTableView.reloadData()
+            self.reloadTable()
         }
     }
     
@@ -114,7 +153,7 @@ class HomeViewController: UIViewController {
             if youtube.authenticated {
                 youtube.liked(success: { (videos: [YoutubeVideo]) in
                     self.youtubeVideos = videos
-                    self.joompedTableView.reloadData()
+                    self.reloadTable()
                 }, failure: { (error: Error) in
                     print("error: \(error.localizedDescription)")
                 })
@@ -138,6 +177,10 @@ class HomeViewController: UIViewController {
                 }
             )
         }
+    }
+    
+    @IBAction func onViewTapped(_ sender: UITapGestureRecognizer) {
+        searchBar.resignFirstResponder()
     }
 
     @IBAction func onLogout(_ sender: Any) {
@@ -163,6 +206,38 @@ class HomeViewController: UIViewController {
         default:
             return
         }
+    }
+    
+    fileprivate func hideSearchMode() {
+        fadeSearchMode(toOpacity: 0.0)
+    }
+    
+    fileprivate func showSearchMode() {
+        if joompedTableView.contentOffset.y < 30 {
+            fadeSearchMode(toOpacity: 1.0)
+        }
+    }
+    
+    private func fadeSearchMode(toOpacity opacity: CGFloat) {
+        if self.searchModeSegmentedControl.alpha != opacity {
+            UIView.animate(withDuration: 0.1, animations: { () -> Void in
+                self.searchModeSegmentedControl.alpha = opacity
+            })
+        }
+    }
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        hideSearchMode()
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        showSearchMode();
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        showSearchMode()
     }
 }
 
@@ -210,7 +285,12 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UISearchBarDelegate {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        viewTapGestureRecognizer.isEnabled = true
+    }
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        viewTapGestureRecognizer.isEnabled = false
         search()
     }
     
@@ -223,4 +303,13 @@ extension HomeViewController: UISearchBarDelegate {
 fileprivate enum SearchMode: Int {
     case joomped = 0
     case youtube
+    
+    var text: String {
+        switch self {
+        case .joomped:
+            return "Find annotations"
+        case .youtube:
+            return "Find something to annotate"
+        }
+    }
 }

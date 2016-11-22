@@ -97,19 +97,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="aXa-DQ-gpX"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LKY-fa-w5E">
+                                <rect key="frame" x="177" y="116" width="20" height="20"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-Lc-nyY">
-                                <rect key="frame" x="0.0" y="93" width="375" height="574"/>
+                                <rect key="frame" x="0.0" y="63" width="375" height="604"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Find annotations" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3cv-Od-WDP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <rect key="frame" x="40" y="72" width="295" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="5Op-XE-7lW"/>
                                 </constraints>
@@ -123,18 +126,21 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="3cv-Od-WDP" firstAttribute="top" secondItem="dUA-ZW-RZL" secondAttribute="bottom" id="3fw-1b-6Jh"/>
+                            <constraint firstItem="3cv-Od-WDP" firstAttribute="top" secondItem="eqe-4a-cdL" secondAttribute="bottom" constant="8" id="8NF-Bd-IdE"/>
                             <constraint firstAttribute="trailing" secondItem="HS6-Lc-nyY" secondAttribute="trailing" id="98F-gh-Pnp"/>
+                            <constraint firstItem="LKY-fa-w5E" firstAttribute="centerX" secondItem="Upd-ew-dAB" secondAttribute="centerX" id="GnO-Wa-N4N"/>
                             <constraint firstItem="kWn-fz-7eL" firstAttribute="top" secondItem="HS6-Lc-nyY" secondAttribute="bottom" id="GsZ-ew-aA6"/>
-                            <constraint firstItem="HS6-Lc-nyY" firstAttribute="top" secondItem="3cv-Od-WDP" secondAttribute="bottom" id="InH-hP-6lR"/>
-                            <constraint firstItem="dUA-ZW-RZL" firstAttribute="top" secondItem="eqe-4a-cdL" secondAttribute="bottom" id="MDK-Wa-N0q"/>
-                            <constraint firstItem="3cv-Od-WDP" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" id="geE-cT-EbB"/>
+                            <constraint firstItem="3cv-Od-WDP" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" constant="40" id="geE-cT-EbB"/>
                             <constraint firstItem="HS6-Lc-nyY" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" id="hAr-vr-9h3"/>
-                            <constraint firstAttribute="trailing" secondItem="dUA-ZW-RZL" secondAttribute="trailing" id="lbx-3U-kpD"/>
-                            <constraint firstAttribute="trailing" secondItem="3cv-Od-WDP" secondAttribute="trailing" id="oCp-4i-vwC"/>
-                            <constraint firstItem="dUA-ZW-RZL" firstAttribute="leading" secondItem="Upd-ew-dAB" secondAttribute="leading" id="zbx-i1-XCA"/>
+                            <constraint firstAttribute="trailing" secondItem="3cv-Od-WDP" secondAttribute="trailing" constant="40" id="oCp-4i-vwC"/>
+                            <constraint firstItem="HS6-Lc-nyY" firstAttribute="top" secondItem="3cv-Od-WDP" secondAttribute="bottom" constant="-38" id="wko-h0-4Sw"/>
+                            <constraint firstItem="LKY-fa-w5E" firstAttribute="top" secondItem="3cv-Od-WDP" secondAttribute="bottom" constant="15" id="z96-M0-2Jf"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="FzK-tv-Hui" appends="YES" id="fCE-OH-SDQ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="NMx-xn-h31">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="IYD-ea-XGa">
@@ -146,11 +152,19 @@
                     <connections>
                         <outlet property="joompedTableView" destination="HS6-Lc-nyY" id="SG7-l4-ijy"/>
                         <outlet property="searchBar" destination="dUA-ZW-RZL" id="xle-O5-584"/>
+                        <outlet property="searchModeSegmentedControl" destination="3cv-Od-WDP" id="XW8-bE-QrA"/>
+                        <outlet property="tableViewActivityIndicator" destination="LKY-fa-w5E" id="Vs6-aN-kSb"/>
+                        <outlet property="viewTapGestureRecognizer" destination="FzK-tv-Hui" id="hYD-Ee-qfD"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="8hp-Pb-k3P"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="CreationSegue" id="vm2-8s-e9R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5M9-xR-8W2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="FzK-tv-Hui">
+                    <connections>
+                        <action selector="onViewTapped:" destination="FpH-lp-WTC" id="Rkl-Zj-hWl"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="997.60000000000002" y="-92.203898050974516"/>
         </scene>
@@ -226,7 +240,7 @@
                                         <rect key="frame" x="0.0" y="172" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSu-gK-gNr" id="yNc-LW-NPe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -321,7 +335,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -336,7 +350,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8hp-Pb-k3P"/>
         <segue reference="Hhx-Qr-R1r"/>
+        <segue reference="8hp-Pb-k3P"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
