@@ -19,8 +19,9 @@ final class Youtube {
         userRequest(
             path: "videos",
             parameters: [
-                "part": "id,snippet" as AnyObject,
-                "myRating": "like" as AnyObject
+                "part": "id,snippet,status" as AnyObject,
+                "myRating": "like" as AnyObject,
+                "maxResults": 50 as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
                 guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
@@ -28,9 +29,13 @@ final class Youtube {
                         return
                 }
                 
-                let videos = items.map({ (d: Dictionary<String, AnyObject>) -> YoutubeVideo in
-                    return YoutubeVideo(dictionary: d)
-                })
+                let videos = items
+                    .map({(d: Dictionary<String, AnyObject>) -> YoutubeVideo in
+                        return YoutubeVideo(dictionary: d)
+                    })
+                    .filter({(v: YoutubeVideo) -> Bool in
+                        return v.status.embeddable
+                    })
                 
                 success(videos)
             },
@@ -45,7 +50,8 @@ final class Youtube {
                 "part": "id,snippet" as AnyObject,
                 "chart": "mostPopular" as AnyObject,
                 "regionCode": "US" as AnyObject,
-                "videoCategoryId": 28 as AnyObject
+                "videoCategoryId": 28 as AnyObject, // Hardcoded science
+                "maxResults": 50 as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
                 guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
@@ -70,7 +76,8 @@ final class Youtube {
                 "type": "video" as AnyObject,
                 "part": "id,snippet" as AnyObject,
                 "videoSyndicated": "true" as AnyObject,
-                "q": term as AnyObject
+                "q": term as AnyObject,
+                "maxResults": 50 as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
                 guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
@@ -140,7 +147,7 @@ final class Youtube {
 extension YoutubeVideo {
     
     convenience init(dictionary d: Dictionary<String, AnyObject>) {
-        let videoId = d["id"]?["videoId"] as? String ?? ""
+        let videoId = (d["id"]?["videoId"] ?? d["id"]) as? String ?? ""
         var snippet = YoutubeSnippet.empty
         if let snippetDictionary = d["snippet"] as? Dictionary<String, AnyObject> {
             snippet = YoutubeSnippet(dictionary: snippetDictionary)
@@ -149,8 +156,12 @@ extension YoutubeVideo {
         if let statisticsDictionary = d["statistics"] as? Dictionary<String, AnyObject> {
             statistics = YoutubeStatistics(dictionary: statisticsDictionary)
         }
+        var status = YoutubeStatus.empty
+        if let statusDictionary = d["status"] as? Dictionary<String, AnyObject> {
+            status = YoutubeStatus(dictionary: statusDictionary)
+        }
         
-        self.init(id: videoId, snippet: snippet, statistics: statistics)
+        self.init(id: videoId, snippet: snippet, statistics: statistics, status: status)
     }
 }
 
@@ -201,6 +212,14 @@ extension YoutubeThumbnail {
         let width = d["width"] as? Int ?? 0
         let height = d["height"] as? Int ?? 0
         self.init(url: url, width: width, height: height)
+    }
+}
+
+extension YoutubeStatus {
+    
+    convenience init(dictionary d: Dictionary<String, AnyObject>) {
+        let embeddable = d["embeddable"] as? Bool ?? false
+        self.init(embeddable: embeddable)
     }
 }
 

@@ -50,8 +50,9 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func didTapSignup(_ sender: Any) {
-        let user = PFUser()
+        let user = User()
         user.username = usernameTextField.text
+        user.displayName = usernameTextField.text
         user.password = passwordTextField.text
         //        user.email = "email@example.com"
         
