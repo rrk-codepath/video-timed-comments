@@ -16,7 +16,6 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
     
     weak var delegate: ParseLoginDelegate?
     
-    // The sign-in flow has finished and was successful if |error| is |nil|.
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             delegate?.login(didFailWith: error)
@@ -47,13 +46,16 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
             failure: { () -> Void in
                 // Create credentials
                 let creds = GoogleCredentials()
-                let newUser = PFUser()
+                let newUser = User()
                 
                 // TODO: Use an actual hash here
                 newUser.username = String("\(Date().timeIntervalSince1970)\(user.userID!)").data(using: String.Encoding.utf8)?.base64EncodedString(options: [])
                 newUser.password = ParseGoogleSignInDelegate.password
+                newUser.displayName = self.displayName(fromEmail: user.profile.email)
                 newUser.signUpInBackground(block: { (success: Bool, error: Error?) in
                     creds.user = newUser
+                    newUser.saveInBackground()
+                    
                     self.update(user: user, credentials: creds,
                         success: { () -> Void in
                             self.delegate?.login(didSucceedFor: newUser)
@@ -97,6 +99,14 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+    }
+    
+    private func displayName(fromEmail email: String) -> String {
+        if let range = email.range(of: "@") {
+            return email.substring(to: range.lowerBound)
+        }
+        
+        return email
     }
 }
 

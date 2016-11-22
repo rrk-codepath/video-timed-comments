@@ -55,7 +55,7 @@ class JoompedViewController: UIViewController {
             annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
-            joompedUploaderLabel?.text = joomped.user.username
+            joompedUploaderLabel?.text = joomped.user.displayName
             var countString = "\(joomped.annotations.count) annotations"
             if joomped.annotations.count == 1 {
                 countString = countString.substring(to: countString.index(before: countString.endIndex))

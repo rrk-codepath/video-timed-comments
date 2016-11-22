@@ -18,7 +18,7 @@ class JoompedTableViewCell: UITableViewCell {
             
             joompedTitleLabel.text = joomped.video.title
             videoAuthorLabel.text = joomped.video.author
-            if let joompedUser = joomped.user.username {
+            if let joompedUser = joomped.user.displayName {
                 var countString = "\(joomped.annotations.count) annotations"
                 if joomped.annotations.count == 1 {
                     countString = countString.substring(to: countString.index(before: countString.endIndex))
