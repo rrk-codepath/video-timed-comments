@@ -5,6 +5,7 @@ final class YoutubeVideoTableViewCell: UITableViewCell {
     @IBOutlet weak var videoImageView: UIImageView!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var videoTitleLabel: UILabel!
+    @IBOutlet weak var timestampLabel: UILabel!
     
     var youtubeVideo: YoutubeVideo? {
         didSet {
@@ -14,6 +15,7 @@ final class YoutubeVideoTableViewCell: UITableViewCell {
             
             videoTitleLabel.text = video.snippet.title
             authorLabel.text = video.snippet.channelTitle
+            timestampLabel.text = video.snippet.publishedAt.timeAgoRelative
             if let thumbnailUrl = URL(string: video.snippet.thumbnail.url) {
                 videoImageView.setImageWith(thumbnailUrl)
             }
