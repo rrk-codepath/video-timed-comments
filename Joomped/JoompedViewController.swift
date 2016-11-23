@@ -73,6 +73,7 @@ class JoompedViewController: UIViewController {
         let playerVars = [
             "playsinline": 1
         ]
+        //playerView.webView.
         self.automaticallyAdjustsScrollViewInsets = false
 
         // TODO(rahul): adjust height of header view

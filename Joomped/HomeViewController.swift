@@ -106,24 +106,29 @@ class HomeViewController: UIViewController {
         }
         
         joompedTableView.reloadData()
-        if joompedTableView.visibleCells.count == 0 {
-            joompedTableView.isHidden = true
-            tableViewActivityIndicator.startAnimating()
-        }
         
         switch searchMode {
         case SearchMode.joomped:
             if joompedSearchText != term {
+                showLoadingIndicator()
                 searchJoomped(term: term)
                 joompedSearchText = searchBar.text
             }
             break
         case SearchMode.youtube:
             if youtubeSearchText != term {
+                showLoadingIndicator()
                 searchYoutube(term: term)
                 youtubeSearchText = searchBar.text
             }
             break
+        }
+    }
+    
+    private func showLoadingIndicator() {
+        if joompedTableView.visibleCells.count == 0 {
+            joompedTableView.isHidden = true
+            tableViewActivityIndicator.startAnimating()
         }
     }
     
@@ -182,14 +187,8 @@ class HomeViewController: UIViewController {
     @IBAction func onViewTapped(_ sender: UITapGestureRecognizer) {
         searchBar.resignFirstResponder()
     }
-
-    @IBAction func onLogout(_ sender: Any) {
-        PFUser.logOutInBackground { (error: Error?) in
-            GIDSignIn.sharedInstance().signOut()
-            let appdelegate = UIApplication.shared.delegate as! AppDelegate
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            appdelegate.window!.rootViewController = mainStoryboard.instantiateInitialViewController()
-        }
+    @IBAction func onTappedProfile(_ sender: Any) {
+        performSegue(withIdentifier: "ProfileSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -203,6 +202,11 @@ class HomeViewController: UIViewController {
             jvc.youtubeVideo = selectedYoutubeVideo
             jvc.isEditMode = true
             break
+        case "ProfileSegue":
+            let pvc = segue.destination as! ProfileViewController
+            if let user = PFUser.current() as? User {
+                pvc.user = user
+            }
         default:
             return
         }
