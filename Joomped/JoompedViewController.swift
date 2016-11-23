@@ -26,6 +26,25 @@ class JoompedViewController: UIViewController {
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
     var joomped: Joomped?
+    var joompedId: String? {
+        didSet {
+            guard let joompedId = joompedId else {
+                return
+            }
+            let query = PFQuery(className:"Joomped")
+            query.includeKeys(["video", "user", "annotations.Annotation"])
+            query.whereKey("objectId", equalTo: joompedId)
+            query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
+                if let error = error {
+                    print("error: \(error.localizedDescription)")
+                    return
+                }
+                self.joomped = object as? Joomped ?? nil
+                self.configureView()
+                self.tableView.reloadData()
+            }
+        }
+    }
     var youtubeVideo: YoutubeVideo?
     fileprivate var annotations = [Annotation]()
     fileprivate var annotationTime: Float?
@@ -142,28 +161,39 @@ class JoompedViewController: UIViewController {
             self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
+    @IBAction func didTapShare(_ sender: UIBarButtonItem) {
+        guard let joompedObjectId = joomped?.objectId else {
+            return
+        }
+        let activityViewController = UIActivityViewController(activityItems: ["joomped://joomp/\(joompedObjectId)"], applicationActivities: nil)
+        navigationController?.present(activityViewController, animated: true)
+    }
     
     func updateNavigationBar() {
         guard let user = PFUser.current() else {
             return
         }
+        var rightBarButtonItems = [UIBarButtonItem]()
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
+        
+        let actionButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(JoompedViewController.didTapEditSave(_:)))
+        
         if isEditMode && (youtubeVideo != nil && joomped == nil || joomped?.user.objectId == user.objectId){
             navigationItem.title = "Creation"
-            navigationItem.rightBarButtonItem?.title = "Save"
+            actionButton.title = "Save"
             if annotations.count == 0 {
-                navigationItem.rightBarButtonItem?.isEnabled = false
+                actionButton.isEnabled = false
             }
+            rightBarButtonItems.append(actionButton)
         } else if (joomped?.user.objectId == user.objectId) {
             navigationItem.title = "Consumption"
-            navigationItem.rightBarButtonItem?.title = "Edit"
+            rightBarButtonItems.append(actionButton)
+            rightBarButtonItems.append(shareButton)
         } else {
             navigationItem.title = "Consumption"
-            hideRightBarButtonItem()
+            rightBarButtonItems.append(shareButton)
         }
-    }
-    
-    func hideRightBarButtonItem() {
-        navigationItem.rightBarButtonItem?.rrk_hide()
+        navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 
     func setAnnotationLabel() {
