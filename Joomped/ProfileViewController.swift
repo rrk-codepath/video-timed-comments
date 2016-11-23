@@ -22,13 +22,12 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        if let imageUrl = user.imageUrl,
-            let url = URL(string: imageUrl) {
+        if let url = URL(string: user.imageUrl ?? "https://placekitten.com/g/100/100") {
             profileImageView.setImageWith(url)
-            profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2;
-            profileImageView.layer.masksToBounds = true;
-            profileImageView.layer.borderWidth = 0;
         }
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2;
+        profileImageView.layer.masksToBounds = true;
+        profileImageView.layer.borderWidth = 0;
         
         displayNameLabel.text = user.displayName
         
@@ -48,7 +47,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
     private func fetchJoomped() {
         let query = PFQuery(className:"Joomped")
         query.includeKey("annotations.Annotation")
@@ -64,7 +62,8 @@ class ProfileViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let jvc = segue.destination as? JoompedViewController {
+        if segue.identifier == "ConsumptionSegue" {
+            let jvc = segue.destination as! JoompedViewController
             jvc.joomped = selectedJoomped
         }
     }

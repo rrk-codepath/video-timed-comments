@@ -26,6 +26,16 @@
 				<string>com.googleusercontent.apps.603123832850-c9naguck6b4fe1tp9retgm5ogp0h8qr3</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.joomed.Joomped</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>joomped</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

@@ -65,6 +65,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Example url: joomped://joomp/mY237ab1
+        if url.host == "joomp" {
+            var joompedId = url.path
+            joompedId.remove(at: url.path.startIndex)
+            // Navigate to the detail VC with this joomped ID
+            let rootViewController = self.window?.rootViewController as! UINavigationController
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let joompedViewController = mainStoryboard.instantiateViewController(withIdentifier: "joomped") as! JoompedViewController
+            joompedViewController.joompedId = joompedId
+            rootViewController.pushViewController(joompedViewController, animated: true)
+        }
+        
         return GIDSignIn.sharedInstance().handle(url,
             sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
             annotation: options[UIApplicationOpenURLOptionsKey.annotation])
