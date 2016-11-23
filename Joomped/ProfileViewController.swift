@@ -62,8 +62,10 @@ class ProfileViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let jvc = segue.destination as! JoompedViewController
-        jvc.joomped = selectedJoomped
+        if segue.identifier == "ConsumptionSegue" {
+            let jvc = segue.destination as! JoompedViewController
+            jvc.joomped = selectedJoomped
+        }
     }
 }
 
