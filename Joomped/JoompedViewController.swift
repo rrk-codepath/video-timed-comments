@@ -22,6 +22,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var numberAnnotationsLabel: UILabel!
     @IBOutlet weak var seekBarView: UIView!
     @IBOutlet weak var seekBar: UIView!
+    @IBOutlet weak var liveAnnotationBlurView: UIVisualEffectView!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -56,7 +57,7 @@ class JoompedViewController: UIViewController {
     
     var isEditMode = false {
         didSet {
-            updateNavigationBar()
+            configureNavigationBar()
         }
     }
     
@@ -70,11 +71,17 @@ class JoompedViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        liveAnnotationBlurView.alpha = 0.50
+        liveAnnotationBlurView.layer.cornerRadius = 5
+        liveAnnotationBlurView.layer.masksToBounds = true
+        liveAnnotationBlurView.clipsToBounds = true
+        
         let playerVars = [
             "playsinline": 1
         ]
         //playerView.webView.
         self.automaticallyAdjustsScrollViewInsets = false
+        seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
         // TODO(rahul): adjust height of header view
         if let joomped = joomped {
@@ -109,12 +116,16 @@ class JoompedViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "AnnotationCell", bundle: nil), forCellReuseIdentifier: "AnnotationCell")
         liveAnnotationLabel.text = ""
-        updateNavigationBar()
+        configureNavigationBar()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -170,7 +181,7 @@ class JoompedViewController: UIViewController {
         navigationController?.present(activityViewController, animated: true)
     }
     
-    func updateNavigationBar() {
+    func configureNavigationBar() {
         guard let user = PFUser.current() else {
             return
         }
@@ -227,7 +238,7 @@ class JoompedViewController: UIViewController {
         annotations.forEach { (annotation) in
             let percentage = annotation.timestamp / (duration ?? Float(playerView.duration()))
             let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: 0, width: 5, height: Double(seekBar.bounds.height)))
-            lineView.backgroundColor = UIColor.yellow
+            lineView.backgroundColor = UIColor.rrk_primaryColor
             seekBar.addSubview(lineView)
         }
         isSeekBarAnnotated = true
@@ -235,8 +246,13 @@ class JoompedViewController: UIViewController {
     
     func updateSeekBarLine(percentage: Float? = nil) {
         seekBarLine?.removeFromSuperview()
-        let percentageOfVideo = percentage ?? playerView.currentTime() / (duration ?? Float(playerView.duration()))
-        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo), y: -10, width: 1, height: Double(seekBar.bounds.height + 20)))
+        var percentageOfVideo = percentage ?? playerView.currentTime() / (duration ?? Float(playerView.duration()))
+        if percentageOfVideo > 1 {
+            percentageOfVideo = 1
+        } else if percentageOfVideo < 0 {
+            percentageOfVideo = 0
+        }
+        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo), y: 0, width: 1, height: Double(seekBar.bounds.height + 15)))
         seekBarLine?.backgroundColor = UIColor.red
         seekBar.addSubview(seekBarLine!)
     }

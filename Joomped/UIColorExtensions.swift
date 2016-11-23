@@ -11,4 +11,5 @@ import UIKit
 
 extension UIColor {
     @nonobjc static let rrk_primaryColor = UIColor(red: 174 / 255, green: 138 / 255, blue: 255 / 255, alpha: 1)
+    @nonobjc static let rrk_secondaryColor = UIColor(red: 106 / 255, green: 71 / 255, blue: 125 / 255, alpha: 1)
 }
