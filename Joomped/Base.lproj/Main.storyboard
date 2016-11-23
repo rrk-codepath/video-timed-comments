@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -143,9 +144,9 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="NMx-xn-h31">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="IYD-ea-XGa">
+                        <barButtonItem key="leftBarButtonItem" title="Me" id="IYD-ea-XGa">
                             <connections>
-                                <action selector="onLogout:" destination="FpH-lp-WTC" id="zoD-Qx-BAn"/>
+                                <action selector="onTappedProfile:" destination="FpH-lp-WTC" id="R4B-1v-DzB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -157,6 +158,7 @@
                         <outlet property="viewTapGestureRecognizer" destination="FzK-tv-Hui" id="hYD-Ee-qfD"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="8hp-Pb-k3P"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="CreationSegue" id="vm2-8s-e9R"/>
+                        <segue destination="zI5-LE-lzX" kind="show" identifier="ProfileSegue" id="106-0h-bvS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5M9-xR-8W2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -167,6 +169,78 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="997.60000000000002" y="-92.203898050974516"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="p5a-7v-QYv">
+            <objects>
+                <viewController id="zI5-LE-lzX" customClass="ProfileViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RaU-3c-UFg"/>
+                        <viewControllerLayoutGuide type="bottom" id="l8S-mZ-Tdn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cdT-az-TNW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1i3-Q7-ZC2">
+                                <rect key="frame" x="8" y="72" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9mi-DH-T5B"/>
+                                    <constraint firstAttribute="width" constant="50" id="az4-ae-rHn"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WX5-y4-tw1">
+                                <rect key="frame" x="73" y="72" width="150.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C94-pw-Nkm">
+                                <rect key="frame" x="0.0" y="130" width="375" height="537"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Annotated videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNl-Ou-DRk">
+                                <rect key="frame" x="73" y="102" width="110" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lNl-Ou-DRk" firstAttribute="leading" secondItem="WX5-y4-tw1" secondAttribute="leading" id="3dv-o4-0IA"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="WX5-y4-tw1" secondAttribute="trailing" id="8lF-SC-zXv"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="lNl-Ou-DRk" secondAttribute="trailing" id="CtS-eJ-LiI"/>
+                            <constraint firstItem="WX5-y4-tw1" firstAttribute="top" secondItem="RaU-3c-UFg" secondAttribute="bottom" constant="8" id="TI9-Y4-vIK"/>
+                            <constraint firstItem="1i3-Q7-ZC2" firstAttribute="leading" secondItem="cdT-az-TNW" secondAttribute="leading" constant="8" id="TaQ-La-7Y1"/>
+                            <constraint firstItem="1i3-Q7-ZC2" firstAttribute="top" secondItem="RaU-3c-UFg" secondAttribute="bottom" constant="8" id="UFB-QX-M1Z"/>
+                            <constraint firstItem="C94-pw-Nkm" firstAttribute="leading" secondItem="cdT-az-TNW" secondAttribute="leading" id="VQZ-y2-tCo"/>
+                            <constraint firstItem="lNl-Ou-DRk" firstAttribute="top" secondItem="WX5-y4-tw1" secondAttribute="bottom" id="d9Z-XW-oRB"/>
+                            <constraint firstItem="WX5-y4-tw1" firstAttribute="leading" secondItem="1i3-Q7-ZC2" secondAttribute="trailing" constant="15" id="hAT-8V-d7E"/>
+                            <constraint firstItem="l8S-mZ-Tdn" firstAttribute="top" secondItem="C94-pw-Nkm" secondAttribute="bottom" id="hyM-FZ-zXW"/>
+                            <constraint firstItem="C94-pw-Nkm" firstAttribute="top" secondItem="1i3-Q7-ZC2" secondAttribute="bottom" constant="8" id="j4q-5a-ZeW"/>
+                            <constraint firstAttribute="trailing" secondItem="C94-pw-Nkm" secondAttribute="trailing" id="rfG-yb-YYv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="vJf-b3-nqO">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="tSL-Kp-gsW" userLabel="Logout">
+                            <connections>
+                                <action selector="onTappedLogout:" destination="zI5-LE-lzX" id="TKY-1a-fEl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="annotatedVideosLabel" destination="lNl-Ou-DRk" id="kUz-6O-Lvg"/>
+                        <outlet property="displayNameLabel" destination="WX5-y4-tw1" id="Boz-ty-M17"/>
+                        <outlet property="joompedTableView" destination="C94-pw-Nkm" id="mUi-Mi-gf7"/>
+                        <outlet property="profileImageView" destination="1i3-Q7-ZC2" id="ehH-gS-0lS"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="LogoutSegue" customClass="ReplaceStoryboardSegue" customModule="Joomped" customModuleProvider="target" id="4ea-dR-8oO"/>
+                        <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="Dg3-WV-wJf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lob-qD-c2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1005.6" y="689.5052473763119"/>
         </scene>
         <!--Joomped View Controller-->
         <scene sceneID="HL9-fK-D9C">
@@ -181,10 +255,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="114" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zhd-B2-6ZF">
-                                <rect key="frame" x="0.0" y="319" width="375" height="348"/>
+                                <rect key="frame" x="0.0" y="363" width="375" height="304"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="oKn-fb-jDx" userLabel="Header View">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                    <rect key="frame" x="0.0" y="64" width="375" height="144"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Youtube uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0Z-sg-Sjv">
@@ -247,20 +321,20 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrz-eA-WJ7" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="211"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xrz-eA-WJ7" secondAttribute="height" multiplier="16:9" id="lqq-D9-AnA"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-zE-iMH">
-                                <rect key="frame" x="146" y="210" width="84" height="21"/>
+                                <rect key="frame" x="146" y="254" width="84" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByS-j5-zlr">
-                                <rect key="frame" x="0.0" y="231" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="275" width="375" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ch8-RA-gks">
                                         <rect key="frame" x="12" y="13" width="350" height="55"/>
@@ -335,7 +409,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -351,7 +425,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Hhx-Qr-R1r"/>
-        <segue reference="8hp-Pb-k3P"/>
+        <segue reference="Dg3-WV-wJf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

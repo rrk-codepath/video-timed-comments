@@ -11,4 +11,13 @@ final class User: PFUser {
             super["displayName"] = newValue
         }
     }
+    
+    var imageUrl: String? {
+        get {
+            return super["imageUrl"] as? String
+        }
+        set {
+            super["imageUrl"] = newValue
+        }
+    }
 }

@@ -25,21 +25,23 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
         findCredentials(
             withId: user.userID,
             success: { (creds: GoogleCredentials) -> Void in
-                self.update(user: user, credentials: creds, success: nil, failure: nil)
+                self.updateGoogleCredentials(user: user, credentials: creds, success: nil, failure: nil)
                 creds.user.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) in
-                    guard let parseUser = object as? PFUser,
+                    guard let parseUser = object as? User,
                         let username = parseUser.username else {
                         self.delegate?.login(didFailWith: error ?? LoginError.unknown)
                         return
                     }
                     
-                    PFUser.logInWithUsername(inBackground: username, password: ParseGoogleSignInDelegate.password, block: { (user: PFUser?, error: Error?) in
-                        guard let user = user else {
+                    PFUser.logInWithUsername(inBackground: username, password: ParseGoogleSignInDelegate.password, block: { (parseUser: PFUser?, error: Error?) in
+                        guard let parseUser = parseUser as? User else {
                             self.delegate?.login(didFailWith: error ?? LoginError.unknown)
                             return
                         }
                         
-                        self.delegate?.login(didSucceedFor: user)
+                        self.updateParseUser(user: parseUser, gidUser: user)
+                        
+                        self.delegate?.login(didSucceedFor: parseUser)
                     })
                 })
             },
@@ -52,11 +54,12 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
                 newUser.username = String("\(Date().timeIntervalSince1970)\(user.userID!)").data(using: String.Encoding.utf8)?.base64EncodedString(options: [])
                 newUser.password = ParseGoogleSignInDelegate.password
                 newUser.displayName = self.displayName(fromEmail: user.profile.email)
+                newUser.imageUrl = user.profile.imageURL(withDimension: 100).absoluteString
                 newUser.signUpInBackground(block: { (success: Bool, error: Error?) in
                     creds.user = newUser
                     newUser.saveInBackground()
                     
-                    self.update(user: user, credentials: creds,
+                    self.updateGoogleCredentials(user: user, credentials: creds,
                         success: { () -> Void in
                             self.delegate?.login(didSucceedFor: newUser)
                         },
@@ -69,7 +72,14 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
         )
     }
     
-    private func update(user: GIDGoogleUser, credentials creds: GoogleCredentials, success: (() -> Void)?, failure: ((Error?) -> Void)?) {
+    private func updateParseUser(user: User, gidUser:
+        GIDGoogleUser) {
+        let url = gidUser.profile.imageURL(withDimension: 100).absoluteString
+        user.imageUrl = url
+        user.saveInBackground()
+    }
+    
+    private func updateGoogleCredentials(user: GIDGoogleUser, credentials creds: GoogleCredentials, success: (() -> Void)?, failure: ((Error?) -> Void)?) {
         creds.userId = user.userID
         creds.authToken = user.authentication.accessToken
         creds.fullName = user.profile.name
