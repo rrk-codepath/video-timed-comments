@@ -89,7 +89,7 @@ class JoompedViewController: UIViewController {
             }
             numberAnnotationsLabel.text = countString
             numberAnnotationsLabel.isHidden = false
-            publishLabel.text = joomped.updatedAt?.timeFormatted
+            publishLabel.text = joomped.createdAt?.timeFormatted
             publishLabel.isHidden = false
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
         } else if let youtubeVideo = youtubeVideo {

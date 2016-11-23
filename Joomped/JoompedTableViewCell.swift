@@ -28,7 +28,7 @@ class JoompedTableViewCell: UITableViewCell {
             if let thumbnail = joomped.video.thumbnail, let thumbnailUrl = URL(string: thumbnail) {
                 videoImageView.setImageWith(thumbnailUrl)
             }
-            timestampLabel.text = joomped.updatedAt?.timeAgoRelative
+            timestampLabel.text = joomped.createdAt?.timeAgoRelative
         }
     }
     
