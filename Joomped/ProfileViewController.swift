@@ -22,13 +22,12 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        if let imageUrl = user.imageUrl,
-            let url = URL(string: imageUrl) {
+        if let url = URL(string: user.imageUrl ?? "https://placekitten.com/g/100/100") {
             profileImageView.setImageWith(url)
-            profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2;
-            profileImageView.layer.masksToBounds = true;
-            profileImageView.layer.borderWidth = 0;
         }
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2;
+        profileImageView.layer.masksToBounds = true;
+        profileImageView.layer.borderWidth = 0;
         
         displayNameLabel.text = user.displayName
         
@@ -47,7 +46,6 @@ class ProfileViewController: UIViewController {
             self.performSegue(withIdentifier: "LogoutSegue", sender: self)
         }
     }
-    
     
     private func fetchJoomped() {
         let query = PFQuery(className:"Joomped")
