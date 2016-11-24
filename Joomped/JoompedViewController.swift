@@ -237,7 +237,7 @@ class JoompedViewController: UIViewController {
     func updateAnnotationInSeekBar() {
         annotations.forEach { (annotation) in
             let percentage = annotation.timestamp / (duration ?? Float(playerView.duration()))
-            let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: 0, width: 5, height: Double(seekBar.bounds.height)))
+            let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: -5, width: 3, height: Double(15)))
             lineView.backgroundColor = UIColor.rrk_primaryColor
             seekBar.addSubview(lineView)
         }
@@ -252,7 +252,8 @@ class JoompedViewController: UIViewController {
         } else if percentageOfVideo < 0 {
             percentageOfVideo = 0
         }
-        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo), y: 0, width: 1, height: Double(seekBar.bounds.height + 15)))
+        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo), y: -5, width: 14, height: 14))
+        seekBarLine?.layer.cornerRadius = 10
         seekBarLine?.backgroundColor = UIColor.red
         seekBar.addSubview(seekBarLine!)
     }
