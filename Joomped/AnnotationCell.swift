@@ -50,6 +50,7 @@ class AnnotationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        annotationTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -59,14 +60,26 @@ class AnnotationCell: UITableViewCell {
     }
 
     @IBAction func didTapSaveButton(_ sender: Any) {
-        guard let annotationText = annotationTextField.text, !annotationText.isEmpty else {
+        saveAnnotation()
+    }
+    
+    fileprivate func saveAnnotation() {
+        guard let annotation = annotation, let annotationText = annotationTextField.text, !annotationText.isEmpty else {
             annotationTextField.layer.borderColor = UIColor.red.cgColor
             annotationTextField.layer.borderWidth = 1.0
             return
         }
         annotationTextField.layer.borderWidth = 0
-        annotation?.text = annotationTextField.text!
-        annotation?.timestamp = timestampFloat!
-        delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation!)
+        annotationTextField.resignFirstResponder()
+        annotation.text = annotationTextField.text!
+        annotation.timestamp = timestampFloat!
+        delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
+    }
+}
+
+extension AnnotationCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        saveAnnotation()
+        return true
     }
 }
