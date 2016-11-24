@@ -235,7 +235,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(joompedTableView.contentOffset.y)
         if joompedTableView.contentOffset.y <= -25 {
             showSearchMode()
         } else if let lastContentOffset = lastContentOffset, lastContentOffset < scrollView.contentOffset.y { //Down Scroll
