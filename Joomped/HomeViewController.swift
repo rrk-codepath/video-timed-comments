@@ -172,18 +172,53 @@ class HomeViewController: UIViewController {
                 })
             }
         } else {
-            youtube.search(
-                term: term,
-                success: { (videos: [YoutubeVideo]) -> Void in
-                    self.youtubeVideos = videos
-                    self.joompedTableView.reloadData()
-                },
-                failure: { (error: Error) -> Void in
-                    print("error: \(error.localizedDescription)")
-                }
-            )
+            if let youtubeId = extractYoutubeIdFromLink(link: term) {
+                youtube.videoIds(
+                    videoIds: [youtubeId],
+                    success: { (videos: [YoutubeVideo]) in
+                        self.selectedYoutubeVideo = videos[0]
+                        self.performSegue(withIdentifier: "CreationSegue", sender: self)
+                    },
+                    failure: { (error: Error) -> Void in
+                        print("error: \(error.localizedDescription)")
+                        // Fallback to search
+                        self.performYoutubeSearch(term: term)
+                    })
+            } else {
+                // Could not match youtube id, fallback to search
+                performYoutubeSearch(term: term)
+            }
         }
     }
+    
+    func performYoutubeSearch(term: String) {
+        youtube.search(
+            term: term,
+            success: { (videos: [YoutubeVideo]) -> Void in
+                self.youtubeVideos = videos
+                self.joompedTableView.reloadData()
+            },
+            failure: { (error: Error) -> Void in
+                print("error: \(error.localizedDescription)")
+            })
+    }
+    
+    // Source: http://stackoverflow.com/questions/11509164/
+    func extractYoutubeIdFromLink(link: String) -> String? {
+        let pattern = "((?<=(v|V)/)|(?<=be/)|(?<=(\\?|\\&)v=)|(?<=embed/))([\\w-]++)"
+        guard let regExp = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return nil
+        }
+        let nsLink = link as NSString
+        let options = NSRegularExpression.MatchingOptions(rawValue: 0)
+        let range = NSRange(location: 0,length: nsLink.length)
+        let matches = regExp.matches(in: link as String, options:options, range:range)
+        if let firstMatch = matches.first {
+            return nsLink.substring(with: firstMatch.range)
+        }
+        return nil
+    }
+    
     
     @IBAction func onViewTapped(_ sender: UITapGestureRecognizer) {
         searchBar.resignFirstResponder()
@@ -318,7 +353,7 @@ fileprivate enum SearchMode: Int {
         case .joomped:
             return "Find annotations"
         case .youtube:
-            return "Find something to annotate"
+            return "Youtube link or search term"
         }
     }
 }

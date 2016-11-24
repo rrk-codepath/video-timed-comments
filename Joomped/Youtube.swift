@@ -15,6 +15,34 @@ final class Youtube {
         return authToken != nil
     }
     
+    func videoIds(videoIds: [String], success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
+        let videoIdsString = videoIds.joined(separator: ",")
+        request(
+            path: "videos",
+            parameters: [
+                "part": "id,snippet,statistics" as AnyObject,
+                "id": videoIdsString as AnyObject
+            ],
+            success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
+                guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
+                    failure?(YoutubeError.failed)
+                    return
+                }
+                
+                let videos = items
+                    .map({(d: Dictionary<String, AnyObject>) -> YoutubeVideo in
+                        return YoutubeVideo(dictionary: d)
+                    })
+                    .filter({(v: YoutubeVideo) -> Bool in
+                        return v.status.embeddable
+                    })
+                
+                success(videos)
+        },
+            failure: failure
+        )
+    }
+    
     func liked(success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
         userRequest(
             path: "videos",
@@ -167,11 +195,11 @@ extension YoutubeVideo {
 
 extension YoutubeStatistics {
     convenience init(dictionary d: Dictionary<String, AnyObject>) {
-        let viewCount = d["viewCount"] as! Int
-        let likeCount = d["likeCount"] as! Int
-        let dislikeCount = d["dislikeCount"] as! Int
-        let favoriteCount = d["favoriteCount"] as! Int
-        let commentCount = d["commentCount"] as! Int
+        let viewCount = Int(d["viewCount"] as! String)!
+        let likeCount = Int(d["likeCount"] as! String)!
+        let dislikeCount = Int(d["dislikeCount"] as! String)!
+        let favoriteCount = Int(d["favoriteCount"] as! String)!
+        let commentCount = Int(d["commentCount"] as! String)!
         self.init(viewCount: viewCount, likeCount: likeCount, dislikeCount: dislikeCount, favoriteCount: favoriteCount, commentCount: commentCount)
     }
 }
