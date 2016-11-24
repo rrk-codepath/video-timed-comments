@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     fileprivate var joomped: [Joomped] = []
     fileprivate var youtubeVideos: [YoutubeVideo] = []
     fileprivate var searchMode = SearchMode.joomped
+    fileprivate var lastContentOffset: CGFloat?
     
     private let youtube = Youtube()
     private var youtubeSearchText: String?
@@ -192,6 +193,7 @@ class HomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         switch segue.identifier! {
         case "ConsumptionSegue":
             let jvc = segue.destination as! JoompedViewController
@@ -213,13 +215,13 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func hideSearchMode() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         fadeSearchMode(toOpacity: 0.0)
     }
     
     fileprivate func showSearchMode() {
-        if joompedTableView.contentOffset.y < 30 {
-            fadeSearchMode(toOpacity: 1.0)
-        }
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        fadeSearchMode(toOpacity: 1.0)
     }
     
     private func fadeSearchMode(toOpacity opacity: CGFloat) {
@@ -232,16 +234,20 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        hideSearchMode()
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(joompedTableView.contentOffset.y)
+        if joompedTableView.contentOffset.y <= -25 {
+            showSearchMode()
+        } else if let lastContentOffset = lastContentOffset, lastContentOffset < scrollView.contentOffset.y { //Down Scroll
+            hideSearchMode()
+        }
+        lastContentOffset = scrollView.contentOffset.y
     }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        showSearchMode();
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        showSearchMode()
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+       withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.y < -1 {
+            showSearchMode()
+        }
     }
 }
 
