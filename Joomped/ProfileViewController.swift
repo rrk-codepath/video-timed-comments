@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController {
         joompedTableView.delegate = self
         joompedTableView.estimatedRowHeight = 50
         joompedTableView.rowHeight = UITableViewAutomaticDimension
+        joompedTableView.tableFooterView = UIView()
         
         fetchJoomped();
     }
