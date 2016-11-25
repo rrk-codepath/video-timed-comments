@@ -9,6 +9,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var joompedTableView: UITableView!
+    @IBOutlet weak var emptyStateLabel: UILabel!
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
@@ -54,10 +55,23 @@ class ProfileViewController: UIViewController {
         query.includeKeys(["video", "user"])
         query.whereKey("user", equalTo: user as Any)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            if let error = error {
+                print("error: \(error.localizedDescription)")
+                return
+            }
             self.joomped = objects as? [Joomped] ?? []
-            self.joompedTableView.reloadData()
+            if self.joomped.count == 0 {
+                self.joompedTableView.isHidden = true
+                self.emptyStateLabel.isHidden = false
+            } else {
+                self.joompedTableView.reloadData()
+            }
             
-            self.annotatedVideosLabel.text = "\(self.joomped.count) annotated videos"
+            var countString = "\(self.joomped.count) annotated videos"
+            if self.joomped.count == 1 {
+                countString = countString.substring(to: countString.index(before: countString.endIndex))
+            }
+            self.annotatedVideosLabel.text = countString
         }
     }
     
