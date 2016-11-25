@@ -166,7 +166,7 @@ class HomeViewController: UIViewController {
             } else {
                 youtube.popular(success: { (videos: [YoutubeVideo]) in
                     self.youtubeVideos = videos
-                    self.joompedTableView.reloadData()
+                    self.reloadTable()
                 }, failure: { (error: Error) in
                     print("error: \(error.localizedDescription)")
                 })
