@@ -368,9 +368,9 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvF-wf-6cg">
-                                <rect key="frame" x="141" y="246" width="94" height="21"/>
+                                <rect key="frame" x="141" y="246" width="93.5" height="21"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Y88-TK-7aL">
-                                    <rect key="frame" x="0.0" y="0.0" width="94" height="21"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="93.5" height="21"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WsG-lq-cEH">
@@ -389,8 +389,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-zE-iMH">
-                                <rect key="frame" x="146" y="246" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-zE-iMH">
+                                <rect key="frame" x="146" y="246" width="83.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -428,6 +428,7 @@
                         <constraints>
                             <constraint firstItem="IvF-wf-6cg" firstAttribute="bottom" secondItem="3Ub-zE-iMH" secondAttribute="bottom" id="0Zx-is-rZS"/>
                             <constraint firstItem="3Ub-zE-iMH" firstAttribute="centerX" secondItem="oeq-XG-3sC" secondAttribute="centerX" id="0rL-X1-ThD"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="3Ub-zE-iMH" secondAttribute="trailing" constant="8" id="5t1-X4-p3h"/>
                             <constraint firstItem="ByS-j5-zlr" firstAttribute="top" secondItem="xrz-eA-WJ7" secondAttribute="bottom" id="7tH-M6-DAQ"/>
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="top" secondItem="VHp-Kn-qJz" secondAttribute="bottom" id="7vv-ez-dE3"/>
                             <constraint firstItem="Hgd-Lr-0de" firstAttribute="top" secondItem="zhd-B2-6ZF" secondAttribute="bottom" id="8bJ-bZ-5XD"/>
@@ -435,6 +436,7 @@
                             <constraint firstItem="zhd-B2-6ZF" firstAttribute="top" secondItem="ByS-j5-zlr" secondAttribute="bottom" constant="8" id="Kmb-Ig-zwv"/>
                             <constraint firstItem="IvF-wf-6cg" firstAttribute="width" secondItem="3Ub-zE-iMH" secondAttribute="width" constant="10" id="OB7-Wi-AzI"/>
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" id="Pin-K8-Nnc"/>
+                            <constraint firstItem="3Ub-zE-iMH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oeq-XG-3sC" secondAttribute="leadingMargin" constant="8" id="SFh-SA-Rs1"/>
                             <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="ByS-j5-zlr" secondAttribute="trailing" constant="30" id="Z4I-cX-hrg"/>
                             <constraint firstAttribute="trailing" secondItem="zhd-B2-6ZF" secondAttribute="trailing" id="m4S-0S-3gB"/>
                             <constraint firstItem="zhd-B2-6ZF" firstAttribute="leading" secondItem="oeq-XG-3sC" secondAttribute="leading" id="phb-6a-Do2"/>
@@ -486,7 +488,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
