@@ -196,7 +196,7 @@ class HomeViewController: UIViewController {
             term: term,
             success: { (videos: [YoutubeVideo]) -> Void in
                 self.youtubeVideos = videos
-                self.joompedTableView.reloadData()
+                self.reloadTable()
             },
             failure: { (error: Error) -> Void in
                 print("error: \(error.localizedDescription)")
