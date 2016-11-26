@@ -83,7 +83,6 @@ class JoompedViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
-        // TODO(rahul): adjust height of header view
         if let joomped = joomped {
             duration = Float(joomped.video.length)
             annotations = joomped.annotations
@@ -120,6 +119,20 @@ class JoompedViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let headerView = tableView.tableHeaderView!
+        headerView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+        // This is a hack in order to adjust the header height according to the contents
+        // Source: http://roadfiresoftware.com/2015/05/how-to-size-a-table-header-view-using-auto-layout-in-interface-builder/
+        let height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 30
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        tableView.tableHeaderView = headerView
     }
     
     override func viewDidAppear(_ animated: Bool) {
