@@ -84,7 +84,11 @@ class JoompedViewController: UIViewController {
         
         let playerVars = [
             "playsinline": 1,
-            "controls": 0
+            "controls": 0,
+            "rel": 0,
+            "showinfo": 0,
+            "fs": 0,
+            "iv_load_policy": 3
         ]
         
         playerViewHeightConstraint.constant = playerView.frame.width * 9.0 / 16.0
