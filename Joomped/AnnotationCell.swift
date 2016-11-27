@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol AnnotationCellDelegate: class {
     @objc optional func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation)
+    @objc optional func annotationCell(annotationCell: AnnotationCell, removedAnnotation: Annotation)
     @objc optional func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float)
 }
 
@@ -18,6 +19,7 @@ class AnnotationCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var annotationLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
     weak var delegate: AnnotationCellDelegate?
     
     var timestampFloat: Float?
@@ -39,6 +41,9 @@ class AnnotationCell: UITableViewCell {
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
                 annotationTextView.isUserInteractionEnabled = true
+                if isEditMode {
+                    closeButton.isHidden = false
+                }
             }
         }
     }
@@ -55,6 +60,13 @@ class AnnotationCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func didTapCloseButton(_ sender: Any) {
+        guard let annotation = annotation else {
+            return
+        }
+        delegate?.annotationCell?(annotationCell: self, removedAnnotation: annotation)
+    }
+    
     @IBAction func didTapSaveButton(_ sender: Any) {
         saveAnnotation()
     }

@@ -266,6 +266,7 @@ class JoompedViewController: UIViewController {
     }
     
     func updateAnnotationInSeekBar() {
+        seekBar.subviews.forEach({ $0.removeFromSuperview() })
         annotations.forEach { (annotation) in
             let percentage = annotation.timestamp / (duration ?? Float(playerView.duration()))
             let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: -5, width: 3, height: Double(15)))
@@ -402,6 +403,14 @@ extension JoompedViewController: AnnotationCellDelegate {
             let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections - 1)
             let indexPath = IndexPath(item: numberOfRows - 1, section: numberOfSections - 1)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        }
+    }
+    
+    func annotationCell(annotationCell: AnnotationCell, removedAnnotation: Annotation) {
+        if let index = annotations.index(of: removedAnnotation) {
+            annotations.remove(at: index)
+            tableView.reloadData()
+            updateAnnotationInSeekBar()
         }
     }
 }
