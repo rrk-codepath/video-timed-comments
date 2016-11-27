@@ -23,6 +23,10 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var seekBarView: UIView!
     @IBOutlet weak var seekBar: UIView!
     @IBOutlet weak var liveAnnotationBlurView: UIVisualEffectView!
+    @IBOutlet weak var playerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var seekBarToPlayerViewSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var fullscreenButton: UIButton!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -55,6 +59,8 @@ class JoompedViewController: UIViewController {
     fileprivate var duration: Float?
     fileprivate var seekBarLine: UIView?
     
+    private var fullscreen = false
+
     var isEditMode = false {
         didSet {
             configureNavigationBar()
@@ -77,9 +83,12 @@ class JoompedViewController: UIViewController {
         liveAnnotationBlurView.clipsToBounds = true
         
         let playerVars = [
-            "playsinline": 1
+            "playsinline": 1,
+            "controls": 0
         ]
-        //playerView.webView.
+        
+        playerViewHeightConstraint.constant = playerView.frame.width * 9.0 / 16.0
+        
         self.automaticallyAdjustsScrollViewInsets = false
         seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
@@ -119,6 +128,13 @@ class JoompedViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            onLandscape()
+        }
+        
+        playButton.isEnabled = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -265,6 +281,24 @@ class JoompedViewController: UIViewController {
         }
     }
     
+    func orientationRotated(notification: NSNotification) {
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            onLandscape()
+        } else {
+            onPortrait()
+        }
+    }
+    
+    private func onLandscape() {
+        displayFullscreen(fullscreen: true)
+        fullscreenButton.isEnabled = false
+    }
+    
+    private func onPortrait() {
+        displayFullscreen(fullscreen: fullscreen)
+        fullscreenButton.isEnabled = true
+    }
+    
     func updateAnnotationInSeekBar() {
         seekBar.subviews.forEach({ $0.removeFromSuperview() })
         annotations.forEach { (annotation) in
@@ -296,6 +330,40 @@ class JoompedViewController: UIViewController {
         updateSeekBarLine(percentage: percentageOfVideo)
         playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
         
+    }
+    
+    @IBAction func onPlayTapped(_ sender: Any) {
+        if playerView.playerState() == YTPlayerState.playing {
+            playButton.setTitle("Play", for: UIControlState.normal)
+            playerView.pauseVideo()
+        } else {
+            playerView.playVideo()
+            // Should eventually be replaced with an icon
+            playButton.setTitle("Pause", for: UIControlState.normal)
+        }
+    }
+    @IBAction func onFullscreenTapped(_ sender: Any) {
+        fullscreen = !fullscreen
+        if !UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            displayFullscreen(fullscreen: fullscreen)
+        }
+    }
+    
+    private func displayFullscreen(fullscreen: Bool) {
+        if fullscreen {
+            animate(constraint: playerViewHeightConstraint, toConstant: view.frame.height)
+            animate(constraint: seekBarToPlayerViewSpaceConstraint, toConstant: -50)
+        } else {
+            animate(constraint: playerViewHeightConstraint, toConstant: playerView.frame.width * 9 / 16)
+            animate(constraint: seekBarToPlayerViewSpaceConstraint, toConstant: 0)
+        }
+        self.navigationController?.setNavigationBarHidden(fullscreen, animated: true)
+    }
+    
+    private func animate(constraint: NSLayoutConstraint, toConstant constant: CGFloat) {
+        UIView.animate(withDuration: 0.1, animations: {
+            constraint.constant = constant
+        })
     }
     
     @IBAction func didTapSeekBar(_ recognizer: UITapGestureRecognizer) {
@@ -422,6 +490,7 @@ extension JoompedViewController: YTPlayerViewDelegate {
         if !isSeekBarAnnotated {
             updateAnnotationInSeekBar()
         }
+        playButton.isEnabled = true
     }
     
     //Called roughly every half second
