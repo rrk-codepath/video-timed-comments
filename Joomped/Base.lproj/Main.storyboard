@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -307,12 +307,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Joomped uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpO-D5-5Ok">
-                                            <rect key="frame" x="245" y="43" width="122" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.68272860739999996" green="0.54089765099999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ea-GQ-lvb">
                                             <rect key="frame" x="8" y="68" width="80" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -331,6 +325,13 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwJ-aX-sdU">
+                                            <rect key="frame" x="252" y="36.5" width="115" height="30"/>
+                                            <state key="normal" title="Joomped upload"/>
+                                            <connections>
+                                                <action selector="didTapJoompedUser:" destination="z9f-sm-9S5" eventType="touchUpInside" id="L9U-eo-TPB"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -338,15 +339,15 @@
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gb9-og-qg5" secondAttribute="trailing" constant="8" id="8do-Cd-rtN"/>
                                         <constraint firstAttribute="trailing" secondItem="drY-fX-e3T" secondAttribute="trailing" constant="8" id="DBh-hL-u0J"/>
                                         <constraint firstItem="R0Z-sg-Sjv" firstAttribute="leading" secondItem="gb9-og-qg5" secondAttribute="leading" id="H7d-tA-6ym"/>
+                                        <constraint firstItem="SwJ-aX-sdU" firstAttribute="centerY" secondItem="R0Z-sg-Sjv" secondAttribute="centerY" id="IzM-bE-Hk2"/>
                                         <constraint firstItem="gb9-og-qg5" firstAttribute="top" secondItem="oKn-fb-jDx" secondAttribute="top" constant="8" id="KnG-Y2-bMc"/>
-                                        <constraint firstItem="lpO-D5-5Ok" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R0Z-sg-Sjv" secondAttribute="trailing" constant="8" id="Mtx-Gi-bBn"/>
+                                        <constraint firstItem="SwJ-aX-sdU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R0Z-sg-Sjv" secondAttribute="trailing" constant="8" id="P3X-QS-4xo"/>
                                         <constraint firstItem="drY-fX-e3T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2ea-GQ-lvb" secondAttribute="trailing" constant="8" id="Rwz-ET-Bln"/>
                                         <constraint firstItem="R0Z-sg-Sjv" firstAttribute="top" secondItem="gb9-og-qg5" secondAttribute="bottom" constant="8" id="ccS-iB-qe9"/>
                                         <constraint firstItem="gb9-og-qg5" firstAttribute="leading" secondItem="oKn-fb-jDx" secondAttribute="leading" constant="8" id="djw-hH-PF6"/>
+                                        <constraint firstAttribute="trailing" secondItem="SwJ-aX-sdU" secondAttribute="trailing" constant="8" id="hdL-yS-Oaa"/>
                                         <constraint firstItem="2ea-GQ-lvb" firstAttribute="top" secondItem="R0Z-sg-Sjv" secondAttribute="bottom" constant="8" id="mRH-rr-fzY"/>
                                         <constraint firstItem="2ea-GQ-lvb" firstAttribute="leading" secondItem="gb9-og-qg5" secondAttribute="leading" id="mhM-NM-bVm"/>
-                                        <constraint firstItem="lpO-D5-5Ok" firstAttribute="centerY" secondItem="R0Z-sg-Sjv" secondAttribute="centerY" id="rJv-0H-Mua"/>
-                                        <constraint firstAttribute="trailing" secondItem="lpO-D5-5Ok" secondAttribute="trailing" constant="8" id="ug9-rZ-uZe"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -354,7 +355,7 @@
                                         <rect key="frame" x="0.0" y="172" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSu-gK-gNr" id="yNc-LW-NPe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -368,16 +369,16 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvF-wf-6cg">
-                                <rect key="frame" x="141" y="246" width="93.5" height="21"/>
+                                <rect key="frame" x="141" y="246" width="94" height="21"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Y88-TK-7aL">
-                                    <rect key="frame" x="0.0" y="0.0" width="93.5" height="21"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="94" height="21"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WsG-lq-cEH">
-                                            <rect key="frame" x="0.0" y="0.0" width="93.5" height="21"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="94" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="Mwx-kd-zak">
-                                                <rect key="frame" x="0.0" y="0.0" width="93.5" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="94" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                             <vibrancyEffect>
@@ -390,7 +391,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Annotation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-zE-iMH">
-                                <rect key="frame" x="146" y="246" width="83.5" height="21"/>
+                                <rect key="frame" x="146" y="246" width="84" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -405,9 +406,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5" id="e0i-OK-v1a"/>
                                         </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="O8h-Iv-0AL" appends="YES" id="lG3-qL-JTo"/>
-                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -456,7 +454,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="joompedUploaderLabel" destination="lpO-D5-5Ok" id="Hh3-dj-742"/>
+                        <outlet property="joompedUploaderButton" destination="SwJ-aX-sdU" id="jKo-Pd-adj"/>
                         <outlet property="liveAnnotationBlurView" destination="IvF-wf-6cg" id="qb0-ZZ-UYN"/>
                         <outlet property="liveAnnotationLabel" destination="3Ub-zE-iMH" id="Ezm-sP-CLx"/>
                         <outlet property="numberAnnotationsLabel" destination="drY-fX-e3T" id="MDv-XR-9nS"/>
@@ -468,19 +466,16 @@
                         <outlet property="videoTitleLabel" destination="gb9-og-qg5" id="Vdm-70-ofL"/>
                         <outlet property="videoUploaderLabel" destination="R0Z-sg-Sjv" id="npT-2X-JmN"/>
                         <segue destination="FpH-lp-WTC" kind="show" identifier="saveHomeSegue" id="Hhx-Qr-R1r"/>
+                        <segue destination="zI5-LE-lzX" kind="show" identifier="ProfileSegue" id="XD9-iG-gfL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0G-fm-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="O8h-Iv-0AL">
-                    <connections>
-                        <action selector="didTapSeekBar:" destination="z9f-sm-9S5" id="9Ub-KL-H4Y"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="mqU-nX-v5f">
                     <connections>
                         <action selector="didPanSeekBar:" destination="z9f-sm-9S5" id="BXf-cn-FFH"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="rhu-eV-0D6"/>
             </objects>
             <point key="canvasLocation" x="1932" y="385.45727136431788"/>
         </scene>
@@ -489,7 +484,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -504,8 +499,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9wy-6B-93j"/>
+        <segue reference="XD9-iG-gfL"/>
         <segue reference="Dg3-WV-wJf"/>
+        <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

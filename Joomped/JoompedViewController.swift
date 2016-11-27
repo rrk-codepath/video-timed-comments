@@ -17,7 +17,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var playerView: YTPlayerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var liveAnnotationLabel: UILabel!
-    @IBOutlet weak var joompedUploaderLabel: UILabel?
+    @IBOutlet weak var joompedUploaderButton: UIButton!
     @IBOutlet weak var publishLabel: UILabel!
     @IBOutlet weak var numberAnnotationsLabel: UILabel!
     @IBOutlet weak var seekBarView: UIView!
@@ -88,7 +88,7 @@ class JoompedViewController: UIViewController {
             annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
-            joompedUploaderLabel?.text = joomped.user.displayName
+            joompedUploaderButton.setTitle(joomped.user.displayName, for: .normal)
             var countString = "\(joomped.annotations.count) annotations"
             if joomped.annotations.count == 1 {
                 countString = countString.substring(to: countString.index(before: countString.endIndex))
@@ -102,7 +102,7 @@ class JoompedViewController: UIViewController {
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
             playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
-            joompedUploaderLabel?.isHidden = true
+            joompedUploaderButton.isHidden = true
         }
         annotations.forEach { (annotation) in
             self.annotationsDict[floorf(annotation.timestamp)] = annotation
@@ -186,6 +186,24 @@ class JoompedViewController: UIViewController {
             self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
         }
     }
+    
+    @IBAction func didTapJoompedUser(_ sender: Any) {
+        performSegue(withIdentifier: "ProfileSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        switch segue.identifier! {
+        case "ProfileSegue":
+            let pvc = segue.destination as! ProfileViewController
+            if let joomped = joomped {
+                pvc.user = joomped.user
+            }
+        default:
+            return
+        }
+    }
+    
     @IBAction func didTapShare(_ sender: UIBarButtonItem) {
         guard let joompedObjectId = joomped?.objectId else {
             return
