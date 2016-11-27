@@ -14,7 +14,7 @@ import UIKit
 }
 
 class AnnotationCell: UITableViewCell {
-    @IBOutlet weak var annotationTextField: UITextField!
+    @IBOutlet weak var annotationTextView: UITextView!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var annotationLabel: UILabel!
@@ -25,7 +25,7 @@ class AnnotationCell: UITableViewCell {
     var isEditMode: Bool = false {
         didSet {
             annotationLabel.isHidden = isEditMode
-            annotationTextField.isHidden = !isEditMode
+            annotationTextView.isHidden = !isEditMode
             saveButton.isHidden = !isEditMode
         }
     }
@@ -33,24 +33,20 @@ class AnnotationCell: UITableViewCell {
     var annotation: Annotation? {
         didSet {
             if let annotation = annotation {
-                annotationTextField.text = annotation.text
+                annotationTextView.text = annotation.text
                 annotationLabel.text = annotation.text
                 timestampFloat = annotation.timestamp
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
-                annotationTextField.isUserInteractionEnabled = true
+                annotationTextView.isUserInteractionEnabled = true
             }
         }
-    }
-    
-    @IBAction func editingDidChange(_ sender: Any) {
-        saveButton.isEnabled = annotationTextField.text!.characters.count > 0
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        annotationTextField.delegate = self
+        annotationTextView.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -64,22 +60,23 @@ class AnnotationCell: UITableViewCell {
     }
     
     fileprivate func saveAnnotation() {
-        guard let annotation = annotation, let annotationText = annotationTextField.text, !annotationText.isEmpty else {
-            annotationTextField.layer.borderColor = UIColor.red.cgColor
-            annotationTextField.layer.borderWidth = 1.0
+        guard let annotation = annotation, let annotationText = annotationTextView.text, !annotationText.isEmpty else {
+            annotationTextView.layer.borderColor = UIColor.red.cgColor
+            annotationTextView.layer.borderWidth = 1.0
             return
         }
-        annotationTextField.layer.borderWidth = 0
-        annotationTextField.resignFirstResponder()
-        annotation.text = annotationTextField.text!
+        annotationTextView.layer.borderWidth = 0
+        annotationTextView.resignFirstResponder()
+        
+        annotation.text = annotationTextView.text!
         annotation.timestamp = timestampFloat!
         delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
     }
 }
 
-extension AnnotationCell: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        saveAnnotation()
-        return true
+extension AnnotationCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        saveButton.isEnabled = annotationTextView.text!.characters.count > 0
+        
     }
 }

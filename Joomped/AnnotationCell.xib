@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,24 +15,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OZ3-Kg-lFm">
-                        <rect key="frame" x="8" y="38.5" width="262" height="30"/>
-                        <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                        <connections>
-                            <action selector="editingDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="HIZ-xK-Frv"/>
-                        </connections>
-                    </textField>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2d-6J-4kZ">
                         <rect key="frame" x="8" y="8" width="86" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.3089923242" green="0.318089344" blue="0.46183736910000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bqx-j7-c3R">
+                        <rect key="frame" x="8" y="38" width="262" height="36"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="Fth-Gm-dve"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYk-u9-Qn8">
                         <rect key="frame" x="278" y="38.5" width="34" height="30"/>
                         <state key="normal" title="Save"/>
@@ -49,23 +48,23 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ZYk-u9-Qn8" firstAttribute="centerY" secondItem="OZ3-Kg-lFm" secondAttribute="centerY" id="5Od-Zt-sou"/>
+                    <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="bqx-j7-c3R" secondAttribute="trailing" constant="8" id="4ML-Xr-MNy"/>
+                    <constraint firstItem="bqx-j7-c3R" firstAttribute="leading" secondItem="M2d-6J-4kZ" secondAttribute="leading" id="9dA-jL-9wi"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l65-Is-vBT" secondAttribute="bottom" constant="2" id="9mk-LC-PD6"/>
-                    <constraint firstItem="OZ3-Kg-lFm" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="9zv-Qj-DCG"/>
                     <constraint firstItem="M2d-6J-4kZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Adv-aA-nCI"/>
-                    <constraint firstItem="OZ3-Kg-lFm" firstAttribute="leading" secondItem="M2d-6J-4kZ" secondAttribute="leading" id="CYA-J9-y8f"/>
+                    <constraint firstItem="bqx-j7-c3R" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="BP2-Ra-OyG"/>
                     <constraint firstItem="l65-Is-vBT" firstAttribute="leading" secondItem="M2d-6J-4kZ" secondAttribute="leading" id="EVh-Wf-kbb"/>
                     <constraint firstItem="l65-Is-vBT" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="GEy-hJ-OwO"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="OZ3-Kg-lFm" secondAttribute="bottom" constant="2" id="HQH-yH-Vbp"/>
                     <constraint firstItem="M2d-6J-4kZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Ka6-OI-mlp"/>
-                    <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="OZ3-Kg-lFm" secondAttribute="trailing" constant="8" id="P3V-G2-0aH"/>
                     <constraint firstAttribute="trailing" secondItem="l65-Is-vBT" secondAttribute="trailing" constant="8" id="WJG-c0-jE4"/>
                     <constraint firstAttribute="trailing" secondItem="ZYk-u9-Qn8" secondAttribute="trailing" constant="8" id="WuI-UN-wJK"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bqx-j7-c3R" secondAttribute="bottom" constant="2" id="flh-hx-ECh"/>
+                    <constraint firstItem="ZYk-u9-Qn8" firstAttribute="top" secondItem="bqx-j7-c3R" secondAttribute="top" id="lJs-Zu-0JW"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="annotationLabel" destination="l65-Is-vBT" id="mBK-X9-cx0"/>
-                <outlet property="annotationTextField" destination="OZ3-Kg-lFm" id="xBb-a0-QKl"/>
+                <outlet property="annotationTextView" destination="bqx-j7-c3R" id="CzB-P9-Wzw"/>
                 <outlet property="saveButton" destination="ZYk-u9-Qn8" id="Wr2-OU-UJo"/>
                 <outlet property="timestampLabel" destination="M2d-6J-4kZ" id="Uea-dH-ayC"/>
             </connections>

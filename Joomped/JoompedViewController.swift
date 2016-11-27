@@ -355,7 +355,7 @@ extension JoompedViewController: UITableViewDelegate {
             let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
             let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
             cell.annotation = annotation
-            cell.annotationTextField.becomeFirstResponder()
+            cell.annotationTextView.becomeFirstResponder()
         } else if indexPath.section == 0 {
             let annotationCell = tableView.cellForRow(at: indexPath) as! AnnotationCell
             currentAnnotationCell = annotationCell
