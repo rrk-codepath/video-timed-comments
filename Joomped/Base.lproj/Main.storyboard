@@ -420,9 +420,11 @@
                                     <outletCollection property="gestureRecognizers" destination="mqU-nX-v5f" appends="YES" id="1hd-E8-Fhh"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAJ-oU-ed4" userLabel="Fullscreen Button">
-                                <rect key="frame" x="337" y="236" width="30" height="30"/>
-                                <state key="normal" title="⇲"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAJ-oU-ed4" userLabel="Fullscreen Button">
+                                <rect key="frame" x="337" y="239" width="30" height="25"/>
+                                <state key="normal" image="Full-Screen">
+                                    <color key="titleColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onFullscreenTapped:" destination="z9f-sm-9S5" eventType="touchUpInside" id="6Y3-Zz-BVf"/>
                                 </connections>
@@ -529,6 +531,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Full-Screen" width="25" height="25"/>
         <image name="Pause" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -83,6 +83,8 @@ class JoompedViewController: UIViewController {
         liveAnnotationBlurView.clipsToBounds = true
         
         playButton.tintColor = UIColor.rrk_primaryColor
+        fullscreenButton.tintColor = UIColor.rrk_primaryColor
+        
         let playerVars = [
             "playsinline": 1,
             "controls": 0,
@@ -139,6 +141,7 @@ class JoompedViewController: UIViewController {
             onLandscape()
         }
         playButton.isEnabled = false
+        fullscreenButton.isEnabled = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -358,15 +361,19 @@ class JoompedViewController: UIViewController {
         if fullscreen {
             animate(constraint: playerViewHeightConstraint, toConstant: view.frame.height)
             animate(constraint: seekBarToPlayerViewSpaceConstraint, toConstant: -50)
+            self.fullscreenButton.setImage(#imageLiteral(resourceName: "Compress"), for: .normal)
         } else {
             animate(constraint: playerViewHeightConstraint, toConstant: playerView.frame.width * 9 / 16)
             animate(constraint: seekBarToPlayerViewSpaceConstraint, toConstant: 0)
+            self.fullscreenButton.setImage(#imageLiteral(resourceName: "Full-Screen"), for: .normal)
         }
         self.navigationController?.setNavigationBarHidden(fullscreen, animated: true)
+        UIApplication.shared.isStatusBarHidden = fullscreen
     }
     
     private func animate(constraint: NSLayoutConstraint, toConstant constant: CGFloat) {
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
             constraint.constant = constant
         })
     }
@@ -496,6 +503,7 @@ extension JoompedViewController: YTPlayerViewDelegate {
             updateAnnotationInSeekBar()
         }
         playButton.isEnabled = true
+        fullscreenButton.isEnabled = true
     }
     
     //Called roughly every half second
