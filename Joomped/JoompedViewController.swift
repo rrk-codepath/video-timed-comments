@@ -76,6 +76,7 @@ class JoompedViewController: UIViewController {
         playerView.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        UIApplication.shared.statusBarStyle = .lightContent
         
         liveAnnotationBlurView.alpha = 0.50
         liveAnnotationBlurView.layer.cornerRadius = 5
@@ -289,7 +290,7 @@ class JoompedViewController: UIViewController {
     }
     
     func orientationRotated(notification: NSNotification) {
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+        if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
             onLandscape()
         } else {
             onPortrait()
@@ -358,6 +359,8 @@ class JoompedViewController: UIViewController {
     }
     
     private func displayFullscreen(fullscreen: Bool) {
+        self.navigationController?.setNavigationBarHidden(fullscreen, animated: true)
+        UIApplication.shared.isStatusBarHidden = fullscreen
         if fullscreen {
             animate(constraint: playerViewHeightConstraint, toConstant: view.frame.height)
             animate(constraint: seekBarToPlayerViewSpaceConstraint, toConstant: -50)
@@ -367,8 +370,7 @@ class JoompedViewController: UIViewController {
             animate(constraint: seekBarToPlayerViewSpaceConstraint, toConstant: 0)
             self.fullscreenButton.setImage(#imageLiteral(resourceName: "Full-Screen"), for: .normal)
         }
-        self.navigationController?.setNavigationBarHidden(fullscreen, animated: true)
-        UIApplication.shared.isStatusBarHidden = fullscreen
+        updateAnnotationInSeekBar()
     }
     
     private func animate(constraint: NSLayoutConstraint, toConstant constant: CGFloat) {

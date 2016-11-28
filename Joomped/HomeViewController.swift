@@ -251,11 +251,13 @@ class HomeViewController: UIViewController {
     
     fileprivate func hideSearchMode() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.shared.statusBarStyle = .default
         fadeSearchMode(toOpacity: 0.0)
     }
     
     fileprivate func showSearchMode() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        UIApplication.shared.statusBarStyle = .lightContent
         fadeSearchMode(toOpacity: 1.0)
     }
     
