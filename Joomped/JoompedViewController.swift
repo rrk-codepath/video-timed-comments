@@ -338,12 +338,12 @@ class JoompedViewController: UIViewController {
     
     @IBAction func onPlayTapped(_ sender: Any) {
         if playerView.playerState() == YTPlayerState.playing {
-            playButton.setTitle("Play", for: UIControlState.normal)
+            playButton.setTitle("▶︎", for: UIControlState.normal)
             playerView.pauseVideo()
         } else {
             playerView.playVideo()
             // Should eventually be replaced with an icon
-            playButton.setTitle("Pause", for: UIControlState.normal)
+            playButton.setTitle("❚❚", for: UIControlState.normal)
         }
     }
     @IBAction func onFullscreenTapped(_ sender: Any) {

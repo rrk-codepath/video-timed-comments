@@ -422,14 +422,16 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAJ-oU-ed4" userLabel="Fullscreen Button">
                                 <rect key="frame" x="337" y="236" width="30" height="30"/>
-                                <state key="normal" title="FS"/>
+                                <state key="normal" title="⇲"/>
                                 <connections>
                                     <action selector="onFullscreenTapped:" destination="z9f-sm-9S5" eventType="touchUpInside" id="6Y3-Zz-BVf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLj-ll-3s7" userLabel="Play Button">
-                                <rect key="frame" x="-6" y="236" width="42" height="30"/>
-                                <state key="normal" title="Pause"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLj-ll-3s7" userLabel="Play Button">
+                                <rect key="frame" x="5" y="234" width="31" height="34"/>
+                                <state key="normal" title="❚❚">
+                                    <color key="titleColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onPlayTapped:" destination="z9f-sm-9S5" eventType="touchUpInside" id="pwf-4C-ZyD"/>
                                 </connections>
@@ -528,7 +530,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Dg3-WV-wJf"/>
         <segue reference="XD9-iG-gfL"/>
-        <segue reference="9wy-6B-93j"/>
+        <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
