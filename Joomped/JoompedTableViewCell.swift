@@ -8,6 +8,9 @@ class JoompedTableViewCell: UITableViewCell {
     @IBOutlet weak var videoImageView: UIImageView!
     @IBOutlet weak var joompedAuthorLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var joompedAuthorImageView: UIImageView!
+    @IBOutlet weak var videoLengthLabel: UILabel!
+    @IBOutlet weak var annotationCountLabel: UILabel!
     
     var joomped: Joomped? {
         didSet {
@@ -18,17 +21,21 @@ class JoompedTableViewCell: UITableViewCell {
             
             joompedTitleLabel.text = joomped.video.title
             videoAuthorLabel.text = joomped.video.author
+            videoLengthLabel.text = Float(joomped.video.length).joompedBeautify()
+            annotationCountLabel.text = "\(joomped.annotations.count)"
             if let joompedUser = joomped.user.displayName {
-                var countString = "\(joomped.annotations.count) annotations"
-                if joomped.annotations.count == 1 {
-                    countString = countString.substring(to: countString.index(before: countString.endIndex))
-                }
-                joompedAuthorLabel.text = "\(joompedUser) • \(countString)"
+                joompedAuthorLabel.text = "\(joompedUser)"
             }
             if let thumbnail = joomped.video.thumbnail, let thumbnailUrl = URL(string: thumbnail) {
                 videoImageView.setImageWith(thumbnailUrl)
             }
             timestampLabel.text = joomped.createdAt?.timeAgoRelative
+            if let url = URL(string: joomped.user.imageUrl) {
+                joompedAuthorImageView.setImageWith(url)
+                joompedAuthorImageView.layer.cornerRadius = joompedAuthorImageView.frame.size.height / 2;
+                joompedAuthorImageView.layer.masksToBounds = true;
+                joompedAuthorImageView.layer.borderWidth = 0;
+            }
         }
     }
     

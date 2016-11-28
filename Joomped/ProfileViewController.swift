@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        if let url = URL(string: user.imageUrl ?? "https://placekitten.com/g/100/100") {
+        if let url = URL(string: user.imageUrl) {
             profileImageView.setImageWith(url)
         }
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2;
@@ -68,7 +68,7 @@ class ProfileViewController: UIViewController {
                 self.joompedTableView.reloadData()
             }
             
-            var countString = "\(self.joomped.count) annotated videos"
+            var countString = "\(self.joomped.count) annotation sets"
             if self.joomped.count == 1 {
                 countString = countString.substring(to: countString.index(before: countString.endIndex))
             }
