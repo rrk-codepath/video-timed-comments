@@ -237,7 +237,7 @@ class JoompedViewController: UIViewController {
             return
         }
         var rightBarButtonItems = [UIBarButtonItem]()
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
         
         let actionButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(JoompedViewController.didTapEditSave(_:)))
         
@@ -346,6 +346,7 @@ class JoompedViewController: UIViewController {
             playButton.setTitle("❚❚", for: UIControlState.normal)
         }
     }
+    
     @IBAction func onFullscreenTapped(_ sender: Any) {
         fullscreen = !fullscreen
         if !UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
@@ -519,6 +520,15 @@ extension JoompedViewController: YTPlayerViewDelegate {
                 
                 timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(setAnnotationLabel), userInfo: nil, repeats: false)
             }
+        }
+    }
+    
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        switch state {
+        case .playing, .buffering:
+            playButton.setTitle("❚❚", for: UIControlState.normal)
+        default:
+            playButton.setTitle("▶︎", for: UIControlState.normal)
         }
     }
 }
