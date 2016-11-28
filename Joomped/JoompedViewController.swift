@@ -325,7 +325,7 @@ class JoompedViewController: UIViewController {
         } else if percentageOfVideo < 0 {
             percentageOfVideo = 0
         }
-        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo), y: -5, width: 14, height: 14))
+        seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo) - 5, y: -5, width: 14, height: 14))
         seekBarLine?.layer.cornerRadius = 10
         seekBarLine?.backgroundColor = UIColor.red
         seekBar.addSubview(seekBarLine!)
