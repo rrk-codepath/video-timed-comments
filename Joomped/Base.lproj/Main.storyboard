@@ -428,8 +428,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLj-ll-3s7" userLabel="Play Button">
-                                <rect key="frame" x="5" y="234" width="31" height="34"/>
-                                <state key="normal" title="❚❚">
+                                <rect key="frame" x="11" y="239" width="25" height="25"/>
+                                <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Pause">
                                     <color key="titleColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -527,6 +528,9 @@
             <point key="canvasLocation" x="143" y="36"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Pause" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Dg3-WV-wJf"/>
         <segue reference="XD9-iG-gfL"/>

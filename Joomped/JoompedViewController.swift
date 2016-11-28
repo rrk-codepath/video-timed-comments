@@ -82,6 +82,7 @@ class JoompedViewController: UIViewController {
         liveAnnotationBlurView.layer.masksToBounds = true
         liveAnnotationBlurView.clipsToBounds = true
         
+        playButton.tintColor = UIColor.rrk_primaryColor
         let playerVars = [
             "playsinline": 1,
             "controls": 0,
@@ -137,7 +138,6 @@ class JoompedViewController: UIViewController {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             onLandscape()
         }
-        
         playButton.isEnabled = false
     }
     
@@ -338,12 +338,12 @@ class JoompedViewController: UIViewController {
     
     @IBAction func onPlayTapped(_ sender: Any) {
         if playerView.playerState() == YTPlayerState.playing {
-            playButton.setTitle("▶︎", for: UIControlState.normal)
+            playButton.setImage(#imageLiteral(resourceName: "Play"), for: UIControlState.normal)
             playerView.pauseVideo()
         } else {
             playerView.playVideo()
             // Should eventually be replaced with an icon
-            playButton.setTitle("❚❚", for: UIControlState.normal)
+            playButton.setImage(#imageLiteral(resourceName: "Pause"), for: UIControlState.normal)
         }
     }
     
@@ -526,9 +526,9 @@ extension JoompedViewController: YTPlayerViewDelegate {
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         switch state {
         case .playing, .buffering:
-            playButton.setTitle("❚❚", for: UIControlState.normal)
+            playButton.setImage(#imageLiteral(resourceName: "Pause"), for: .normal)
         default:
-            playButton.setTitle("▶︎", for: UIControlState.normal)
+            playButton.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
         }
     }
 }
