@@ -470,6 +470,7 @@ extension JoompedViewController: AnnotationCellDelegate {
                 }
             }
         }
+        annotationCell.closeButton.isHidden = false
         print("Number of annotations: \(annotations.count)")
         annotations.forEach { (annotation) in
             annotationsDict[floorf(annotation.timestamp)] = annotation
