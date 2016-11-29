@@ -501,6 +501,10 @@ extension JoompedViewController: AnnotationCellDelegate {
 extension JoompedViewController: YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        guard let videoId = joomped?.video.youtubeId ?? self.youtubeVideo?.id else {
+            return
+        }
+        playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
         playerView.playVideo()
         if !isSeekBarAnnotated {
             updateAnnotationInSeekBar()

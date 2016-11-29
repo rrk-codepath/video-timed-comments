@@ -52,6 +52,7 @@ class AnnotationCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         annotationTextView.delegate = self
+        annotationTextView.textContainer.lineFragmentPadding = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -89,6 +90,5 @@ class AnnotationCell: UITableViewCell {
 extension AnnotationCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         saveButton.isEnabled = annotationTextView.text!.characters.count > 0
-        
     }
 }
