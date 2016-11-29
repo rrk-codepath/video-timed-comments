@@ -29,6 +29,7 @@ class AnnotationCell: UITableViewCell {
             annotationLabel.isHidden = isEditMode
             annotationTextView.isHidden = !isEditMode
             saveButton.isHidden = !isEditMode
+            closeButton.isHidden = !isEditMode
         }
     }
     

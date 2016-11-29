@@ -51,6 +51,12 @@ class JoompedViewController: UIViewController {
         }
     }
     var youtubeVideo: YoutubeVideo?
+    var segueToHomeFlag: Bool {
+        get {
+            return joomped == nil
+        }
+    }
+    
     fileprivate var annotations = [Annotation]()
     fileprivate var annotationTime: Float?
     fileprivate var annotationsDict = [Float:Annotation]()
@@ -58,12 +64,12 @@ class JoompedViewController: UIViewController {
     fileprivate var isSeekBarAnnotated = false
     fileprivate var duration: Float?
     fileprivate var seekBarLine: UIView?
-    
     private var fullscreen = false
 
     var isEditMode = false {
         didSet {
             configureNavigationBar()
+            tableView?.reloadData()
         }
     }
     
@@ -206,8 +212,12 @@ class JoompedViewController: UIViewController {
                 return
             }
             print("saved successfully: \(newJoomped.objectId)")
-            self.playerView.stopVideo()
-            self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
+            if self.segueToHomeFlag {
+                self.playerView.stopVideo()
+                self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
+            } else {
+                self.isEditMode = false
+            }
         }
     }
     
