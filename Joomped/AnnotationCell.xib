@@ -24,7 +24,7 @@
                         <color key="textColor" red="0.3089923242" green="0.318089344" blue="0.46183736910000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqx-j7-c3R">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqx-j7-c3R">
                         <rect key="frame" x="8" y="39" width="361" height="41"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
