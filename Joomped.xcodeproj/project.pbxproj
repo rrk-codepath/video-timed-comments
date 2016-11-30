@@ -26,6 +26,7 @@
 		5684F1D81DD719EB004EAF1C /* YoutubeVideoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684F1D71DD719EB004EAF1C /* YoutubeVideoDetails.swift */; };
 		56952DBF1DD7DE4B00C372B0 /* ParseGoogleSignInDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56952DBE1DD7DE4B00C372B0 /* ParseGoogleSignInDelegate.swift */; };
 		56B6A9CF1DE54EFE00329E08 /* ReplaceStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6A9CE1DE54EFE00329E08 /* ReplaceStoryboardSegue.swift */; };
+		56B6A9D11DEED36700329E08 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6A9D01DEED36700329E08 /* UIImage+Resize.swift */; };
 		56D783351DD7AEF800779183 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56D783341DD7AEF800779183 /* GoogleService-Info.plist */; };
 		56D783371DD7B17B00779183 /* GoogleCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D783361DD7B17B00779183 /* GoogleCredentials.swift */; };
 		79C5C69C1DD40CFA00040B17 /* JoompedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C69B1DD40CFA00040B17 /* JoompedViewController.swift */; };
@@ -64,6 +65,7 @@
 		56952DBD1DD7BF1E00C372B0 /* Joomped-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Joomped-Bridging-Header.h"; sourceTree = "<group>"; };
 		56952DBE1DD7DE4B00C372B0 /* ParseGoogleSignInDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseGoogleSignInDelegate.swift; sourceTree = "<group>"; };
 		56B6A9CE1DE54EFE00329E08 /* ReplaceStoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceStoryboardSegue.swift; sourceTree = "<group>"; };
+		56B6A9D01DEED36700329E08 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		56D783341DD7AEF800779183 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56D783361DD7B17B00779183 /* GoogleCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCredentials.swift; sourceTree = "<group>"; };
 		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +145,7 @@
 				B72C6C2D1DDC51390049C3C5 /* Date+Relative.swift */,
 				79D35C5F1DDD8362006B4967 /* UIColorExtensions.swift */,
 				79D35C611DDD88A5006B4967 /* UIBarButtonItemExtensions.swift */,
+				56B6A9D01DEED36700329E08 /* UIImage+Resize.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				B7E73F491DD42C41009F7F48 /* HomeViewController.swift in Sources */,
 				5630B0A81DD41974008E78D6 /* User.swift in Sources */,
 				B75866561DD69A3E00BB101D /* AnnotationCell.swift in Sources */,
+				56B6A9D11DEED36700329E08 /* UIImage+Resize.swift in Sources */,
 				5630B09E1DD41216008E78D6 /* Video.swift in Sources */,
 				79D35C601DDD8362006B4967 /* UIColorExtensions.swift in Sources */,
 				56952DBF1DD7DE4B00C372B0 /* ParseGoogleSignInDelegate.swift in Sources */,

@@ -20,9 +20,12 @@ class AnnotationCell: UITableViewCell {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var annotationLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    
     weak var delegate: AnnotationCellDelegate?
     var isNew: Bool = false
     
+
     var timestampFloat: Float?
     
     var isEditMode: Bool = false {
@@ -31,6 +34,13 @@ class AnnotationCell: UITableViewCell {
             annotationTextView.isHidden = !isEditMode
             saveButton.isHidden = !isEditMode
             closeButton.isHidden = !isEditMode
+        }
+    }
+    
+    var thumbnail: UIImage? {
+        didSet {
+            thumbnailImageView.image = thumbnail
+            thumbnailImageView.alpha = 0.5
         }
     }
     
@@ -43,6 +53,16 @@ class AnnotationCell: UITableViewCell {
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
                 annotationTextView.isUserInteractionEnabled = true
+                if let thumbnail = annotation.thumbnail {
+                    thumbnail.getDataInBackground(block: { (data: Data?, error: Error?) in
+                        if error == nil,
+                            let data = data,
+                            let thumbnail = UIImage(data: data) {
+                            self.thumbnailImageView.image = thumbnail
+                        }
+                    })
+                }
+                
                 if isEditMode {
                     closeButton.isHidden = false
                 }
@@ -85,6 +105,8 @@ class AnnotationCell: UITableViewCell {
         
         annotation.text = annotationTextView.text!
         annotation.timestamp = timestampFloat!
+        
+        thumbnailImageView.alpha = 1.0
         if isNew {
             delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
         }

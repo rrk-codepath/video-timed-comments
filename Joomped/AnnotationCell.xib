@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -56,14 +56,23 @@
                             <action selector="didTapCloseButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pbp-wX-t86"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IjH-gq-5Y8">
+                        <rect key="frame" x="185.5" y="5" width="48" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="TA1-hq-k6Y"/>
+                            <constraint firstAttribute="height" constant="27" id="gQ7-cj-Gsr"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="bqx-j7-c3R" secondAttribute="trailing" constant="8" id="4ML-Xr-MNy"/>
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="top" secondItem="l65-Is-vBT" secondAttribute="top" id="5L6-7L-u9p"/>
+                    <constraint firstItem="IjH-gq-5Y8" firstAttribute="centerY" secondItem="M2d-6J-4kZ" secondAttribute="centerY" id="6A2-8y-Ctg"/>
                     <constraint firstAttribute="trailing" secondItem="Stt-xu-hpA" secondAttribute="trailing" constant="8" id="8h3-6L-jRe"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l65-Is-vBT" secondAttribute="bottom" constant="4" id="9mk-LC-PD6"/>
                     <constraint firstItem="M2d-6J-4kZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Adv-aA-nCI"/>
                     <constraint firstItem="bqx-j7-c3R" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="BP2-Ra-OyG"/>
+                    <constraint firstItem="IjH-gq-5Y8" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="E5M-fu-T1f"/>
                     <constraint firstItem="l65-Is-vBT" firstAttribute="leading" secondItem="M2d-6J-4kZ" secondAttribute="leading" id="EVh-Wf-kbb"/>
                     <constraint firstItem="l65-Is-vBT" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="GEy-hJ-OwO"/>
                     <constraint firstItem="M2d-6J-4kZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Ka6-OI-mlp"/>
@@ -81,6 +90,7 @@
                 <outlet property="annotationTextView" destination="bqx-j7-c3R" id="CzB-P9-Wzw"/>
                 <outlet property="closeButton" destination="Stt-xu-hpA" id="1os-SE-hO3"/>
                 <outlet property="saveButton" destination="ZYk-u9-Qn8" id="Wr2-OU-UJo"/>
+                <outlet property="thumbnailImageView" destination="IjH-gq-5Y8" id="nXj-QU-ST0"/>
                 <outlet property="timestampLabel" destination="M2d-6J-4kZ" id="Uea-dH-ayC"/>
             </connections>
             <point key="canvasLocation" x="138.5" y="87.5"/>

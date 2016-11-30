@@ -98,11 +98,12 @@ class JoompedViewController: UIViewController {
             "rel": 0,
             "showinfo": 0,
             "fs": 0,
-            "iv_load_policy": 3
+            "iv_load_policy": 3,
+            "modestbranding": 1
         ]
         
-        playerViewHeightConstraint.constant = playerView.frame.width * 9.0 / 16.0
-        
+        playerViewHeightConstraint.constant = UIScreen.main.bounds.width * 9.0 / 16.0
+
         self.automaticallyAdjustsScrollViewInsets = false
         seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
@@ -396,6 +397,23 @@ class JoompedViewController: UIViewController {
         updateSeekBarLine(percentage: Float(percentageOfVideo))
         playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
     }
+    
+    fileprivate func imageFromPlayerView() -> UIImage? {
+        let image = _UICreateScreenUIImage()
+        guard let cgImage = image.cgImage else {
+            return nil
+        }
+        let scale = CGFloat(cgImage.height) / CGFloat(image.size.height)
+        let statusBarHeight = Int(UIApplication.shared.statusBarFrame.height * scale)
+        let navBarHeight = Int((navigationController?.navigationBar.frame.height ?? 0) * scale)
+        let playerHeight = Int(playerView.frame.height * scale)
+        let imageRef = cgImage.cropping(to: CGRect(x: 0, y: navBarHeight + statusBarHeight, width: cgImage.width, height: playerHeight))
+        print("\(image.cgImage!.width) \(image.cgImage!.height)")
+        return UIImage(cgImage: imageRef!).scaleImage(toSize: CGSize(width: 80, height: 45))
+    }
+    
+    @_silgen_name("_UICreateScreenUIImage")
+    private func _UICreateScreenUIImage() -> UIImage
 }
 
 
@@ -450,6 +468,10 @@ extension JoompedViewController: UITableViewDelegate {
             cell.annotation = annotation
             cell.isNew = true
             cell.annotationTextView.becomeFirstResponder()
+            
+            if let image = imageFromPlayerView() {
+                cell.thumbnail = image
+            }
         } else if indexPath.section == 0 {
             let annotationCell = tableView.cellForRow(at: indexPath) as! AnnotationCell
             currentAnnotationCell = annotationCell
@@ -491,6 +513,11 @@ extension JoompedViewController: AnnotationCellDelegate {
         }
         tableView?.reloadData()
         updateAnnotationInSeekBar()
+        
+        if let thumbnail = annotationCell.thumbnail,
+            let data = UIImageJPEGRepresentation(thumbnail, 0.5) {
+            newAnnotation.thumbnail = PFFile(data: data)
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             let numberOfSections = self.tableView.numberOfSections

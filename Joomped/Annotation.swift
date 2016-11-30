@@ -42,6 +42,15 @@ final class Annotation: PFObject, PFSubclassing {
         }
     }
     
+    var thumbnail: PFFile? {
+        get {
+            return super["thumbnail"] as? PFFile
+        }
+        set {
+            super["thumbnail"] = newValue
+        }
+    }
+    
     init(text: String, timestamp: Float) {
         super.init()
         self.text = text
