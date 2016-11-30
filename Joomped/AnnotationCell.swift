@@ -21,6 +21,7 @@ class AnnotationCell: UITableViewCell {
     @IBOutlet weak var annotationLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
     weak var delegate: AnnotationCellDelegate?
+    var isNew: Bool = false
     
     var timestampFloat: Float?
     
@@ -84,7 +85,9 @@ class AnnotationCell: UITableViewCell {
         
         annotation.text = annotationTextView.text!
         annotation.timestamp = timestampFloat!
-        delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
+        if isNew {
+            delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
+        }
     }
 }
 

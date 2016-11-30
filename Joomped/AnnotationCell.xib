@@ -33,6 +33,7 @@
                     </textView>
                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYk-u9-Qn8">
                         <rect key="frame" x="377" y="39" width="34" height="30"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <state key="normal" title="Save"/>
                         <connections>
                             <action selector="didTapSaveButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZO8-o6-aGd"/>
