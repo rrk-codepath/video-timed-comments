@@ -347,8 +347,7 @@ extension HomeViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
-            //Perform selector needed to resign first responder
-            searchBar.performSelector(onMainThread: #selector(resignFirstResponder), with: nil, waitUntilDone: false)
+            searchBar.resignFirstResponder()
             search()
         }
     }
