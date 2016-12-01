@@ -215,6 +215,7 @@ class JoompedViewController: UIViewController {
         newJoomped.annotations = annotations
         newJoomped.user = user
         newJoomped.video = video
+        newJoomped.views = joomped?.views ?? 0
         newJoomped.saveInBackground { (success: Bool, error: Error?) in
             if let error = error {
                 print("error saving \(error.localizedDescription)")

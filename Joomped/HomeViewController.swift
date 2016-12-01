@@ -39,8 +39,8 @@ class HomeViewController: UIViewController {
         
         joompedTableView.dataSource = self
         joompedTableView.delegate = self
-        joompedTableView.rowHeight = UITableViewAutomaticDimension
-        joompedTableView.estimatedRowHeight = 50
+        joompedTableView.estimatedRowHeight = 114
+        joompedTableView.rowHeight = 114
         joompedTableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         joompedTableView.isHidden = true
         tableViewActivityIndicator.startAnimating()
