@@ -74,6 +74,8 @@ class AnnotationCell: UITableViewCell {
         // Initialization code
         annotationTextView.delegate = self
         annotationTextView.textContainer.lineFragmentPadding = 0
+        annotationTextView.text = "Add a thought..."
+        annotationTextView.textColor = UIColor.lightGray
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -113,5 +115,19 @@ class AnnotationCell: UITableViewCell {
 extension AnnotationCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         saveButton.isEnabled = annotationTextView.text!.characters.count > 0
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.darkGray
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Add a thought.."
+            textView.textColor = UIColor.lightGray
+        }
     }
 }

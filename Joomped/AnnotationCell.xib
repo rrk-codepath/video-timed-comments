@@ -25,9 +25,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqx-j7-c3R">
-                        <rect key="frame" x="8" y="39" width="361" height="41"/>
+                        <rect key="frame" x="8" y="39" width="361" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="NhV-sD-ZFQ"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
@@ -80,7 +83,6 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bqx-j7-c3R" secondAttribute="bottom" constant="4" id="flh-hx-ECh"/>
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="l65-Is-vBT" secondAttribute="trailing" constant="8" id="g8c-7y-MZ2"/>
                     <constraint firstItem="bqx-j7-c3R" firstAttribute="leading" secondItem="l65-Is-vBT" secondAttribute="leading" id="hwj-9M-IT3"/>
-                    <constraint firstItem="bqx-j7-c3R" firstAttribute="height" secondItem="l65-Is-vBT" secondAttribute="height" id="k9h-bo-OWR"/>
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="top" secondItem="bqx-j7-c3R" secondAttribute="top" id="lJs-Zu-0JW"/>
                     <constraint firstItem="Stt-xu-hpA" firstAttribute="centerY" secondItem="M2d-6J-4kZ" secondAttribute="centerY" id="uQC-da-ea7"/>
                 </constraints>
