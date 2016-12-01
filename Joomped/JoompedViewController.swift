@@ -283,21 +283,15 @@ class JoompedViewController: UIViewController {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
+        if let userInfo = notification.userInfo {
+            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
+                tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight + 8, 0)
             }
         }
-        
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
+        UIView.animate(withDuration: 0.2, animations: { self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0) })
     }
     
     func orientationRotated(notification: NSNotification) {
@@ -462,24 +456,30 @@ extension JoompedViewController: UITableViewDataSource {
 extension JoompedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
+        if isEditMode {
+            self.playerView.pauseVideo()
+            cell.annotationTextView.becomeFirstResponder()
+        }
+        
         if indexPath.section == 1 {
             let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
-            let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
             cell.annotation = annotation
             cell.isNew = true
             cell.annotationTextView.becomeFirstResponder()
-            
             if let image = imageFromPlayerView() {
                 cell.thumbnail = image
             }
         } else if indexPath.section == 0 {
-            let annotationCell = tableView.cellForRow(at: indexPath) as! AnnotationCell
-            currentAnnotationCell = annotationCell
+            currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
-                annotationCell.backgroundColor = UIColor.rrk_primaryColor
+                cell.backgroundColor = UIColor.rrk_primaryColor
             })
-            tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-            if let timestamp = annotationCell.annotation?.timestamp {
+            if !isEditMode {
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+            }
+            if let timestamp = cell.annotation?.timestamp {
                 self.playerView?.seek(toSeconds: timestamp, allowSeekAhead: true)
                 let percentage = timestamp / (duration ?? Float(playerView.duration()))
                 updateSeekBarLine(percentage: percentage)
@@ -494,6 +494,11 @@ extension JoompedViewController: UITableViewDelegate {
 extension JoompedViewController: AnnotationCellDelegate {
     
     func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation) {
+        self.playerView.playVideo()
+        //Edit annotation
+        if !annotationCell.isNew {
+            return
+        }
         if annotations.count == 0 || newAnnotation.timestamp > annotations.last!.timestamp {
             // insert at end if no annotations, or the new annotation has the largest timestamp
             annotations.append(newAnnotation)

@@ -52,7 +52,6 @@ class AnnotationCell: UITableViewCell {
                 timestampFloat = annotation.timestamp
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
-                annotationTextView.isUserInteractionEnabled = true
                 if let thumbnail = annotation.thumbnail {
                     thumbnail.getDataInBackground(block: { (data: Data?, error: Error?) in
                         if error == nil,
@@ -107,9 +106,7 @@ class AnnotationCell: UITableViewCell {
         annotation.timestamp = timestampFloat!
         
         thumbnailImageView.alpha = 1.0
-        if isNew {
-            delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
-        }
+        delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
     }
 }
 
