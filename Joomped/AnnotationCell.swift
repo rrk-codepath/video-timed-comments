@@ -52,16 +52,6 @@ class AnnotationCell: UITableViewCell {
                 timestampFloat = annotation.timestamp
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
-                if let thumbnail = annotation.thumbnail {
-                    thumbnail.getDataInBackground(block: { (data: Data?, error: Error?) in
-                        if error == nil,
-                            let data = data,
-                            let thumbnail = UIImage(data: data) {
-                            self.thumbnailImageView.image = thumbnail
-                        }
-                    })
-                }
-                
                 if isEditMode {
                     closeButton.isHidden = false
                 }

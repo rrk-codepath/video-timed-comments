@@ -64,6 +64,8 @@ class JoompedViewController: UIViewController {
     fileprivate var isSeekBarAnnotated = false
     fileprivate var duration: Float?
     fileprivate var seekBarLine: UIView?
+    
+    private var youtubeStoryboard: YoutubeStoryboard!
     private var fullscreen = false
 
     var isEditMode = false {
@@ -122,11 +124,15 @@ class JoompedViewController: UIViewController {
             publishLabel.text = joomped.createdAt?.timeFormatted
             publishLabel.isHidden = false
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
+            
+            youtubeStoryboard = YoutubeStoryboard(videoId: joomped.video.youtubeId)
         } else if let youtubeVideo = youtubeVideo {
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
             playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
             joompedUploaderButton.isHidden = true
+            
+            youtubeStoryboard = YoutubeStoryboard(videoId: youtubeVideo.id)
         }
         annotations.forEach { (annotation) in
             self.annotationsDict[floorf(annotation.timestamp)] = annotation
@@ -392,22 +398,21 @@ class JoompedViewController: UIViewController {
         playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
     }
     
-    fileprivate func imageFromPlayerView() -> UIImage? {
-        let image = _UICreateScreenUIImage()
-        guard let cgImage = image.cgImage else {
-            return nil
+    fileprivate func displayThumbnail(forCell cell: AnnotationCell) {
+        guard let timestamp = cell.annotation?.timestamp, let duration = duration else {
+            return
         }
-        let scale = CGFloat(cgImage.height) / CGFloat(image.size.height)
-        let statusBarHeight = Int(UIApplication.shared.statusBarFrame.height * scale)
-        let navBarHeight = Int((navigationController?.navigationBar.frame.height ?? 0) * scale)
-        let playerHeight = Int(playerView.frame.height * scale)
-        let imageRef = cgImage.cropping(to: CGRect(x: 0, y: navBarHeight + statusBarHeight, width: cgImage.width, height: playerHeight))
-        print("\(image.cgImage!.width) \(image.cgImage!.height)")
-        return UIImage(cgImage: imageRef!).scaleImage(toSize: CGSize(width: 80, height: 45))
+        youtubeStoryboard.getThumbnail(progress: timestamp / duration, callback: { (url: URL, location: YoutubeStoryboard.Location) in
+            cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
+                let widthScale = cell.thumbnailImageView.frame.width / image.size.width
+                let heightScale = cell.thumbnailImageView.frame.height / image.size.height
+                let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
+                let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
+                cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
+                cell.thumbnailImageView.image = image
+            }, failure: nil)
+        })
     }
-    
-    @_silgen_name("_UICreateScreenUIImage")
-    private func _UICreateScreenUIImage() -> UIImage
 }
 
 
@@ -445,6 +450,7 @@ extension JoompedViewController: UITableViewDataSource {
             let annotation = annotations[indexPath.row]
             cell.annotation = annotation
             cell.isEditMode = isEditMode
+            displayThumbnail(forCell: cell)
         } else if indexPath.section == 1 && isEditMode {
             cell.annotation = nil
             cell.timestampLabel.isHidden = true
@@ -468,9 +474,7 @@ extension JoompedViewController: UITableViewDelegate {
             cell.annotation = annotation
             cell.isNew = true
             cell.annotationTextView.becomeFirstResponder()
-            if let image = imageFromPlayerView() {
-                cell.thumbnail = image
-            }
+            displayThumbnail(forCell: cell)
         } else if indexPath.section == 0 {
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
@@ -519,11 +523,6 @@ extension JoompedViewController: AnnotationCellDelegate {
         tableView?.reloadData()
         updateAnnotationInSeekBar()
         
-        if let thumbnail = annotationCell.thumbnail,
-            let data = UIImageJPEGRepresentation(thumbnail, 0.5) {
-            newAnnotation.thumbnail = PFFile(data: data)
-        }
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             let numberOfSections = self.tableView.numberOfSections
             let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections - 1)
@@ -547,6 +546,9 @@ extension JoompedViewController: YTPlayerViewDelegate {
         guard let videoId = joomped?.video.youtubeId ?? self.youtubeVideo?.id else {
             return
         }
+        
+        duration = Float(playerView.duration())
+        
         playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
         playerView.playVideo()
         if !isSeekBarAnnotated {
