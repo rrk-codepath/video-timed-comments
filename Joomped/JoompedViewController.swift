@@ -124,6 +124,8 @@ class JoompedViewController: UIViewController {
             publishLabel.text = joomped.createdAt?.timeFormatted
             publishLabel.isHidden = false
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
+            joomped.views += 1
+            joomped.saveInBackground()
             
             youtubeStoryboard = YoutubeStoryboard(videoId: joomped.video.youtubeId)
         } else if let youtubeVideo = youtubeVideo {
