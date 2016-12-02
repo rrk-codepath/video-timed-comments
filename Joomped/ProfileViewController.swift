@@ -10,6 +10,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var emptyStateLabel: UILabel!
+    @IBOutlet weak var viewCountLabel: UILabel!
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
@@ -68,11 +69,17 @@ class ProfileViewController: UIViewController {
                 self.joompedTableView.reloadData()
             }
             
-            var countString = "\(self.joomped.count) annotation sets"
+            var joompedCountString = "\(self.joomped.count) annotation videos"
             if self.joomped.count == 1 {
-                countString = countString.substring(to: countString.index(before: countString.endIndex))
+                joompedCountString = joompedCountString.substring(to: joompedCountString.index(before: joompedCountString.endIndex))
             }
-            self.annotatedVideosLabel.text = countString
+            self.annotatedVideosLabel.text = joompedCountString
+            
+            let viewCount = self.joomped.reduce(0) {
+                $0 + $1.views
+            }
+            let viewCountString = viewCount == 1 ? "view" : "views"
+            self.viewCountLabel.text = "\(viewCount) \(viewCountString)"
         }
     }
     
