@@ -240,17 +240,36 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C94-pw-Nkm">
-                                <rect key="frame" x="0.0" y="86" width="375" height="581"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="561"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypt-KC-ffg">
-                                <rect key="frame" x="121" y="99" width="17.5" height="21"/>
+                                <rect key="frame" x="183" y="55" width="17.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 views" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HjQ-Mp-VXM">
-                                <rect key="frame" x="138.5" y="102" width="43" height="15"/>
+                                <rect key="frame" x="200.5" y="58" width="43" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karma received:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aav-RF-aVn">
+                                <rect key="frame" x="73" y="81" width="92" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="NcS-rm-4j1">
+                                <rect key="frame" x="175" y="76.5" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="IsN-Qd-Ybg"/>
+                                    <constraint firstAttribute="height" constant="24" id="MRM-iM-igL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPs-fa-FdE">
+                                <rect key="frame" x="209" y="81" width="8" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -261,6 +280,8 @@
                             <constraint firstItem="lNl-Ou-DRk" firstAttribute="leading" secondItem="WX5-y4-tw1" secondAttribute="leading" id="3dv-o4-0IA"/>
                             <constraint firstItem="ypt-KC-ffg" firstAttribute="centerY" secondItem="lNl-Ou-DRk" secondAttribute="centerY" id="63a-CE-qQ6"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="WX5-y4-tw1" secondAttribute="trailing" id="8lF-SC-zXv"/>
+                            <constraint firstItem="Aav-RF-aVn" firstAttribute="leading" secondItem="lNl-Ou-DRk" secondAttribute="leading" id="9Qh-SI-eMa"/>
+                            <constraint firstItem="NcS-rm-4j1" firstAttribute="centerY" secondItem="Aav-RF-aVn" secondAttribute="centerY" id="AOs-uF-Oz1"/>
                             <constraint firstItem="HjQ-Mp-VXM" firstAttribute="leading" secondItem="ypt-KC-ffg" secondAttribute="trailing" id="Hde-Jd-UMW"/>
                             <constraint firstItem="kap-mj-VoZ" firstAttribute="centerX" secondItem="cdT-az-TNW" secondAttribute="centerX" id="K5l-hx-UKy"/>
                             <constraint firstItem="kap-mj-VoZ" firstAttribute="centerY" secondItem="cdT-az-TNW" secondAttribute="centerY" id="LFU-yM-Uva"/>
@@ -272,9 +293,13 @@
                             <constraint firstItem="lNl-Ou-DRk" firstAttribute="top" secondItem="WX5-y4-tw1" secondAttribute="bottom" id="d9Z-XW-oRB"/>
                             <constraint firstItem="WX5-y4-tw1" firstAttribute="leading" secondItem="1i3-Q7-ZC2" secondAttribute="trailing" constant="15" id="hAT-8V-d7E"/>
                             <constraint firstItem="l8S-mZ-Tdn" firstAttribute="top" secondItem="C94-pw-Nkm" secondAttribute="bottom" id="hyM-FZ-zXW"/>
-                            <constraint firstItem="C94-pw-Nkm" firstAttribute="top" secondItem="1i3-Q7-ZC2" secondAttribute="bottom" constant="8" id="j4q-5a-ZeW"/>
+                            <constraint firstItem="C94-pw-Nkm" firstAttribute="top" secondItem="1i3-Q7-ZC2" secondAttribute="bottom" constant="28" id="j4q-5a-ZeW"/>
+                            <constraint firstItem="Aav-RF-aVn" firstAttribute="top" secondItem="lNl-Ou-DRk" secondAttribute="bottom" constant="8" id="k9t-zs-DRF"/>
                             <constraint firstItem="ypt-KC-ffg" firstAttribute="leading" secondItem="lNl-Ou-DRk" secondAttribute="trailing" id="o9m-0N-I1k"/>
+                            <constraint firstItem="IPs-fa-FdE" firstAttribute="centerY" secondItem="Aav-RF-aVn" secondAttribute="centerY" id="pJM-nZ-k5X"/>
                             <constraint firstAttribute="trailing" secondItem="C94-pw-Nkm" secondAttribute="trailing" id="rfG-yb-YYv"/>
+                            <constraint firstItem="NcS-rm-4j1" firstAttribute="leading" secondItem="Aav-RF-aVn" secondAttribute="trailing" constant="10" id="w3H-92-b2R"/>
+                            <constraint firstItem="IPs-fa-FdE" firstAttribute="leading" secondItem="NcS-rm-4j1" secondAttribute="trailing" constant="10" id="z9C-LL-wUF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="vJf-b3-nqO">
@@ -289,6 +314,7 @@
                         <outlet property="displayNameLabel" destination="WX5-y4-tw1" id="Boz-ty-M17"/>
                         <outlet property="emptyStateLabel" destination="kap-mj-VoZ" id="oXd-7E-X86"/>
                         <outlet property="joompedTableView" destination="C94-pw-Nkm" id="mUi-Mi-gf7"/>
+                        <outlet property="karmaCountLabel" destination="IPs-fa-FdE" id="DmD-eq-rnT"/>
                         <outlet property="profileImageView" destination="1i3-Q7-ZC2" id="ehH-gS-0lS"/>
                         <outlet property="viewCountLabel" destination="HjQ-Mp-VXM" id="7os-yl-7xx"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="LogoutSegue" customClass="ReplaceStoryboardSegue" customModule="Joomped" customModuleProvider="target" id="4ea-dR-8oO"/>
@@ -563,7 +589,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.68235294120000001" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -586,12 +612,12 @@
     <resources>
         <image name="Full-Screen" width="25" height="25"/>
         <image name="Pause" width="25" height="25"/>
-        <image name="heart" width="32" height="32"/>
+        <image name="heart" width="32" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XD9-iG-gfL"/>
         <segue reference="Dg3-WV-wJf"/>
-        <segue reference="9wy-6B-93j"/>
+        <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

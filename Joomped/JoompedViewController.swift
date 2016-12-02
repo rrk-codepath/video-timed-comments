@@ -125,9 +125,9 @@ class JoompedViewController: UIViewController {
             if let user = PFUser.current() as? User {
                 if ParseUtility.contains(objects: user.gaveKarma, element: joomped) {
                     print("user has liked")
-                    likeButton.imageView?.backgroundColor = UIColor.red
+                    likeButton.imageView?.tintColor = UIColor.red
                 } else {
-                    likeButton.imageView?.backgroundColor = UIColor.clear
+                    likeButton.imageView?.tintColor = UIColor.black
                 }
             }
             duration = Float(joomped.video.length)
@@ -269,7 +269,7 @@ class JoompedViewController: UIViewController {
             // unlike
             user.gaveKarma.remove(at: index)
             newKarmaCount = joomped.karma! - 1
-            backgroundColor = UIColor.clear
+            backgroundColor = UIColor.black
         } else {
             // like
             user.gaveKarma.append(joomped)
@@ -278,7 +278,7 @@ class JoompedViewController: UIViewController {
         }
         joomped.karma = newKarmaCount
         karmaCount.text = String(newKarmaCount)
-        likeButton.imageView?.backgroundColor = backgroundColor
+        likeButton.imageView?.tintColor = backgroundColor
 //        likeButton.backgroundColor = backgroundColor
         likeButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         UIView.animate(
