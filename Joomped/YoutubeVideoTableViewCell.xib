@@ -44,8 +44,17 @@
                         <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGa-gd-jgc">
+                        <rect key="frame" x="105.5" y="85" width="26.5" height="15"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="YGa-gd-jgc" firstAttribute="trailing" secondItem="XjD-7l-q3M" secondAttribute="trailing" constant="-4" id="6ri-bK-nOf"/>
+                    <constraint firstItem="YGa-gd-jgc" firstAttribute="bottom" secondItem="XjD-7l-q3M" secondAttribute="bottom" constant="-4" id="KMd-UI-iRK"/>
                     <constraint firstAttribute="topMargin" secondItem="XjD-7l-q3M" secondAttribute="top" id="LCI-Ta-jSk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0yE-dQ-Ay5" secondAttribute="trailing" id="OBx-PC-5xX"/>
                     <constraint firstItem="zPi-Dm-dfq" firstAttribute="leading" secondItem="XjD-7l-q3M" secondAttribute="trailing" constant="8" id="T97-3c-CDS"/>
@@ -64,6 +73,7 @@
                 <outlet property="authorLabel" destination="FcP-hS-f40" id="ouM-fF-eaQ"/>
                 <outlet property="timestampLabel" destination="0yE-dQ-Ay5" id="hQm-Sg-FhQ"/>
                 <outlet property="videoImageView" destination="XjD-7l-q3M" id="fic-88-u6o"/>
+                <outlet property="videoLengthLabel" destination="YGa-gd-jgc" id="ca2-9x-CVS"/>
                 <outlet property="videoTitleLabel" destination="zPi-Dm-dfq" id="Iq6-yt-CHB"/>
             </connections>
             <point key="canvasLocation" x="71" y="60.5"/>

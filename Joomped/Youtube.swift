@@ -20,7 +20,7 @@ final class Youtube {
         request(
             path: "videos",
             parameters: [
-                "part": "id,snippet,statistics" as AnyObject,
+                "part": "id,snippet,statistics,contentDetails" as AnyObject,
                 "id": videoIdsString as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
@@ -47,7 +47,7 @@ final class Youtube {
         userRequest(
             path: "videos",
             parameters: [
-                "part": "id,snippet,status" as AnyObject,
+                "part": "id,snippet,status,contentDetails" as AnyObject,
                 "myRating": "like" as AnyObject,
                 "maxResults": 50 as AnyObject
             ],
@@ -113,12 +113,12 @@ final class Youtube {
                     return
                 }
                 
-                let videos = items.map({ (d: Dictionary<String, AnyObject>) -> YoutubeVideo in
-                    return YoutubeVideo(dictionary: d)
+                let videoIds = items.map({ (d: Dictionary<String, AnyObject>) -> String in
+                    return YoutubeVideo(dictionary: d).id
                 })
                 
-                success(videos)
-        },
+                self.videoIds(videoIds: videoIds, success: success, failure: failure)
+            },
             failure: failure
         )
     }
@@ -188,18 +188,22 @@ extension YoutubeVideo {
         if let statusDictionary = d["status"] as? Dictionary<String, AnyObject> {
             status = YoutubeStatus(dictionary: statusDictionary)
         }
+        var details: YoutubeVideoDetails? = nil
+        if let detailsDict = d["contentDetails"] as? Dictionary<String, AnyObject> {
+            details = YoutubeVideoDetails(dictionary: detailsDict)
+        }
         
-        self.init(id: videoId, snippet: snippet, statistics: statistics, status: status)
+        self.init(id: videoId, snippet: snippet, statistics: statistics, status: status, details: details)
     }
 }
 
 extension YoutubeStatistics {
     convenience init(dictionary d: Dictionary<String, AnyObject>) {
-        let viewCount = Int(d["viewCount"] as! String)!
-        let likeCount = Int(d["likeCount"] as! String)!
-        let dislikeCount = Int(d["dislikeCount"] as! String)!
-        let favoriteCount = Int(d["favoriteCount"] as! String)!
-        let commentCount = Int(d["commentCount"] as! String)!
+        let viewCount = Int(d["viewCount"] as? String ?? "0") ?? 0
+        let likeCount = Int(d["likeCount"] as? String ?? "0") ?? 0
+        let dislikeCount = Int(d["dislikeCount"] as? String ?? "0") ?? 0
+        let favoriteCount = Int(d["favoriteCount"] as? String ?? "0") ?? 0
+        let commentCount = Int(d["commentCount"] as? String ?? "0") ?? 0
         self.init(viewCount: viewCount, likeCount: likeCount, dislikeCount: dislikeCount, favoriteCount: favoriteCount, commentCount: commentCount)
     }
 }
@@ -251,36 +255,35 @@ extension YoutubeStatus {
     }
 }
 
-/*extension YoutubeVideoDetails {
+extension YoutubeVideoDetails {
     
     convenience init(dictionary d: Dictionary<String, AnyObject>) {
         var duration: TimeInterval = 0
         if let durationString = d["duration"] as? String {
-            var seconds = 0
+            let parts = Array(durationString.split(byRegex: "PT|H|M|S|DT")
+                .map({(component: String) -> Int? in
+                    return Int(component)
+                })
+                .filter({(component: Int?) -> Bool in component != nil})
+                .map({(component: Int?) -> Int in component!})
+                .reversed())
+            
             var totalSeconds = 0
-            var totalTime = ""
-            for c in durationString.characters.reversed() {
-                if let time = Int(String(c)) {
-                    totalTime = "\(time)\(totalTime)"
-                } else if let totalTimeAmount = Int(totalTime) {
-                    totalSeconds += totalTimeAmount * seconds
-                    totalTime = ""
-                }
-                switch c {
-                    case "S":
-                    seconds = 1
-                    break
-                    case "M":
-                    seconds = 60
-                    break
-                case "H":
-                    seconds = 3600
-                    break
+            let length = parts.count
+            for i in 0...length - 1 {
+                switch i {
+                case 0:
+                    totalSeconds += parts[i]
+                case 1:
+                    totalSeconds += parts[i] * 60
+                case 2:
+                    totalSeconds += parts[i] * 3600
+                case 3:
+                    totalSeconds += parts[i] * 86400
                 default:
-                    seconds = 0
+                    continue
                 }
             }
-            
             duration = TimeInterval(totalSeconds)
         }
         
@@ -288,7 +291,21 @@ extension YoutubeStatus {
         let definition = d["definition"] as? String ?? ""
         self.init(duration: duration, definition: definition, dimension: dimension)
     }
-}*/
+}
+
+fileprivate extension String {
+    
+    func split(byRegex regex: String) -> [String] {
+        let regEx = try! NSRegularExpression(pattern: regex, options: NSRegularExpression.Options())
+        let stop = "|||||"
+        let modifiedString = regEx.stringByReplacingMatches(
+            in: self, options: NSRegularExpression.MatchingOptions(),
+            range: NSMakeRange(0, characters.count),
+            withTemplate:stop
+        )
+        return modifiedString.components(separatedBy: stop)
+    }
+}
 
 enum YoutubeError: Error {
     case failed
