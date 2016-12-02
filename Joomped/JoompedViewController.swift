@@ -29,7 +29,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var fullscreenButton: UIButton!
     @IBOutlet weak var karmaLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var karmaCount: UILabel!
+    @IBOutlet weak var karmaCountLabel: UILabel!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -116,15 +116,14 @@ class JoompedViewController: UIViewController {
         if let joomped = joomped {
             likeButton.isHidden = false
             karmaLabel.isHidden = false
-            karmaCount.isHidden = false
+            karmaCountLabel.isHidden = false
             if let karma = joomped.karma {
-                karmaCount.text = String(karma)
+                karmaCountLabel.text = String(karma)
             } else {
-                karmaCount.text = "0"
+                karmaCountLabel.text = "0"
             }
             if let user = PFUser.current() as? User {
                 if ParseUtility.contains(objects: user.gaveKarma, element: joomped) {
-                    print("user has liked")
                     likeButton.imageView?.tintColor = UIColor.red
                 } else {
                     likeButton.imageView?.tintColor = UIColor.black
@@ -277,7 +276,7 @@ class JoompedViewController: UIViewController {
             backgroundColor = UIColor.red
         }
         joomped.karma = newKarmaCount
-        karmaCount.text = String(newKarmaCount)
+        karmaCountLabel.text = String(newKarmaCount)
         likeButton.imageView?.tintColor = backgroundColor
 //        likeButton.backgroundColor = backgroundColor
         likeButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)

@@ -129,10 +129,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LKY-fa-w5E">
-                                <rect key="frame" x="178" y="116" width="20" height="20"/>
+                                <rect key="frame" x="178" y="72" width="20" height="20"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-Lc-nyY">
-                                <rect key="frame" x="0.0" y="63" width="375" height="604"/>
+                                <rect key="frame" x="0.0" y="19" width="375" height="648"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Find annotations" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
@@ -143,7 +143,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3cv-Od-WDP">
-                                <rect key="frame" x="40" y="72" width="295" height="30"/>
+                                <rect key="frame" x="40" y="28" width="295" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="5Op-XE-7lW"/>
@@ -430,7 +430,7 @@
                                         <rect key="frame" x="0.0" y="172" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSu-gK-gNr" id="yNc-LW-NPe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -554,7 +554,7 @@
                     <connections>
                         <outlet property="fullscreenButton" destination="kAJ-oU-ed4" id="cDI-it-3L6"/>
                         <outlet property="joompedUploaderButton" destination="SwJ-aX-sdU" id="jKo-Pd-adj"/>
-                        <outlet property="karmaCount" destination="fOa-EF-f61" id="C6R-5c-cB5"/>
+                        <outlet property="karmaCountLabel" destination="fOa-EF-f61" id="rEg-ad-198"/>
                         <outlet property="karmaLabel" destination="5yG-l5-Xfr" id="tJO-Pu-WHb"/>
                         <outlet property="likeButton" destination="vGy-6t-sgV" id="9qS-tL-wJt"/>
                         <outlet property="liveAnnotationBlurView" destination="IvF-wf-6cg" id="qb0-ZZ-UYN"/>
