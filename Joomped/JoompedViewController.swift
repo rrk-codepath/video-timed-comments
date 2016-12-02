@@ -27,6 +27,9 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var seekBarToPlayerViewSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var fullscreenButton: UIButton!
+    @IBOutlet weak var karmaLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var karmaCount: UILabel!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -111,6 +114,22 @@ class JoompedViewController: UIViewController {
         seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
         if let joomped = joomped {
+            likeButton.isHidden = false
+            karmaLabel.isHidden = false
+            karmaCount.isHidden = false
+            if let karma = joomped.karma {
+                karmaCount.text = String(karma)
+            } else {
+                karmaCount.text = "0"
+            }
+            if let user = PFUser.current() as? User {
+                if ParseUtility.contains(objects: user.gaveKarma, element: joomped) {
+                    print("user has liked")
+                    likeButton.imageView?.tintColor = UIColor.red
+                } else {
+                    likeButton.imageView?.tintColor = UIColor.black
+                }
+            }
             duration = Float(joomped.video.length)
             annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
@@ -168,7 +187,7 @@ class JoompedViewController: UIViewController {
         tableView.layoutIfNeeded()
         // This is a hack in order to adjust the header height according to the contents
         // Source: http://roadfiresoftware.com/2015/05/how-to-size-a-table-header-view-using-auto-layout-in-interface-builder/
-        let height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 30
+        let height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 70
         var frame = headerView.frame
         frame.size.height = height
         headerView.frame = frame
@@ -230,6 +249,51 @@ class JoompedViewController: UIViewController {
                 self.isEditMode = false
             }
         }
+    }
+    
+    @IBAction func didTapLikeButton(_ sender: Any) {
+        guard let user = PFUser.current() as? User else {
+            print("failed to get User object")
+            return
+        }
+        guard let joomped = joomped else {
+            return
+        }
+        if joomped.karma == nil {
+            joomped.karma = 0
+        }
+        var newKarmaCount: Int
+        var backgroundColor: UIColor
+        let index = ParseUtility.indexOf(objects: user.gaveKarma, element: joomped)
+        if index != -1 {
+            // unlike
+            user.gaveKarma.remove(at: index)
+            newKarmaCount = joomped.karma! - 1
+            backgroundColor = UIColor.black
+        } else {
+            // like
+            user.gaveKarma.append(joomped)
+            newKarmaCount = joomped.karma! + 1
+            backgroundColor = UIColor.red
+        }
+        joomped.karma = newKarmaCount
+        karmaCount.text = String(newKarmaCount)
+        likeButton.imageView?.tintColor = backgroundColor
+//        likeButton.backgroundColor = backgroundColor
+        likeButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
+        UIView.animate(
+            withDuration: 2.0,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: .allowUserInteraction,
+            animations: {[weak self] in
+                self?.likeButton.transform = .identity
+            },
+            completion: nil)
+        // animate the button
+        joomped.saveInBackground()
+        user.saveInBackground()
     }
     
     @IBAction func didTapJoompedUser(_ sender: Any) {

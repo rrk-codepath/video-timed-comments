@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var emptyStateLabel: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
+    @IBOutlet weak var karmaCountLabel: UILabel!
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
@@ -80,6 +81,11 @@ class ProfileViewController: UIViewController {
             }
             let viewCountString = viewCount == 1 ? "view" : "views"
             self.viewCountLabel.text = "\(viewCount) \(viewCountString)"
+            
+            let karmaCount = self.joomped.reduce(0) {
+                $0 + ($1.karma ?? 0)
+            }
+            self.karmaCountLabel.text = String(karmaCount)
         }
     }
     
