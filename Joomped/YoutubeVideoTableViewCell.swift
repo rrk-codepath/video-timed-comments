@@ -6,6 +6,7 @@ final class YoutubeVideoTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var videoTitleLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var videoLengthLabel: UILabel!
     
     var youtubeVideo: YoutubeVideo? {
         didSet {
@@ -18,6 +19,13 @@ final class YoutubeVideoTableViewCell: UITableViewCell {
             timestampLabel.text = video.snippet.publishedAt.timeAgoRelative
             if let thumbnailUrl = URL(string: video.snippet.thumbnail.url) {
                 videoImageView.setImageWith(thumbnailUrl)
+            }
+            
+            if let details = video.details {
+                videoLengthLabel.isHidden = false
+                videoLengthLabel.text = Float(details.duration).joompedBeautify()
+            } else {
+                videoLengthLabel.isHidden = true
             }
         }
     }
