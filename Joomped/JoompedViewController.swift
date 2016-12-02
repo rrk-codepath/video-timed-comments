@@ -274,11 +274,11 @@ class JoompedViewController: UIViewController {
             }
             rightBarButtonItems.append(actionButton)
         } else if (joomped?.user.objectId == user.objectId) {
-            navigationItem.title = "Consumption"
+            navigationItem.title = "Joomped"
             rightBarButtonItems.append(actionButton)
             rightBarButtonItems.append(shareButton)
         } else {
-            navigationItem.title = "Consumption"
+            navigationItem.title = "Joomped"
             rightBarButtonItems.append(shareButton)
         }
         navigationItem.rightBarButtonItems = rightBarButtonItems
