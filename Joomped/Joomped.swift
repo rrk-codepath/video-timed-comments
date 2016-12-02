@@ -41,4 +41,13 @@ final class Joomped: PFObject, PFSubclassing {
             super["views"] = newValue
         }
     }
+    
+    var karma: Int? {
+        get {
+            return super["karma"] as? Int
+        }
+        set {
+            super["karma"] = newValue
+        }
+    }
 }

@@ -20,4 +20,13 @@ final class User: PFUser {
             super["imageUrl"] = newValue
         }
     }
+    
+    var gaveKarma: [Joomped] {
+        get {
+            return super["gaveKarma"] as? [Joomped] ?? []
+        }
+        set {
+            super["gaveKarma"] = newValue
+        }
+    }
 }
