@@ -11,6 +11,19 @@ import GoogleSignIn
 import Parse
 
 class HomeViewController: UIViewController {
+    
+    private static let presetTerms = [
+        "The School of Life",
+        "TED Talk",
+        "Wisecrack",
+        "Philosophy Tube",
+        "Draw With Jazza",
+        "BBC Earth",
+        "Gresham College",
+        "Healthcare Triage",
+        "THNKR",
+        "Codepath"
+    ]
 
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -156,21 +169,12 @@ class HomeViewController: UIViewController {
     
     private func searchYoutube(term: String) {
         if term.isEmpty {
-            if youtube.authenticated {
-                youtube.liked(success: { (videos: [YoutubeVideo]) in
-                    self.youtubeVideos = videos
-                    self.reloadTable()
-                }, failure: { (error: Error) in
-                    print("error: \(error.localizedDescription)")
-                })
-            } else {
-                youtube.popular(success: { (videos: [YoutubeVideo]) in
-                    self.youtubeVideos = videos
-                    self.reloadTable()
-                }, failure: { (error: Error) in
-                    print("error: \(error.localizedDescription)")
-                })
-            }
+            youtube.search(term: randomPresetTerm(), success: { (videos: [YoutubeVideo]) in
+                self.youtubeVideos = videos
+                self.reloadTable()
+            }, failure: { (error: Error) in
+                print("error: \(error.localizedDescription)")
+            })
         } else {
             if let youtubeId = extractYoutubeIdFromLink(link: term) {
                 youtube.videoIds(
@@ -189,6 +193,10 @@ class HomeViewController: UIViewController {
                 performYoutubeSearch(term: term)
             }
         }
+    }
+    
+    private func randomPresetTerm() -> String {
+        return HomeViewController.presetTerms[Int(arc4random_uniform(UInt32(HomeViewController.presetTerms.count)))]
     }
     
     func performYoutubeSearch(term: String) {
