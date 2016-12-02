@@ -64,6 +64,7 @@ class JoompedViewController: UIViewController {
     fileprivate var isSeekBarAnnotated = false
     fileprivate var duration: Float?
     fileprivate var seekBarLine: UIView?
+    fileprivate var highlightedRow: Int?
     
     private var youtubeStoryboard: YoutubeStoryboard!
     private var fullscreen = false
@@ -285,6 +286,7 @@ class JoompedViewController: UIViewController {
 
     func setAnnotationLabel() {
         self.liveAnnotationLabel?.text = ""
+        highlightedRow = nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -443,12 +445,10 @@ extension JoompedViewController: UITableViewDataSource {
         cell.delegate = self
         
         if indexPath.section == 0 {
-            if let currentAnnotation = currentAnnotation {
-                if cell.annotation != currentAnnotation {
-                    cell.backgroundColor = UIColor.white
-                } else {
-                    cell.backgroundColor = UIColor.rrk_primaryColor
-                }
+            if highlightedRow == indexPath.row {
+                cell.backgroundColor = UIColor.rrk_primaryColor
+            } else {
+                cell.backgroundColor = UIColor.white
             }
             let annotation = annotations[indexPath.row]
             cell.annotation = annotation
@@ -479,6 +479,7 @@ extension JoompedViewController: UITableViewDelegate {
             cell.annotationTextView.becomeFirstResponder()
             displayThumbnail(forCell: cell)
         } else if indexPath.section == 0 {
+            highlightedRow = indexPath.row
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
                 cell.backgroundColor = UIColor.rrk_primaryColor
@@ -573,11 +574,14 @@ extension JoompedViewController: YTPlayerViewDelegate {
                 if let index = annotations.index(of: annotation) {
                     let indexPath = IndexPath(row: index, section: 0)
                     tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-                    let currentAnnotationCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
-                    UIView.animate(withDuration: 1, animations: {
-                        currentAnnotationCell?.backgroundColor = UIColor.rrk_primaryColor
-                    })
-                    self.currentAnnotationCell = currentAnnotationCell
+                    let currentCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
+                    highlightedRow = indexPath.row
+                    if currentCell?.backgroundColor != UIColor.rrk_primaryColor {
+                        UIView.animate(withDuration: 1, animations: {
+                            currentCell?.backgroundColor = UIColor.rrk_primaryColor
+                        })
+                    }
+                    self.currentAnnotationCell = currentCell
                     unhighlightVisbileCells()
                 }
                 
