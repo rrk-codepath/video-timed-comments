@@ -35,8 +35,8 @@ class ProfileViewController: UIViewController {
         joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.dataSource = self
         joompedTableView.delegate = self
-        joompedTableView.estimatedRowHeight = 50
-        joompedTableView.rowHeight = UITableViewAutomaticDimension
+        joompedTableView.estimatedRowHeight = 114
+        joompedTableView.rowHeight = 114
         joompedTableView.tableFooterView = UIView()
         
         fetchJoomped();

@@ -11,7 +11,7 @@ class JoompedTableViewCell: UITableViewCell {
     @IBOutlet weak var joompedAuthorImageView: UIImageView!
     @IBOutlet weak var videoLengthLabel: UILabel!
     @IBOutlet weak var annotationCountLabel: UILabel!
-    
+    @IBOutlet weak var viewCountLabel: UILabel!
     var joomped: Joomped? {
         didSet {
             guard let joomped = joomped else {
@@ -24,6 +24,8 @@ class JoompedTableViewCell: UITableViewCell {
             videoLengthLabel.text = Float(joomped.video.length).joompedBeautify()
             let jumps = joomped.annotations.count == 1 ? "jump" : "jumps"
             annotationCountLabel.text = "\(joomped.annotations.count) \(jumps)"
+            let views = joomped.views == 1 ? "view" : "views"
+            viewCountLabel.text = "\(joomped.views) \(views)"
             if let joompedUser = joomped.user.displayName {
                 joompedAuthorLabel.text = "\(joompedUser)"
             }
