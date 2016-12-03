@@ -55,6 +55,7 @@ class JoompedViewController: UIViewController {
         }
     }
     var youtubeVideo: YoutubeVideo?
+    //First time creation
     var segueToHomeFlag: Bool {
         get {
             return joomped == nil
@@ -116,9 +117,6 @@ class JoompedViewController: UIViewController {
         seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
         if let joomped = joomped {
-            likeButton.isHidden = false
-            karmaLabel.isHidden = false
-            karmaCountLabel.isHidden = false
             if let karma = joomped.karma {
                 karmaCountLabel.text = String(karma)
             } else {
@@ -155,6 +153,11 @@ class JoompedViewController: UIViewController {
             
             youtubeStoryboard = YoutubeStoryboard(videoId: joomped.video.youtubeId)
         } else if let youtubeVideo = youtubeVideo {
+            likeButton.removeFromSuperview()
+            karmaLabel.removeFromSuperview()
+            publishLabel.removeFromSuperview()
+            numberAnnotationsLabel.removeFromSuperview()
+            karmaCountLabel.removeFromSuperview()
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoTitleLabel.textColor = UIColor.black
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
@@ -194,7 +197,13 @@ class JoompedViewController: UIViewController {
         tableView.layoutIfNeeded()
         // This is a hack in order to adjust the header height according to the contents
         // Source: http://roadfiresoftware.com/2015/05/how-to-size-a-table-header-view-using-auto-layout-in-interface-builder/
-        let height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 70
+        var height: CGFloat
+        //First time creation
+        if segueToHomeFlag {
+            height = videoTitleLabel.frame.height + videoUploaderLabel.frame.height + 20
+        } else {
+            height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 70
+        }
         var frame = headerView.frame
         frame.size.height = height
         headerView.frame = frame

@@ -33,7 +33,7 @@ class AnnotationCell: UITableViewCell {
             annotationTextView.isHidden = !isEditMode
             saveButton.isHidden = !isEditMode
             if isEditMode {
-                annotationTextView.textColor = UIColor.lightGray
+                annotationTextView.textColor = UIColor.darkGray
             }
         }
     }
