@@ -48,17 +48,6 @@
                         <nil key="textColor"/>
                         <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Stt-xu-hpA">
-                        <rect key="frame" x="393" y="10" width="18" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="18" id="8ax-dK-pbv"/>
-                            <constraint firstAttribute="height" constant="18" id="dX1-fv-kC6"/>
-                        </constraints>
-                        <state key="normal" image="close"/>
-                        <connections>
-                            <action selector="didTapCloseButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pbp-wX-t86"/>
-                        </connections>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IjH-gq-5Y8">
                         <rect key="frame" x="185.5" y="5" width="48" height="27"/>
                         <constraints>
@@ -71,7 +60,6 @@
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="bqx-j7-c3R" secondAttribute="trailing" constant="8" id="4ML-Xr-MNy"/>
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="top" secondItem="l65-Is-vBT" secondAttribute="top" id="5L6-7L-u9p"/>
                     <constraint firstItem="IjH-gq-5Y8" firstAttribute="centerY" secondItem="M2d-6J-4kZ" secondAttribute="centerY" id="6A2-8y-Ctg"/>
-                    <constraint firstAttribute="trailing" secondItem="Stt-xu-hpA" secondAttribute="trailing" constant="8" id="8h3-6L-jRe"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l65-Is-vBT" secondAttribute="bottom" constant="4" id="9mk-LC-PD6"/>
                     <constraint firstItem="M2d-6J-4kZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Adv-aA-nCI"/>
                     <constraint firstItem="bqx-j7-c3R" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="BP2-Ra-OyG"/>
@@ -84,13 +72,11 @@
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="leading" secondItem="l65-Is-vBT" secondAttribute="trailing" constant="8" id="g8c-7y-MZ2"/>
                     <constraint firstItem="bqx-j7-c3R" firstAttribute="leading" secondItem="l65-Is-vBT" secondAttribute="leading" id="hwj-9M-IT3"/>
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="top" secondItem="bqx-j7-c3R" secondAttribute="top" id="lJs-Zu-0JW"/>
-                    <constraint firstItem="Stt-xu-hpA" firstAttribute="centerY" secondItem="M2d-6J-4kZ" secondAttribute="centerY" id="uQC-da-ea7"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="annotationLabel" destination="l65-Is-vBT" id="mBK-X9-cx0"/>
                 <outlet property="annotationTextView" destination="bqx-j7-c3R" id="CzB-P9-Wzw"/>
-                <outlet property="closeButton" destination="Stt-xu-hpA" id="1os-SE-hO3"/>
                 <outlet property="saveButton" destination="ZYk-u9-Qn8" id="Wr2-OU-UJo"/>
                 <outlet property="thumbnailImageView" destination="IjH-gq-5Y8" id="nXj-QU-ST0"/>
                 <outlet property="timestampLabel" destination="M2d-6J-4kZ" id="Uea-dH-ayC"/>
@@ -98,7 +84,4 @@
             <point key="canvasLocation" x="138.5" y="87.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="close" width="24" height="24"/>
-    </resources>
 </document>

@@ -503,6 +503,21 @@ extension JoompedViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return isEditMode && indexPath.section == 0 ? true : false
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
+            if let index = annotations.index(of: cell.annotation!) {
+                annotations.remove(at: index)
+                tableView.reloadData()
+                updateAnnotationInSeekBar()
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AnnotationCell") as! AnnotationCell
         cell.delegate = self
@@ -581,7 +596,6 @@ extension JoompedViewController: AnnotationCellDelegate {
                 }
             }
         }
-        annotationCell.closeButton.isHidden = false
         print("Number of annotations: \(annotations.count)")
         annotations.forEach { (annotation) in
             annotationsDict[floorf(annotation.timestamp)] = annotation
@@ -595,14 +609,6 @@ extension JoompedViewController: AnnotationCellDelegate {
             let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections - 1)
             let indexPath = IndexPath(item: numberOfRows - 1, section: numberOfSections - 1)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
-        }
-    }
-    
-    func annotationCell(annotationCell: AnnotationCell, removedAnnotation: Annotation) {
-        if let index = annotations.index(of: removedAnnotation) {
-            annotations.remove(at: index)
-            tableView.reloadData()
-            updateAnnotationInSeekBar()
         }
     }
 }

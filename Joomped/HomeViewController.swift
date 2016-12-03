@@ -74,6 +74,11 @@ class HomeViewController: UIViewController {
         joompedTableView.insertSubview(refreshControl, at: 0)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        joompedTableView.reloadData()
+    }
+    
     @IBAction func onSearchModeChanged(_ sender: UISegmentedControl) {
         searchMode = SearchMode(rawValue: sender.selectedSegmentIndex)!
         searchBar.placeholder = searchMode.text
