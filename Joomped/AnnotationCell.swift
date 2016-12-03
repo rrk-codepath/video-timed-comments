@@ -101,6 +101,7 @@ class AnnotationCell: UITableViewCell {
         
         annotation.text = annotationTextView.text!
         annotation.timestamp = timestampFloat!
+        self.saveButton.isEnabled = false
         
         thumbnailImageView.alpha = 1.0
         delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
