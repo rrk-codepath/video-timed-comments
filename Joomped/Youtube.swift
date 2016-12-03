@@ -33,9 +33,6 @@ final class Youtube {
                     .map({(d: Dictionary<String, AnyObject>) -> YoutubeVideo in
                         return YoutubeVideo(dictionary: d)
                     })
-                    .filter({(v: YoutubeVideo) -> Bool in
-                        return v.status.embeddable
-                    })
                 
                 success(videos)
         },
@@ -60,9 +57,6 @@ final class Youtube {
                 let videos = items
                     .map({(d: Dictionary<String, AnyObject>) -> YoutubeVideo in
                         return YoutubeVideo(dictionary: d)
-                    })
-                    .filter({(v: YoutubeVideo) -> Bool in
-                        return v.status.embeddable
                     })
                 
                 success(videos)
@@ -103,7 +97,6 @@ final class Youtube {
             parameters: [
                 "type": "video" as AnyObject,
                 "part": "id,snippet" as AnyObject,
-                "videoSyndicated": "true" as AnyObject,
                 "q": term as AnyObject,
                 "maxResults": 50 as AnyObject
             ],

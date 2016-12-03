@@ -105,8 +105,9 @@ class JoompedViewController: UIViewController {
             "showinfo": 0,
             "fs": 0,
             "iv_load_policy": 3,
-            "modestbranding": 1
-        ]
+            "modestbranding": 1,
+            "origin": "https://www.example.com"
+        ] as [String : Any]
         
         playerViewHeightConstraint.constant = UIScreen.main.bounds.width * 9.0 / 16.0
 
