@@ -95,8 +95,8 @@ class JoompedViewController: UIViewController {
         liveAnnotationBlurView.layer.masksToBounds = true
         liveAnnotationBlurView.clipsToBounds = true
         
-        playButton.tintColor = UIColor.rrk_primaryColor
-        fullscreenButton.tintColor = UIColor.rrk_primaryColor
+        playButton.tintColor = UIColor.rrk_secondaryColor
+        fullscreenButton.tintColor = UIColor.rrk_secondaryColor
         
         let playerVars = [
             "playsinline": 1,
