@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var segmentedControlBackground: UIView!
     @IBOutlet weak var searchModeSegmentedControl: UISegmentedControl!
     @IBOutlet var viewTapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var tableViewActivityIndicator: UIActivityIndicatorView!
@@ -261,12 +262,14 @@ class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         UIApplication.shared.statusBarStyle = .default
         fadeSearchMode(toOpacity: 0.0)
+        segmentedControlBackground.isHidden = true
     }
     
     fileprivate func showSearchMode() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         UIApplication.shared.statusBarStyle = .lightContent
         fadeSearchMode(toOpacity: 1.0)
+        segmentedControlBackground.isHidden = false
     }
     
     private func fadeSearchMode(toOpacity opacity: CGFloat) {
