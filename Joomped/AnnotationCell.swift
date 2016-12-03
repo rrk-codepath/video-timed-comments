@@ -24,7 +24,7 @@ class AnnotationCell: UITableViewCell {
     
     weak var delegate: AnnotationCellDelegate?
     var isNew: Bool = false
-    
+
 
     var timestampFloat: Float?
     
@@ -34,6 +34,9 @@ class AnnotationCell: UITableViewCell {
             annotationTextView.isHidden = !isEditMode
             saveButton.isHidden = !isEditMode
             closeButton.isHidden = !isEditMode
+            if isEditMode {
+                annotationTextView.textColor = UIColor.lightGray
+            }
         }
     }
     
@@ -55,6 +58,9 @@ class AnnotationCell: UITableViewCell {
                 if isEditMode {
                     closeButton.isHidden = false
                 }
+            } else {
+                annotationTextView.text = "Add a thought..."
+                annotationTextView.textColor = UIColor.lightGray
             }
         }
     }
@@ -63,9 +69,8 @@ class AnnotationCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         annotationTextView.delegate = self
-        annotationTextView.textContainer.lineFragmentPadding = 0
-        annotationTextView.text = "Add a thought..."
-        annotationTextView.textColor = UIColor.lightGray
+        let padding = annotationTextView.textContainer.lineFragmentPadding
+        annotationTextView.textContainerInset = UIEdgeInsetsMake(-0.5, -padding, 0, -padding)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -108,10 +113,7 @@ extension AnnotationCell: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.darkGray
-        }
+        textView.textColor = UIColor.darkGray
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

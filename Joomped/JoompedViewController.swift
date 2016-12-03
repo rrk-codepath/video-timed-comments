@@ -359,7 +359,7 @@ class JoompedViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
-                tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight + 8, 0)
+                tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight + 24, 0)
             }
         }
     }
@@ -517,6 +517,7 @@ extension JoompedViewController: UITableViewDataSource {
             cell.isEditMode = isEditMode
             displayThumbnail(forCell: cell)
         } else if indexPath.section == 1 && isEditMode {
+            cell.isNew = true
             cell.annotation = nil
             cell.timestampLabel.isHidden = true
         }
@@ -537,7 +538,6 @@ extension JoompedViewController: UITableViewDelegate {
         if indexPath.section == 1 {
             let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
             cell.annotation = annotation
-            cell.isNew = true
             cell.annotationTextView.becomeFirstResponder()
             displayThumbnail(forCell: cell)
         } else if indexPath.section == 0 {
