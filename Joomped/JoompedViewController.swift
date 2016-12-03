@@ -411,12 +411,18 @@ class JoompedViewController: UIViewController {
         seekBar.addSubview(seekBarLine!)
     }
     
-    @IBAction func didPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
-        let location = recognizer.location(in: self.seekBar)
+    private func updateSeekBar(location: CGPoint) {
         let percentageOfVideo = Float(location.x / self.seekBar.bounds.width)
         updateSeekBarLine(percentage: percentageOfVideo)
         playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
-        
+    }
+    
+    @IBAction func didPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
+        updateSeekBar(location: recognizer.location(in: self.seekBar))
+    }
+    
+    @IBAction func didTapSeekBar(_ recognizer: UITapGestureRecognizer) {
+        updateSeekBar(location: recognizer.location(in: self.seekBar))
     }
     
     @IBAction func onPlayTapped(_ sender: Any) {
@@ -457,13 +463,6 @@ class JoompedViewController: UIViewController {
             self.view.layoutIfNeeded()
             constraint.constant = constant
         })
-    }
-    
-    @IBAction func didTapSeekBar(_ recognizer: UITapGestureRecognizer) {
-        let location = recognizer.location(in: self.seekBar)
-        let percentageOfVideo = Float(location.x / self.seekBar.bounds.width)
-        updateSeekBarLine(percentage: Float(percentageOfVideo))
-        playerView.seek(toSeconds: Float(playerView.duration()) * percentageOfVideo , allowSeekAhead: true)
     }
     
     fileprivate func displayThumbnail(forCell cell: AnnotationCell) {
