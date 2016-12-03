@@ -30,6 +30,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var karmaLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var karmaCountLabel: UILabel!
+    @IBOutlet weak var joompedUploaderImageView: UIImageView!
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
@@ -135,7 +136,12 @@ class JoompedViewController: UIViewController {
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
             joompedUploaderButton.setTitle(joomped.user.displayName, for: .normal)
-            var countString = "\(joomped.annotations.count) annotations"
+            if let url = URL(string: joomped.user.imageUrl) {
+                joompedUploaderImageView.setImageWith(url)
+                joompedUploaderImageView.layer.cornerRadius = joompedUploaderImageView.frame.width / 2
+                joompedUploaderImageView.clipsToBounds = true
+            }
+            var countString = "\(joomped.annotations.count) jumps"
             if joomped.annotations.count == 1 {
                 countString = countString.substring(to: countString.index(before: countString.endIndex))
             }
@@ -150,6 +156,7 @@ class JoompedViewController: UIViewController {
             youtubeStoryboard = YoutubeStoryboard(videoId: joomped.video.youtubeId)
         } else if let youtubeVideo = youtubeVideo {
             videoTitleLabel.text = youtubeVideo.snippet.title
+            videoTitleLabel.textColor = UIColor.black
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
             playerView.load(withVideoId: youtubeVideo.id, playerVars: playerVars)
             joompedUploaderButton.isHidden = true
