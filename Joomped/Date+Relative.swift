@@ -47,7 +47,7 @@ extension Date {
     
     public var timeFormatted: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy, h:mma"
+        dateFormatter.dateFormat = "MMM d, yyyy"
         dateFormatter.timeZone = TimeZone.current
         let timeStamp = dateFormatter.string(from: self)
         
