@@ -19,7 +19,6 @@ class AnnotationCell: UITableViewCell {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var annotationLabel: UILabel!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
     weak var delegate: AnnotationCellDelegate?
@@ -33,7 +32,6 @@ class AnnotationCell: UITableViewCell {
             annotationLabel.isHidden = isEditMode
             annotationTextView.isHidden = !isEditMode
             saveButton.isHidden = !isEditMode
-            closeButton.isHidden = !isEditMode
             if isEditMode {
                 annotationTextView.textColor = UIColor.lightGray
             }
@@ -55,9 +53,6 @@ class AnnotationCell: UITableViewCell {
                 timestampFloat = annotation.timestamp
                 timestampLabel.text = annotation.timestamp.joompedBeautify()
                 timestampLabel.isHidden = false
-                if isEditMode {
-                    closeButton.isHidden = false
-                }
             } else {
                 annotationTextView.text = "Add a thought..."
                 annotationTextView.textColor = UIColor.lightGray
@@ -79,13 +74,6 @@ class AnnotationCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    @IBAction func didTapCloseButton(_ sender: Any) {
-        guard let annotation = annotation else {
-            return
-        }
-        delegate?.annotationCell?(annotationCell: self, removedAnnotation: annotation)
-    }
-    
     @IBAction func didTapSaveButton(_ sender: Any) {
         saveAnnotation()
     }
