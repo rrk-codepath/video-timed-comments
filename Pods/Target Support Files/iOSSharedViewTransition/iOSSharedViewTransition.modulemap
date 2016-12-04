@@ -1,0 +1,6 @@
+framework module iOSSharedViewTransition {
+  umbrella header "iOSSharedViewTransition-umbrella.h"
+
+  export *
+  module * { export * }
+}
