@@ -569,7 +569,7 @@ extension JoompedViewController: UITableViewDataSource {
         
         if indexPath.section == 0 {
             if highlightedRow == indexPath.row {
-                cell.backgroundColor = UIColor.rrk_primaryColor
+                cell.backgroundColor = UIColor.rrk_highlightColor
             } else {
                 cell.backgroundColor = UIColor.white
             }
@@ -605,7 +605,7 @@ extension JoompedViewController: UITableViewDelegate {
             highlightedRow = indexPath.row
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
-                cell.backgroundColor = UIColor.rrk_primaryColor
+                cell.backgroundColor = UIColor.rrk_highlightColor
             })
             if !isEditMode {
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
@@ -699,9 +699,9 @@ extension JoompedViewController: YTPlayerViewDelegate {
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
                 let currentCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
                 highlightedRow = indexPath.row
-                if currentCell?.backgroundColor != UIColor.rrk_primaryColor {
+                if currentCell?.backgroundColor != UIColor.rrk_highlightColor {
                     UIView.animate(withDuration: 1, animations: {
-                        currentCell?.backgroundColor = UIColor.rrk_primaryColor
+                        currentCell?.backgroundColor = UIColor.rrk_highlightColor
                     })
                 }
                 self.currentAnnotationCell = currentCell
