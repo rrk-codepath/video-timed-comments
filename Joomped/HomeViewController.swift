@@ -340,7 +340,12 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedThumbnail = (tableView.cellForRow(at: indexPath) as! JoompedTableViewCell).videoImageView
+        let cell = tableView.cellForRow(at: indexPath)
+        if let cell = cell as? JoompedTableViewCell {
+            selectedThumbnail = cell.videoImageView
+        } else if let cell = cell as? YoutubeVideoTableViewCell {
+            selectedThumbnail = cell.videoImageView
+        }
         switch searchMode {
         case SearchMode.joomped:
             selectedJoomped = joomped[indexPath.row]
