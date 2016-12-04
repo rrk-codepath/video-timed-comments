@@ -202,7 +202,7 @@ class JoompedViewController: UIViewController {
         if segueToHomeFlag {
             height = videoTitleLabel.frame.height + videoUploaderLabel.frame.height + 20
         } else {
-            height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 70
+            height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + joompedUploaderImageView.frame.height + 70
         }
         var frame = headerView.frame
         frame.size.height = height
@@ -488,8 +488,8 @@ class JoompedViewController: UIViewController {
         }
         youtubeStoryboard.getThumbnail(progress: timestamp / duration, callback: { (url: URL, location: YoutubeStoryboard.Location) in
             cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
-                let widthScale = cell.thumbnailImageView.frame.width / image.size.width
-                let heightScale = cell.thumbnailImageView.frame.height / image.size.height
+                let widthScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.width / image.size.width
+                let heightScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.height / image.size.height
                 let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
                 let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
                 cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
