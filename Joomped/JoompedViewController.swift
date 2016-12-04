@@ -100,7 +100,7 @@ class JoompedViewController: UIViewController {
         
         playButton.tintColor = UIColor.rrk_secondaryColor
         fullscreenButton.tintColor = UIColor.rrk_secondaryColor
-        
+
         let playerVars = [
             "playsinline": 1,
             "controls": 0,
