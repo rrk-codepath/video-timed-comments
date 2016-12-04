@@ -56,6 +56,7 @@ class JoompedViewController: UIViewController {
         }
     }
     var youtubeVideo: YoutubeVideo?
+    //First time creation
     var segueToHomeFlag: Bool {
         get {
             return joomped == nil
@@ -117,9 +118,6 @@ class JoompedViewController: UIViewController {
         seekBar.backgroundColor = UIColor.rrk_secondaryColor
 
         if let joomped = joomped {
-            likeButton.isHidden = false
-            karmaLabel.isHidden = false
-            karmaCountLabel.isHidden = false
             if let karma = joomped.karma {
                 karmaCountLabel.text = String(karma)
             } else {
@@ -156,6 +154,11 @@ class JoompedViewController: UIViewController {
             
             youtubeStoryboard = YoutubeStoryboard(videoId: joomped.video.youtubeId)
         } else if let youtubeVideo = youtubeVideo {
+            likeButton.removeFromSuperview()
+            karmaLabel.removeFromSuperview()
+            publishLabel.removeFromSuperview()
+            numberAnnotationsLabel.removeFromSuperview()
+            karmaCountLabel.removeFromSuperview()
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoTitleLabel.textColor = UIColor.black
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle
@@ -195,7 +198,13 @@ class JoompedViewController: UIViewController {
         tableView.layoutIfNeeded()
         // This is a hack in order to adjust the header height according to the contents
         // Source: http://roadfiresoftware.com/2015/05/how-to-size-a-table-header-view-using-auto-layout-in-interface-builder/
-        let height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + 70
+        var height: CGFloat
+        //First time creation
+        if segueToHomeFlag {
+            height = videoTitleLabel.frame.height + videoUploaderLabel.frame.height + 20
+        } else {
+            height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + joompedUploaderImageView.frame.height + 70
+        }
         var frame = headerView.frame
         frame.size.height = height
         headerView.frame = frame
@@ -480,8 +489,8 @@ class JoompedViewController: UIViewController {
         }
         youtubeStoryboard.getThumbnail(progress: timestamp / duration, callback: { (url: URL, location: YoutubeStoryboard.Location) in
             cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
-                let widthScale = cell.thumbnailImageView.frame.width / image.size.width
-                let heightScale = cell.thumbnailImageView.frame.height / image.size.height
+                let widthScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.width / image.size.width
+                let heightScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.height / image.size.height
                 let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
                 let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
                 cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
