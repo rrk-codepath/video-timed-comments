@@ -164,6 +164,8 @@ class JoompedViewController: UIViewController {
             publishLabel.removeFromSuperview()
             numberAnnotationsLabel.removeFromSuperview()
             karmaCountLabel.removeFromSuperview()
+            joompedUploaderImageView.removeFromSuperview()
+            
             videoTitleLabel.text = youtubeVideo.snippet.title
             videoTitleLabel.textColor = UIColor.black
             videoUploaderLabel.text = youtubeVideo.snippet.channelTitle

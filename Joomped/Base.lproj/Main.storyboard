@@ -193,7 +193,7 @@
                                 <rect key="frame" x="0.0" y="19" width="414" height="717"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Find annotations" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
+                            <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="What would you like to learn?" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUA-ZW-RZL">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
@@ -242,7 +242,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="NMx-xn-h31">
-                        <barButtonItem key="leftBarButtonItem" title="Me" id="IYD-ea-XGa">
+                        <barButtonItem key="leftBarButtonItem" image="Person" id="IYD-ea-XGa">
                             <connections>
                                 <action selector="onTappedProfile:" destination="FpH-lp-WTC" id="R4B-1v-DzB"/>
                             </connections>
@@ -250,6 +250,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="joompedTableView" destination="HS6-Lc-nyY" id="SG7-l4-ijy"/>
+                        <outlet property="profileBarButtonItem" destination="IYD-ea-XGa" id="hom-4v-Sr1"/>
                         <outlet property="searchBar" destination="dUA-ZW-RZL" id="xle-O5-584"/>
                         <outlet property="searchModeSegmentedControl" destination="3cv-Od-WDP" id="XW8-bE-QrA"/>
                         <outlet property="segmentedControlBackground" destination="GI4-yi-LJc" id="cvp-6b-HGH"/>
@@ -688,7 +689,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.68235294120000001" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -711,12 +712,13 @@
     <resources>
         <image name="Full-Screen" width="25" height="25"/>
         <image name="Pause" width="25" height="25"/>
+        <image name="Person" width="30" height="30"/>
         <image name="heart" width="32" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XD9-iG-gfL"/>
-        <segue reference="Dg3-WV-wJf"/>
+        <segue reference="106-0h-bvS"/>
         <segue reference="Hhx-Qr-R1r"/>
+        <segue reference="vm2-8s-e9R"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
         "Codepath"
     ]
 
+    @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControlBackground: UIView!
@@ -391,7 +392,7 @@ fileprivate enum SearchMode: Int {
     var text: String {
         switch self {
         case .joomped:
-            return "Find annotations"
+            return "What would you like to learn?"
         case .youtube:
             return "Youtube link or search term"
         }
