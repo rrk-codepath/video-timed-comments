@@ -135,11 +135,16 @@ class JoompedViewController: UIViewController {
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
             joompedUploaderButton.setTitle(joomped.user.displayName, for: .normal)
-            if let url = URL(string: joomped.user.imageUrl) {
+            if let imageUrl = joomped.user.imageUrl,
+                let url = URL(string: imageUrl) {
                 joompedUploaderImageView.setImageWith(url)
-                joompedUploaderImageView.layer.cornerRadius = joompedUploaderImageView.frame.width / 2
-                joompedUploaderImageView.clipsToBounds = true
+            } else {
+                joompedUploaderImageView.image = #imageLiteral(resourceName: "Person")
             }
+            
+            joompedUploaderImageView.layer.cornerRadius = joompedUploaderImageView.frame.width / 2
+            joompedUploaderImageView.clipsToBounds = true
+            
             var countString = "\(joomped.annotations.count) jumps"
             if joomped.annotations.count == 1 {
                 countString = countString.substring(to: countString.index(before: countString.endIndex))

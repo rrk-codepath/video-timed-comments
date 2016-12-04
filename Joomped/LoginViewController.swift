@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     private let signInDelegate = ParseGoogleSignInDelegate()
     
@@ -25,6 +26,9 @@ class LoginViewController: UIViewController {
         
         GIDSignIn.sharedInstance().delegate = signInDelegate
         GIDSignIn.sharedInstance().uiDelegate = self
+        
+        loadingIndicator.isHidden = true
+        loadingIndicator.stopAnimating()
     }
     
     @IBAction func didTapLogin(_ sender: Any) {
@@ -37,6 +41,14 @@ class LoginViewController: UIViewController {
                 }
             }
     }
+    
+    @IBAction func onTapGidSignIn(_ sender: Any) {
+        loadingIndicator.isHidden = false
+        loadingIndicator.startAnimating()
+
+        googleSignInButton.isHidden = true
+    }
+
     
     fileprivate func onLoginFailure() {
         let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)
@@ -87,11 +99,14 @@ extension LoginViewController: ParseLoginDelegate {
     
     func login(didSucceedFor user: PFUser) {
         performSegue(withIdentifier: "HomeSegue", sender: self)
+        loadingIndicator.isHidden = true
+
     }
     
     func login(didFailWith error: Error?) {
         print("\(error?.localizedDescription)")
         onLoginFailure()
+        loadingIndicator.isHidden = true
     }
 }
 

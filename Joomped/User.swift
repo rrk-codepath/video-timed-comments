@@ -12,9 +12,9 @@ final class User: PFUser {
         }
     }
     
-    var imageUrl: String {
+    var imageUrl: String? {
         get {
-            return super["imageUrl"] as? String ?? "https://placekitten.com/g/100/100"
+            return super["imageUrl"] as? String
         }
         set {
             super["imageUrl"] = newValue

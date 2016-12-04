@@ -25,8 +25,11 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        if let url = URL(string: user.imageUrl) {
+        if let imageUrl = user.imageUrl,
+            let url = URL(string: imageUrl) {
             profileImageView.setImageWith(url)
+        } else {
+            profileImageView.image = #imageLiteral(resourceName: "Person")
         }
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2;
         profileImageView.layer.masksToBounds = true;

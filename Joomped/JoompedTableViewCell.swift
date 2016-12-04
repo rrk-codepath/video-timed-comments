@@ -37,19 +37,20 @@ class JoompedTableViewCell: UITableViewCell {
                 // Timestamp is sometimes nil for newly created videos, so we get empty string
                 timestampLabel.text = "Just now"
             }
-            if let url = URL(string: joomped.user.imageUrl) {
-                joompedAuthorImageView.setImageWith(url)
-                joompedAuthorImageView.layer.cornerRadius = joompedAuthorImageView.frame.size.height / 2;
-                joompedAuthorImageView.layer.masksToBounds = true;
-                joompedAuthorImageView.layer.borderWidth = 0;
+            if let imageUrl = joomped.user.imageUrl,
+                let url = URL(string: imageUrl) {
+                joompedAuthorImageView.setImageWith(url, placeholderImage: #imageLiteral(resourceName: "Person"))
+            } else {
+                joompedAuthorImageView.image = #imageLiteral(resourceName: "Person")
             }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
+        joompedAuthorImageView.layer.cornerRadius = joompedAuthorImageView.frame.size.height / 2;
+        joompedAuthorImageView.layer.masksToBounds = true;
+        joompedAuthorImageView.layer.borderWidth = 0;    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
