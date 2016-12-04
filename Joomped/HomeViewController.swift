@@ -50,8 +50,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Following code won't work until we re-add joomped table view to storyboard
-        ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
-        
         joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.register(UINib(nibName: "YoutubeVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "YoutubeVideo")
         
@@ -62,6 +60,7 @@ class HomeViewController: UIViewController {
         joompedTableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         joompedTableView.isHidden = true
         tableViewActivityIndicator.startAnimating()
+        ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         navigationItem.titleView = searchBar
         

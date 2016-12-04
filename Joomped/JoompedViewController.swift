@@ -177,7 +177,6 @@ class JoompedViewController: UIViewController {
         annotations.forEach { (annotation) in
             self.annotationsDict[floorf(annotation.timestamp)] = annotation
             self.annotationsDict[ceilf(annotation.timestamp)] = annotation
-            updateAnnotationInSeekBar()
         }
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -220,6 +219,7 @@ class JoompedViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateAnnotationInSeekBar()
     }
     
     override func didReceiveMemoryWarning() {

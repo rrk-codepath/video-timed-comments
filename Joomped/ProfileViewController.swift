@@ -1,6 +1,7 @@
 import UIKit
 import GoogleSignIn
 import Parse
+import iOSSharedViewTransition
 
 class ProfileViewController: UIViewController {
     
@@ -15,11 +16,12 @@ class ProfileViewController: UIViewController {
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
-    
+    fileprivate var selectedThumbnail: UIImageView?
     var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ASFSharedViewTransition.addWith(fromViewControllerClass: ProfileViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         guard let user = user else {
             return
@@ -118,6 +120,15 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedJoomped = joomped[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath) as! JoompedTableViewCell
+        selectedThumbnail = cell.videoImageView
+        
         performSegue(withIdentifier: "ConsumptionSegue", sender: self)
+    }
+}
+
+extension ProfileViewController: ASFSharedViewTransitionDataSource {
+    func sharedView() -> UIView! {
+        return selectedThumbnail
     }
 }
