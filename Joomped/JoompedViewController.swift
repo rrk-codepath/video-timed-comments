@@ -659,26 +659,28 @@ extension JoompedViewController: YTPlayerViewDelegate {
     //Need floor/ceil as not every annotation shows up when tapped
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
         updateSeekBarLine()
-        if !timer.isValid {
-            if let annotation = annotationsDict[floor(playTime)] {
-                liveAnnotationLabel?.text = annotation.text
-                currentAnnotation = annotation
-                if let index = annotations.index(of: annotation) {
-                    let indexPath = IndexPath(row: index, section: 0)
-                    tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-                    let currentCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
-                    highlightedRow = indexPath.row
-                    if currentCell?.backgroundColor != UIColor.rrk_primaryColor {
-                        UIView.animate(withDuration: 1, animations: {
-                            currentCell?.backgroundColor = UIColor.rrk_primaryColor
-                        })
-                    }
-                    self.currentAnnotationCell = currentCell
-                    unhighlightVisbileCells()
-                }
-                
-                timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(setAnnotationLabel), userInfo: nil, repeats: false)
+        if let annotation = annotationsDict[floor(playTime)] {
+            if annotation != currentAnnotation && timer.isValid {
+                timer.invalidate()
             }
+            
+            liveAnnotationLabel?.text = annotation.text
+            currentAnnotation = annotation
+            if let index = annotations.index(of: annotation) {
+                let indexPath = IndexPath(row: index, section: 0)
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+                let currentCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
+                highlightedRow = indexPath.row
+                if currentCell?.backgroundColor != UIColor.rrk_primaryColor {
+                    UIView.animate(withDuration: 1, animations: {
+                        currentCell?.backgroundColor = UIColor.rrk_primaryColor
+                    })
+                }
+                self.currentAnnotationCell = currentCell
+                unhighlightVisbileCells()
+            }
+            
+            timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setAnnotationLabel), userInfo: nil, repeats: false)
         }
     }
     
