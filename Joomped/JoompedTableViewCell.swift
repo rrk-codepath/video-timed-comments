@@ -33,6 +33,10 @@ class JoompedTableViewCell: UITableViewCell {
                 videoImageView.setImageWith(thumbnailUrl)
             }
             timestampLabel.text = joomped.createdAt?.timeAgoRelative
+            if timestampLabel.text != nil && timestampLabel.text!.isEmpty {
+                // Timestamp is sometimes nil for newly created videos, so we get empty string
+                timestampLabel.text = "Just now"
+            }
             if let url = URL(string: joomped.user.imageUrl) {
                 joompedAuthorImageView.setImageWith(url)
                 joompedAuthorImageView.layer.cornerRadius = joompedAuthorImageView.frame.size.height / 2;
