@@ -77,11 +77,6 @@ class HomeViewController: UIViewController {
         joompedTableView.insertSubview(refreshControl, at: 0)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.navigationController?.delegate = self
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         joompedTableView.reloadData()
@@ -380,15 +375,6 @@ extension HomeViewController: UISearchBarDelegate {
             searchBar.resignFirstResponder()
             search()
         }
-    }
-}
-
-extension HomeViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if toVC.restorationIdentifier == "JoompedViewController" {
-            ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self,   toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.5)
-        }
-        return nil
     }
 }
 

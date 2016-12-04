@@ -45,7 +45,6 @@
 		B7CC8D1E1DD2D625005FCBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D1C1DD2D625005FCBEF /* LaunchScreen.storyboard */; };
 		B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */; };
 		B7E73F491DD42C41009F7F48 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E73F481DD42C41009F7F48 /* HomeViewController.swift */; };
-		B7E9D4AE1DF3833700F2C2F0 /* SharedElementAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E9D4AD1DF3833700F2C2F0 /* SharedElementAnimationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,7 +90,6 @@
 		B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7E73F481DD42C41009F7F48 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B7E73F4A1DD43457009F7F48 /* Joomped.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Joomped.entitlements; sourceTree = "<group>"; };
-		B7E9D4AD1DF3833700F2C2F0 /* SharedElementAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedElementAnimationController.swift; sourceTree = "<group>"; };
 		B7E9D4B01DF38D0A00F2C2F0 /* Joomped-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Joomped-Bridging-Header.h"; sourceTree = "<group>"; };
 		FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.release.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.release.xcconfig"; sourceTree = "<group>"; };
 		FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				B7E73F481DD42C41009F7F48 /* HomeViewController.swift */,
 				5632235A1DE5397D006A8F58 /* ProfileViewController.swift */,
 				56B6A9CE1DE54EFE00329E08 /* ReplaceStoryboardSegue.swift */,
-				B7E9D4AD1DF3833700F2C2F0 /* SharedElementAnimationController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -386,7 +383,6 @@
 				563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */,
 				B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */,
 				568DFC1E1DEFF5E10090D2D8 /* YoutubeStoryboard.swift in Sources */,
-				B7E9D4AE1DF3833700F2C2F0 /* SharedElementAnimationController.swift in Sources */,
 				5630B0A01DD412A8008E78D6 /* Annotation.swift in Sources */,
 				5630B0A21DD41327008E78D6 /* Joomped.swift in Sources */,
 				563708DF1DD6A473007CF706 /* YoutubeVideo.swift in Sources */,
