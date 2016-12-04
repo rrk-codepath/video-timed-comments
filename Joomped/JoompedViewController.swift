@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import youtube_ios_player_helper
+import iOSSharedViewTransition
 
 class JoompedViewController: UIViewController {
 
@@ -617,6 +618,12 @@ extension JoompedViewController: AnnotationCellDelegate {
             let indexPath = IndexPath(item: numberOfRows - 1, section: numberOfSections - 1)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
+    }
+}
+
+extension JoompedViewController: ASFSharedViewTransitionDataSource {
+    func sharedView() -> UIView! {
+        return playerView
     }
 }
 

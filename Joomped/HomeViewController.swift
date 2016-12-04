@@ -9,6 +9,7 @@
 import UIKit
 import GoogleSignIn
 import Parse
+import iOSSharedViewTransition
 
 class HomeViewController: UIViewController {
     
@@ -39,6 +40,7 @@ class HomeViewController: UIViewController {
     fileprivate var youtubeVideos: [YoutubeVideo] = []
     fileprivate var searchMode = SearchMode.joomped
     fileprivate var lastContentOffset: CGFloat?
+    fileprivate var selectedThumbnail: UIImageView?
     
     private let youtube = Youtube()
     private var youtubeSearchText: String?
@@ -72,6 +74,11 @@ class HomeViewController: UIViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchJoomped(refreshControl:)), for: UIControlEvents.valueChanged)
         joompedTableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.navigationController?.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -332,6 +339,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        selectedThumbnail = (tableView.cellForRow(at: indexPath) as! JoompedTableViewCell).videoImageView
         switch searchMode {
         case SearchMode.joomped:
             selectedJoomped = joomped[indexPath.row]
@@ -366,6 +374,26 @@ extension HomeViewController: UISearchBarDelegate {
             searchBar.resignFirstResponder()
             search()
         }
+    }
+}
+
+extension HomeViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if toVC.restorationIdentifier == "JoompedViewController" {
+            ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self,   toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.5)
+//            if let homeViewController = fromVC as? HomeViewController {
+//                homeViewController.selectedJoomped
+//            }
+//            toVC.youtube
+            return SharedElementAnimationController()
+        }
+        return nil
+    }
+}
+
+extension HomeViewController: ASFSharedViewTransitionDataSource {
+    func sharedView() -> UIView! {
+        return selectedThumbnail
     }
 }
 

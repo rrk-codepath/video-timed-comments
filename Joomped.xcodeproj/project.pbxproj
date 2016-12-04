@@ -45,6 +45,7 @@
 		B7CC8D1E1DD2D625005FCBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7CC8D1C1DD2D625005FCBEF /* LaunchScreen.storyboard */; };
 		B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */; };
 		B7E73F491DD42C41009F7F48 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E73F481DD42C41009F7F48 /* HomeViewController.swift */; };
+		B7E9D4AE1DF3833700F2C2F0 /* SharedElementAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E9D4AD1DF3833700F2C2F0 /* SharedElementAnimationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,8 @@
 		B7CC8D271DD2DBBB005FCBEF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7E73F481DD42C41009F7F48 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B7E73F4A1DD43457009F7F48 /* Joomped.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Joomped.entitlements; sourceTree = "<group>"; };
+		B7E9D4AD1DF3833700F2C2F0 /* SharedElementAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedElementAnimationController.swift; sourceTree = "<group>"; };
+		B7E9D4B01DF38D0A00F2C2F0 /* Joomped-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Joomped-Bridging-Header.h"; sourceTree = "<group>"; };
 		FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.release.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.release.xcconfig"; sourceTree = "<group>"; };
 		FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joomped.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Joomped/Pods-Joomped.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +178,7 @@
 				5684F1D31DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib */,
 				5684F1D51DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift */,
 				B7BA77751DE3F7EF005F52D6 /* TableViewHeader.xib */,
+				B7E9D4B01DF38D0A00F2C2F0 /* Joomped-Bridging-Header.h */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -224,6 +228,7 @@
 				B7E73F481DD42C41009F7F48 /* HomeViewController.swift */,
 				5632235A1DE5397D006A8F58 /* ProfileViewController.swift */,
 				56B6A9CE1DE54EFE00329E08 /* ReplaceStoryboardSegue.swift */,
+				B7E9D4AD1DF3833700F2C2F0 /* SharedElementAnimationController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -361,7 +366,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -381,6 +386,7 @@
 				563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */,
 				B7CC8D281DD2DBBB005FCBEF /* LoginViewController.swift in Sources */,
 				568DFC1E1DEFF5E10090D2D8 /* YoutubeStoryboard.swift in Sources */,
+				B7E9D4AE1DF3833700F2C2F0 /* SharedElementAnimationController.swift in Sources */,
 				5630B0A01DD412A8008E78D6 /* Annotation.swift in Sources */,
 				5630B0A21DD41327008E78D6 /* Joomped.swift in Sources */,
 				563708DF1DD6A473007CF706 /* YoutubeVideo.swift in Sources */,
@@ -531,7 +537,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joomed.Joomped;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Joomped/Joomped-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -552,7 +558,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joomed.Joomped;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Joomped/Joomped-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

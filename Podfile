@@ -10,4 +10,5 @@ target 'Joomped' do
   pod 'youtube-ios-player-helper'
   pod 'AFNetworking', '~> 3.0'
   pod 'Google/SignIn'
+  pod 'iOSSharedViewTransition', '~> 1.0.2'
 end
