@@ -49,6 +49,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Following code won't work until we re-add joomped table view to storyboard
+        ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.register(UINib(nibName: "YoutubeVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "YoutubeVideo")
@@ -381,11 +382,6 @@ extension HomeViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if toVC.restorationIdentifier == "JoompedViewController" {
             ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self,   toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.5)
-//            if let homeViewController = fromVC as? HomeViewController {
-//                homeViewController.selectedJoomped
-//            }
-//            toVC.youtube
-            return SharedElementAnimationController()
         }
         return nil
     }
