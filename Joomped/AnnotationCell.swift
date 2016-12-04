@@ -87,7 +87,7 @@ class AnnotationCell: UITableViewCell {
         annotationTextView.layer.borderWidth = 0
         annotationTextView.resignFirstResponder()
         
-        annotation.text = annotationTextView.text!
+        annotation.text = annotationTextView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         annotation.timestamp = timestampFloat!
         self.saveButton.isEnabled = false
         
