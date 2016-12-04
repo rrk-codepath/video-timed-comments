@@ -494,16 +494,22 @@ class JoompedViewController: UIViewController {
         guard let timestamp = cell.annotation?.timestamp, let duration = duration else {
             return
         }
-        youtubeStoryboard.getThumbnail(progress: timestamp / duration, callback: { (url: URL, location: YoutubeStoryboard.Location) in
-            cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
-                let widthScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.width / image.size.width
-                let heightScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.height / image.size.height
-                let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
-                let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
-                cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
-                cell.thumbnailImageView.image = image
-            }, failure: nil)
-        })
+        youtubeStoryboard.getThumbnail(
+            progress: timestamp / duration,
+            callback: { (url: URL, location: YoutubeStoryboard.Location) in
+                cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
+                    let widthScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.width / image.size.width
+                    let heightScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.height / image.size.height
+                    let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
+                    let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
+                    cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
+                    cell.thumbnailImageView.image = image
+                }, failure: nil)
+            },
+            failure: { () -> Void in
+                cell.hideThumbnail()
+            }
+        )
     }
 }
 

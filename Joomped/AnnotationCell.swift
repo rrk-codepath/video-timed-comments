@@ -20,6 +20,7 @@ class AnnotationCell: UITableViewCell {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var annotationLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var thumbnailImageViewWidthConstraint: NSLayoutConstraint!
     
     weak var delegate: AnnotationCellDelegate?
     var isNew: Bool = false
@@ -76,6 +77,14 @@ class AnnotationCell: UITableViewCell {
 
     @IBAction func didTapSaveButton(_ sender: Any) {
         saveAnnotation()
+    }
+    
+    func hideThumbnail() {
+        /*if thumbnailImageViewWidthConstraint.constant > 0 {
+            UIView.animate(withDuration: 1, animations: { () -> Void in
+                self.thumbnailImageViewWidthConstraint.constant = 0
+            })
+        }*/
     }
     
     fileprivate func saveAnnotation() {

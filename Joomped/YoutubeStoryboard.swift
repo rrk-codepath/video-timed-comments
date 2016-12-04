@@ -11,6 +11,7 @@ final class YoutubeStoryboard {
     private var thumbnails: Int = 0
     private var thumbnailsPerSheet: Int = 0
     private var fetching: Bool = true
+    private var failed: Bool = false
     private var callbacks: [Callback] = []
     
     init(videoId: String) {
@@ -18,11 +19,17 @@ final class YoutubeStoryboard {
         fetchStoryboardUrls()
     }
     
-    func getThumbnail(progress: Float, callback: @escaping (URL, Location) -> Void) -> Void {
+    func getThumbnail(progress: Float, callback: @escaping (URL, Location) -> Void, failure: @escaping () -> Void) -> Void {
         if fetching {
-            callbacks.append(Callback(callback: callback, progress: progress))
+            callbacks.append(Callback(callback: callback, failure: failure, progress: progress))
             return
         }
+        
+        if failed {
+            failure()
+            return
+        }
+        
         getThumbnailInternal(progress: progress, callback: callback)
     }
     
@@ -56,22 +63,26 @@ final class YoutubeStoryboard {
         let task = manager.dataTask(with: request, completionHandler: { (response: URLResponse, payload: Any?, error: Error?) -> Void in
             guard let data = payload as? Data,
                 let decoded = String(data: data, encoding: String.Encoding.ascii) else {
-                    return
+                self.onFailure()
+                return
             }
             print("storyboard index=\(decoded.range(of: "storyboard_spec")?.lowerBound)")
             let videoInfo = self.getKeyVals(query: decoded)
             
             guard let spec = videoInfo["storyboard_spec"] else {
-                    return
+                self.onFailure()
+                return
             }
             
             let specParts = spec.components(separatedBy: "|")
             guard specParts.count >= 4 else {
+                self.onFailure()
                 return
             }
             
             let urlParts = specParts[0].components(separatedBy: "$")
             guard urlParts.count > 0 else {
+                self.onFailure()
                 return
             }
             
@@ -82,6 +93,7 @@ final class YoutubeStoryboard {
                 let thumbnails = Int(sigParts[2]),
                 let rows = Int(sigParts[3]),
                 let columns = Int(sigParts[4]) else {
+                self.onFailure()
                 return
             }
             
@@ -132,13 +144,26 @@ final class YoutubeStoryboard {
         return results
     }
     
+    private func onFailure() {
+        fetching = false
+        failed = true
+        while self.callbacks.count > 0 {
+            guard let cb = self.callbacks.popLast() else {
+                break
+            }
+            cb.failure()
+        }
+    }
+    
     private class Callback {
         let callback: (URL, Location) -> Void
+        let failure: () -> Void
         let progress: Float
         
-        init(callback: @escaping (URL, Location) -> Void, progress: Float) {
+        init(callback: @escaping (URL, Location) -> Void, failure: @escaping () -> Void, progress: Float) {
             self.progress = progress
             self.callback = callback
+            self.failure = failure
         }
     }
     
