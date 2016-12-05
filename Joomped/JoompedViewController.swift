@@ -581,6 +581,7 @@ extension JoompedViewController: UITableViewDataSource {
             cell.isNew = true
             cell.annotation = nil
             cell.timestampLabel.isHidden = true
+            cell.thumbnailImageView.image = nil
         }
         return cell
     }
@@ -638,6 +639,7 @@ extension JoompedViewController: AnnotationCellDelegate {
             for (index, annotation) in annotations.enumerated() {
                 if newAnnotation.timestamp < annotation.timestamp {
                     annotations.insert(newAnnotation, at: index)
+                    break
                 }
             }
         }
