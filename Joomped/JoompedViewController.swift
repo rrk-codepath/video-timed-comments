@@ -352,7 +352,7 @@ class JoompedViewController: UIViewController {
         guard let joompedObjectId = joomped?.objectId else {
             return
         }
-        let activityViewController = UIActivityViewController(activityItems: ["notate://joomp/\(joompedObjectId)"], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: ["notate://journal/\(joompedObjectId)"], applicationActivities: nil)
         navigationController?.present(activityViewController, animated: true)
     }
     
