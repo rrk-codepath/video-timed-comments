@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Notate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -177,7 +177,7 @@
         <!--Home View Controller-->
         <scene sceneID="Q6E-7W-Cpr">
             <objects>
-                <viewController restorationIdentifier="HomeViewController" storyboardIdentifier="HomeViewController" id="FpH-lp-WTC" customClass="HomeViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HomeViewController" storyboardIdentifier="HomeViewController" id="FpH-lp-WTC" customClass="HomeViewController" customModule="Notate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eqe-4a-cdL"/>
                         <viewControllerLayoutGuide type="bottom" id="kWn-fz-7eL"/>
@@ -273,7 +273,7 @@
         <!--Profile-->
         <scene sceneID="p5a-7v-QYv">
             <objects>
-                <viewController id="zI5-LE-lzX" customClass="ProfileViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zI5-LE-lzX" customClass="ProfileViewController" customModule="Notate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RaU-3c-UFg"/>
                         <viewControllerLayoutGuide type="bottom" id="l8S-mZ-Tdn"/>
@@ -302,8 +302,8 @@
                                 <color key="textColor" red="0.41568627450000001" green="0.2784313725" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Joompeds Yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kap-mj-VoZ">
-                                <rect key="frame" x="137" y="358" width="141" height="21"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Journals Yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kap-mj-VoZ">
+                                <rect key="frame" x="145" y="358" width="125.33333333333331" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -400,7 +400,7 @@
                         <outlet property="karmaCountLabel" destination="IPs-fa-FdE" id="DmD-eq-rnT"/>
                         <outlet property="profileImageView" destination="1i3-Q7-ZC2" id="ehH-gS-0lS"/>
                         <outlet property="viewCountLabel" destination="HjQ-Mp-VXM" id="7os-yl-7xx"/>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="LogoutSegue" customClass="ReplaceStoryboardSegue" customModule="Joomped" customModuleProvider="target" id="4ea-dR-8oO"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="LogoutSegue" customClass="ReplaceStoryboardSegue" customModule="Notate" customModuleProvider="target" id="4ea-dR-8oO"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="Dg3-WV-wJf"/>
                     </connections>
                 </viewController>
@@ -411,7 +411,7 @@
         <!--Joomped View Controller-->
         <scene sceneID="HL9-fK-D9C">
             <objects>
-                <viewController restorationIdentifier="JoompedViewController" storyboardIdentifier="joomped" id="z9f-sm-9S5" customClass="JoompedViewController" customModule="Joomped" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="JoompedViewController" storyboardIdentifier="joomped" id="z9f-sm-9S5" customClass="JoompedViewController" customModule="Notate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VHp-Kn-qJz"/>
                         <viewControllerLayoutGuide type="bottom" id="Hgd-Lr-0de"/>
@@ -520,7 +520,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnotationCell" rowHeight="114" id="qSu-gK-gNr" customClass="AnnotationCell" customModule="Joomped" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnotationCell" rowHeight="114" id="qSu-gK-gNr" customClass="AnnotationCell" customModule="Notate" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="172" width="414" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSu-gK-gNr" id="yNc-LW-NPe">
@@ -694,7 +694,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.68235294120000001" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
