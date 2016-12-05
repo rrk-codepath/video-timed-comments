@@ -17,8 +17,12 @@ final class YoutubeVideoTableViewCell: UITableViewCell {
             videoTitleLabel.text = video.snippet.title
             authorLabel.text = video.snippet.channelTitle
             timestampLabel.text = video.snippet.publishedAt.timeAgoRelative
-            if let thumbnailUrl = URL(string: video.snippet.thumbnail.url) {
-                videoImageView.setImageWith(thumbnailUrl)
+            
+            if oldValue?.snippet.thumbnail.url != video.snippet.thumbnail.url {
+                videoImageView.image = nil
+                if let thumbnailUrl = URL(string: video.snippet.thumbnail.url) {
+                    videoImageView.setImageWith(thumbnailUrl, fadeTime: 0.2)
+                }
             }
             
             if let details = video.details {
