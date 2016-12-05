@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     private let signInDelegate = ParseGoogleSignInDelegate()
     
@@ -29,6 +30,8 @@ class LoginViewController: UIViewController {
         
         loadingIndicator.isHidden = true
         loadingIndicator.stopAnimating()
+        
+        titleLabel.setTextWithTypeAnimation(typedText: "Notate", characterInterval: 0.3)
     }
     
     @IBAction func didTapLogin(_ sender: Any) {
