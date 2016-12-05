@@ -3,8 +3,8 @@ import Foundation
 
 final class YoutubeStoryboard {
     
-    var rows: Int = 0
-    var columns: Int = 0
+    private(set) var rows: Int = 0
+    private(set) var columns: Int = 0
     
     private let videoId: String
     private var storyboardUrls: [URL] = []
