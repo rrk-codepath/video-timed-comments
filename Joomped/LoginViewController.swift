@@ -29,6 +29,10 @@ class LoginViewController: UIViewController {
         
         loadingIndicator.isHidden = true
         loadingIndicator.stopAnimating()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     @IBAction func didTapLogin(_ sender: Any) {
@@ -49,6 +53,23 @@ class LoginViewController: UIViewController {
         googleSignInButton.isHidden = true
     }
 
+    func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
+//                self.view.frame.origin.y -= keyboardHeight
+                _ = keyboardHeight
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
+//                self.view.frame.origin.y += keyboardHeight
+                _ = keyboardHeight
+            }
+        }
+    }
     
     fileprivate func onLoginFailure() {
         let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)

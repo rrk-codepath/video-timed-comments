@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController {
                 self.joompedTableView.reloadData()
             }
             
-            var joompedCountString = "\(self.joomped.count) annotation videos"
+            var joompedCountString = "\(self.joomped.count) journals"
             if self.joomped.count == 1 {
                 joompedCountString = joompedCountString.substring(to: joompedCountString.index(before: joompedCountString.endIndex))
             }

@@ -147,7 +147,7 @@ class JoompedViewController: UIViewController {
             joompedUploaderImageView.layer.cornerRadius = joompedUploaderImageView.frame.width / 2
             joompedUploaderImageView.clipsToBounds = true
             
-            var countString = "\(joomped.annotations.count) jumps"
+            var countString = "\(joomped.annotations.count) notes"
             if joomped.annotations.count == 1 {
                 countString = countString.substring(to: countString.index(before: countString.endIndex))
             }
@@ -352,7 +352,7 @@ class JoompedViewController: UIViewController {
         guard let joompedObjectId = joomped?.objectId else {
             return
         }
-        let activityViewController = UIActivityViewController(activityItems: ["joomped://joomp/\(joompedObjectId)"], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: ["notate://joomp/\(joompedObjectId)"], applicationActivities: nil)
         navigationController?.present(activityViewController, animated: true)
     }
     
@@ -373,11 +373,11 @@ class JoompedViewController: UIViewController {
             }
             rightBarButtonItems.append(actionButton)
         } else if (joomped?.user.objectId == user.objectId) {
-            navigationItem.title = "Joomped"
+            navigationItem.title = "Journal"
             rightBarButtonItems.append(actionButton)
             rightBarButtonItems.append(shareButton)
         } else {
-            navigationItem.title = "Joomped"
+            navigationItem.title = "Journal"
             rightBarButtonItems.append(shareButton)
         }
         navigationItem.rightBarButtonItems = rightBarButtonItems

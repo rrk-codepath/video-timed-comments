@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Notate</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,19 +23,19 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.rrk.Notate</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.603123832850-c9naguck6b4fe1tp9retgm5ogp0h8qr3</string>
+				<string>notate</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.joomed.Joomped</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>joomped</string>
+				<string>com.googleusercontent.apps.603123832850-c9naguck6b4fe1tp9retgm5ogp0h8qr3</string>
 			</array>
 		</dict>
 	</array>

@@ -535,7 +535,7 @@
 				DEVELOPMENT_TEAM = 5K27PD58GS;
 				INFOPLIST_FILE = Joomped/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.joomed.Joomped;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrk.Notate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Joomped/Joomped-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
@@ -556,7 +556,7 @@
 				DEVELOPMENT_TEAM = 5K27PD58GS;
 				INFOPLIST_FILE = Joomped/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.joomed.Joomped;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrk.Notate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Joomped/Joomped-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

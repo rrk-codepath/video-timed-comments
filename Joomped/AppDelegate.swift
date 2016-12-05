@@ -70,11 +70,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var joompedId = url.path
             joompedId.remove(at: url.path.startIndex)
             // Navigate to the detail VC with this joomped ID
-            let rootViewController = self.window?.rootViewController as! UINavigationController
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeNavController = mainStoryboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
             let joompedViewController = mainStoryboard.instantiateViewController(withIdentifier: "joomped") as! JoompedViewController
             joompedViewController.joompedId = joompedId
-            rootViewController.pushViewController(joompedViewController, animated: true)
+            homeNavController.viewControllers.append(joompedViewController)
+            self.window?.rootViewController = homeNavController
         }
         
         return GIDSignIn.sharedInstance().handle(url,

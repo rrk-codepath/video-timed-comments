@@ -22,8 +22,8 @@ class JoompedTableViewCell: UITableViewCell {
             joompedTitleLabel.text = joomped.video.title
             videoAuthorLabel.text = joomped.video.author
             videoLengthLabel.text = Float(joomped.video.length).joompedBeautify()
-            let jumps = joomped.annotations.count == 1 ? "jump" : "jumps"
-            annotationCountLabel.text = "\(joomped.annotations.count) \(jumps)"
+            let notes = joomped.annotations.count == 1 ? "note" : "notes"
+            annotationCountLabel.text = "\(joomped.annotations.count) \(notes)"
             let views = joomped.views == 1 ? "view" : "views"
             viewCountLabel.text = "\(joomped.views) \(views)"
             if let joompedUser = joomped.user.displayName {
