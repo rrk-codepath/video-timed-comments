@@ -196,7 +196,7 @@
 		B7CC8D071DD2D625005FCBEF = {
 			isa = PBXGroup;
 			children = (
-				B7CC8D121DD2D625005FCBEF /* Joomped */,
+				B7CC8D121DD2D625005FCBEF /* Notate */,
 				B7CC8D111DD2D625005FCBEF /* Products */,
 				2C37E3E184D6A90C16EADC86 /* Pods */,
 				FE0C3538427662739965C3D8 /* Frameworks */,
@@ -211,7 +211,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B7CC8D121DD2D625005FCBEF /* Joomped */ = {
+		B7CC8D121DD2D625005FCBEF /* Notate */ = {
 			isa = PBXGroup;
 			children = (
 				56D783381DD7B8E200779183 /* Extensions */,
@@ -227,6 +227,7 @@
 				79C5C6981DD40BE500040B17 /* Supporting Files */,
 				56952DBD1DD7BF1E00C372B0 /* Joomped-Bridging-Header.h */,
 			);
+			name = Notate;
 			path = Joomped;
 			sourceTree = "<group>";
 		};
@@ -253,9 +254,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7CC8D0F1DD2D625005FCBEF /* Joomped */ = {
+		B7CC8D0F1DD2D625005FCBEF /* Notate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7CC8D221DD2D625005FCBEF /* Build configuration list for PBXNativeTarget "Joomped" */;
+			buildConfigurationList = B7CC8D221DD2D625005FCBEF /* Build configuration list for PBXNativeTarget "Notate" */;
 			buildPhases = (
 				B1B40C9CB065134463D3C6F4 /* [CP] Check Pods Manifest.lock */,
 				B7CC8D0C1DD2D625005FCBEF /* Sources */,
@@ -268,7 +269,7 @@
 			);
 			dependencies = (
 			);
-			name = Joomped;
+			name = Notate;
 			productName = Joomped;
 			productReference = B7CC8D101DD2D625005FCBEF /* Joomped.app */;
 			productType = "com.apple.product-type.application";
@@ -296,7 +297,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B7CC8D0B1DD2D625005FCBEF /* Build configuration list for PBXProject "Joomped" */;
+			buildConfigurationList = B7CC8D0B1DD2D625005FCBEF /* Build configuration list for PBXProject "Notate" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -309,7 +310,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7CC8D0F1DD2D625005FCBEF /* Joomped */,
+				B7CC8D0F1DD2D625005FCBEF /* Notate */,
 			);
 		};
 /* End PBXProject section */
@@ -581,7 +582,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B7CC8D0B1DD2D625005FCBEF /* Build configuration list for PBXProject "Joomped" */ = {
+		B7CC8D0B1DD2D625005FCBEF /* Build configuration list for PBXProject "Notate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7CC8D201DD2D625005FCBEF /* Debug */,
@@ -590,7 +591,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7CC8D221DD2D625005FCBEF /* Build configuration list for PBXNativeTarget "Joomped" */ = {
+		B7CC8D221DD2D625005FCBEF /* Build configuration list for PBXNativeTarget "Notate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7CC8D231DD2D625005FCBEF /* Debug */,
