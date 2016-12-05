@@ -188,7 +188,7 @@ class HomeViewController: UIViewController {
         
         if !term.isEmpty {
             let videoQuery = PFQuery(className: "Video")
-            videoQuery.whereKey("title", matchesRegex: "(\(term))", modifiers: "i")
+            videoQuery.whereKey("lowercaseTitle", contains: term.lowercased())
             query.whereKey("video", matchesQuery: videoQuery)
         }
 

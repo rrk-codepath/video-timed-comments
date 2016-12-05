@@ -254,6 +254,7 @@ class JoompedViewController: UIViewController {
             video.youtubeId = youtubeVideo.id
             video.length = playerView.duration()
             video.title = youtubeVideo.snippet.title
+            video.lowercaseTitle = youtubeVideo.snippet.title.lowercased()
             video.author = youtubeVideo.snippet.channelTitle
             video.thumbnail = youtubeVideo.snippet.thumbnail.url
         }

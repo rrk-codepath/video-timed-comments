@@ -14,6 +14,7 @@ class Video: PFObject, PFSubclassing {
     static let youtubeIdKey = "youtubeId"
     static let lengthKey = "length"
     static let titleKey = "title"
+    static let lowercaseTitleKey = "lowercaseTitle"
     static let authorKey = "author"
     static let thumbnailKey = "thumbnail"
     
@@ -45,6 +46,16 @@ class Video: PFObject, PFSubclassing {
         }
         set {
             super[Video.titleKey] = newValue
+        }
+    }
+    
+    //Optimize case insensitive parse search
+    var lowercaseTitle: String {
+        get {
+            return super[Video.lowercaseTitleKey] as! String
+        }
+        set {
+            super[Video.lowercaseTitleKey] = newValue
         }
     }
     
