@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -461,17 +461,6 @@
                                             <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-6t-sgV">
-                                            <rect key="frame" x="8" y="104" width="20" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="4el-CH-xV9"/>
-                                                <constraint firstAttribute="height" constant="20" id="KId-ss-MZg"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="heart"/>
-                                            <connections>
-                                                <action selector="didTapLikeButton:" destination="z9f-sm-9S5" eventType="touchUpInside" id="lHr-fQ-crd"/>
-                                            </connections>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOa-EF-f61">
                                             <rect key="frame" x="32" y="105.66666666666667" width="9" height="17"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
@@ -493,30 +482,41 @@
                                             <color key="textColor" red="0.41568627450000001" green="0.2784313725" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="dG1-z2-jwV">
+                                            <rect key="frame" x="8" y="104.66666666666667" width="20" height="20"/>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="ddp-5h-6ce"/>
+                                                <constraint firstAttribute="height" constant="20" id="niV-Zu-b5A"/>
+                                            </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="hWl-iv-H2y" appends="YES" id="NJk-tt-rxV"/>
+                                            </connections>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="fOa-EF-f61" firstAttribute="centerY" secondItem="5yG-l5-Xfr" secondAttribute="centerY" id="2GN-gc-4RN"/>
                                         <constraint firstItem="SwJ-aX-sdU" firstAttribute="centerY" secondItem="wMb-9D-FuR" secondAttribute="centerY" id="3im-V2-2gp"/>
-                                        <constraint firstItem="vGy-6t-sgV" firstAttribute="centerY" secondItem="5yG-l5-Xfr" secondAttribute="centerY" id="7hi-UP-lGG"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gb9-og-qg5" secondAttribute="trailing" constant="8" id="8do-Cd-rtN"/>
                                         <constraint firstAttribute="trailing" secondItem="2ea-GQ-lvb" secondAttribute="trailing" constant="24" id="GHU-lh-eNp"/>
                                         <constraint firstItem="R0Z-sg-Sjv" firstAttribute="leading" secondItem="gb9-og-qg5" secondAttribute="leading" id="H7d-tA-6ym"/>
-                                        <constraint firstItem="vGy-6t-sgV" firstAttribute="top" secondItem="wMb-9D-FuR" secondAttribute="bottom" constant="7.5" id="JBV-qi-Q50"/>
+                                        <constraint firstItem="5yG-l5-Xfr" firstAttribute="centerY" secondItem="dG1-z2-jwV" secondAttribute="centerY" id="IhI-yK-qRR"/>
                                         <constraint firstItem="gb9-og-qg5" firstAttribute="top" secondItem="oKn-fb-jDx" secondAttribute="top" constant="8" id="KnG-Y2-bMc"/>
                                         <constraint firstAttribute="trailing" secondItem="drY-fX-e3T" secondAttribute="trailing" constant="24" id="QnU-7x-12O"/>
-                                        <constraint firstItem="fOa-EF-f61" firstAttribute="leading" secondItem="vGy-6t-sgV" secondAttribute="trailing" constant="4" id="YS9-uV-NXJ"/>
                                         <constraint firstItem="wMb-9D-FuR" firstAttribute="leading" secondItem="R0Z-sg-Sjv" secondAttribute="leading" id="YgD-K6-WIm"/>
+                                        <constraint firstItem="dG1-z2-jwV" firstAttribute="leading" secondItem="wMb-9D-FuR" secondAttribute="leading" id="bp9-b3-pm7"/>
                                         <constraint firstItem="R0Z-sg-Sjv" firstAttribute="top" secondItem="gb9-og-qg5" secondAttribute="bottom" constant="8" id="ccS-iB-qe9"/>
                                         <constraint firstItem="gb9-og-qg5" firstAttribute="leading" secondItem="oKn-fb-jDx" secondAttribute="leading" constant="8" id="djw-hH-PF6"/>
                                         <constraint firstItem="2ea-GQ-lvb" firstAttribute="centerY" secondItem="5yG-l5-Xfr" secondAttribute="centerY" id="gQk-cJ-JAk"/>
-                                        <constraint firstItem="vGy-6t-sgV" firstAttribute="top" secondItem="wMb-9D-FuR" secondAttribute="bottom" constant="7.5" id="kzJ-Cw-zFg"/>
-                                        <constraint firstItem="vGy-6t-sgV" firstAttribute="leading" secondItem="wMb-9D-FuR" secondAttribute="leading" id="lBA-Fe-hpR"/>
                                         <constraint firstItem="wMb-9D-FuR" firstAttribute="top" secondItem="R0Z-sg-Sjv" secondAttribute="bottom" constant="12" id="lQO-NY-Uk0"/>
+                                        <constraint firstItem="dG1-z2-jwV" firstAttribute="top" secondItem="wMb-9D-FuR" secondAttribute="bottom" constant="8" id="mgU-eF-Pxv"/>
                                         <constraint firstItem="5yG-l5-Xfr" firstAttribute="leading" secondItem="fOa-EF-f61" secondAttribute="trailing" constant="3" id="ohO-d0-VH4"/>
                                         <constraint firstItem="drY-fX-e3T" firstAttribute="centerY" secondItem="SwJ-aX-sdU" secondAttribute="centerY" id="sM9-oE-vHG"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5yG-l5-Xfr" secondAttribute="bottom" constant="4" id="tvB-EH-am3"/>
                                         <constraint firstItem="SwJ-aX-sdU" firstAttribute="leading" secondItem="wMb-9D-FuR" secondAttribute="trailing" constant="4" id="vnx-DM-iZA"/>
+                                        <constraint firstItem="fOa-EF-f61" firstAttribute="leading" secondItem="dG1-z2-jwV" secondAttribute="trailing" constant="4" id="w9a-TB-7hk"/>
+                                        <constraint firstItem="5yG-l5-Xfr" firstAttribute="centerY" secondItem="dG1-z2-jwV" secondAttribute="centerY" id="xZw-e6-ePa"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -652,7 +652,7 @@
                         <outlet property="joompedUploaderImageView" destination="wMb-9D-FuR" id="kKJ-2a-TFB"/>
                         <outlet property="karmaCountLabel" destination="fOa-EF-f61" id="rEg-ad-198"/>
                         <outlet property="karmaLabel" destination="5yG-l5-Xfr" id="tJO-Pu-WHb"/>
-                        <outlet property="likeButton" destination="vGy-6t-sgV" id="9qS-tL-wJt"/>
+                        <outlet property="likeButton" destination="dG1-z2-jwV" id="c3g-eL-pww"/>
                         <outlet property="liveAnnotationBlurView" destination="IvF-wf-6cg" id="qb0-ZZ-UYN"/>
                         <outlet property="liveAnnotationLabel" destination="3Ub-zE-iMH" id="Ezm-sP-CLx"/>
                         <outlet property="numberAnnotationsLabel" destination="drY-fX-e3T" id="MDv-XR-9nS"/>
@@ -681,8 +681,13 @@
                         <action selector="didTapSeekBar:" destination="z9f-sm-9S5" id="yeF-RQ-8A7"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="hWl-iv-H2y">
+                    <connections>
+                        <action selector="didTapLikeButton:" destination="z9f-sm-9S5" id="yNo-Dm-iPK"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1932" y="385.45727136431788"/>
+            <point key="canvasLocation" x="1931.8840579710147" y="384.78260869565219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="00k-qF-SZo">
@@ -713,11 +718,11 @@
         <image name="Full-Screen" width="25" height="25"/>
         <image name="Pause" width="25" height="25"/>
         <image name="Person" width="30" height="30"/>
-        <image name="heart" width="32" height="30"/>
+        <image name="heart" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XD9-iG-gfL"/>
-        <segue reference="vm2-8s-e9R"/>
+        <segue reference="8hp-Pb-k3P"/>
         <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>

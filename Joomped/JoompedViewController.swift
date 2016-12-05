@@ -30,7 +30,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var fullscreenButton: UIButton!
     @IBOutlet weak var karmaLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: UIImageView!
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var joompedUploaderImageView: UIImageView!
     
@@ -127,9 +127,9 @@ class JoompedViewController: UIViewController {
             }
             if let user = PFUser.current() as? User {
                 if ParseUtility.contains(objects: user.gaveKarma, element: joomped) {
-                    likeButton.imageView?.tintColor = UIColor.red
+                    likeButton.tintColor = UIColor.red
                 } else {
-                    likeButton.imageView?.tintColor = UIColor.black
+                    likeButton.tintColor = UIColor.lightGray
                 }
             }
             duration = Float(joomped.video.length)
@@ -286,7 +286,7 @@ class JoompedViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapLikeButton(_ sender: Any) {
+    @IBAction func didTapLikeButton(_ sender: UITapGestureRecognizer) {
         guard let user = PFUser.current() as? User else {
             print("failed to get User object")
             return
@@ -298,23 +298,24 @@ class JoompedViewController: UIViewController {
             joomped.karma = 0
         }
         var newKarmaCount: Int
-        var backgroundColor: UIColor
+        var tintColor: UIColor
         let index = ParseUtility.indexOf(objects: user.gaveKarma, element: joomped)
         if index != -1 {
             // unlike
             user.gaveKarma.remove(at: index)
             newKarmaCount = joomped.karma! - 1
-            backgroundColor = UIColor.black
+            tintColor = UIColor.lightGray
         } else {
             // like
             user.gaveKarma.append(joomped)
             newKarmaCount = joomped.karma! + 1
-            backgroundColor = UIColor.red
+            tintColor = UIColor.red
         }
         joomped.karma = newKarmaCount
         karmaCountLabel.text = String(newKarmaCount)
-        likeButton.imageView?.tintColor = backgroundColor
-//        likeButton.backgroundColor = backgroundColor
+        let tintedImage = likeButton.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        likeButton.image = tintedImage
+        likeButton.tintColor = tintColor
         likeButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         UIView.animate(
             withDuration: 2.0,
@@ -326,7 +327,6 @@ class JoompedViewController: UIViewController {
                 self?.likeButton.transform = .identity
             },
             completion: nil)
-        // animate the button
         joomped.saveInBackground()
         user.saveInBackground()
     }
