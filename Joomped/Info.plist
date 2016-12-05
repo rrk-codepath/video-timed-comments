@@ -27,7 +27,7 @@
 			<string>com.rrk.Notate</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>notate</string>
+				<string>joomped</string>
 			</array>
 		</dict>
 		<dict>

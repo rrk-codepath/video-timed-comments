@@ -29,9 +29,14 @@ class JoompedTableViewCell: UITableViewCell {
             if let joompedUser = joomped.user.displayName {
                 joompedAuthorLabel.text = "\(joompedUser)"
             }
-            if let thumbnail = joomped.video.thumbnail, let thumbnailUrl = URL(string: thumbnail) {
-                videoImageView.setImageWith(thumbnailUrl)
+            
+            if oldValue?.video.thumbnail != joomped.video.thumbnail {
+                videoImageView.image = nil
+                if let thumbnail = joomped.video.thumbnail, let thumbnailUrl = URL(string: thumbnail) {
+                    videoImageView.setImageWith(thumbnailUrl, fadeTime: 0.2)
+                }
             }
+            
             timestampLabel.text = joomped.createdAt?.timeAgoRelative
             if timestampLabel.text != nil && timestampLabel.text!.isEmpty {
                 // Timestamp is sometimes nil for newly created videos, so we get empty string
