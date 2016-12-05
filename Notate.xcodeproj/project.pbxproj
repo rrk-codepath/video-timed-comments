@@ -89,7 +89,7 @@
 		B75866541DD69A3E00BB101D /* AnnotationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCell.swift; sourceTree = "<group>"; };
 		B75866551DD69A3E00BB101D /* AnnotationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotationCell.xib; sourceTree = "<group>"; };
 		B7BA77751DE3F7EF005F52D6 /* TableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeader.xib; sourceTree = "<group>"; };
-		B7CC8D101DD2D625005FCBEF /* Joomped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joomped.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7CC8D101DD2D625005FCBEF /* Notate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CC8D131DD2D625005FCBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7CC8D181DD2D625005FCBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7CC8D1A1DD2D625005FCBEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		B7CC8D111DD2D625005FCBEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7CC8D101DD2D625005FCBEF /* Joomped.app */,
+				B7CC8D101DD2D625005FCBEF /* Notate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 			);
 			name = Notate;
 			productName = Joomped;
-			productReference = B7CC8D101DD2D625005FCBEF /* Joomped.app */;
+			productReference = B7CC8D101DD2D625005FCBEF /* Notate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
