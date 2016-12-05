@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
         "THNKR",
         "Codepath"
     ]
-
+    
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -77,6 +77,19 @@ class HomeViewController: UIViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchJoomped(refreshControl:)), for: UIControlEvents.valueChanged)
         joompedTableView.insertSubview(refreshControl, at: 0)
+        
+        if let user = PFUser.current() as? User,
+            let imageUrl = user.imageUrl,
+            let url = URL(string: imageUrl) {
+        let profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            profileImageView.setImageWith(url)
+            profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+            profileImageView.clipsToBounds = true
+            
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(onTappedProfile(_:)))
+            profileImageView.addGestureRecognizer(gesture)
+            profileBarButtonItem.customView = profileImageView
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
