@@ -25,7 +25,23 @@ class HomeViewController: UIViewController {
         "Gresham College",
         "Healthcare Triage",
         "THNKR",
-        "Codepath"
+        "Codepath",
+        "GoogleTalks",
+        "Bad Astronomy",
+        "Big Think",
+        "British Film Institute National Archive",
+        "American Museum of Natural History",
+        "Artists Space",
+        "Al Jazeera English",
+        "Aspen Institute",
+        "Brooklyn Museum",
+        "Canal Educatif",
+        "Computer History Museum",
+        "Reuters Video",
+        "The New York Times",
+        "YouTube EDU",
+        "University of California – Berkeley",
+        "Stanford University"
     ]
     
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!

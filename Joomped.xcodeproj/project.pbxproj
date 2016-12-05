@@ -14,6 +14,8 @@
 		5630B0A81DD41974008E78D6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B0A71DD41974008E78D6 /* User.swift */; };
 		5632235B1DE5397D006A8F58 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632235A1DE5397D006A8F58 /* ProfileViewController.swift */; };
 		5636B9671DF5420E006BB7D6 /* FTIndicator+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5636B9661DF5420E006BB7D6 /* FTIndicator+Async.swift */; };
+		5636B9691DF54D46006BB7D6 /* UILabel+Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5636B9681DF54D46006BB7D6 /* UILabel+Animate.swift */; };
+		5636B96B1DF5505E006BB7D6 /* UIImageView+Fade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5636B96A1DF5505E006BB7D6 /* UIImageView+Fade.swift */; };
 		563708DC1DD6A473007CF706 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708D81DD6A473007CF706 /* Youtube.swift */; };
 		563708DD1DD6A473007CF706 /* YoutubeSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708D91DD6A473007CF706 /* YoutubeSnippet.swift */; };
 		563708DE1DD6A473007CF706 /* YoutubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */; };
@@ -57,6 +59,8 @@
 		5630B0A71DD41974008E78D6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5632235A1DE5397D006A8F58 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5636B9661DF5420E006BB7D6 /* FTIndicator+Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FTIndicator+Async.swift"; sourceTree = "<group>"; };
+		5636B9681DF54D46006BB7D6 /* UILabel+Animate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Animate.swift"; sourceTree = "<group>"; };
+		5636B96A1DF5505E006BB7D6 /* UIImageView+Fade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Fade.swift"; sourceTree = "<group>"; };
 		563708D81DD6A473007CF706 /* Youtube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
 		563708D91DD6A473007CF706 /* YoutubeSnippet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeSnippet.swift; sourceTree = "<group>"; };
 		563708DA1DD6A473007CF706 /* YoutubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeThumbnail.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				56B6A9D01DEED36700329E08 /* UIImage+Resize.swift */,
 				793957551DF3FB8E004D12D8 /* UIButtonExtensions.swift */,
 				5636B9661DF5420E006BB7D6 /* FTIndicator+Async.swift */,
+				5636B9681DF54D46006BB7D6 /* UILabel+Animate.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				5684F1D51DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift */,
 				B7BA77751DE3F7EF005F52D6 /* TableViewHeader.xib */,
 				B7E9D4B01DF38D0A00F2C2F0 /* Joomped-Bridging-Header.h */,
+				5636B96A1DF5505E006BB7D6 /* UIImageView+Fade.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -403,7 +409,9 @@
 				79D35C621DDD88A5006B4967 /* UIBarButtonItemExtensions.swift in Sources */,
 				B72C6C2E1DDC51390049C3C5 /* Date+Relative.swift in Sources */,
 				562F27BB1DD6B6100012E196 /* JoompedTableViewCell.swift in Sources */,
+				5636B9691DF54D46006BB7D6 /* UILabel+Animate.swift in Sources */,
 				B7CC8D141DD2D625005FCBEF /* AppDelegate.swift in Sources */,
+				5636B96B1DF5505E006BB7D6 /* UIImageView+Fade.swift in Sources */,
 				5636B9671DF5420E006BB7D6 /* FTIndicator+Async.swift in Sources */,
 				5684F1D81DD719EB004EAF1C /* YoutubeVideoDetails.swift in Sources */,
 				79C5C69C1DD40CFA00040B17 /* JoompedViewController.swift in Sources */,
