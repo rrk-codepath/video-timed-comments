@@ -660,6 +660,14 @@ extension JoompedViewController: AnnotationCellDelegate {
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
     }
+    
+    func annotationCellNeedsLayoutUpdate(annotationCell: AnnotationCell) {
+        // http://stackoverflow.com/questions/31595524/resize-uitableviewcell-containing-uitextview-upon-typing
+        UIView.setAnimationsEnabled(false)
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+    }
 }
 
 extension JoompedViewController: ASFSharedViewTransitionDataSource {

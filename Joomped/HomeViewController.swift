@@ -123,12 +123,16 @@ class HomeViewController: UIViewController {
         // query.limit = 10
         
         query.includeKeys(["video", "user"])
+        
+        FTIndicator.showProgressWithmessage("")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            self.joomped = objects as? [Joomped] ?? []
-            self.reloadTable()
-            if let refreshControl = refreshControl {
-                refreshControl.endRefreshing()
-            }
+            DispatchQueue.main.async(execute: { 
+                self.joomped = objects as? [Joomped] ?? []
+                self.reloadTable()
+                if let refreshControl = refreshControl {
+                    refreshControl.endRefreshing()
+                }
+            })
         }
     }
     
@@ -179,8 +183,10 @@ class HomeViewController: UIViewController {
         
         query.includeKeys(["video", "user", "annotations.Annotation"])
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            self.joomped = objects as? [Joomped] ?? []
-            self.reloadTable()
+            DispatchQueue.main.async(execute: { 
+                self.joomped = objects as? [Joomped] ?? []
+                self.reloadTable()
+            })
         }
     }
     

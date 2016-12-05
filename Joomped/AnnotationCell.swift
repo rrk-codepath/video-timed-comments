@@ -12,6 +12,7 @@ import UIKit
     @objc optional func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation)
     @objc optional func annotationCell(annotationCell: AnnotationCell, removedAnnotation: Annotation)
     @objc optional func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float)
+    @objc optional func annotationCellNeedsLayoutUpdate(annotationCell: AnnotationCell)
 }
 
 class AnnotationCell: UITableViewCell {
@@ -98,7 +99,14 @@ class AnnotationCell: UITableViewCell {
 
 extension AnnotationCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        saveButton.isEnabled = annotationTextView.text!.characters.count > 0
+        saveButton.isEnabled = annotationTextView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).characters.count > 0
+        
+        // http://stackoverflow.com/questions/31595524/resize-uitableviewcell-containing-uitextview-upon-typing
+        let startHeight = textView.frame.size.height
+        let calcHeight = textView.sizeThatFits(textView.frame.size).height  //iOS 8+ only
+        if startHeight != calcHeight {
+            delegate?.annotationCellNeedsLayoutUpdate?(annotationCell: self)
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
