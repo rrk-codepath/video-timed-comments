@@ -1,4 +1,5 @@
 //
+
 //  HomeViewController.swift
 //  Joomped
 //
@@ -10,6 +11,7 @@ import UIKit
 import GoogleSignIn
 import Parse
 import iOSSharedViewTransition
+import FTIndicator
 
 class HomeViewController: UIViewController {
     
@@ -32,6 +34,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var segmentedControlBackground: UIView!
     @IBOutlet weak var searchModeSegmentedControl: UISegmentedControl!
     @IBOutlet var viewTapGestureRecognizer: UITapGestureRecognizer!
+    //Now used for white status bar on scroll
     @IBOutlet weak var tableViewActivityIndicator: UIActivityIndicatorView!
     
     var selectedJoomped: Joomped?
@@ -59,7 +62,6 @@ class HomeViewController: UIViewController {
         joompedTableView.rowHeight = 114
         joompedTableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         joompedTableView.isHidden = true
-        tableViewActivityIndicator.startAnimating()
         ASFSharedViewTransition.addWith(fromViewControllerClass: HomeViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         navigationItem.titleView = searchBar
@@ -119,7 +121,7 @@ class HomeViewController: UIViewController {
     
     private func reloadTable() {
         self.joompedTableView.isHidden = false
-        self.tableViewActivityIndicator.stopAnimating()
+        FTIndicator.dismissProgress()
         self.joompedTableView.reloadData()
     }
     
@@ -133,25 +135,18 @@ class HomeViewController: UIViewController {
         switch searchMode {
         case SearchMode.joomped:
             if joompedSearchText != term {
-                showLoadingIndicator()
+                FTIndicator.showProgressWithmessage("")
                 searchJoomped(term: term)
                 joompedSearchText = searchBar.text
             }
             break
         case SearchMode.youtube:
             if youtubeSearchText != term {
-                showLoadingIndicator()
+                FTIndicator.showProgressWithmessage("")
                 searchYoutube(term: term)
                 youtubeSearchText = searchBar.text
             }
             break
-        }
-    }
-    
-    private func showLoadingIndicator() {
-        if joompedTableView.visibleCells.count == 0 {
-            joompedTableView.isHidden = true
-            tableViewActivityIndicator.startAnimating()
         }
     }
     
@@ -160,7 +155,7 @@ class HomeViewController: UIViewController {
         
         if !term.isEmpty {
             let videoQuery = PFQuery(className: "Video")
-            videoQuery.whereKey("title", contains: term)
+            videoQuery.whereKey("title", matchesRegex: "(\(term))", modifiers: "i")
             query.whereKey("video", matchesQuery: videoQuery)
         }
 
@@ -216,6 +211,7 @@ class HomeViewController: UIViewController {
                 self.reloadTable()
             },
             failure: { (error: Error) -> Void in
+                FTIndicator.dismissProgress()
                 print("error: \(error.localizedDescription)")
             })
     }
@@ -362,7 +358,6 @@ extension HomeViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         viewTapGestureRecognizer.isEnabled = false
-        search()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

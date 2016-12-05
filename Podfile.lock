@@ -24,6 +24,13 @@ PODS:
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleUtilities (~> 1.2)
   - FirebaseInstanceID (1.0.8)
+  - FTIndicator (1.1.5):
+    - FTIndicator/FTNotificationIndicator (= 1.1.5)
+    - FTIndicator/FTProgressIndicator (= 1.1.5)
+    - FTIndicator/FTToastIndicator (= 1.1.5)
+  - FTIndicator/FTNotificationIndicator (1.1.5)
+  - FTIndicator/FTProgressIndicator (1.1.5)
+  - FTIndicator/FTToastIndicator (1.1.5)
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
   - Google/SignIn (3.0.3):
@@ -53,6 +60,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - FTIndicator
   - Google/SignIn
   - iOSSharedViewTransition (~> 1.0.2)
   - Parse
@@ -64,6 +72,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 0533a00b681e08fd0b2cd0444b7ddf0ef9fd7a1a
   FirebaseCore: 5a885548bbc5f0c410b04f8e9ac9d73ff1221907
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  FTIndicator: 8b9885b84340a19029ad13672add3bb8183feba8
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
   GoogleAuthUtilities: ccad2e0a9284699973ff57c0dd24c3893657fda4
@@ -76,6 +85,6 @@ SPEC CHECKSUMS:
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: e46491e781f1190e375d1ae5611e9932f94058c2
+PODFILE CHECKSUM: 9fee3073ea0c7c23e407d0ab20f58d11b472e14b
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.1.1

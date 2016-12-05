@@ -11,4 +11,5 @@ target 'Joomped' do
   pod 'AFNetworking', '~> 3.0'
   pod 'Google/SignIn'
   pod 'iOSSharedViewTransition', '~> 1.0.2'
+  pod 'FTIndicator'
 end

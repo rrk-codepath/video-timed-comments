@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import youtube_ios_player_helper
 import iOSSharedViewTransition
+import FTIndicator
 
 class JoompedViewController: UIViewController {
 
@@ -78,6 +79,7 @@ class JoompedViewController: UIViewController {
     var isEditMode = false {
         didSet {
             configureNavigationBar()
+            FTIndicator.dismissProgress()
             tableView?.reloadData()
         }
     }
@@ -260,12 +262,21 @@ class JoompedViewController: UIViewController {
         newJoomped.user = user
         newJoomped.video = video
         newJoomped.views = joomped?.views ?? 0
+        FTIndicator.showProgressWithmessage("")
         newJoomped.saveInBackground { (success: Bool, error: Error?) in
+            FTIndicator.dismissProgress()
             if let error = error {
-                print("error saving \(error.localizedDescription)")
+                let alert = UIAlertController(title: "Error with save",
+                                              message: error.localizedDescription,
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                
+                let cancelAction = UIAlertAction(title: "OK",
+                                                 style: .cancel, handler: nil)
+                
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
                 return
             }
-            print("saved successfully: \(newJoomped.objectId)")
             if self.segueToHomeFlag {
                 self.playerView.stopVideo()
                 self.performSegue(withIdentifier: "saveHomeSegue", sender: self)
@@ -414,7 +425,11 @@ class JoompedViewController: UIViewController {
     func updateAnnotationInSeekBar() {
         seekBar.subviews.forEach({ $0.removeFromSuperview() })
         annotations.forEach { (annotation) in
-            let percentage = annotation.timestamp / (duration ?? Float(playerView.duration()))
+            let duration = self.duration ?? Float(playerView.duration())
+            if duration == 0 {
+                return
+            }
+            let percentage = annotation.timestamp / duration
             let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: -5, width: 3, height: Double(15)))
             lineView.backgroundColor = UIColor.rrk_primaryColor
             seekBar.addSubview(lineView)
