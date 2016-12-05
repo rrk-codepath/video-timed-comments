@@ -30,7 +30,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var fullscreenButton: UIButton!
     @IBOutlet weak var karmaLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: UIImageView!
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var joompedUploaderImageView: UIImageView!
     
@@ -127,9 +127,9 @@ class JoompedViewController: UIViewController {
             }
             if let user = PFUser.current() as? User {
                 if ParseUtility.contains(objects: user.gaveKarma, element: joomped) {
-                    likeButton.imageView?.tintColor = UIColor.red
+                    likeButton.tintColor = UIColor.red
                 } else {
-                    likeButton.imageView?.tintColor = UIColor.black
+                    likeButton.tintColor = UIColor.lightGray
                 }
             }
             duration = Float(joomped.video.length)
@@ -286,7 +286,7 @@ class JoompedViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapLikeButton(_ sender: Any) {
+    @IBAction func didTapLikeButton(_ sender: UITapGestureRecognizer) {
         guard let user = PFUser.current() as? User else {
             print("failed to get User object")
             return
@@ -298,23 +298,24 @@ class JoompedViewController: UIViewController {
             joomped.karma = 0
         }
         var newKarmaCount: Int
-        var backgroundColor: UIColor
+        var tintColor: UIColor
         let index = ParseUtility.indexOf(objects: user.gaveKarma, element: joomped)
         if index != -1 {
             // unlike
             user.gaveKarma.remove(at: index)
             newKarmaCount = joomped.karma! - 1
-            backgroundColor = UIColor.black
+            tintColor = UIColor.lightGray
         } else {
             // like
             user.gaveKarma.append(joomped)
             newKarmaCount = joomped.karma! + 1
-            backgroundColor = UIColor.red
+            tintColor = UIColor.red
         }
         joomped.karma = newKarmaCount
         karmaCountLabel.text = String(newKarmaCount)
-        likeButton.imageView?.tintColor = backgroundColor
-//        likeButton.backgroundColor = backgroundColor
+        let tintedImage = likeButton.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        likeButton.image = tintedImage
+        likeButton.tintColor = tintColor
         likeButton.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         UIView.animate(
             withDuration: 2.0,
@@ -326,7 +327,6 @@ class JoompedViewController: UIViewController {
                 self?.likeButton.transform = .identity
             },
             completion: nil)
-        // animate the button
         joomped.saveInBackground()
         user.saveInBackground()
     }
@@ -431,7 +431,7 @@ class JoompedViewController: UIViewController {
             }
             let percentage = annotation.timestamp / duration
             let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: -5, width: 3, height: Double(15)))
-            lineView.backgroundColor = UIColor.rrk_primaryColor
+            lineView.backgroundColor = UIColor.rrk_primaryColorSelected
             seekBar.addSubview(lineView)
         }
         isSeekBarAnnotated = true
@@ -513,12 +513,13 @@ class JoompedViewController: UIViewController {
             progress: timestamp / duration,
             callback: { (url: URL, location: YoutubeStoryboard.Location) in
                 cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
-                    let widthScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.width / image.size.width
-                    let heightScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.height / image.size.height
+                    let widthScale: CGFloat = 1.0 / CGFloat(self.youtubeStoryboard.columns)
+                    let heightScale: CGFloat = 1.0 / CGFloat(self.youtubeStoryboard.rows)
                     let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
                     let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
                     cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
                     cell.thumbnailImageView.image = image
+                    cell.showThumbnail()
                 }, failure: nil)
             },
             failure: { () -> Void in
@@ -569,7 +570,7 @@ extension JoompedViewController: UITableViewDataSource {
         
         if indexPath.section == 0 {
             if highlightedRow == indexPath.row {
-                cell.backgroundColor = UIColor.rrk_primaryColor
+                cell.backgroundColor = UIColor.rrk_highlightColor
             } else {
                 cell.backgroundColor = UIColor.white
             }
@@ -581,6 +582,7 @@ extension JoompedViewController: UITableViewDataSource {
             cell.isNew = true
             cell.annotation = nil
             cell.timestampLabel.isHidden = true
+            cell.thumbnailImageView.image = nil
         }
         return cell
     }
@@ -605,7 +607,8 @@ extension JoompedViewController: UITableViewDelegate {
             highlightedRow = indexPath.row
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
-                cell.backgroundColor = UIColor.rrk_primaryColor
+                cell.backgroundColor = UIColor.rrk_highlightColor
+                cell.backgroundColor = UIColor.rrk_primaryColorSelected
             })
             if !isEditMode {
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
@@ -638,6 +641,7 @@ extension JoompedViewController: AnnotationCellDelegate {
             for (index, annotation) in annotations.enumerated() {
                 if newAnnotation.timestamp < annotation.timestamp {
                     annotations.insert(newAnnotation, at: index)
+                    break
                 }
             }
         }
@@ -655,6 +659,14 @@ extension JoompedViewController: AnnotationCellDelegate {
             let indexPath = IndexPath(item: numberOfRows - 1, section: numberOfSections - 1)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
+    }
+    
+    func annotationCellNeedsLayoutUpdate(annotationCell: AnnotationCell) {
+        // http://stackoverflow.com/questions/31595524/resize-uitableviewcell-containing-uitextview-upon-typing
+        UIView.setAnimationsEnabled(false)
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
 }
 
@@ -699,9 +711,9 @@ extension JoompedViewController: YTPlayerViewDelegate {
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
                 let currentCell = tableView.cellForRow(at: indexPath) as? AnnotationCell
                 highlightedRow = indexPath.row
-                if currentCell?.backgroundColor != UIColor.rrk_primaryColor {
+                if currentCell?.backgroundColor != UIColor.rrk_highlightColor {
                     UIView.animate(withDuration: 1, animations: {
-                        currentCell?.backgroundColor = UIColor.rrk_primaryColor
+                        currentCell?.backgroundColor = UIColor.rrk_highlightColor
                     })
                 }
                 self.currentAnnotationCell = currentCell

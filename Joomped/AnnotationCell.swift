@@ -12,15 +12,16 @@ import UIKit
     @objc optional func annotationCell(annotationCell: AnnotationCell, addedAnnotation newAnnotation: Annotation)
     @objc optional func annotationCell(annotationCell: AnnotationCell, removedAnnotation: Annotation)
     @objc optional func annotationCell(annotationCell: AnnotationCell, tappedTimestamp timestamp: Float)
+    @objc optional func annotationCellNeedsLayoutUpdate(annotationCell: AnnotationCell)
 }
 
 class AnnotationCell: UITableViewCell {
+    @IBOutlet weak var thumbnailWidth: NSLayoutConstraint!
     @IBOutlet weak var annotationTextView: UITextView!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var annotationLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var thumbnailImageViewWidthConstraint: NSLayoutConstraint!
     
     weak var delegate: AnnotationCellDelegate?
     var isNew: Bool = false
@@ -36,13 +37,6 @@ class AnnotationCell: UITableViewCell {
             if isEditMode {
                 annotationTextView.textColor = UIColor.darkGray
             }
-        }
-    }
-    
-    var thumbnail: UIImage? {
-        didSet {
-            thumbnailImageView.image = thumbnail
-            thumbnailImageView.alpha = 0.5
         }
     }
     
@@ -63,16 +57,14 @@ class AnnotationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         annotationTextView.delegate = self
         let padding = annotationTextView.textContainer.lineFragmentPadding
         annotationTextView.textContainerInset = UIEdgeInsetsMake(-0.5, -padding, 0, -padding)
+        thumbnailImageView.alpha = 0.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     @IBAction func didTapSaveButton(_ sender: Any) {
@@ -80,11 +72,12 @@ class AnnotationCell: UITableViewCell {
     }
     
     func hideThumbnail() {
-        /*if thumbnailImageViewWidthConstraint.constant > 0 {
-            UIView.animate(withDuration: 1, animations: { () -> Void in
-                self.thumbnailImageViewWidthConstraint.constant = 0
-            })
-        }*/
+    }
+    
+    func showThumbnail() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.thumbnailImageView.alpha = 0.5
+        })
     }
     
     fileprivate func saveAnnotation() {
@@ -100,14 +93,20 @@ class AnnotationCell: UITableViewCell {
         annotation.timestamp = timestampFloat!
         self.saveButton.isEnabled = false
         
-        thumbnailImageView.alpha = 1.0
         delegate?.annotationCell?(annotationCell: self, addedAnnotation: annotation)
     }
 }
 
 extension AnnotationCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        saveButton.isEnabled = annotationTextView.text!.characters.count > 0
+        saveButton.isEnabled = annotationTextView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).characters.count > 0
+        
+        // http://stackoverflow.com/questions/31595524/resize-uitableviewcell-containing-uitextview-upon-typing
+        let startHeight = textView.frame.size.height
+        let calcHeight = textView.sizeThatFits(textView.frame.size).height  //iOS 8+ only
+        if startHeight != calcHeight {
+            delegate?.annotationCellNeedsLayoutUpdate?(annotationCell: self)
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
