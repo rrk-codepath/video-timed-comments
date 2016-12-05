@@ -2,6 +2,7 @@ import UIKit
 import GoogleSignIn
 import Parse
 import iOSSharedViewTransition
+import FTIndicator
 
 class ProfileViewController: UIViewController {
     
@@ -45,7 +46,7 @@ class ProfileViewController: UIViewController {
         joompedTableView.estimatedRowHeight = 114
         joompedTableView.rowHeight = 114
         joompedTableView.tableFooterView = UIView()
-        
+
         fetchJoomped();
     }
 
@@ -62,7 +63,10 @@ class ProfileViewController: UIViewController {
         query.order(byDescending: "createdAt")
         query.includeKeys(["video", "user"])
         query.whereKey("user", equalTo: user as Any)
+        
+        FTIndicator.showProgressWithmessage("")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            FTIndicator.dismissProgress()
             if let error = error {
                 print("error: \(error.localizedDescription)")
                 return
