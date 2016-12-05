@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqx-j7-c3R">
-                        <rect key="frame" x="116" y="39" width="253" height="36.5"/>
+                        <rect key="frame" x="116" y="33" width="253" height="36.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYk-u9-Qn8">
-                        <rect key="frame" x="377" y="39" width="34" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="753" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYk-u9-Qn8">
+                        <rect key="frame" x="377" y="33" width="34" height="30"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <state key="normal" title="Save"/>
                         <connections>
@@ -34,8 +34,8 @@
                         </connections>
                     </button>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Annotation Label goes here, which could be very long" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l65-Is-vBT">
-                        <rect key="frame" x="116" y="39" width="253" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="116" y="33" width="253" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
@@ -49,7 +49,7 @@
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2d-6J-4kZ">
                         <rect key="frame" x="116" y="8" width="36" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.3089923242" green="0.318089344" blue="0.46183736910000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.3089923242" green="0.318089344" blue="0.46183736910000001" alpha="0.6000269396551724" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -58,9 +58,9 @@
                     <constraint firstItem="ZYk-u9-Qn8" firstAttribute="top" secondItem="l65-Is-vBT" secondAttribute="top" id="5L6-7L-u9p"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l65-Is-vBT" secondAttribute="bottom" constant="12" id="9mk-LC-PD6"/>
                     <constraint firstItem="M2d-6J-4kZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Adv-aA-nCI"/>
-                    <constraint firstItem="bqx-j7-c3R" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="BP2-Ra-OyG"/>
+                    <constraint firstItem="bqx-j7-c3R" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="4" id="BP2-Ra-OyG"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IjH-gq-5Y8" secondAttribute="bottom" constant="8" id="BRB-4h-UYJ"/>
-                    <constraint firstItem="l65-Is-vBT" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="10" id="GEy-hJ-OwO"/>
+                    <constraint firstItem="l65-Is-vBT" firstAttribute="top" secondItem="M2d-6J-4kZ" secondAttribute="bottom" constant="4" id="GEy-hJ-OwO"/>
                     <constraint firstItem="IjH-gq-5Y8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GRc-jD-Vad"/>
                     <constraint firstItem="IjH-gq-5Y8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="WHK-MM-DmU"/>
                     <constraint firstAttribute="trailing" secondItem="ZYk-u9-Qn8" secondAttribute="trailing" constant="8" id="WuI-UN-wJK"/>
@@ -77,6 +77,7 @@
                 <outlet property="annotationTextView" destination="bqx-j7-c3R" id="CzB-P9-Wzw"/>
                 <outlet property="saveButton" destination="ZYk-u9-Qn8" id="Wr2-OU-UJo"/>
                 <outlet property="thumbnailImageView" destination="IjH-gq-5Y8" id="nXj-QU-ST0"/>
+                <outlet property="thumbnailWidth" destination="TA1-hq-k6Y" id="URy-lO-RsR"/>
                 <outlet property="timestampLabel" destination="M2d-6J-4kZ" id="Uea-dH-ayC"/>
             </connections>
             <point key="canvasLocation" x="138.5" y="87.5"/>

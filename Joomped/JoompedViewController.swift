@@ -431,7 +431,7 @@ class JoompedViewController: UIViewController {
             }
             let percentage = annotation.timestamp / duration
             let lineView = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentage), y: -5, width: 3, height: Double(15)))
-            lineView.backgroundColor = UIColor.rrk_primaryColor
+            lineView.backgroundColor = UIColor.rrk_primaryColorSelected
             seekBar.addSubview(lineView)
         }
         isSeekBarAnnotated = true
@@ -513,12 +513,13 @@ class JoompedViewController: UIViewController {
             progress: timestamp / duration,
             callback: { (url: URL, location: YoutubeStoryboard.Location) in
                 cell.thumbnailImageView.setImageWith(URLRequest(url: url), placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
-                    let widthScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.width / image.size.width
-                    let heightScale: CGFloat = 0.2 //cell.thumbnailImageView.frame.height / image.size.height
+                    let widthScale: CGFloat = 1.0 / CGFloat(self.youtubeStoryboard.columns)
+                    let heightScale: CGFloat = 1.0 / CGFloat(self.youtubeStoryboard.rows)
                     let xLocation = CGFloat(location.column) / CGFloat(self.youtubeStoryboard.columns)
                     let yLocation = CGFloat(location.row) / CGFloat(self.youtubeStoryboard.rows)
                     cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
                     cell.thumbnailImageView.image = image
+                    cell.showThumbnail()
                 }, failure: nil)
             },
             failure: { () -> Void in
@@ -581,6 +582,7 @@ extension JoompedViewController: UITableViewDataSource {
             cell.isNew = true
             cell.annotation = nil
             cell.timestampLabel.isHidden = true
+            cell.thumbnailImageView.image = nil
         }
         return cell
     }
@@ -606,6 +608,7 @@ extension JoompedViewController: UITableViewDelegate {
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
                 cell.backgroundColor = UIColor.rrk_highlightColor
+                cell.backgroundColor = UIColor.rrk_primaryColorSelected
             })
             if !isEditMode {
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
@@ -638,6 +641,7 @@ extension JoompedViewController: AnnotationCellDelegate {
             for (index, annotation) in annotations.enumerated() {
                 if newAnnotation.timestamp < annotation.timestamp {
                     annotations.insert(newAnnotation, at: index)
+                    break
                 }
             }
         }
