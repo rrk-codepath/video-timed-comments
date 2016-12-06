@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController {
         
         FTIndicator.showProgressWithmessage("")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            FTIndicator.dismissProgressOnMainThread()
+            FTIndicator.dismissProgress()
             if let error = error {
                 print("error: \(error.localizedDescription)")
                 return

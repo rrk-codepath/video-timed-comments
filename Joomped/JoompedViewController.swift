@@ -79,8 +79,8 @@ class JoompedViewController: UIViewController {
     var isEditMode = false {
         didSet {
             configureNavigationBar()
-            FTIndicator.dismissProgress()
             tableView?.reloadData()
+            FTIndicator.dismissProgress()
         }
     }
     
@@ -211,7 +211,7 @@ class JoompedViewController: UIViewController {
         if segueToHomeFlag {
             height = videoTitleLabel.frame.height + videoUploaderLabel.frame.height + 20
         } else {
-            height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + joompedUploaderImageView.frame.height + 70
+            height = videoTitleLabel.frame.height + publishLabel.frame.height + videoUploaderLabel.frame.height + joompedUploaderImageView.frame.height + 40
         }
         var frame = headerView.frame
         frame.size.height = height

@@ -111,6 +111,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         joompedTableView.reloadData()
+        FTIndicator.dismissProgress()
     }
     
     @IBAction func onSearchModeChanged(_ sender: UISegmentedControl) {
@@ -140,7 +141,9 @@ class HomeViewController: UIViewController {
         
         query.includeKeys(["video", "user"])
         
-        FTIndicator.showProgressWithmessage("")
+        if refreshControl == nil {
+            FTIndicator.showProgressWithmessage("")
+        }
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             DispatchQueue.main.async(execute: { 
                 self.joomped = objects as? [Joomped] ?? []
@@ -154,8 +157,8 @@ class HomeViewController: UIViewController {
     
     private func reloadTable() {
         self.joompedTableView.isHidden = false
-        FTIndicator.dismissProgress()
         self.joompedTableView.reloadData()
+        FTIndicator.dismissProgress()
     }
     
     fileprivate func search() {
