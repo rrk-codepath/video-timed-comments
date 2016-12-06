@@ -367,8 +367,7 @@ class JoompedViewController: UIViewController {
         
         let actionButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(JoompedViewController.didTapEditSave(_:)))
         
-        if isEditMode && (youtubeVideo != nil && joomped == nil || joomped?.user.objectId == user.objectId){
-            navigationItem.title = "Creation"
+        if isEditMode && (youtubeVideo != nil && joomped == nil || joomped?.user.objectId == user.objectId) {
             actionButton.title = "Save"
             if annotations.count == 0 {
                 actionButton.isEnabled = false
