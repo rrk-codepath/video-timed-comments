@@ -295,6 +295,7 @@ class HomeViewController: UIViewController {
             if let user = PFUser.current() as? User {
                 pvc.user = user
             }
+            pvc.delegate = self
         default:
             return
         }
@@ -409,6 +410,17 @@ extension HomeViewController: UISearchBarDelegate {
             //Selector needed to resign correctly
             searchBar.performSelector(onMainThread: #selector(resignFirstResponder), with: nil, waitUntilDone: false)
             search()
+        }
+    }
+}
+
+extension HomeViewController: ProfileViewControllerDelegate {
+    
+    func profileViewController(_ profileViewController: ProfileViewController, didDeleteJoomped joomped: Joomped) {
+        let index = ParseUtility.indexOf(objects: self.joomped, element: joomped)
+        if index != -1 {
+            self.joomped.remove(at: index)
+            joompedTableView.reloadData()
         }
     }
 }

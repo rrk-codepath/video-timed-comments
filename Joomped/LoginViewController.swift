@@ -81,6 +81,11 @@ class LoginViewController: UIViewController {
         self.present(alertController, animated: true, completion: {
             // empty
         })
+        
+        loadingIndicator.isHidden = true
+        loadingIndicator.stopAnimating()
+        
+        googleSignInButton.isHidden = false
     }
 
     @IBAction func didTapSignup(_ sender: Any) {

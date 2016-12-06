@@ -4,6 +4,11 @@ import Parse
 import iOSSharedViewTransition
 import FTIndicator
 
+protocol ProfileViewControllerDelegate: class {
+    
+    func profileViewController(_ profileViewController: ProfileViewController, didDeleteJoomped: Joomped)
+}
+
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -18,6 +23,9 @@ class ProfileViewController: UIViewController {
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
     fileprivate var selectedThumbnail: UIImageView?
+    
+    weak var delegate: ProfileViewControllerDelegate?
+    
     var user: User?
     
     override func viewDidLoad() {
@@ -104,6 +112,14 @@ class ProfileViewController: UIViewController {
             jvc.joomped = selectedJoomped
         }
     }
+    
+    fileprivate func delete(index: Int) {
+        let toDelete = joomped[index]
+        toDelete.deleteEventually()
+        joomped.remove(at: index)
+        joompedTableView.reloadData()
+        delegate?.profileViewController(self, didDeleteJoomped: toDelete)
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -116,6 +132,16 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return joomped.count
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            delete(index: indexPath.row)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }
 
