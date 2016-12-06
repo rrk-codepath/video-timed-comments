@@ -396,7 +396,7 @@ class JoompedViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
-                tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight + 24, 0)
+                tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight + 13, 0)
             }
         }
     }
