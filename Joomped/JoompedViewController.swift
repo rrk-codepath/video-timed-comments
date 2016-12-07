@@ -680,7 +680,7 @@ extension JoompedViewController: ASFSharedViewTransitionDataSource {
 extension JoompedViewController: YTPlayerViewDelegate {
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        guard let videoId = joomped?.video.youtubeId ?? self.youtubeVideo?.id else {
+        guard let videoId = joomped?.video.youtubeId ?? self.youtubeVideo?.id, videoId != "" else {
             return
         }
         
