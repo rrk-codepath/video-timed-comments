@@ -115,7 +115,8 @@ class ProfileViewController: UIViewController {
     
     fileprivate func delete(index: Int) {
         let toDelete = joomped[index]
-        toDelete.deleteEventually()
+        let allToDelete: [PFObject] = toDelete.annotations + [toDelete.video, toDelete]
+        PFObject.deleteAll(inBackground: allToDelete)
         joomped.remove(at: index)
         joompedTableView.reloadData()
         delegate?.profileViewController(self, didDeleteJoomped: toDelete)
