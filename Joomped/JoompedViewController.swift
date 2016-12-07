@@ -373,6 +373,9 @@ class JoompedViewController: UIViewController {
             if annotations.count == 0 {
                 actionButton.isEnabled = false
             }
+            if segueToHomeFlag {
+                actionButton.isEnabled = false
+            }
             rightBarButtonItems.append(actionButton)
         } else if (joomped?.user.objectId == user.objectId) {
             navigationItem.title = "Notate"
@@ -683,6 +686,9 @@ extension JoompedViewController: YTPlayerViewDelegate {
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         guard let videoId = joomped?.video.youtubeId ?? self.youtubeVideo?.id, videoId != "" else {
             return
+        }
+        if segueToHomeFlag {
+           navigationItem.rightBarButtonItem?.isEnabled = true
         }
         
         duration = Float(playerView.duration())

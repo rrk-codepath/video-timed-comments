@@ -303,7 +303,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Notates Yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kap-mj-VoZ">
-                                <rect key="frame" x="147" y="358" width="120.33333333333331" height="21"/>
+                                <rect key="frame" x="147" y="358" width="121" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -518,7 +518,6 @@
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5yG-l5-Xfr" secondAttribute="bottom" constant="4" id="tvB-EH-am3"/>
                                         <constraint firstItem="SwJ-aX-sdU" firstAttribute="leading" secondItem="wMb-9D-FuR" secondAttribute="trailing" constant="4" id="vnx-DM-iZA"/>
                                         <constraint firstItem="fOa-EF-f61" firstAttribute="leading" secondItem="dG1-z2-jwV" secondAttribute="trailing" constant="4" id="w9a-TB-7hk"/>
-                                        <constraint firstItem="5yG-l5-Xfr" firstAttribute="centerY" secondItem="dG1-z2-jwV" secondAttribute="centerY" id="xZw-e6-ePa"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
