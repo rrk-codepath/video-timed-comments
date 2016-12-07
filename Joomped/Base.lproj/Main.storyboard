@@ -211,7 +211,7 @@
                                     <constraint firstAttribute="height" constant="29" id="5Op-XE-7lW"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Journals"/>
+                                    <segment title="Notates"/>
                                     <segment title="YouTube"/>
                                 </segments>
                                 <color key="tintColor" red="0.41568627450980389" green="0.27843137254901962" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
