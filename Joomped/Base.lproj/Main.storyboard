@@ -515,7 +515,6 @@
                                         <constraint firstItem="dG1-z2-jwV" firstAttribute="top" secondItem="wMb-9D-FuR" secondAttribute="bottom" constant="8" id="mgU-eF-Pxv"/>
                                         <constraint firstItem="5yG-l5-Xfr" firstAttribute="leading" secondItem="fOa-EF-f61" secondAttribute="trailing" constant="3" id="ohO-d0-VH4"/>
                                         <constraint firstItem="drY-fX-e3T" firstAttribute="centerY" secondItem="SwJ-aX-sdU" secondAttribute="centerY" id="sM9-oE-vHG"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5yG-l5-Xfr" secondAttribute="bottom" constant="4" id="tvB-EH-am3"/>
                                         <constraint firstItem="SwJ-aX-sdU" firstAttribute="leading" secondItem="wMb-9D-FuR" secondAttribute="trailing" constant="4" id="vnx-DM-iZA"/>
                                         <constraint firstItem="fOa-EF-f61" firstAttribute="leading" secondItem="dG1-z2-jwV" secondAttribute="trailing" constant="4" id="w9a-TB-7hk"/>
                                     </constraints>
