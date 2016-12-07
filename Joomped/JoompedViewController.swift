@@ -197,6 +197,7 @@ class JoompedViewController: UIViewController {
         }
         playButton.isEnabled = false
         fullscreenButton.isEnabled = false
+        seekBarView.isUserInteractionEnabled = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -699,6 +700,10 @@ extension JoompedViewController: YTPlayerViewDelegate {
     //TODO: Can't create annotations within 2 seconds apart..., but also don't want to keep firing same annotation timer due to floor/ceil
     //Need floor/ceil as not every annotation shows up when tapped
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
+        if seekBarView.isUserInteractionEnabled == false {
+            seekBarView.isUserInteractionEnabled = true
+        }
+        //May need Operation queue
         updateSeekBarLine()
         if let annotation = annotationsDict[floor(playTime)] {
             if annotation != currentAnnotation && timer.isValid {
