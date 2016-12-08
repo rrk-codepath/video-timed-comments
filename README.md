@@ -19,8 +19,4 @@ Mobile features used:
 * push
 * real-time (in creating the feed of annotated videos)
 
-Wireframes:
-
-![img1](./IMG_1373.JPG)
-
-![img2](./IMG_1374.JPG)
+Walkthrough: http://i.imgur.com/7r42ouX.gifv
