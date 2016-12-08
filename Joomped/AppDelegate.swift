@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import Google
 import GoogleSignIn
+import FTIndicator
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Parse.setApplicationId("6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8",
                                clientKey: "x4S9CP9dhOj6pXCRNb4yWzWHIiPF195MXc03TbIb")
+        //Hack to solve issues with spinner
+        FTIndicator.showProgressWithmessage("")
+        FTIndicator.dismissProgress()
         
         // Initialize sign-in
         var configureError: NSError?

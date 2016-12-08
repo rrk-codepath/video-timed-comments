@@ -17,16 +17,22 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var signupButton: UIButton!
     
+    private var originalFrame: CGFloat!
+    private var newFrame: CGFloat!
     private let signInDelegate = ParseGoogleSignInDelegate()
+    private var keyboardShown: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         signInDelegate.delegate = self
-        
         GIDSignIn.sharedInstance().delegate = signInDelegate
         GIDSignIn.sharedInstance().uiDelegate = self
+        
+        originalFrame = self.scrollView.frame.origin.y
         
         loadingIndicator.isHidden = true
         loadingIndicator.stopAnimating()
@@ -34,6 +40,13 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         titleLabel.setTextWithTypeAnimation(typedText: "Notate", characterInterval: 0.3)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        //Fixes issues with frame changin when tapping on tapping and switching textfields
+        if keyboardShown {
+            self.scrollView.frame.origin.y = newFrame
+        }
     }
     
     @IBAction func didTapLogin(_ sender: Any) {
@@ -53,23 +66,32 @@ class LoginViewController: UIViewController {
 
         googleSignInButton.isHidden = true
     }
-
+    
     func keyboardWillShow(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
-//                self.view.frame.origin.y -= keyboardHeight
-                _ = keyboardHeight
+        if self.scrollView.frame.origin.y > 0 {
+            let info  = notification.userInfo!
+            let value: NSValue = info[UIKeyboardFrameEndUserInfoKey] as! NSValue
+            
+            let rawFrame = value.cgRectValue
+            let keyboardFrame = view.convert(rawFrame, from: nil)
+            if keyboardFrame.size.height == 0 {
+                return
             }
+            
+            let screenHeight = UIScreen.main.bounds.size.height;
+            let Ylimit = screenHeight - keyboardFrame.size.height
+            let textboxOriginInSuperview:CGPoint = self.view.convert(CGPoint.zero, from: self.signupButton)
+            
+            let keyboardHeight = (textboxOriginInSuperview.y+self.signupButton!.frame.size.height) - Ylimit
+            self.scrollView.frame.origin.y -= keyboardHeight + 12
+            newFrame = self.scrollView.frame.origin.y
+            keyboardShown = true
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
-//                self.view.frame.origin.y += keyboardHeight
-                _ = keyboardHeight
-            }
-        }
+        keyboardShown = false
+        self.scrollView.frame.origin.y = originalFrame
     }
     
     fileprivate func onLoginFailure() {
@@ -136,4 +158,3 @@ extension LoginViewController: ParseLoginDelegate {
         loadingIndicator.isHidden = true
     }
 }
-

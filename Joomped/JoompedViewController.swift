@@ -641,7 +641,6 @@ extension JoompedViewController: AnnotationCellDelegate {
         if annotations.count == 0 || newAnnotation.timestamp > annotations.last!.timestamp {
             // insert at end if no annotations, or the new annotation has the largest timestamp
             annotations.append(newAnnotation)
-            navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
             for (index, annotation) in annotations.enumerated() {
                 if newAnnotation.timestamp < annotation.timestamp {
@@ -687,9 +686,6 @@ extension JoompedViewController: YTPlayerViewDelegate {
         guard let videoId = joomped?.video.youtubeId ?? self.youtubeVideo?.id, videoId != "" else {
             return
         }
-        if segueToHomeFlag {
-           navigationItem.rightBarButtonItem?.isEnabled = true
-        }
         
         duration = Float(playerView.duration())
         
@@ -706,6 +702,9 @@ extension JoompedViewController: YTPlayerViewDelegate {
     //TODO: Can't create annotations within 2 seconds apart..., but also don't want to keep firing same annotation timer due to floor/ceil
     //Need floor/ceil as not every annotation shows up when tapped
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
+        if segueToHomeFlag && self.annotations.count > 0 && self.navigationItem.rightBarButtonItem?.isEnabled == false {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
         if seekBarView.isUserInteractionEnabled == false {
             seekBarView.isUserInteractionEnabled = true
         }

@@ -74,7 +74,6 @@ class ProfileViewController: UIViewController {
         
         FTIndicator.showProgressWithmessage("")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            FTIndicator.dismissProgress()
             if let error = error {
                 print("error: \(error.localizedDescription)")
                 return
@@ -103,6 +102,7 @@ class ProfileViewController: UIViewController {
                 $0 + ($1.karma ?? 0)
             }
             self.karmaCountLabel.text = String(karmaCount)
+            FTIndicator.dismissProgress()
         }
     }
     
