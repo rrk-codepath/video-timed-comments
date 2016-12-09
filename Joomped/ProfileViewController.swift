@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var emptyStateLabel: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
     @IBOutlet weak var karmaCountLabel: UILabel!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
@@ -34,6 +35,9 @@ class ProfileViewController: UIViewController {
         
         guard let user = user else {
             return
+        }
+        if user != PFUser.current() {
+            logoutButton.rrk_hide()
         }
         
         if let imageUrl = user.imageUrl,
