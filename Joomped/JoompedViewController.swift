@@ -72,6 +72,7 @@ class JoompedViewController: UIViewController {
     fileprivate var duration: Float?
     fileprivate var seekBarLine: UIView?
     fileprivate var highlightedRow: Int?
+    fileprivate var viewCounted: Bool = false
     
     private var youtubeStoryboard: YoutubeStoryboard!
     private var fullscreen = false
@@ -156,8 +157,6 @@ class JoompedViewController: UIViewController {
             publishLabel.text = joomped.createdAt?.timeFormatted
             publishLabel.isHidden = false
             playerView.load(withVideoId: joomped.video.youtubeId, playerVars: playerVars)
-            joomped.views += 1
-            joomped.saveInBackground()
             
             youtubeStoryboard = YoutubeStoryboard(videoId: joomped.video.youtubeId)
         } else if let youtubeVideo = youtubeVideo {
@@ -704,6 +703,11 @@ extension JoompedViewController: YTPlayerViewDelegate {
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
         if segueToHomeFlag && self.annotations.count > 0 && self.navigationItem.rightBarButtonItem?.isEnabled == false {
             self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+        if let joomped = joomped, let duration = duration, !viewCounted && playTime > duration/3 {
+            viewCounted = true
+            joomped.views += 1
+            joomped.saveInBackground()
         }
         if seekBarView.isUserInteractionEnabled == false {
             seekBarView.isUserInteractionEnabled = true
