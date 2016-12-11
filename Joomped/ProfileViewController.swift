@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController {
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
     fileprivate var selectedThumbnail: UIImageView?
+    fileprivate var isCurrentUser: Bool!
     
     weak var delegate: ProfileViewControllerDelegate?
     
@@ -36,7 +37,10 @@ class ProfileViewController: UIViewController {
         guard let user = user else {
             return
         }
-        if user != PFUser.current() {
+        
+        isCurrentUser = user == PFUser.current()
+        
+        if !isCurrentUser {
             logoutButton.rrk_hide()
         }
         
@@ -146,7 +150,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return isCurrentUser
     }
 }
 

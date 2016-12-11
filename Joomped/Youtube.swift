@@ -6,7 +6,7 @@ final class Youtube {
     
     private static let baseUrl = "https://www.googleapis.com/youtube/v3"
     private static let key = "AIzaSyANijfbKhKbuIqqt7cJy6zbwE4ewsHIdQg"
-    
+
     private var authToken: String? {
         return GIDSignIn.sharedInstance().currentUser?.authentication?.accessToken
     }
@@ -24,18 +24,8 @@ final class Youtube {
                 "id": videoIdsString as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
-                guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
-                    failure?(YoutubeError.failed)
-                    return
-                }
-                
-                let videos = items
-                    .map({(d: Dictionary<String, AnyObject>) -> YoutubeVideo in
-                        return YoutubeVideo(dictionary: d)
-                    })
-                
-                success(videos)
-        },
+                self.onReceivedVideos(dictionary: dictionary, success: success, failure: failure)
+            },
             failure: failure
         )
     }
@@ -49,17 +39,7 @@ final class Youtube {
                 "maxResults": 50 as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
-                guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
-                        failure?(YoutubeError.failed)
-                        return
-                }
-                
-                let videos = items
-                    .map({(d: Dictionary<String, AnyObject>) -> YoutubeVideo in
-                        return YoutubeVideo(dictionary: d)
-                    })
-                
-                success(videos)
+                self.onReceivedVideos(dictionary: dictionary, success: success, failure: failure)
             },
             failure: failure
         )
@@ -76,19 +56,23 @@ final class Youtube {
                 "maxResults": 50 as AnyObject
             ],
             success: { (dictionary: Dictionary<String, AnyObject>) -> Void in
-                guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
-                    failure?(YoutubeError.failed)
-                    return
-                }
-                
-                let videos = items.map({ (d: Dictionary<String, AnyObject>) -> YoutubeVideo in
-                    return YoutubeVideo(dictionary: d)
-                })
-                
-                success(videos)
-        },
+                self.onReceivedVideos(dictionary: dictionary, success: success, failure: failure)
+            },
             failure: failure
         )
+    }
+    
+    private func onReceivedVideos(dictionary: Dictionary<String, AnyObject>, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
+        guard let items = dictionary["items"] as? [Dictionary<String, AnyObject>] else {
+            failure?(YoutubeError.failed)
+            return
+        }
+        
+        let videos = items.map({ (d: Dictionary<String, AnyObject>) -> YoutubeVideo in
+            return YoutubeVideo(dictionary: d)
+        })
+        
+        success(videos)
     }
     
     func search(term: String, success: @escaping (([YoutubeVideo]) -> Void), failure: ((Error) -> Void)?) {
@@ -152,7 +136,12 @@ final class Youtube {
                 success(dictionary)
             },
             failure: {(task: URLSessionDataTask?, error: Error) -> Void in
-                failure?(error)
+                if let response = task?.response as? HTTPURLResponse,
+                    response.statusCode == 401 {
+                    failure?(YoutubeError.unauthorized)
+                } else {
+                    failure?(error)
+                }
             }
         )
         

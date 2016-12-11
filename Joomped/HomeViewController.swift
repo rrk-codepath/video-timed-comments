@@ -158,6 +158,10 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func search() {
+        search(forceRefresh: false)
+    }
+    
+    fileprivate func search(forceRefresh: Bool) {
         guard let term = searchBar.text else {
             return
         }
@@ -166,14 +170,14 @@ class HomeViewController: UIViewController {
         
         switch searchMode {
         case SearchMode.joomped:
-            if joompedSearchText != term {
+            if forceRefresh || joompedSearchText != term {
                 FTIndicator.showProgressWithmessage("")
                 searchJoomped(term: term)
                 joompedSearchText = searchBar.text
             }
             break
         case SearchMode.youtube:
-            if youtubeSearchText != term {
+            if forceRefresh || youtubeSearchText != term {
                 FTIndicator.showProgressWithmessage("")
                 searchYoutube(term: term)
                 youtubeSearchText = searchBar.text
@@ -207,12 +211,7 @@ class HomeViewController: UIViewController {
     
     private func searchYoutube(term: String) {
         if term.isEmpty {
-            youtube.search(term: randomPresetTerm(), success: { (videos: [YoutubeVideo]) in
-                self.youtubeVideos = videos
-                self.reloadTable()
-            }, failure: { (error: Error) in
-                print("error: \(error.localizedDescription)")
-            })
+            performYoutubeSearch(term: randomPresetTerm())
         } else {
             if let youtubeId = extractYoutubeIdFromLink(link: term) {
                 youtube.videoIds(
@@ -245,8 +244,21 @@ class HomeViewController: UIViewController {
                 self.reloadTable()
             },
             failure: { (error: Error) -> Void in
-                FTIndicator.dismissProgress()
-                print("error: \(error.localizedDescription)")
+                self.youtubeVideos = []
+                self.reloadTable()
+                
+                switch error {
+                case YoutubeError.unauthorized:
+                    if GIDSignIn.sharedInstance().currentUser != nil {
+                        GIDSignIn.sharedInstance().signOut()
+                        GIDSignIn.sharedInstance().uiDelegate = self
+                        GIDSignIn.sharedInstance().delegate = self
+                        GIDSignIn.sharedInstance().signIn()
+                    }
+                    break
+                default:
+                    print("error: \(error.localizedDescription)")
+                }
             })
     }
     
@@ -424,6 +436,19 @@ extension HomeViewController: ProfileViewControllerDelegate {
 extension HomeViewController: ASFSharedViewTransitionDataSource {
     func sharedView() -> UIView! {
         return selectedThumbnail
+    }
+}
+
+extension HomeViewController: GIDSignInUIDelegate {
+}
+
+extension HomeViewController: GIDSignInDelegate {
+    
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        search(forceRefresh: true)
     }
 }
 
