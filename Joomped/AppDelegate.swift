@@ -61,7 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if PFUser.current() != nil {
+            GIDSignIn.sharedInstance().signInSilently()
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -83,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let joompedViewController = mainStoryboard.instantiateViewController(withIdentifier: "joomped") as! JoompedViewController
             joompedViewController.joompedId = journalId
             rootViewController.pushViewController(joompedViewController, animated: true)
+            return true
         }
         
         return GIDSignIn.sharedInstance().handle(url,

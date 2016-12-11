@@ -571,6 +571,7 @@ extension JoompedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AnnotationCell") as! AnnotationCell
         cell.delegate = self
+        cell.isNew = false
         
         if indexPath.section == 0 {
             if highlightedRow == indexPath.row {
