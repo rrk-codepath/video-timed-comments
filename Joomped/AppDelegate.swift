@@ -81,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let joompedViewController = mainStoryboard.instantiateViewController(withIdentifier: "joomped") as! JoompedViewController
             joompedViewController.joompedId = journalId
             rootViewController.pushViewController(joompedViewController, animated: true)
+            return true
         }
         
         return GIDSignIn.sharedInstance().handle(url,
