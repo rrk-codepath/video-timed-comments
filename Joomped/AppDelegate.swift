@@ -20,13 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        Parse.setApplicationId("6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8",
-//                               clientKey: "x4S9CP9dhOj6pXCRNb4yWzWHIiPF195MXc03TbIb")
         let configuration = ParseClientConfiguration {
             $0.applicationId = "6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8"
             $0.clientKey = "x4S9CP9dhOj6pXCRNb4yWzWHIiPF195MXc03TbIb"
-            $0.server = "http://wikirace.me:1337/parse"
-//            $0.server = "http://localhost:1337/parse"
+            $0.server = "https://thawing-garden-21306.herokuapp.com/parse"
         }
         Parse.initialize(with: configuration)
         //Hack to solve issues with spinner
