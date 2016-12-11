@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214B3D87ED53CC4AEFB6BB85 /* Pods_Notate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A03B3EDC816B4F9AD3168BC /* Pods_Notate.framework */; };
 		562F27BB1DD6B6100012E196 /* JoompedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F27BA1DD6B6100012E196 /* JoompedTableViewCell.swift */; };
 		5630B09E1DD41216008E78D6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B09D1DD41216008E78D6 /* Video.swift */; };
 		5630B0A01DD412A8008E78D6 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5630B09F1DD412A8008E78D6 /* Annotation.swift */; };
@@ -22,7 +23,6 @@
 		563708DF1DD6A473007CF706 /* YoutubeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708DB1DD6A473007CF706 /* YoutubeVideo.swift */; };
 		563708E11DD6A4C7007CF706 /* Float+Beautify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563708E01DD6A4C7007CF706 /* Float+Beautify.swift */; };
 		563708E31DD6A8F0007CF706 /* JoompedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 563708E21DD6A8F0007CF706 /* JoompedTableViewCell.xib */; };
-		5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59467971EF4A07165814593E /* Pods_Joomped.framework */; };
 		566210B31DE3F8CD00147124 /* YoutubeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566210B21DE3F8CD00147124 /* YoutubeStatus.swift */; };
 		5684F1D41DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5684F1D31DD713F0004EAF1C /* YoutubeVideoTableViewCell.xib */; };
 		5684F1D61DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5684F1D51DD715A6004EAF1C /* YoutubeVideoTableViewCell.swift */; };
@@ -52,6 +52,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E41E0CE14A00DD824F7C40E /* Pods-Notate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Notate/Pods-Notate.debug.xcconfig"; sourceTree = "<group>"; };
+		2A03B3EDC816B4F9AD3168BC /* Pods_Notate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35464CC2B3447DFBE457430B /* Pods-Notate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notate.release.xcconfig"; path = "Pods/Target Support Files/Pods-Notate/Pods-Notate.release.xcconfig"; sourceTree = "<group>"; };
 		562F27BA1DD6B6100012E196 /* JoompedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoompedTableViewCell.swift; sourceTree = "<group>"; };
 		5630B09D1DD41216008E78D6 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		5630B09F1DD412A8008E78D6 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
@@ -78,7 +81,6 @@
 		56B6A9D01DEED36700329E08 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		56D783341DD7AEF800779183 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56D783361DD7B17B00779183 /* GoogleCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCredentials.swift; sourceTree = "<group>"; };
-		59467971EF4A07165814593E /* Pods_Joomped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joomped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		793957551DF3FB8E004D12D8 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		79C5C69B1DD40CFA00040B17 /* JoompedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoompedViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		79D35C5F1DDD8362006B4967 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5642DF7BCAE4B8DAEBA5CAE7 /* Pods_Joomped.framework in Frameworks */,
+				214B3D87ED53CC4AEFB6BB85 /* Pods_Notate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +122,8 @@
 			children = (
 				FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */,
 				FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */,
+				0E41E0CE14A00DD824F7C40E /* Pods-Notate.debug.xcconfig */,
+				35464CC2B3447DFBE457430B /* Pods-Notate.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -246,7 +250,7 @@
 		FE0C3538427662739965C3D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				59467971EF4A07165814593E /* Pods_Joomped.framework */,
+				2A03B3EDC816B4F9AD3168BC /* Pods_Notate.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -346,7 +350,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Joomped/Pods-Joomped-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Notate/Pods-Notate-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		771CC702689BA6AA0549E42B /* [CP] Embed Pods Frameworks */ = {
@@ -361,7 +365,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Joomped/Pods-Joomped-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Notate/Pods-Notate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B1B40C9CB065134463D3C6F4 /* [CP] Check Pods Manifest.lock */ = {
@@ -376,7 +380,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -539,7 +543,7 @@
 		};
 		B7CC8D231DD2D625005FCBEF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF68408A99270B4D8C8B5D88 /* Pods-Joomped.debug.xcconfig */;
+			baseConfigurationReference = 0E41E0CE14A00DD824F7C40E /* Pods-Notate.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -562,7 +566,7 @@
 		};
 		B7CC8D241DD2D625005FCBEF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCE3EDED0A1A2271E8658087 /* Pods-Joomped.release.xcconfig */;
+			baseConfigurationReference = 35464CC2B3447DFBE457430B /* Pods-Notate.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
