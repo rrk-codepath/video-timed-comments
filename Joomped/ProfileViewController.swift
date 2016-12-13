@@ -117,28 +117,21 @@ class ProfileViewController: UIViewController {
     }
     
     private func fetchKarmaJoomped() {
-        self.joomped = (user?.gaveKarma)!
-        FTIndicator.showProgressWithmessage("")
-        DispatchQueue.global(qos: .userInitiated).async {
-            var fullJoomped: [Joomped] = []
-            self.joomped.forEach { (joomp) in
-                do {
-                    let joomp = try joomp.fetchIfNeeded()
-                    try joomp.video.fetchIfNeeded()
-                    try PFObject.fetchAllIfNeeded(joomp.annotations)
-                    try joomp.user.fetchIfNeeded()
-                    fullJoomped.append(joomp)
-                } catch {
-//                    print("error retrieving karma joomp \(joomp.objectId)")
-                }
-            }
-            DispatchQueue.main.async {
-                self.joomped = fullJoomped
-                FTIndicator.dismissProgress()
-                self.joompedTableView.reloadData()
-            }
+        guard let karmadJoomped = self.user?.gaveKarma, karmadJoomped.count > 0 else {
+            return
         }
-    
+        FTIndicator.showProgressWithmessage("")
+        let query = PFQuery(className:"Joomped")
+        query.order(byDescending: "createdAt")
+        query.includeKeys(["video", "user", "annotations.Annotation"])
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            self.joomped = objects as? [Joomped] ?? []
+            self.joomped = self.joomped.filter { (joomp) -> Bool in
+                return ParseUtility.contains(objects: karmadJoomped, element: joomp)
+            }
+            FTIndicator.dismissProgress()
+            self.joompedTableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
