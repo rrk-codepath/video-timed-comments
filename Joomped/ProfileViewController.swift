@@ -118,6 +118,7 @@ class ProfileViewController: UIViewController {
         if segue.identifier == "ConsumptionSegue" {
             let jvc = segue.destination as! JoompedViewController
             jvc.joomped = selectedJoomped
+            jvc.fromProfileVc = true
         }
     }
     

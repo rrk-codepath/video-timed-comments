@@ -36,6 +36,7 @@ class JoompedViewController: UIViewController {
     
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
+    var fromProfileVc: Bool = false
     var joomped: Joomped?
     var joompedId: String? {
         didSet {
@@ -333,7 +334,11 @@ class JoompedViewController: UIViewController {
     }
     
     @IBAction func didTapJoompedUser(_ sender: Any) {
-        performSegue(withIdentifier: "ProfileSegue", sender: self)
+        if fromProfileVc {
+            navigationController?.popViewController(animated: true)
+        } else {
+            performSegue(withIdentifier: "ProfileSegue", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
