@@ -765,9 +765,9 @@
         <image name="heart" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XD9-iG-gfL"/>
-        <segue reference="Dg3-WV-wJf"/>
+        <segue reference="106-0h-bvS"/>
         <segue reference="Hhx-Qr-R1r"/>
+        <segue reference="vm2-8s-e9R"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

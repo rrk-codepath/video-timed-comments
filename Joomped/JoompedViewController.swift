@@ -336,7 +336,7 @@ class JoompedViewController: UIViewController {
     
     @IBAction func didTapJoompedUser(_ sender: Any) {
         if fromProfileVc {
-            navigationController?.popViewController(animated: true)
+            _ = navigationController?.popViewController(animated: true)
         } else {
             performSegue(withIdentifier: "ProfileSegue", sender: self)
         }
