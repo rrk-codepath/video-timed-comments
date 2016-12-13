@@ -694,7 +694,12 @@ extension JoompedViewController: YTPlayerViewDelegate {
         
         duration = Float(playerView.duration())
         
-        playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            //Doesn't work with iPad
+            playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.large)
+        } else {
+            playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
+        }
         playerView.playVideo()
         if !isSeekBarAnnotated {
             updateAnnotationInSeekBar()
