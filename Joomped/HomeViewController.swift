@@ -454,7 +454,7 @@ extension HomeViewController: GIDSignInDelegate {
 
 fileprivate enum SearchMode: Int {
     case joomped = 0
-    case youtube
+    case youtube = 1
     
     var text: String {
         switch self {
