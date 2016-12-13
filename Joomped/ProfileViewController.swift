@@ -21,7 +21,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var notatesSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var tableView: UITableView!
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
@@ -38,15 +37,15 @@ class ProfileViewController: UIViewController {
         
         let query = PFQuery(className:"_User")
         query.includeKey("gaveKarma")
-        query.includeKeys(["gaveKarma.Joomped", "gaveKarma.Joomped.video"])
-        query.whereKey("objectId", equalTo: user?.objectId)
+//        query.includeKeys(["gaveKarma.Joomped", "gaveKarma.Joomped.video", "gaveKarma.Joomped.user"])
+        query.whereKey("objectId", equalTo: user?.objectId!)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             let fullUsers = objects as? [User]
             self.user = fullUsers?.first
-            if let joomped = fullUsers?.first?.gaveKarma {
+//            if let joomped = fullUsers?.first?.gaveKarma {
 //                self.joomped = joomped
 //                self.tableView.reloadData()
-            }
+//            }
         }
         ASFSharedViewTransition.addWith(fromViewControllerClass: ProfileViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
@@ -131,14 +130,15 @@ class ProfileViewController: UIViewController {
     
     private func fetchKarmaJoomped() {
         self.joomped = (user?.gaveKarma)!
-        if let karmadJoomped = user?.gaveKarma {
-            karmadJoomped.forEach {
-                $0.fetchInBackground(block: { (joomp, error: Error?) in
-                    
-                })
-            }
-        }
-        tableView.reloadData()
+//        if let karmadJoomped = user?.gaveKarma {
+//            karmadJoomped.forEach {
+//                $0.video.fetchInBackground(block: { (video, error: Error?) in
+//                    $0.video = video
+//                })
+//            }
+//        }
+//        fetchJoomped()
+        self.joompedTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

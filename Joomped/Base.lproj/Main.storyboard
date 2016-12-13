@@ -445,7 +445,6 @@
                         <outlet property="logoutButton" destination="tSL-Kp-gsW" id="uqR-Eu-ZwD"/>
                         <outlet property="notatesSegmentedControl" destination="04s-Op-2TG" id="hAm-h9-Kwp"/>
                         <outlet property="profileImageView" destination="1i3-Q7-ZC2" id="ehH-gS-0lS"/>
-                        <outlet property="tableView" destination="C94-pw-Nkm" id="rvX-zH-smy"/>
                         <outlet property="viewCountLabel" destination="HjQ-Mp-VXM" id="7os-yl-7xx"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="LogoutSegue" customClass="ReplaceStoryboardSegue" customModule="Notate" customModuleProvider="target" id="4ea-dR-8oO"/>
                         <segue destination="z9f-sm-9S5" kind="show" identifier="ConsumptionSegue" id="Dg3-WV-wJf"/>
@@ -739,7 +738,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.68235294120000001" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
