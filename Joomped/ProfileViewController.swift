@@ -125,9 +125,7 @@ class ProfileViewController: UIViewController {
                 do {
                     let joomp = try joomp.fetchIfNeeded()
                     try joomp.video.fetchIfNeeded()
-                    try joomp.annotations.forEach({ (annotation) in
-                        try annotation.fetchIfNeeded()
-                    })
+                    try PFObject.fetchAllIfNeeded(joomp.annotations)
                     try joomp.user.fetchIfNeeded()
                     fullJoomped.append(joomp)
                 } catch {
