@@ -35,18 +35,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let query = PFQuery(className:"_User")
-        query.includeKey("gaveKarma")
-//        query.includeKeys(["gaveKarma.Joomped", "gaveKarma.Joomped.video", "gaveKarma.Joomped.user"])
-        query.whereKey("objectId", equalTo: user?.objectId!)
-        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-            let fullUsers = objects as? [User]
-            self.user = fullUsers?.first
-//            if let joomped = fullUsers?.first?.gaveKarma {
-//                self.joomped = joomped
-//                self.tableView.reloadData()
-//            }
-        }
         ASFSharedViewTransition.addWith(fromViewControllerClass: ProfileViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         guard let user = user else {
@@ -130,15 +118,29 @@ class ProfileViewController: UIViewController {
     
     private func fetchKarmaJoomped() {
         self.joomped = (user?.gaveKarma)!
-//        if let karmadJoomped = user?.gaveKarma {
-//            karmadJoomped.forEach {
-//                $0.video.fetchInBackground(block: { (video, error: Error?) in
-//                    $0.video = video
-//                })
-//            }
-//        }
-//        fetchJoomped()
-        self.joompedTableView.reloadData()
+        FTIndicator.showProgressWithmessage("")
+        DispatchQueue.global(qos: .userInitiated).async {
+            var fullJoomped: [Joomped] = []
+            self.joomped.forEach { (joomp) in
+                do {
+                    let joomp = try joomp.fetchIfNeeded()
+                    try joomp.video.fetchIfNeeded()
+                    try joomp.annotations.forEach({ (annotation) in
+                        try annotation.fetchIfNeeded()
+                    })
+                    try joomp.user.fetchIfNeeded()
+                    fullJoomped.append(joomp)
+                } catch {
+//                    print("error retrieving karma joomp \(joomp.objectId)")
+                }
+            }
+            DispatchQueue.main.async {
+                self.joomped = fullJoomped
+                FTIndicator.dismissProgress()
+                self.joompedTableView.reloadData()
+            }
+        }
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
