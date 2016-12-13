@@ -359,7 +359,7 @@ class JoompedViewController: UIViewController {
             return
         }
         playerView.pauseVideo()
-        let activityViewController = UIActivityViewController(activityItems: ["notate://journal/\(joompedObjectId)"], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: ["notate://notate/\(joompedObjectId)"], applicationActivities: nil)
         navigationController?.present(activityViewController, animated: true)
     }
     
