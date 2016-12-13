@@ -34,6 +34,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var joompedUploaderImageView: UIImageView!
     
+    var shareButton: UIBarButtonItem?
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
     var fromProfileVc: Bool = false
@@ -360,6 +361,10 @@ class JoompedViewController: UIViewController {
         }
         playerView.pauseVideo()
         let activityViewController = UIActivityViewController(activityItems: ["notate://notate/\(joompedObjectId)"], applicationActivities: nil)
+        activityViewController.modalPresentationStyle = .popover
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.barButtonItem = shareButton
+        }
         navigationController?.present(activityViewController, animated: true)
     }
     
@@ -368,7 +373,7 @@ class JoompedViewController: UIViewController {
             return
         }
         var rightBarButtonItems = [UIBarButtonItem]()
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
         
         let actionButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(JoompedViewController.didTapEditSave(_:)))
         
@@ -384,10 +389,10 @@ class JoompedViewController: UIViewController {
         } else if (joomped?.user.objectId == user.objectId) {
             navigationItem.title = "Notate"
             rightBarButtonItems.append(actionButton)
-            rightBarButtonItems.append(shareButton)
+            rightBarButtonItems.append(shareButton!)
         } else {
             navigationItem.title = "Notate"
-            rightBarButtonItems.append(shareButton)
+            rightBarButtonItems.append(shareButton!)
         }
         navigationItem.rightBarButtonItems = rightBarButtonItems
     }
@@ -694,7 +699,12 @@ extension JoompedViewController: YTPlayerViewDelegate {
         
         duration = Float(playerView.duration())
         
-        playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            //Anything above medium doesn't work with iPad
+            playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.HD720)
+        } else {
+            playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
+        }
         playerView.playVideo()
         if !isSeekBarAnnotated {
             updateAnnotationInSeekBar()
