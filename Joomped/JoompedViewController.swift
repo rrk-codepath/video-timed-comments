@@ -34,6 +34,7 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var joompedUploaderImageView: UIImageView!
     
+    var shareButton: UIBarButtonItem?
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
     var joomped: Joomped?
@@ -355,6 +356,10 @@ class JoompedViewController: UIViewController {
         }
         playerView.pauseVideo()
         let activityViewController = UIActivityViewController(activityItems: ["notate://journal/\(joompedObjectId)"], applicationActivities: nil)
+        activityViewController.modalPresentationStyle = .popover
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.barButtonItem = shareButton
+        }
         navigationController?.present(activityViewController, animated: true)
     }
     
@@ -363,7 +368,7 @@ class JoompedViewController: UIViewController {
             return
         }
         var rightBarButtonItems = [UIBarButtonItem]()
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
         
         let actionButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(JoompedViewController.didTapEditSave(_:)))
         
@@ -379,10 +384,10 @@ class JoompedViewController: UIViewController {
         } else if (joomped?.user.objectId == user.objectId) {
             navigationItem.title = "Notate"
             rightBarButtonItems.append(actionButton)
-            rightBarButtonItems.append(shareButton)
+            rightBarButtonItems.append(shareButton!)
         } else {
             navigationItem.title = "Notate"
-            rightBarButtonItems.append(shareButton)
+            rightBarButtonItems.append(shareButton!)
         }
         navigationItem.rightBarButtonItems = rightBarButtonItems
     }
