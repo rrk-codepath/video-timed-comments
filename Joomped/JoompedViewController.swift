@@ -43,7 +43,7 @@ class JoompedViewController: UIViewController {
                 return
             }
             let query = PFQuery(className:"Joomped")
-            query.includeKeys(["video", "user", "annotations.Annotation"])
+            query.includeKeys(["video", "user", "annotations"])
             query.whereKey("objectId", equalTo: joompedId)
             query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
                 if let error = error {

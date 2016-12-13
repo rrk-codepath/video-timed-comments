@@ -130,7 +130,7 @@ class HomeViewController: UIViewController {
     
     @objc private func fetchJoomped(refreshControl: UIRefreshControl?) {
         let query = PFQuery(className:"Joomped")
-        query.includeKey("annotations.Annotation")
+        query.includeKey("annotations")
         
         // Retrieve the most recent ones
         query.order(byDescending: "createdAt")
@@ -200,7 +200,7 @@ class HomeViewController: UIViewController {
         // Should limit once we're making millions of dollars
         // query.limit = 10
         
-        query.includeKeys(["video", "user", "annotations.Annotation"])
+        query.includeKeys(["video", "user", "annotations"])
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             DispatchQueue.main.async(execute: { 
                 self.joomped = objects as? [Joomped] ?? []

@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
     private func fetchJoomped() {
         let query = PFQuery(className:"Joomped")
         query.order(byDescending: "createdAt")
-        query.includeKeys(["video", "user", "annotations.Annotation"])
+        query.includeKeys(["video", "user", "annotations"])
         query.whereKey("user", equalTo: user as Any)
         
         FTIndicator.showProgressWithmessage("")
@@ -123,7 +123,7 @@ class ProfileViewController: UIViewController {
         FTIndicator.showProgressWithmessage("")
         let query = PFQuery(className:"Joomped")
         query.order(byDescending: "createdAt")
-        query.includeKeys(["video", "user", "annotations.Annotation"])
+        query.includeKeys(["video", "user", "annotations"])
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             self.joomped = objects as? [Joomped] ?? []
             self.joomped = self.joomped.filter { (joomp) -> Bool in
