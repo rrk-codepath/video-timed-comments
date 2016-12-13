@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -341,8 +342,19 @@
                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="04s-Op-2TG">
+                                <rect key="frame" x="20" y="85" width="374" height="29"/>
+                                <segments>
+                                    <segment title="Notates"/>
+                                    <segment title="Karma'd Notates"/>
+                                </segments>
+                                <color key="tintColor" red="0.41568627450000001" green="0.2784313725" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="onFilterNotatesChanged:" destination="zI5-LE-lzX" eventType="valueChanged" id="I09-I5-0HT"/>
+                                </connections>
+                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C94-pw-Nkm">
-                                <rect key="frame" x="0.0" y="86" width="414" height="650"/>
+                                <rect key="frame" x="0.0" y="121" width="414" height="615"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="・" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypt-KC-ffg">
@@ -385,6 +397,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="04s-Op-2TG" firstAttribute="leading" secondItem="cdT-az-TNW" secondAttribute="leadingMargin" id="4mX-Uv-yK0"/>
                             <constraint firstItem="ypt-KC-ffg" firstAttribute="centerY" secondItem="lNl-Ou-DRk" secondAttribute="centerY" id="63a-CE-qQ6"/>
                             <constraint firstItem="lNl-Ou-DRk" firstAttribute="centerY" secondItem="A04-fE-SW3" secondAttribute="centerY" id="8eO-IB-jeX"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="WX5-y4-tw1" secondAttribute="trailing" id="8lF-SC-zXv"/>
@@ -392,7 +405,9 @@
                             <constraint firstItem="lNl-Ou-DRk" firstAttribute="leading" secondItem="vRP-R3-VBF" secondAttribute="trailing" constant="-2" id="E0V-uB-CmE"/>
                             <constraint firstItem="A04-fE-SW3" firstAttribute="centerY" secondItem="IPs-fa-FdE" secondAttribute="centerY" id="FDV-XX-X4f"/>
                             <constraint firstItem="HjQ-Mp-VXM" firstAttribute="leading" secondItem="ypt-KC-ffg" secondAttribute="trailing" id="Hde-Jd-UMW"/>
+                            <constraint firstItem="04s-Op-2TG" firstAttribute="top" secondItem="NcS-rm-4j1" secondAttribute="bottom" constant="8" id="J7g-E1-pzS"/>
                             <constraint firstItem="kap-mj-VoZ" firstAttribute="centerX" secondItem="cdT-az-TNW" secondAttribute="centerX" id="K5l-hx-UKy"/>
+                            <constraint firstItem="04s-Op-2TG" firstAttribute="trailing" secondItem="cdT-az-TNW" secondAttribute="trailingMargin" id="Knh-gi-tST"/>
                             <constraint firstItem="kap-mj-VoZ" firstAttribute="centerY" secondItem="cdT-az-TNW" secondAttribute="centerY" id="LFU-yM-Uva"/>
                             <constraint firstItem="IPs-fa-FdE" firstAttribute="centerY" secondItem="NcS-rm-4j1" secondAttribute="centerY" id="MnE-FJ-Y1B"/>
                             <constraint firstItem="WX5-y4-tw1" firstAttribute="top" secondItem="RaU-3c-UFg" secondAttribute="bottom" constant="8" id="TI9-Y4-vIK"/>
@@ -406,7 +421,7 @@
                             <constraint firstItem="HjQ-Mp-VXM" firstAttribute="centerY" secondItem="lNl-Ou-DRk" secondAttribute="centerY" id="e0R-M8-MPI"/>
                             <constraint firstItem="WX5-y4-tw1" firstAttribute="leading" secondItem="1i3-Q7-ZC2" secondAttribute="trailing" constant="15" id="hAT-8V-d7E"/>
                             <constraint firstItem="l8S-mZ-Tdn" firstAttribute="top" secondItem="C94-pw-Nkm" secondAttribute="bottom" id="hyM-FZ-zXW"/>
-                            <constraint firstItem="C94-pw-Nkm" firstAttribute="top" secondItem="1i3-Q7-ZC2" secondAttribute="bottom" constant="8" id="j4q-5a-ZeW"/>
+                            <constraint firstItem="C94-pw-Nkm" firstAttribute="top" secondItem="04s-Op-2TG" secondAttribute="bottom" constant="8" id="iMz-CT-5E8"/>
                             <constraint firstItem="WX5-y4-tw1" firstAttribute="leading" secondItem="NcS-rm-4j1" secondAttribute="leading" id="mhK-RJ-fUU"/>
                             <constraint firstAttribute="trailing" secondItem="C94-pw-Nkm" secondAttribute="trailing" id="rfG-yb-YYv"/>
                             <constraint firstItem="vRP-R3-VBF" firstAttribute="centerY" secondItem="A04-fE-SW3" secondAttribute="centerY" id="uM2-97-MkX"/>
@@ -428,6 +443,7 @@
                         <outlet property="joompedTableView" destination="C94-pw-Nkm" id="mUi-Mi-gf7"/>
                         <outlet property="karmaCountLabel" destination="IPs-fa-FdE" id="DmD-eq-rnT"/>
                         <outlet property="logoutButton" destination="tSL-Kp-gsW" id="uqR-Eu-ZwD"/>
+                        <outlet property="notatesSegmentedControl" destination="04s-Op-2TG" id="hAm-h9-Kwp"/>
                         <outlet property="profileImageView" destination="1i3-Q7-ZC2" id="ehH-gS-0lS"/>
                         <outlet property="viewCountLabel" destination="HjQ-Mp-VXM" id="7os-yl-7xx"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="LogoutSegue" customClass="ReplaceStoryboardSegue" customModule="Notate" customModuleProvider="target" id="4ea-dR-8oO"/>
@@ -691,7 +707,7 @@
                         <outlet property="seekBar" destination="ch8-RA-gks" id="ZVM-mV-rNf"/>
                         <outlet property="seekBarToPlayerViewSpaceConstraint" destination="7tH-M6-DAQ" id="IAl-HW-4tk"/>
                         <outlet property="seekBarView" destination="ByS-j5-zlr" id="M73-bB-row"/>
-                        <outlet property="tableView" destination="zhd-B2-6ZF" id="DPp-dL-Mrp"/>
+                        <outlet property="tableView" destination="zhd-B2-6ZF" id="9nN-sb-xHG"/>
                         <outlet property="videoTitleLabel" destination="gb9-og-qg5" id="Vdm-70-ofL"/>
                         <outlet property="videoUploaderLabel" destination="R0Z-sg-Sjv" id="npT-2X-JmN"/>
                         <segue destination="FpH-lp-WTC" kind="show" identifier="saveHomeSegue" id="Hhx-Qr-R1r"/>
@@ -722,7 +738,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.68235294120000001" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
