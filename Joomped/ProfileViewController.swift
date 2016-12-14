@@ -20,11 +20,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var viewCountLabel: UILabel!
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var notatesSegmentedControl: UISegmentedControl!
     
     fileprivate var joomped: [Joomped] = []
     fileprivate var selectedJoomped: Joomped?
     fileprivate var selectedThumbnail: UIImageView?
     fileprivate var isCurrentUser: Bool!
+    fileprivate var notatesMode: NotatesMode = NotatesMode.profile
     
     weak var delegate: ProfileViewControllerDelegate?
     
@@ -32,6 +34,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ASFSharedViewTransition.addWith(fromViewControllerClass: ProfileViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         guard let user = user else {
@@ -75,9 +78,8 @@ class ProfileViewController: UIViewController {
     
     private func fetchJoomped() {
         let query = PFQuery(className:"Joomped")
-        query.includeKey("annotations.Annotation")
         query.order(byDescending: "createdAt")
-        query.includeKeys(["video", "user"])
+        query.includeKeys(["video", "user", "annotations"])
         query.whereKey("user", equalTo: user as Any)
         
         FTIndicator.showProgressWithmessage("")
@@ -114,10 +116,29 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    private func fetchKarmaJoomped() {
+        guard let karmadJoomped = self.user?.gaveKarma, karmadJoomped.count > 0 else {
+            return
+        }
+        FTIndicator.showProgressWithmessage("")
+        let query = PFQuery(className:"Joomped")
+        query.order(byDescending: "createdAt")
+        query.includeKeys(["video", "user", "annotations"])
+        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+            self.joomped = objects as? [Joomped] ?? []
+            self.joomped = self.joomped.filter { (joomp) -> Bool in
+                return ParseUtility.contains(objects: karmadJoomped, element: joomp)
+            }
+            FTIndicator.dismissProgress()
+            self.joompedTableView.reloadData()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ConsumptionSegue" {
             let jvc = segue.destination as! JoompedViewController
             jvc.joomped = selectedJoomped
+            jvc.fromProfileVc = true
         }
     }
     
@@ -128,6 +149,11 @@ class ProfileViewController: UIViewController {
         joomped.remove(at: index)
         joompedTableView.reloadData()
         delegate?.profileViewController(self, didDeleteJoomped: toDelete)
+    }
+    
+    @IBAction func onFilterNotatesChanged(_ sender: UISegmentedControl) {
+        notatesMode = NotatesMode(rawValue: sender.selectedSegmentIndex)!
+        notatesMode == .profile ? fetchJoomped() : fetchKarmaJoomped()
     }
 }
 
@@ -170,4 +196,9 @@ extension ProfileViewController: ASFSharedViewTransitionDataSource {
     func sharedView() -> UIView! {
         return selectedThumbnail
     }
+}
+
+fileprivate enum NotatesMode: Int {
+    case profile = 0
+    case karma = 1
 }

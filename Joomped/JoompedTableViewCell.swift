@@ -19,34 +19,45 @@ class JoompedTableViewCell: UITableViewCell {
                 return
             }
             
-            joompedTitleLabel.text = joomped.video.title
-            videoAuthorLabel.text = joomped.video.author
-            videoLengthLabel.text = Float(joomped.video.length).joompedBeautify()
+            self.joompedTitleLabel.text = joomped.video.title
+            self.videoAuthorLabel.text = joomped.video.author
+            self.videoLengthLabel.text = Float(joomped.video.length).joompedBeautify()
             let notes = joomped.annotations.count == 1 ? "note" : "notes"
-            annotationCountLabel.text = "\(joomped.annotations.count) \(notes)"
+            self.annotationCountLabel.text = "\(joomped.annotations.count) \(notes)"
             let views = joomped.views == 1 ? "view" : "views"
-            viewCountLabel.text = "\(joomped.views) \(views)"
+            self.viewCountLabel.text = "\(joomped.views) \(views)"
             if let joompedUser = joomped.user.displayName {
-                joompedAuthorLabel.text = "\(joompedUser)"
+                self.joompedAuthorLabel.text = "\(joompedUser)"
             }
             
             if oldValue?.video.thumbnail != joomped.video.thumbnail {
-                videoImageView.image = nil
+                self.videoImageView.image = nil
                 if let thumbnail = joomped.video.thumbnail, let thumbnailUrl = URL(string: thumbnail) {
-                    videoImageView.setImageWith(thumbnailUrl, fadeTime: 0.2)
+                    self.videoImageView.setImageWith(thumbnailUrl, fadeTime: 0.2)
                 }
             }
             
-            timestampLabel.text = joomped.createdAt?.timeAgoRelative
-            if timestampLabel.text != nil && timestampLabel.text!.isEmpty {
+            self.timestampLabel.text = joomped.createdAt?.timeAgoRelative
+            if self.timestampLabel.text != nil && self.timestampLabel.text!.isEmpty {
                 // Timestamp is sometimes nil for newly created videos, so we get empty string
-                timestampLabel.text = "Just now"
+                self.timestampLabel.text = "Just now"
             }
             if let imageUrl = joomped.user.imageUrl,
                 let url = URL(string: imageUrl) {
-                joompedAuthorImageView.setImageWith(url, placeholderImage: #imageLiteral(resourceName: "Person"))
+                self.joompedAuthorImageView.setImageWith(url, placeholderImage: #imageLiteral(resourceName: "Person"))
             } else {
-                joompedAuthorImageView.image = #imageLiteral(resourceName: "Person")
+                self.joompedAuthorImageView.image = #imageLiteral(resourceName: "Person")
+            }
+
+            if let joompedUser = joomped.user.displayName {
+                self.joompedAuthorLabel.text = "\(joompedUser)"
+            }
+            
+            if let imageUrl = joomped.user.imageUrl,
+                let url = URL(string: imageUrl) {
+                self.joompedAuthorImageView.setImageWith(url, placeholderImage: #imageLiteral(resourceName: "Person"))
+            } else {
+                self.joompedAuthorImageView.image = #imageLiteral(resourceName: "Person")
             }
         }
     }

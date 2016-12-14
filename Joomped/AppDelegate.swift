@@ -75,15 +75,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        // Example url: notate://journal/mY237ab1
-        if url.host == "journal" {
-            var journalId = url.path
-            journalId.remove(at: url.path.startIndex)
+        // Example url: notate://notate/mY237ab1
+        if url.host == "notate" {
+            var notateId = url.path
+            notateId.remove(at: url.path.startIndex)
             // Navigate to the detail VC with this joomped ID
             let rootViewController = self.window?.rootViewController as! UINavigationController
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let joompedViewController = mainStoryboard.instantiateViewController(withIdentifier: "joomped") as! JoompedViewController
-            joompedViewController.joompedId = journalId
+            joompedViewController.joompedId = notateId
             rootViewController.pushViewController(joompedViewController, animated: true)
             return true
         }

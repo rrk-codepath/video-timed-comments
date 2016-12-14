@@ -115,41 +115,32 @@ class LoginViewController: UIViewController {
         user.username = usernameTextField.text
         user.displayName = usernameTextField.text
         user.password = passwordTextField.text
-        //        user.email = "email@example.com"
         
         user.signUpInBackground {
             (succeeded: Bool, error: Error?) -> Void in
             if let error = error {
-                print("error: \(error.localizedDescription)")
-                // let errorString = error.userInfo["error"] as? String
-                // Show the errorString somewhere and let the user try again.
-                let alertController = UIAlertController(title: "Failure", message: "Failed to signup", preferredStyle: .alert)
+                // Show the errorString and let the user try again.
+                let alertController = UIAlertController(title: "Failure", message: error.localizedDescription, preferredStyle: .alert)
                 let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
                     // dismiss by default
                 }
                 alertController.addAction(OKAction)
-                self.present(alertController, animated: true, completion: {
-                    // empty
-                })
+                self.present(alertController, animated: true, completion: {})
             } else {
                 self.performSegue(withIdentifier: "HomeSegue", sender: self)
                 // Hooray! Let them use the app now.
-                print("signed up")
             }
         }
     }
 }
 
-extension LoginViewController: GIDSignInUIDelegate {
-}
-
+extension LoginViewController: GIDSignInUIDelegate {}
 
 extension LoginViewController: ParseLoginDelegate {
     
     func login(didSucceedFor user: PFUser) {
         performSegue(withIdentifier: "HomeSegue", sender: self)
         loadingIndicator.isHidden = true
-
     }
     
     func login(didFailWith error: Error?) {

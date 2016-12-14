@@ -34,8 +34,10 @@ class JoompedViewController: UIViewController {
     @IBOutlet weak var karmaCountLabel: UILabel!
     @IBOutlet weak var joompedUploaderImageView: UIImageView!
     
+    var shareButton: UIBarButtonItem?
     var currentAnnotation: Annotation?
     var currentAnnotationCell: AnnotationCell?
+    var fromProfileVc: Bool = false
     var joomped: Joomped?
     var joompedId: String? {
         didSet {
@@ -43,7 +45,7 @@ class JoompedViewController: UIViewController {
                 return
             }
             let query = PFQuery(className:"Joomped")
-            query.includeKeys(["video", "user", "annotations.Annotation"])
+            query.includeKeys(["video", "user", "annotations"])
             query.whereKey("objectId", equalTo: joompedId)
             query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
                 if let error = error {
@@ -333,7 +335,11 @@ class JoompedViewController: UIViewController {
     }
     
     @IBAction func didTapJoompedUser(_ sender: Any) {
-        performSegue(withIdentifier: "ProfileSegue", sender: self)
+        if fromProfileVc {
+            _ = navigationController?.popViewController(animated: true)
+        } else {
+            performSegue(withIdentifier: "ProfileSegue", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -354,7 +360,11 @@ class JoompedViewController: UIViewController {
             return
         }
         playerView.pauseVideo()
-        let activityViewController = UIActivityViewController(activityItems: ["notate://journal/\(joompedObjectId)"], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: ["notate://notate/\(joompedObjectId)"], applicationActivities: nil)
+        activityViewController.modalPresentationStyle = .popover
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.barButtonItem = shareButton
+        }
         navigationController?.present(activityViewController, animated: true)
     }
     
@@ -363,7 +373,7 @@ class JoompedViewController: UIViewController {
             return
         }
         var rightBarButtonItems = [UIBarButtonItem]()
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(JoompedViewController.didTapShare(_:)))
         
         let actionButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(JoompedViewController.didTapEditSave(_:)))
         
@@ -379,10 +389,10 @@ class JoompedViewController: UIViewController {
         } else if (joomped?.user.objectId == user.objectId) {
             navigationItem.title = "Notate"
             rightBarButtonItems.append(actionButton)
-            rightBarButtonItems.append(shareButton)
+            rightBarButtonItems.append(shareButton!)
         } else {
             navigationItem.title = "Notate"
-            rightBarButtonItems.append(shareButton)
+            rightBarButtonItems.append(shareButton!)
         }
         navigationItem.rightBarButtonItems = rightBarButtonItems
     }
@@ -689,7 +699,12 @@ extension JoompedViewController: YTPlayerViewDelegate {
         
         duration = Float(playerView.duration())
         
-        playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            //Anything above medium doesn't work with iPad
+            playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.HD720)
+        } else {
+            playerView.cueVideo(byId: videoId, startSeconds: playerView.currentTime(), suggestedQuality: YTPlaybackQuality.medium)
+        }
         playerView.playVideo()
         if !isSeekBarAnnotated {
             updateAnnotationInSeekBar()
