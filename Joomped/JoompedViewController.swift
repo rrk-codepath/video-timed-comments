@@ -11,6 +11,8 @@ import Parse
 import youtube_ios_player_helper
 import iOSSharedViewTransition
 import FTIndicator
+import Fabric
+import Crashlytics
 
 class JoompedViewController: UIViewController {
 
@@ -294,6 +296,7 @@ class JoompedViewController: UIViewController {
             print("failed to get User object")
             return
         }
+        Answers.logCustomEvent(withName: "Tapped like button", customAttributes: ["userId": user.objectId!])
         guard let joomped = joomped else {
             return
         }
@@ -338,6 +341,7 @@ class JoompedViewController: UIViewController {
         if fromProfileVc {
             _ = navigationController?.popViewController(animated: true)
         } else {
+            Answers.logCustomEvent(withName: "Tapped user profile in Notate", customAttributes: ["userId": PFUser.current()!.objectId!])
             performSegue(withIdentifier: "ProfileSegue", sender: self)
         }
     }
@@ -359,6 +363,8 @@ class JoompedViewController: UIViewController {
         guard let joompedObjectId = joomped?.objectId else {
             return
         }
+        
+        Answers.logCustomEvent(withName: "Tap shared", customAttributes: ["Notate object id" : joompedObjectId])
         playerView.pauseVideo()
         let activityViewController = UIActivityViewController(activityItems: ["notate://notate/\(joompedObjectId)"], applicationActivities: nil)
         activityViewController.modalPresentationStyle = .popover
@@ -427,6 +433,7 @@ class JoompedViewController: UIViewController {
     }
     
     private func onLandscape() {
+        Answers.logCustomEvent(withName: "On landscape", customAttributes: ["userId": PFUser.current()!.objectId!])
         displayFullscreen(fullscreen: true)
         fullscreenButton.isEnabled = false
     }
@@ -472,10 +479,12 @@ class JoompedViewController: UIViewController {
     }
     
     @IBAction func didPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
+        Answers.logCustomEvent(withName: "Pan seek bar", customAttributes: ["userId": PFUser.current()!.objectId!])
         updateSeekBar(location: recognizer.location(in: self.seekBar))
     }
     
     @IBAction func didTapSeekBar(_ recognizer: UITapGestureRecognizer) {
+        Answers.logCustomEvent(withName: "Tap seek bar", customAttributes: ["userId": PFUser.current()!.objectId!])
         updateSeekBar(location: recognizer.location(in: self.seekBar))
     }
     
@@ -610,6 +619,7 @@ extension JoompedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+       Answers.logCustomEvent(withName: "Tapped annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!]) 
         let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
         if isEditMode {
             self.playerView.pauseVideo()
@@ -617,11 +627,13 @@ extension JoompedViewController: UITableViewDelegate {
         }
         
         if indexPath.section == 1 {
+           Answers.logCustomEvent(withName: "Tapped new annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!])
             let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
             cell.annotation = annotation
             cell.annotationTextView.becomeFirstResponder()
             displayThumbnail(forCell: cell)
         } else if indexPath.section == 0 {
+            Answers.logCustomEvent(withName: "Tapped annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!])
             highlightedRow = indexPath.row
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {

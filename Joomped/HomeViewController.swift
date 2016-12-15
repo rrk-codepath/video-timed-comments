@@ -12,6 +12,8 @@ import GoogleSignIn
 import Parse
 import iOSSharedViewTransition
 import FTIndicator
+import Fabric
+import Crashlytics
 
 class HomeViewController: UIViewController {
     
@@ -68,6 +70,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Following code won't work until we re-add joomped table view to storyboard
         joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.register(UINib(nibName: "YoutubeVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "YoutubeVideo")
@@ -115,6 +118,8 @@ class HomeViewController: UIViewController {
     
     @IBAction func onSearchModeChanged(_ sender: UISegmentedControl) {
         searchMode = SearchMode(rawValue: sender.selectedSegmentIndex)!
+        Answers.logCustomEvent(withName: "Change search mode",
+                               customAttributes: ["searchMode" : searchMode == .joomped ? "joomped" : "youtube"])
         searchBar.placeholder = searchMode.text
         switch searchMode {
         case .joomped:
@@ -214,6 +219,7 @@ class HomeViewController: UIViewController {
             performYoutubeSearch(term: randomPresetTerm())
         } else {
             if let youtubeId = extractYoutubeIdFromLink(link: term) {
+                Answers.logCustomEvent(withName: "Paste youtube link", customAttributes: ["youtubeId": youtubeId])
                 youtube.videoIds(
                     videoIds: [youtubeId],
                     success: { (videos: [YoutubeVideo]) in
@@ -237,6 +243,7 @@ class HomeViewController: UIViewController {
     }
     
     func performYoutubeSearch(term: String) {
+        Answers.logCustomEvent(withName: "Youtube searched", customAttributes: ["term": term])
         youtube.search(
             term: term,
             success: { (videos: [YoutubeVideo]) -> Void in
@@ -283,6 +290,7 @@ class HomeViewController: UIViewController {
         searchBar.resignFirstResponder()
     }
     @IBAction func onTappedProfile(_ sender: Any) {
+        Answers.logCustomEvent(withName: "Tapped profile in home", customAttributes: ["Profile" : PFUser.current()!.objectId!])
         performSegue(withIdentifier: "ProfileSegue", sender: self)
     }
     

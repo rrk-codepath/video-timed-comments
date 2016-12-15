@@ -3,6 +3,8 @@ import GoogleSignIn
 import Parse
 import iOSSharedViewTransition
 import FTIndicator
+import Fabric
+import Crashlytics
 
 protocol ProfileViewControllerDelegate: class {
     
@@ -70,6 +72,7 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func onTappedLogout(_ sender: Any) {
+        Answers.logCustomEvent(withName: "Tapped logout", customAttributes: ["userId": PFUser.current()!.objectId!])
         PFUser.logOutInBackground { (error: Error?) in
             GIDSignIn.sharedInstance().signOut()
             self.performSegue(withIdentifier: "LogoutSegue", sender: self)
@@ -154,6 +157,8 @@ class ProfileViewController: UIViewController {
     @IBAction func onFilterNotatesChanged(_ sender: UISegmentedControl) {
         notatesMode = NotatesMode(rawValue: sender.selectedSegmentIndex)!
         notatesMode == .profile ? fetchJoomped() : fetchKarmaJoomped()
+        Answers.logCustomEvent(withName: "Change notate filter",
+                               customAttributes: ["Notate mode": notatesMode == .karma ? "Karma" : "Profile"])
     }
 }
 
