@@ -1,10 +1,10 @@
 # Notate
 
-Notate is an iOS application that allows you to discover insightful comments and interesting questions at particular times in a video. With Notate, you can associate your comment with a particular time in a video to easily reference it, or have a discussion around it. People who watch your video will see your comments as the video plays, allowing for a more social video consumption experience.
+Notate is an iOS application that allows you to bookmark and comment at different points of a video, and then easily save and share these notes. With Notate, you can associate a comment with a particular time in a video to easily reference it, or to add color to that section. People who watch your Notate will see your comments as the video plays.
 
-More and more of the education system is moving toward video content. Notate is a more efficient and engaging way to learn from these materials. The app can be used simply to bookmark particular times in a video, or to provide color on a confusing part of a lecture. 
+More and more of the education system is moving toward video. Notate is a more efficient and engaging way to learn from video lectures. The app can be used simply to re-watch particular snippets of a lecture, or to quickly the gist of the video. 
 
-Required user stories:
+User stories:
 
 * Ability for the user to create an account and login.
 * Ability to view a feed of annotated videos. 
@@ -12,11 +12,5 @@ Required user stories:
 * Ability to search videos to annotate. 
 * Ability to add annotations to a video at particular times. 
 * Ability to share an annotated video with friends which opens the detail page in the app. 
-
-Mobile features used: 
-
-* audio
-* push
-* real-time (in creating the feed of annotated videos)
 
 Walkthrough: http://i.imgur.com/7r42ouX.gifv
