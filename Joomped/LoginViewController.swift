@@ -55,7 +55,7 @@ class LoginViewController: UIViewController {
                     print("logged in as: \(user.username!)")
                     self.performSegue(withIdentifier: "HomeSegue", sender: self)
                 } else {
-                    self.onLoginFailure()
+                    self.onLoginFailure(error: error)
                 }
             }
     }
@@ -94,8 +94,8 @@ class LoginViewController: UIViewController {
         self.scrollView.frame.origin.y = originalFrame
     }
     
-    fileprivate func onLoginFailure() {
-        let alertController = UIAlertController(title: "Failure", message: "Failed to login", preferredStyle: .alert)
+    fileprivate func onLoginFailure(error: Error?) {
+        let alertController = UIAlertController(title: "Failed to login", message: error?.localizedDescription, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
             // dismiss by default
         }
@@ -144,8 +144,7 @@ extension LoginViewController: ParseLoginDelegate {
     }
     
     func login(didFailWith error: Error?) {
-        print("\(error?.localizedDescription)")
-        onLoginFailure()
+        onLoginFailure(error: error)
         loadingIndicator.isHidden = true
     }
 }

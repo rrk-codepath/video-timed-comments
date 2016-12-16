@@ -679,7 +679,6 @@ extension JoompedViewController: AnnotationCellDelegate {
                 }
             }
         }
-        print("Number of annotations: \(annotations.count)")
         annotations.forEach { (annotation) in
             annotationsDict[floorf(annotation.timestamp)] = annotation
             annotationsDict[ceilf(annotation.timestamp)] = annotation
