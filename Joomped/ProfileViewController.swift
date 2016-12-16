@@ -132,6 +132,13 @@ class ProfileViewController: UIViewController {
             self.joomped = self.joomped.filter { (joomp) -> Bool in
                 return ParseUtility.contains(objects: karmadJoomped, element: joomp)
             }
+            if self.joomped.count == 0 {
+                self.joompedTableView.isHidden = true
+                self.emptyStateLabel.isHidden = false
+            } else {
+                self.joompedTableView.isHidden = false
+                self.emptyStateLabel.isHidden = true
+            }
             FTIndicator.dismissProgress()
             self.joompedTableView.reloadData()
         }

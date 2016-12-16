@@ -543,13 +543,14 @@ class JoompedViewController: UIViewController {
                     cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
                     cell.thumbnailImageView.image = image
                     cell.showThumbnail()
-                }, failure: { (_, _, _) in
+                }, failure: { (url: URLRequest, response: HTTPURLResponse?, error: Error?) in
                     cell.thumbnailImageView.image = #imageLiteral(resourceName: "no-thumbnail")
                     cell.showThumbnail()
                 })
             },
             failure: { () -> Void in
-                cell.hideThumbnail()
+                cell.thumbnailImageView.image = #imageLiteral(resourceName: "no-thumbnail")
+                cell.showThumbnail()
             }
         )
     }
