@@ -43,6 +43,7 @@ class JoompedViewController: UIViewController {
     var joomped: Joomped?
     var joompedId: String? {
         didSet {
+            FTIndicator.showProgressWithmessage("")
             guard let joompedId = joompedId else {
                 return
             }
@@ -51,12 +52,15 @@ class JoompedViewController: UIViewController {
             query.whereKey("objectId", equalTo: joompedId)
             query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
                 if let error = error {
-                    print("error: \(error.localizedDescription)")
+                    print("error getting joomped: \(error.localizedDescription)")
                     return
                 }
                 self.joomped = object as? Joomped ?? nil
-                self.configureView()
-                self.tableView.reloadData()
+                if self.playerView != nil && self.tableView != nil {
+                    FTIndicator.dismissProgress()
+                    self.configureView()
+                    self.tableView.reloadData()
+                }
             }
         }
     }
