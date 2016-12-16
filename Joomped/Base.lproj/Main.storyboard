@@ -738,7 +738,7 @@
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="5d4-ar-yu1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="eN0-hK-CgF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="eN0-hK-CgF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.68235294120000001" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -765,9 +765,9 @@
         <image name="heart" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="106-0h-bvS"/>
-        <segue reference="Hhx-Qr-R1r"/>
+        <segue reference="XD9-iG-gfL"/>
         <segue reference="vm2-8s-e9R"/>
+        <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.61568627450000002" green="0.43529411759999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

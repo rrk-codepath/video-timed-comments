@@ -11,14 +11,16 @@ import Parse
 import Google
 import GoogleSignIn
 import FTIndicator
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Fabric.with([Crashlytics.self])
         // Override point for customization after application launch.
         let configuration = ParseClientConfiguration {
             $0.applicationId = "6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8"
@@ -37,7 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if PFUser.current() != nil {
+        if let currentUser = PFUser.current() {
+            self.logUser()
+            Answers.logCustomEvent(withName: "Launched app", customAttributes: ["userId" : currentUser.objectId!])
             GIDSignIn.sharedInstance().signInSilently()
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
             // TODO: animation does not work
@@ -49,6 +53,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.sharedInstance().setUserEmail(PFUser.current()?.email)
+        Crashlytics.sharedInstance().setUserIdentifier(PFUser.current()?.objectId)
+        Crashlytics.sharedInstance().setUserName(PFUser.current()?.username)
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -77,14 +90,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         // Example url: notate://notate/mY237ab1
         if url.host == "notate" {
+            if PFUser.current() == nil {
+                return false
+            }
             var notateId = url.path
             notateId.remove(at: url.path.startIndex)
             // Navigate to the detail VC with this joomped ID
-            let rootViewController = self.window?.rootViewController as! UINavigationController
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeNav = mainStoryboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
             let joompedViewController = mainStoryboard.instantiateViewController(withIdentifier: "joomped") as! JoompedViewController
             joompedViewController.joompedId = notateId
-            rootViewController.pushViewController(joompedViewController, animated: true)
+            homeNav.pushViewController(joompedViewController, animated: true)
+            self.window?.rootViewController = homeNav
             return true
         }
         

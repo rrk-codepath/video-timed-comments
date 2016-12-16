@@ -12,5 +12,7 @@ target 'Notate' do
   pod 'Google/SignIn'
   pod 'iOSSharedViewTransition', '~> 1.0.2'
   pod 'FTIndicator'
+  pod 'Fabric'
+  pod 'Crashlytics'
   pod 'CryptoSwift'
 end

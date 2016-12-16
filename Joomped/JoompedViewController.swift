@@ -11,6 +11,8 @@ import Parse
 import youtube_ios_player_helper
 import iOSSharedViewTransition
 import FTIndicator
+import Fabric
+import Crashlytics
 
 class JoompedViewController: UIViewController {
 
@@ -41,6 +43,7 @@ class JoompedViewController: UIViewController {
     var joomped: Joomped?
     var joompedId: String? {
         didSet {
+            FTIndicator.showProgressWithmessage("")
             guard let joompedId = joompedId else {
                 return
             }
@@ -49,12 +52,15 @@ class JoompedViewController: UIViewController {
             query.whereKey("objectId", equalTo: joompedId)
             query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
                 if let error = error {
-                    print("error: \(error.localizedDescription)")
+                    print("error getting joomped: \(error.localizedDescription)")
                     return
                 }
                 self.joomped = object as? Joomped ?? nil
-                self.configureView()
-                self.tableView.reloadData()
+                if self.playerView != nil && self.tableView != nil {
+                    FTIndicator.dismissProgress()
+                    self.configureView()
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -294,6 +300,7 @@ class JoompedViewController: UIViewController {
             print("failed to get User object")
             return
         }
+        Answers.logCustomEvent(withName: "Tapped like button", customAttributes: ["userId": user.objectId!])
         guard let joomped = joomped else {
             return
         }
@@ -338,6 +345,7 @@ class JoompedViewController: UIViewController {
         if fromProfileVc {
             _ = navigationController?.popViewController(animated: true)
         } else {
+            Answers.logCustomEvent(withName: "Tapped user profile in Notate", customAttributes: ["userId": PFUser.current()!.objectId!])
             performSegue(withIdentifier: "ProfileSegue", sender: self)
         }
     }
@@ -359,6 +367,8 @@ class JoompedViewController: UIViewController {
         guard let joompedObjectId = joomped?.objectId else {
             return
         }
+        
+        Answers.logCustomEvent(withName: "Tap shared", customAttributes: ["Notate object id" : joompedObjectId])
         playerView.pauseVideo()
         let activityViewController = UIActivityViewController(activityItems: ["notate://notate/\(joompedObjectId)"], applicationActivities: nil)
         activityViewController.modalPresentationStyle = .popover
@@ -427,6 +437,7 @@ class JoompedViewController: UIViewController {
     }
     
     private func onLandscape() {
+        Answers.logCustomEvent(withName: "On landscape", customAttributes: ["userId": PFUser.current()!.objectId!])
         displayFullscreen(fullscreen: true)
         fullscreenButton.isEnabled = false
     }
@@ -472,10 +483,12 @@ class JoompedViewController: UIViewController {
     }
     
     @IBAction func didPanSeekBar(_ recognizer: UIPanGestureRecognizer) {
+        Answers.logCustomEvent(withName: "Pan seek bar", customAttributes: ["userId": PFUser.current()!.objectId!])
         updateSeekBar(location: recognizer.location(in: self.seekBar))
     }
     
     @IBAction func didTapSeekBar(_ recognizer: UITapGestureRecognizer) {
+        Answers.logCustomEvent(withName: "Tap seek bar", customAttributes: ["userId": PFUser.current()!.objectId!])
         updateSeekBar(location: recognizer.location(in: self.seekBar))
     }
     
@@ -534,10 +547,14 @@ class JoompedViewController: UIViewController {
                     cell.thumbnailImageView.layer.contentsRect = CGRect(x: xLocation, y: yLocation, width: widthScale, height: heightScale)
                     cell.thumbnailImageView.image = image
                     cell.showThumbnail()
-                }, failure: nil)
+                }, failure: { (url: URLRequest, response: HTTPURLResponse?, error: Error?) in
+                    cell.thumbnailImageView.image = #imageLiteral(resourceName: "no-thumbnail")
+                    cell.showThumbnail()
+                })
             },
             failure: { () -> Void in
-                cell.hideThumbnail()
+                cell.thumbnailImageView.image = #imageLiteral(resourceName: "no-thumbnail")
+                cell.showThumbnail()
             }
         )
     }
@@ -607,6 +624,7 @@ extension JoompedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+       Answers.logCustomEvent(withName: "Tapped annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!]) 
         let cell = tableView.cellForRow(at: indexPath) as! AnnotationCell
         if isEditMode {
             self.playerView.pauseVideo()
@@ -614,11 +632,13 @@ extension JoompedViewController: UITableViewDelegate {
         }
         
         if indexPath.section == 1 {
+           Answers.logCustomEvent(withName: "Tapped new annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!])
             let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
             cell.annotation = annotation
             cell.annotationTextView.becomeFirstResponder()
             displayThumbnail(forCell: cell)
         } else if indexPath.section == 0 {
+            Answers.logCustomEvent(withName: "Tapped annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!])
             highlightedRow = indexPath.row
             currentAnnotationCell = cell
             UIView.animate(withDuration: 1, animations: {
