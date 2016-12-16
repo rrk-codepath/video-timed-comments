@@ -14,4 +14,5 @@ target 'Notate' do
   pod 'FTIndicator'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'CryptoSwift'
 end

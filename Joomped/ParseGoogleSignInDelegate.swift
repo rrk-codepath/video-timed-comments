@@ -1,6 +1,8 @@
 import Foundation
+
 import GoogleSignIn
 import Parse
+import CryptoSwift
 
 protocol ParseLoginDelegate: class {
     
@@ -11,8 +13,7 @@ protocol ParseLoginDelegate: class {
 
 final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
     
-    // TODO: Find a way around parse requiring an explicit password
-    private static let password = ""
+    private static let salt = "Sc9vh13ozp"
     
     weak var delegate: ParseLoginDelegate?
     
@@ -33,7 +34,7 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
                         return
                     }
                     
-                    PFUser.logInWithUsername(inBackground: username, password: ParseGoogleSignInDelegate.password, block: { (parseUser: PFUser?, error: Error?) in
+                    PFUser.logInWithUsername(inBackground: username, password: self.password(forUser: user), block: { (parseUser: PFUser?, error: Error?) in
                         guard let parseUser = parseUser as? User else {
                             self.delegate?.login(didFailWith: error ?? LoginError.unknown)
                             return
@@ -50,10 +51,10 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
                 let creds = GoogleCredentials()
                 let newUser = User()
                 
-                // TODO: Use an actual hash here
-                newUser.username = String("\(Date().timeIntervalSince1970)\(user.userID!)").data(using: String.Encoding.utf8)?.base64EncodedString(options: [])
-                newUser.password = ParseGoogleSignInDelegate.password
+                newUser.username = self.username(forUser: user)
+                newUser.password = self.password(forUser: user)
                 newUser.displayName = self.displayName(fromEmail: user.profile.email)
+                newUser.email = user.profile.email
                 newUser.imageUrl = user.profile.imageURL(withDimension: 100).absoluteString
                 newUser.signUpInBackground(block: { (success: Bool, error: Error?) in
                     creds.user = newUser
@@ -117,6 +118,14 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
         }
         
         return email
+    }
+    
+    private func username(forUser user: GIDGoogleUser) -> String {
+        return String("\(ParseGoogleSignInDelegate.salt)\(Date().timeIntervalSince1970)\(user.userID!)").sha256()
+    }
+    
+    private func password(forUser user: GIDGoogleUser) -> String {
+        return String("\(ParseGoogleSignInDelegate.salt)\(user.userID)").sha256()
     }
 }
 
