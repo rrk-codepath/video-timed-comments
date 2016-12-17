@@ -342,9 +342,18 @@ class JoompedViewController: UIViewController {
     }
     
     @IBAction func didTapJoompedUser(_ sender: Any) {
-        if fromProfileVc {
-            _ = navigationController?.popViewController(animated: true)
-        } else {
+        var foundVcInBackstack = false
+        // if this profile view controller with the requested user lives anywhere on
+        // the back stack, pop the stack instead of pushing a new VC
+        if let viewControllers = navigationController?.viewControllers {
+            for vc in viewControllers {
+                if let vc = vc as? ProfileViewController, vc.user?.displayName == joomped?.user.displayName {
+                    _ = navigationController?.popToViewController(vc, animated: true)
+                    foundVcInBackstack = true
+                }
+            }
+        }
+        if (!foundVcInBackstack) {
             Answers.logCustomEvent(withName: "Tapped user profile in Notate", customAttributes: ["userId": PFUser.current()!.objectId!])
             performSegue(withIdentifier: "ProfileSegue", sender: self)
         }
