@@ -199,11 +199,8 @@ class JoompedViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(orientationRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        switch UIDevice.current.orientation {
-        case .landscapeLeft,.landscapeRight:
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             onLandscape()
-        default:
-            break
         }
         playButton.isEnabled = false
         fullscreenButton.isEnabled = false
@@ -521,10 +518,8 @@ class JoompedViewController: UIViewController {
     
     @IBAction func onFullscreenTapped(_ sender: Any) {
         fullscreen = !fullscreen
-        switch UIDevice.current.orientation {
-        case .landscapeLeft,.landscapeRight:
-            break
-        default:
+        
+        if !UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             displayFullscreen(fullscreen: fullscreen)
         }
     }
