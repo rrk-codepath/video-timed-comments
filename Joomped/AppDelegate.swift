@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.logUser()
             Answers.logCustomEvent(withName: "Launched app", customAttributes: ["userId" : currentUser.objectId!])
             
-            if GIDSignIn.sharedInstance().currentUser != nil {
+            if GIDSignIn.sharedInstance().currentUser != nil || GIDSignIn.sharedInstance().hasAuthInKeychain() {
                 GIDSignIn.sharedInstance().signInSilently()
             }
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        if PFUser.current() != nil && GIDSignIn.sharedInstance().currentUser != nil {
+        if PFUser.current() != nil && (GIDSignIn.sharedInstance().currentUser != nil || GIDSignIn.sharedInstance().hasAuthInKeychain()) {
             GIDSignIn.sharedInstance().signInSilently()
         }
     }
