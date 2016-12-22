@@ -38,7 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let currentUser = PFUser.current() {
             self.logUser()
             Answers.logCustomEvent(withName: "Launched app", customAttributes: ["userId" : currentUser.objectId!])
-            GIDSignIn.sharedInstance().signInSilently()
+            
+            if GIDSignIn.sharedInstance().currentUser != nil {
+                GIDSignIn.sharedInstance().signInSilently()
+            }
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
             // TODO: animation does not work
             UIView.transition(with: self.window!, duration: 0.5, options: UIViewAnimationOptions.transitionFlipFromLeft, animations: {
@@ -70,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        if PFUser.current() != nil {
+        if PFUser.current() != nil && GIDSignIn.sharedInstance().currentUser != nil {
             GIDSignIn.sharedInstance().signInSilently()
         }
     }

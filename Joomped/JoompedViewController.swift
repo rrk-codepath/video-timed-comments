@@ -447,12 +447,14 @@ class JoompedViewController: UIViewController {
         default:
             break
         }
+        updateSeekBarLine()
     }
     
     private func onLandscape() {
         Answers.logCustomEvent(withName: "On landscape", customAttributes: ["userId": PFUser.current()!.objectId!])
         displayFullscreen(fullscreen: true)
         fullscreenButton.isEnabled = false
+        view.endEditing(true)
     }
     
     private func onPortrait() {
@@ -478,10 +480,13 @@ class JoompedViewController: UIViewController {
     func updateSeekBarLine(percentage: Float? = nil) {
         seekBarLine?.removeFromSuperview()
         var percentageOfVideo = percentage ?? playerView.currentTime() / (duration ?? Float(playerView.duration()))
+        // Prevent from seeking past boundaries
         if percentageOfVideo > 1 {
             percentageOfVideo = 1
         } else if percentageOfVideo < 0 {
             percentageOfVideo = 0
+        } else if percentageOfVideo.isNaN {
+            return
         }
         seekBarLine = UIView(frame: CGRect(x: Double(Float(seekBar.bounds.width) * percentageOfVideo) - 5, y: -5, width: 14, height: 14))
         seekBarLine?.layer.cornerRadius = 10
@@ -647,8 +652,14 @@ extension JoompedViewController: UITableViewDelegate {
         
         if indexPath.section == 1 {
            Answers.logCustomEvent(withName: "Tapped new annotation cell", customAttributes: ["userId": PFUser.current()!.objectId!])
-            let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
-            cell.annotation = annotation
+            if let annotation = cell.annotation {
+                annotation.text = cell.annotationTextView.text
+                annotation.timestamp = self.playerView.currentTime()
+                cell.annotation = annotation
+            } else {
+                let annotation = Annotation(text: "", timestamp: self.playerView.currentTime())
+                cell.annotation = annotation
+            }
             cell.annotationTextView.becomeFirstResponder()
             displayThumbnail(forCell: cell)
         } else if indexPath.section == 0 {
