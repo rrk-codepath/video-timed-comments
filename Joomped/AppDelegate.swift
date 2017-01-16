@@ -22,8 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
         // Override point for customization after application launch.
-        Parse.setApplicationId("6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8",
-                               clientKey: "x4S9CP9dhOj6pXCRNb4yWzWHIiPF195MXc03TbIb")
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "6OvJ4QaZiK9QN8jZpjVHoEO8IZ9kqks9ThGny7c8"
+            $0.clientKey = "x4S9CP9dhOj6pXCRNb4yWzWHIiPF195MXc03TbIb"
+            $0.server = "https://thawing-garden-21306.herokuapp.com/parse"
+        }
+        Parse.initialize(with: configuration)
         //Hack to solve issues with spinner
         FTIndicator.showProgressWithmessage("")
         FTIndicator.dismissProgress()
@@ -38,10 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let currentUser = PFUser.current() {
             self.logUser()
             Answers.logCustomEvent(withName: "Launched app", customAttributes: ["userId" : currentUser.objectId!])
-            
-            if GIDSignIn.sharedInstance().currentUser != nil || GIDSignIn.sharedInstance().hasAuthInKeychain() {
-                GIDSignIn.sharedInstance().signInSilently()
-            }
+            GIDSignIn.sharedInstance().signInSilently()
             let vc = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController") as! UINavigationController
             // TODO: animation does not work
             UIView.transition(with: self.window!, duration: 0.5, options: UIViewAnimationOptions.transitionFlipFromLeft, animations: {
@@ -73,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        if PFUser.current() != nil && (GIDSignIn.sharedInstance().currentUser != nil || GIDSignIn.sharedInstance().hasAuthInKeychain()) {
+        if PFUser.current() != nil {
             GIDSignIn.sharedInstance().signInSilently()
         }
     }
