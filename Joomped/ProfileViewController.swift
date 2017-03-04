@@ -16,7 +16,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var annotatedVideosLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var joompedTableView: UITableView!
     @IBOutlet weak var emptyStateLabel: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
@@ -59,7 +58,7 @@ class ProfileViewController: UIViewController {
         profileImageView.layer.masksToBounds = true;
         profileImageView.layer.borderWidth = 0;
         
-        displayNameLabel.text = user.displayName
+        nameLabel.text = user.name
         
         joompedTableView.register(UINib(nibName: "JoompedTableViewCell", bundle: nil), forCellReuseIdentifier: "Joomped")
         joompedTableView.dataSource = self

@@ -3,15 +3,31 @@ import Parse
 
 final class User: PFUser {
     
-    var displayName: String? {
+    var name: String? {
+        guard let firstName = super["firstName"] as? String, let lastName = super["lastName"] as? String else {
+            return ""
+        }
+        return "\(firstName) \(lastName)"
+    }
+    
+    var firstName: String? {
         get {
-            return super["displayName"] as? String
+            return super["firstName"] as? String
         }
         set {
-            super["displayName"] = newValue
+            super["firstName"] = newValue
         }
     }
     
+    var lastName: String? {
+        get {
+            return super["lastName"] as? String
+        }
+        set {
+            super["lastName"] = newValue
+        }
+    }
+
     var imageUrl: String? {
         get {
             return super["imageUrl"] as? String

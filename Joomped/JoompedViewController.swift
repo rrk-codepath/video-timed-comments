@@ -146,7 +146,7 @@ class JoompedViewController: UIViewController {
             annotations = joomped.annotations
             videoTitleLabel.text = joomped.video.title
             videoUploaderLabel.text = joomped.video.author
-            joompedUploaderButton.setTitle(joomped.user.displayName, for: .normal)
+            joompedUploaderButton.setTitle(joomped.user.name, for: .normal)
             if let imageUrl = joomped.user.imageUrl,
                 let url = URL(string: imageUrl) {
                 joompedUploaderImageView.setImageWith(url)
@@ -348,7 +348,7 @@ class JoompedViewController: UIViewController {
         // the back stack, pop the stack instead of pushing a new VC
         if let viewControllers = navigationController?.viewControllers {
             for vc in viewControllers {
-                if let vc = vc as? ProfileViewController, vc.user?.displayName == joomped?.user.displayName {
+                if let vc = vc as? ProfileViewController, vc.user?.name == joomped?.user.name {
                     _ = navigationController?.popToViewController(vc, animated: true)
                     foundVcInBackstack = true
                 }

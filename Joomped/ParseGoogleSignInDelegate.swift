@@ -53,9 +53,10 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
                 
                 newUser.username = self.username(forUser: user)
                 newUser.password = self.password(forUser: user)
-                newUser.displayName = self.displayName(fromEmail: user.profile.email)
                 newUser.email = user.profile.email
                 newUser.imageUrl = user.profile.imageURL(withDimension: 100).absoluteString
+                newUser.firstName = user.profile.givenName
+                newUser.lastName = user.profile.familyName
                 newUser.signUpInBackground(block: { (success: Bool, error: Error?) in
                     creds.user = newUser
                     newUser.saveInBackground()
@@ -77,6 +78,8 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
         GIDGoogleUser) {
         let url = gidUser.profile.imageURL(withDimension: 100).absoluteString
         user.imageUrl = url
+        user.firstName = gidUser.profile.givenName
+        user.lastName = gidUser.profile.familyName
         user.saveInBackground()
     }
     
@@ -110,14 +113,6 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-    }
-    
-    private func displayName(fromEmail email: String) -> String {
-        if let range = email.range(of: "@") {
-            return email.substring(to: range.lowerBound)
-        }
-        
-        return email
     }
     
     private func username(forUser user: GIDGoogleUser) -> String {

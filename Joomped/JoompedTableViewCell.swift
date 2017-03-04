@@ -26,8 +26,8 @@ class JoompedTableViewCell: UITableViewCell {
             self.annotationCountLabel.text = "\(joomped.annotations.count) \(notes)"
             let views = joomped.views == 1 ? "view" : "views"
             self.viewCountLabel.text = "\(joomped.views) \(views)"
-            if let joompedUser = joomped.user.displayName {
-                self.joompedAuthorLabel.text = "\(joompedUser)"
+            if let name = joomped.user.name {
+                self.joompedAuthorLabel.text = "\(name)"
             }
             
             if oldValue?.video.thumbnail != joomped.video.thumbnail {
@@ -49,8 +49,8 @@ class JoompedTableViewCell: UITableViewCell {
                 self.joompedAuthorImageView.image = #imageLiteral(resourceName: "Person")
             }
 
-            if let joompedUser = joomped.user.displayName {
-                self.joompedAuthorLabel.text = "\(joompedUser)"
+            if let name = joomped.user.name {
+                self.joompedAuthorLabel.text = "\(name)"
             }
             
             if let imageUrl = joomped.user.imageUrl,
