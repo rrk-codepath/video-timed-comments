@@ -99,6 +99,7 @@ class JoompedViewController: UIViewController {
     }
     
     func configureView() {
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         playerView.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
@@ -808,3 +809,6 @@ extension JoompedViewController: YTPlayerViewDelegate {
         }
     }
 }
+
+//Needed for swipe back gesture
+extension JoompedViewController: UIGestureRecognizerDelegate {}

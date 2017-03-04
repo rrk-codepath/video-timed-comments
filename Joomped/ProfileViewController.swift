@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self 
         ASFSharedViewTransition.addWith(fromViewControllerClass: ProfileViewController.self, toViewControllerClass: JoompedViewController.self, with: self.navigationController, withDuration: 0.3)
         
         guard let user = user else {
@@ -214,3 +214,6 @@ fileprivate enum NotatesMode: Int {
     case profile = 0
     case karma = 1
 }
+
+//Needed for swipe back gesture
+extension ProfileViewController: UIGestureRecognizerDelegate {}
