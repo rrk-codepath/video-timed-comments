@@ -14,5 +14,5 @@ target 'Notate' do
   pod 'FTIndicator'
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'CryptoSwift'
+  pod 'CryptoSwift', '~> 0.8.1'
 end

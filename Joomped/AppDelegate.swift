@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Parse.initialize(with: configuration)
         //Hack to solve issues with spinner
-        FTIndicator.showProgressWithmessage("")
+        FTIndicator.showProgress(withMessage: "")
         FTIndicator.dismissProgress()
         
         // Initialize sign-in

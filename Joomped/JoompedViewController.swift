@@ -43,7 +43,7 @@ class JoompedViewController: UIViewController {
     var joomped: Joomped?
     var joompedId: String? {
         didSet {
-            FTIndicator.showProgressWithmessage("")
+            FTIndicator.showProgress(withMessage: "")
             guard let joompedId = joompedId else {
                 return
             }
@@ -271,7 +271,7 @@ class JoompedViewController: UIViewController {
         newJoomped.user = user
         newJoomped.video = video
         newJoomped.views = joomped?.views ?? 0
-        FTIndicator.showProgressWithmessage("")
+        FTIndicator.showProgress(withMessage: "")
         newJoomped.saveInBackground { (success: Bool, error: Error?) in
             FTIndicator.dismissProgress()
             if let error = error {
@@ -416,7 +416,7 @@ class JoompedViewController: UIViewController {
         navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 
-    func setAnnotationLabel() {
+    @objc func setAnnotationLabel() {
         self.liveAnnotationLabel?.text = ""
         highlightedRow = nil
     }
@@ -425,7 +425,7 @@ class JoompedViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height {
                 tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight + 13, 0)
@@ -433,11 +433,11 @@ class JoompedViewController: UIViewController {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.2, animations: { self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0) })
     }
     
-    func orientationRotated(notification: NSNotification) {
+    @objc func orientationRotated(notification: NSNotification) {
         switch UIDevice.current.orientation {
         case .portrait,
              .portraitUpsideDown where UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad:

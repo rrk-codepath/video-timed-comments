@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
         googleSignInButton.isHidden = true
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if self.scrollView.frame.origin.y > 0 {
             let info  = notification.userInfo!
             let value: NSValue = info[UIKeyboardFrameEndUserInfoKey] as! NSValue
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         keyboardShown = false
         self.scrollView.frame.origin.y = originalFrame
     }

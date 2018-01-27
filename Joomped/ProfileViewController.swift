@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController {
         query.includeKeys(["video", "user", "annotations"])
         query.whereKey("user", equalTo: user as Any)
         
-        FTIndicator.showProgressWithmessage("")
+        FTIndicator.showProgress(withMessage: "")
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
             if let error = error {
                 print("error: \(error.localizedDescription)")
@@ -123,7 +123,7 @@ class ProfileViewController: UIViewController {
         guard let karmadJoomped = self.user?.gaveKarma, karmadJoomped.count > 0 else {
             return
         }
-        FTIndicator.showProgressWithmessage("")
+        FTIndicator.showProgress(withMessage: "")
         let query = PFQuery(className:"Joomped")
         query.order(byDescending: "createdAt")
         query.includeKeys(["video", "user", "annotations"])

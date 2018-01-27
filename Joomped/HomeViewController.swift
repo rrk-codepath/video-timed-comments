@@ -176,14 +176,14 @@ class HomeViewController: UIViewController {
         switch searchMode {
         case SearchMode.joomped:
             if forceRefresh || joompedSearchText != term {
-                FTIndicator.showProgressWithmessage("")
+                FTIndicator.showProgress(withMessage: "")
                 searchJoomped(term: term)
                 joompedSearchText = searchBar.text
             }
             break
         case SearchMode.youtube:
             if forceRefresh || youtubeSearchText != term {
-                FTIndicator.showProgressWithmessage("")
+                FTIndicator.showProgress(withMessage: "")
                 searchYoutube(term: term)
                 youtubeSearchText = searchBar.text
             }

@@ -14,69 +14,64 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.8.3):
-    - Fabric (~> 1.6.3)
-  - CryptoSwift (0.6.6)
-  - Fabric (1.6.11)
-  - FirebaseAnalytics (3.6.0):
-    - FirebaseCore (~> 3.4)
+  - Bolts/Tasks (1.9.0)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - CryptoSwift (0.8.1)
+  - Fabric (1.7.2)
+  - FirebaseAnalytics (3.9.0):
+    - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.4.5):
-    - GoogleInterchangeUtilities (~> 1.2)
+  - FirebaseCore (3.6.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (1.0.8)
-  - FTIndicator (1.1.5):
-    - FTIndicator/FTNotificationIndicator (= 1.1.5)
-    - FTIndicator/FTProgressIndicator (= 1.1.5)
-    - FTIndicator/FTToastIndicator (= 1.1.5)
-  - FTIndicator/FTNotificationIndicator (1.1.5)
-  - FTIndicator/FTProgressIndicator (1.1.5)
-  - FTIndicator/FTToastIndicator (1.1.5)
-  - Google/Core (3.0.3):
+  - FirebaseInstanceID (1.0.10):
+    - FirebaseCore (~> 3.6)
+  - FTIndicator (1.2.6):
+    - FTIndicator/FTNotificationIndicator (= 1.2.6)
+    - FTIndicator/FTProgressIndicator (= 1.2.6)
+    - FTIndicator/FTToastIndicator (= 1.2.6)
+  - FTIndicator/FTNotificationIndicator (1.2.6)
+  - FTIndicator/FTProgressIndicator (1.2.6)
+  - FTIndicator/FTToastIndicator (1.2.6)
+  - Google/Core (3.1.0):
     - FirebaseAnalytics (~> 3.2)
-  - Google/SignIn (3.0.3):
+  - Google/SignIn (3.1.0):
     - Google/Core
     - GoogleSignIn (~> 4.0)
-  - GoogleAppUtilities (1.1.2):
-    - GoogleSymbolUtilities (~> 1.1)
-  - GoogleInterchangeUtilities (1.2.2):
-    - GoogleSymbolUtilities (~> 1.1)
-  - GoogleSignIn (4.0.1):
-    - GoogleAppUtilities (~> 1.1)
+  - GoogleSignIn (4.1.1):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleSymbolUtilities (1.1.2)
-  - GoogleToolboxForMac/DebugUtils (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-  - GoogleToolboxForMac/Defines (2.1.0)
-  - GoogleToolboxForMac/NSData+zlib (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.0):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.0)
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.0)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
-  - GTMOAuth2 (1.1.4):
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.7):
-    - GTMSessionFetcher/Full (= 1.1.7)
-  - GTMSessionFetcher/Core (1.1.7)
-  - GTMSessionFetcher/Full (1.1.7):
-    - GTMSessionFetcher/Core (= 1.1.7)
+  - GTMSessionFetcher (1.1.12):
+    - GTMSessionFetcher/Full (= 1.1.12)
+  - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Full (1.1.12):
+    - GTMSessionFetcher/Core (= 1.1.12)
   - iOSSharedViewTransition (1.0.2)
-  - Parse (1.14.2):
-    - Bolts/Tasks (~> 1.8)
+  - Parse (1.16.0):
+    - Parse/Core (= 1.16.0)
+  - Parse/Core (1.16.0):
+    - Bolts/Tasks (~> 1.9)
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Crashlytics
-  - CryptoSwift
+  - CryptoSwift (~> 0.8.1)
   - Fabric
   - FTIndicator
   - Google/SignIn
@@ -86,26 +81,23 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
-  CryptoSwift: 88592381b73f36e192124539390a7c9bacda76af
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
-  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
-  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
-  FTIndicator: 8b9885b84340a19029ad13672add3bb8183feba8
-  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
-  GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
-  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
-  GoogleSignIn: a8694c0a8e6d1b0ec77c58014de5bfd4ba2fa766
-  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
-  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
-  GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  CryptoSwift: 4b07d5b508c1eb67bfa314a727b705f8048a85de
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
+  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
+  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
+  FTIndicator: d2a7c204341b7b0165b6dbeb5bf6979c6d7d4bb7
+  Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
+  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   iOSSharedViewTransition: d4bdb3662b51d780b7a0646da8ff2158dbb2e43c
-  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  Parse: 5b36dc2c2f0a2fd82a257ae018bc3d68cf2c24e7
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 8f65da5f44bdf3e469fe4c4e8ed60abd029f71bf
+PODFILE CHECKSUM: 647b52baaa260bb7f1533f2d6cf3acc8a7cc46a6
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0
