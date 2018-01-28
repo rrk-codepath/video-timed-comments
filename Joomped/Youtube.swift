@@ -282,7 +282,7 @@ fileprivate extension String {
         let stop = "|||||"
         let modifiedString = regEx.stringByReplacingMatches(
             in: self, options: NSRegularExpression.MatchingOptions(),
-            range: NSMakeRange(0, characters.count),
+            range: NSMakeRange(0, self.count),
             withTemplate:stop
         )
         return modifiedString.components(separatedBy: stop)

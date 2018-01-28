@@ -467,7 +467,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="114" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zhd-B2-6ZF">
-                                <rect key="frame" x="0.0" y="303" width="375" height="475"/>
+                                <rect key="frame" x="0.0" y="303" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="oKn-fb-jDx" userLabel="Header View">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
@@ -661,7 +661,7 @@
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="3Ub-zE-iMH" secondAttribute="trailing" constant="8" id="5t1-X4-p3h"/>
                             <constraint firstItem="ByS-j5-zlr" firstAttribute="top" secondItem="xrz-eA-WJ7" secondAttribute="bottom" id="7tH-M6-DAQ"/>
                             <constraint firstItem="xrz-eA-WJ7" firstAttribute="top" secondItem="VHp-Kn-qJz" secondAttribute="bottom" id="7vv-ez-dE3"/>
-                            <constraint firstItem="Hgd-Lr-0de" firstAttribute="top" secondItem="zhd-B2-6ZF" secondAttribute="bottom" id="8bJ-bZ-5XD"/>
+                            <constraint firstAttribute="bottom" secondItem="zhd-B2-6ZF" secondAttribute="bottom" id="8bJ-bZ-5XD"/>
                             <constraint firstItem="ByS-j5-zlr" firstAttribute="top" secondItem="3Ub-zE-iMH" secondAttribute="bottom" constant="8" id="DLx-Yc-Dd5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kAJ-oU-ed4" secondAttribute="trailing" constant="-8" id="Es3-1I-TQz"/>
                             <constraint firstItem="hLj-ll-3s7" firstAttribute="centerY" secondItem="ByS-j5-zlr" secondAttribute="centerY" id="K9A-3E-PLx"/>
@@ -764,7 +764,7 @@
         <image name="heart" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dg3-WV-wJf"/>
+        <segue reference="8hp-Pb-k3P"/>
         <segue reference="XD9-iG-gfL"/>
         <segue reference="Hhx-Qr-R1r"/>
     </inferredMetricsTieBreakers>

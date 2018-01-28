@@ -158,7 +158,7 @@ class JoompedViewController: UIViewController {
             
             var countString = "\(joomped.annotations.count) notes"
             if joomped.annotations.count == 1 {
-                countString = countString.substring(to: countString.index(before: countString.endIndex))
+                countString = String(countString[..<countString.index(before: countString.endIndex)])
             }
             numberAnnotationsLabel.text = countString
             numberAnnotationsLabel.isHidden = false

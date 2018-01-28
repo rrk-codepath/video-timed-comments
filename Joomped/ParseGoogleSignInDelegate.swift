@@ -114,7 +114,7 @@ final class ParseGoogleSignInDelegate: NSObject, GIDSignInDelegate {
     
     private func displayName(fromEmail email: String) -> String {
         if let range = email.range(of: "@") {
-            return email.substring(to: range.lowerBound)
+            return String(email[..<range.lowerBound])
         }
         
         return email

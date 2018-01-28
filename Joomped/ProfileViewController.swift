@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController {
             
             var joompedCountString = "\(self.joomped.count) notates"
             if self.joomped.count == 1 {
-                joompedCountString = joompedCountString.substring(to: joompedCountString.index(before: joompedCountString.endIndex))
+                joompedCountString = String(joompedCountString[..<joompedCountString.index(before: joompedCountString.endIndex)])
             }
             self.annotatedVideosLabel.text = joompedCountString
             

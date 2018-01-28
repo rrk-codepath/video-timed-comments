@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize sign-in
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
         
         GIDSignIn.sharedInstance().scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

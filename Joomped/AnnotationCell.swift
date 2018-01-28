@@ -99,7 +99,7 @@ class AnnotationCell: UITableViewCell {
 
 extension AnnotationCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        saveButton.isEnabled = annotationTextView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).characters.count > 0
+        saveButton.isEnabled = annotationTextView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).count > 0
         
         // http://stackoverflow.com/questions/31595524/resize-uitableviewcell-containing-uitextview-upon-typing
         let startHeight = textView.frame.size.height
